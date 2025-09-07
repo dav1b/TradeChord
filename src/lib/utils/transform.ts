@@ -1,0 +1,247 @@
+interface TradeRecord {
+	year: string;
+	reporter: string;
+	partner: string;
+	product: string;
+	indicator: string;
+	value: string;
+}
+
+export interface SimpleChordData {
+	matrix: number[][];
+	countries: string[];
+	countryLabels: string[];
+}
+
+export interface BowtieData {
+	matrix: number[][];
+	labels: string[];
+	colors: string[];
+}
+
+export interface SankeyNode {
+	name: string;
+}
+export interface SankeyLink {
+	source: number;
+	target: number;
+	value: number;
+}
+export interface SankeyData {
+	nodes: SankeyNode[];
+	links: SankeyLink[];
+}
+
+interface TransformedData {
+	simpleChordData: SimpleChordData;
+	barChartData: { country: string, exports: number, imports: number }[];
+	bowtieData: BowtieData;
+	sankeyData: SankeyData;
+}
+
+export function transformTradeData(data: TradeRecord[]): TransformedData {
+	const data2022 = data.filter(record => record.year === '2022' && record.indicator === 'XPRT-TRD-VL');
+	
+	const allCountries = new Set<string>();
+	data2022.forEach(record => {
+		allCountries.add(record.reporter);
+		allCountries.add(record.partner);
+	});
+	
+	const countryTotals = new Map<string, { exports: number, imports: number }>();
+	for (const country of allCountries) {
+		countryTotals.set(country, { exports: 0, imports: 0 });
+	}
+
+	data2022.forEach(record => {
+		const value = (parseFloat(record.value) || 0) * 1000;
+		
+		if (countryTotals.has(record.reporter)) {
+			countryTotals.get(record.reporter)!.exports += value;
+		}
+		
+		if (countryTotals.has(record.partner)) {
+			countryTotals.get(record.partner)!.imports += value;
+		}
+	});
+	
+	const countries = Array.from(allCountries).sort((a, b) => {
+		if (a === 'ROW') return 1;
+		if (b === 'ROW') return -1;
+		
+		const totalA = (countryTotals.get(a)?.exports || 0) + (countryTotals.get(a)?.imports || 0);
+		const totalB = (countryTotals.get(b)?.exports || 0) + (countryTotals.get(b)?.imports || 0);
+		return totalB - totalA;
+	});
+
+	const barChartData = countries.map(country => ({
+		country,
+		exports: countryTotals.get(country)?.exports || 0,
+		imports: countryTotals.get(country)?.imports || 0,
+	}));
+
+	const countryIndex = new Map(countries.map((country, index) => [country, index]));
+	
+	const matrix: number[][] = Array(countries.length)
+		.fill(0)
+		.map(() => Array(countries.length).fill(0));
+	
+	data2022.forEach(record => {
+		const reporterIndex = countryIndex.get(record.reporter);
+		const partnerIndex = countryIndex.get(record.partner);
+		
+		if (reporterIndex !== undefined && partnerIndex !== undefined) {
+			matrix[reporterIndex][partnerIndex] = (parseFloat(record.value) || 0) * 1000;
+		}
+	});
+	
+	const countryLabels = countries.map(country => {
+		const totalExports = countryTotals.get(country)?.exports || 0;
+		const totalImports = countryTotals.get(country)?.imports || 0;
+		const total = totalExports + totalImports;
+		const totalInBillions = (total / 1e9).toFixed(1);
+		return `${country} ($${totalInBillions}B)`;
+	});
+	
+	const simpleChordData: SimpleChordData = { matrix, countries, countryLabels };
+
+	// ---- New Bowtie Chart Data Structure ----
+	const reporterNodes = [...new Set(data2022.map(d => d.reporter))];
+	const partnerNodes = [...new Set(data2022.map(d => d.partner))];
+	
+	const allNodes = [...reporterNodes, ...partnerNodes];
+	const nodeIndex = new Map(allNodes.map((node, i) => [node, i]));
+
+	const bowtieMatrix: number[][] = Array(allNodes.length).fill(0).map(() => Array(allNodes.length).fill(0));
+
+	data2022.forEach(d => {
+		const sourceIndex = nodeIndex.get(d.reporter);
+		const targetIndex = nodeIndex.get(d.partner);
+		if(sourceIndex !== undefined && targetIndex !== undefined) {
+			bowtieMatrix[sourceIndex][targetIndex] = (parseFloat(d.value) || 0) * 1000;
+		}
+	});
+
+	const bowtieLabels = allNodes.map(node => {
+		// A bit of a simplification, could be more detailed
+		return node;
+	});
+
+	const bowtieData: BowtieData = {
+		matrix: bowtieMatrix,
+		labels: bowtieLabels,
+		colors: allNodes
+	};
+
+	// ---- New Sankey Chart Data Structure ----
+	const reporterTotals = new Map<string, number>();
+	const partnerTotals = new Map<string, number>();
+
+	data2022.forEach(d => {
+		const value = (parseFloat(d.value) || 0) * 1000;
+		reporterTotals.set(d.reporter, (reporterTotals.get(d.reporter) || 0) + value);
+		partnerTotals.set(d.partner, (partnerTotals.get(d.partner) || 0) + value);
+	});
+
+	const sortedReporters = [...new Set(data2022.map(d => d.reporter))].sort((a, b) => {
+		if (a === 'ROW') return 1;
+		if (b === 'ROW') return -1;
+		return (reporterTotals.get(b) || 0) - (reporterTotals.get(a) || 0);
+	});
+
+	const sortedPartners = [...new Set(data2022.map(d => d.partner))].sort((a, b) => {
+		if (a === 'ROW') return 1;
+		if (b === 'ROW') return -1;
+		return (partnerTotals.get(b) || 0) - (partnerTotals.get(a) || 0);
+	});
+
+	const sankeyNodes: SankeyNode[] = [
+		...sortedReporters.map(name => ({ name: `${name} (Reporter)` })),
+		...sortedPartners.map(name => ({ name: `${name} (Partner)` }))
+	];
+
+	const nodeNameIndex = new Map(sankeyNodes.map((node, i) => [node.name, i]));
+
+	const sankeyLinks: SankeyLink[] = data2022.map(d => ({
+		source: nodeNameIndex.get(`${d.reporter} (Reporter)`)!,
+		target: nodeNameIndex.get(`${d.partner} (Partner)`)!,
+		value: (parseFloat(d.value) || 0) * 1000
+	})).filter(d => d.source !== undefined && d.target !== undefined);
+
+	const sankeyData: SankeyData = {
+		nodes: sankeyNodes,
+		links: sankeyLinks,
+	};
+	
+	return { simpleChordData, barChartData, bowtieData, sankeyData };
+} 
+
+// Build a chord dataset for a single country (as reporter or partner)
+export function buildCountryChord(data: TradeRecord[], countryCode: string, topN: number = 10): SimpleChordData {
+	const filtered = data.filter(
+		(r) => r.year === '2022' && r.indicator === 'XPRT-TRD-VL' && (r.reporter === countryCode || r.partner === countryCode)
+	);
+
+	// Track both total bilateral trade and exports TO reporter
+	const counterpartTotals = new Map<string, number>();
+	const exportsToReporter = new Map<string, number>();
+	filtered.forEach((r) => {
+		const v = (parseFloat(r.value) || 0) * 1000;
+		if (r.reporter === countryCode) {
+			counterpartTotals.set(r.partner, (counterpartTotals.get(r.partner) || 0) + v);
+			exportsToReporter.set(r.partner, (exportsToReporter.get(r.partner) || 0) + v);
+		}
+		if (r.partner === countryCode) {
+			counterpartTotals.set(r.reporter, (counterpartTotals.get(r.reporter) || 0) + v);
+		}
+	});
+
+	// Identify top counterparts EXCLUDING ROW; sort by exports TO reporter
+	let counterparts = Array.from(counterpartTotals.keys()).filter((c) => c !== countryCode && c !== 'ROW');
+	counterparts.sort((a, b) => (exportsToReporter.get(b) || 0) - (exportsToReporter.get(a) || 0));
+	const topCounterparts = counterparts.slice(0, Math.max(0, topN));
+	const remainder = counterparts.slice(topCounterparts.length);
+
+	// Aggregate the remainder into ROW bucket
+	let remainderTotal = 0;
+	remainder.forEach((c) => {
+		remainderTotal += counterpartTotals.get(c) || 0;
+	});
+	const includeROW = remainder.length > 0 || counterpartTotals.has('ROW');
+
+	// Final countries: selected + top counterparts + ROW (last if included)
+	const countries = [countryCode, ...topCounterparts];
+	if (includeROW) countries.push('ROW');
+
+	// Prepare index
+	const idx = new Map(countries.map((c, i) => [c, i]));
+
+	// Build matrix initialized to zero
+	const matrix: number[][] = Array(countries.length)
+		.fill(0)
+		.map(() => Array(countries.length).fill(0));
+
+	// Helper to add value possibly aggregating into ROW
+	function addValue(rep: string, par: string, v: number) {
+		const reporterKey = topCounterparts.includes(rep) || rep === countryCode ? rep : 'ROW';
+		const partnerKey = topCounterparts.includes(par) || par === countryCode ? par : 'ROW';
+		if (!idx.has(reporterKey) || !idx.has(partnerKey)) return;
+		const i = idx.get(reporterKey)!;
+		const j = idx.get(partnerKey)!;
+		matrix[i][j] += v;
+	}
+
+	// Fill matrix from filtered rows
+	filtered.forEach((r) => {
+		let v = (parseFloat(r.value) || 0) * 1000;
+		addValue(r.reporter, r.partner, v);
+	});
+
+	// Build exports-only labels (sum of row i)
+	const countryLabels = countries.map((c, i) => {
+		const exportsOnly = matrix[i].reduce((sum, val) => sum + val, 0);
+		return c;
+	});
+
+	return { matrix, countries, countryLabels };
+} 
