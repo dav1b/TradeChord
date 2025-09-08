@@ -177,28 +177,28 @@ export function transformTradeData(data: TradeRecord[]): TransformedData {
 } 
 
 // Build a chord dataset for a single country (as reporter or partner)
-export function buildCountryChord(data: TradeRecord[], countryCode: string, topN: number = 10): SimpleChordData {
+export function buildCountryChord(data: TradeRecord[], countryCode: string, topN: number = 10, year: string = '2022'): SimpleChordData {
 	const filtered = data.filter(
-		(r) => r.year === '2022' && r.indicator === 'XPRT-TRD-VL' && (r.reporter === countryCode || r.partner === countryCode)
+		(r) => r.year === year && r.indicator === 'XPRT-TRD-VL' && (r.reporter === countryCode || r.partner === countryCode)
 	);
 
-	// Track both total bilateral trade and exports TO reporter
+	// Track both total bilateral trade and imports TO reporter from each partner
 	const counterpartTotals = new Map<string, number>();
-	const exportsToReporter = new Map<string, number>();
+	const importsToReporter = new Map<string, number>();
 	filtered.forEach((r) => {
 		const v = (parseFloat(r.value) || 0) * 1000;
 		if (r.reporter === countryCode) {
 			counterpartTotals.set(r.partner, (counterpartTotals.get(r.partner) || 0) + v);
-			exportsToReporter.set(r.partner, (exportsToReporter.get(r.partner) || 0) + v);
 		}
 		if (r.partner === countryCode) {
 			counterpartTotals.set(r.reporter, (counterpartTotals.get(r.reporter) || 0) + v);
+			importsToReporter.set(r.reporter, (importsToReporter.get(r.reporter) || 0) + v);
 		}
 	});
 
-	// Identify top counterparts EXCLUDING ROW; sort by exports TO reporter
+	// Identify top counterparts EXCLUDING ROW; sort by imports TO reporter from each partner
 	let counterparts = Array.from(counterpartTotals.keys()).filter((c) => c !== countryCode && c !== 'ROW');
-	counterparts.sort((a, b) => (exportsToReporter.get(b) || 0) - (exportsToReporter.get(a) || 0));
+	counterparts.sort((a, b) => (importsToReporter.get(b) || 0) - (importsToReporter.get(a) || 0));
 	const topCounterparts = counterparts.slice(0, Math.max(0, topN));
 	const remainder = counterparts.slice(topCounterparts.length);
 

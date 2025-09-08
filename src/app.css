@@ -1,7 +1,54 @@
 :root {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.chord-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.trade-equation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	padding: 1.5rem 2rem;
+	background: #f8f9fa;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	margin-bottom: 1rem;
+}
+
+.equation-part {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.equation-label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #6b7280;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.equation-value {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.equation-operator {
+	font-size: 2.5rem;
+	font-weight: 300;
+	color: #374151;
+	margin: 0 0.5rem;
 }
