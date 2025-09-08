@@ -1,10 +1,11 @@
 <script lang="ts">
   import ChordDiagram from '$components/ChordDiagram.svelte';
   import TradeBalanceChart from '$components/TradeBalanceChart.svelte';
+  import BumpChart from '$components/BumpChart.svelte';
   import { onMount } from 'svelte';
   import * as d3 from 'd3';
   import { transformTradeData, buildCountryChord } from '$lib/utils/transform';
-  import { buildTimeSeriesData } from '$lib/utils/timeSeries';
+  import { buildTimeSeriesData, buildExportRankSeries } from '$lib/utils/timeSeries';
   import type { SimpleChordData, BowtieData, SankeyData } from '$lib/utils/transform';
   import type { TimeSeriesData } from '$lib/utils/timeSeries';
 
@@ -18,11 +19,13 @@
   let selectedYear = '2022';
   let topN = 10;
   let countryStats: { exports: number, imports: number, balance: number } | null = null;
+  let bumpData: any[] = [];
 
   async function rebuildCharts() {
     if (!rawData.length) return;
     chordData = buildCountryChord(rawData as any, selectedCountry, topN, selectedYear);
     timeSeriesData = buildTimeSeriesData(rawData as any, selectedCountry);
+    bumpData = buildExportRankSeries(rawData as any, selectedCountry, 10, 2002, 2022);
     
     // Calculate country stats for selected year
     const yearData = rawData.filter((r: any) => r.year === selectedYear && r.indicator === 'XPRT-TRD-VL');
@@ -58,7 +61,19 @@
   });
 </script>
 
-<h1>TradeChord: Visualizing Global Trade</h1>
+<div class="page-header">
+  <h1>TradeChord: Visualizing Global Trade</h1>
+  <a href="/all" class="icon-link" title="View all countries" aria-label="View all countries">
+    <!-- simple grid icon -->
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="8" height="8" rx="2" fill="#374151"/>
+      <rect x="13" y="3" width="8" height="8" rx="2" fill="#374151"/>
+      <rect x="3" y="13" width="8" height="8" rx="2" fill="#374151"/>
+      <rect x="13" y="13" width="8" height="8" rx="2" fill="#374151"/>
+    </svg>
+  </a>
+  
+</div>
 
 <label for="country">Select country:</label>
 <select id="country" bind:value={selectedCountry} on:change={rebuildCharts}>
@@ -103,4 +118,9 @@
 
 {#if timeSeriesData.length > 0}
   <TradeBalanceChart data={timeSeriesData} />
+{/if}
+
+{#if bumpData.length > 0}
+  <h2>Export Rank Over Time (Top Partners)</h2>
+  <BumpChart data={bumpData} />
 {/if}

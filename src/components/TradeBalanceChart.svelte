@@ -3,6 +3,9 @@
 	import * as d3 from 'd3';
 
 	export let data: { year: number; exports: number; imports: number; balance: number }[];
+	export let width: number = 960;
+	export let height: number = 400;
+	export let margin = { top: 20, right: 30, bottom: 40, left: 60 } as const;
 
 	let container: HTMLDivElement;
 
@@ -16,11 +19,11 @@
 	function drawChart() {
 		if (!container || !data || data.length === 0) return;
 
-		const width = 960;
-		const height = 400;
-		const margin = { top: 20, right: 30, bottom: 40, left: 60 };
-		const innerWidth = width - margin.left - margin.right;
-		const innerHeight = height - margin.top - margin.bottom;
+		const widthLocal = width;
+		const heightLocal = height;
+		const marginLocal = margin;
+		const innerWidth = widthLocal - marginLocal.left - marginLocal.right;
+		const innerHeight = heightLocal - marginLocal.top - marginLocal.bottom;
 
 		// Create scales
 		const xScale = d3.scaleLinear()
@@ -45,11 +48,11 @@
 		// Create SVG
 		const svg = d3.select(container)
 			.append('svg')
-			.attr('width', width)
-			.attr('height', height);
+			.attr('width', widthLocal)
+			.attr('height', heightLocal);
 
 		const g = svg.append('g')
-			.attr('transform', `translate(${margin.left},${margin.top})`);
+			.attr('transform', `translate(${marginLocal.left},${marginLocal.top})`);
 
 		// Add colored areas based on trade balance
 		const positiveData = data.filter(d => d.balance >= 0);
@@ -91,19 +94,19 @@
 			.call(d3.axisBottom(xScale).tickFormat(d3.format('d')));
 
 		g.append('g')
-			.call(d3.axisLeft(yScale).tickFormat(d => `$${(d / 1e9).toFixed(0)}B`));
+			.call(d3.axisLeft(yScale).tickFormat(d => `$${(Number(d) / 1e9).toFixed(0)}B`));
 
 		// Add axis labels
 		g.append('text')
 			.attr('transform', 'rotate(-90)')
-			.attr('y', 0 - margin.left)
+			.attr('y', 0 - marginLocal.left)
 			.attr('x', 0 - (innerHeight / 2))
 			.attr('dy', '1em')
 			.style('text-anchor', 'middle')
 			.text('Trade Value ($B)');
 
 		g.append('text')
-			.attr('transform', `translate(${innerWidth / 2}, ${innerHeight + margin.bottom - 5})`)
+			.attr('transform', `translate(${innerWidth / 2}, ${innerHeight + marginLocal.bottom - 5})`)
 			.style('text-anchor', 'middle')
 			.text('Year');
 

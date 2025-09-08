@@ -5,8 +5,33 @@
 
 	export let data: SimpleChordData;
 
-	// Configuration object - centralize all formatting and styling
-	const config = {
+	// Configuration types and defaults
+	type ChordConfig = {
+		width: number;
+		height: number;
+		margin: number;
+		arcStroke: string;
+		arcStrokeWidth: number;
+		rimInnerOffset: number;
+		rimOuterOffset: number;
+		rimStroke: string;
+		rimStrokeWidth: number;
+		ribbonStroke: string;
+		ribbonStrokeWidth: number;
+		ribbonOpacity: number;
+		positiveBalanceColor: string;
+		negativeBalanceColor: string;
+		padAngle: number;
+		labelOffset: number;
+		labelFontSize: number;
+		tooltipPadding: string;
+		tooltipBorderRadius: string;
+		tooltipFontSize: string;
+		showLabels: boolean;
+		showTooltip: boolean;
+	};
+
+	const defaultConfig: ChordConfig = {
 		// Chart dimensions
 		width: 800,
 		height: 800,
@@ -41,8 +66,15 @@
 		// Tooltip styling
 		tooltipPadding: '8px',
 		tooltipBorderRadius: '4px',
-		tooltipFontSize: '12px'
+		tooltipFontSize: '12px',
+		
+		// Toggles
+		showLabels: true,
+		showTooltip: true
 	};
+
+	export let configOverride: Partial<ChordConfig> = {};
+	const config: ChordConfig = { ...defaultConfig, ...configOverride } as ChordConfig;
 
 	let container: HTMLDivElement;
 
@@ -74,7 +106,7 @@
 		const chords = chord(matrix);
 		
 		const countryTotals = countries.map((_, i) => 
-      		matrix[i].reduce((sum, val) => sum + val, 0)
+     		matrix[i].reduce((sum, val) => sum + val, 0)
     	);
 
 		// Calculate trade balance for each country (exports - imports)
@@ -114,21 +146,23 @@
 			.style('stroke', config.rimStroke)
 			.style('stroke-width', config.rimStrokeWidth);
 
-		group
-			.append('text')
-			.attr('dy', '.35em')
-			.attr('transform', (d: any) => {
-				const angle = ((d.startAngle + d.endAngle) / 2) * (180 / Math.PI) - 90;
-				const rotate = angle > 90 ? angle + 180 : angle;
-				return `rotate(${angle}) translate(${outerRadius + config.labelOffset}) ${
-					rotate > 90 ? 'rotate(180)' : ''
-				}`;
-			})
-			.style('text-anchor', (d: any) => {
-				const angle = ((d.startAngle + d.endAngle) / 2) * (180 / Math.PI);
-				return angle > 90 && angle < 270 ? 'end' : 'start';
-			})
-			.text((d: any) => countryLabels[d.index]);
+		if (config.showLabels) {
+			group
+				.append('text')
+				.attr('dy', '.35em')
+				.attr('transform', (d: any) => {
+					const angle = ((d.startAngle + d.endAngle) / 2) * (180 / Math.PI) - 90;
+					const rotate = angle > 90 ? angle + 180 : angle;
+					return `rotate(${angle}) translate(${outerRadius + config.labelOffset}) ${
+						rotate > 90 ? 'rotate(180)' : ''
+					}`;
+				})
+				.style('text-anchor', (d: any) => {
+					const angle = ((d.startAngle + d.endAngle) / 2) * (180 / Math.PI);
+					return angle > 90 && angle < 270 ? 'end' : 'start';
+				})
+				.text((d: any) => countryLabels[d.index]);
+		}
 
 		const tooltipDiv = d3
 			.select(container)
@@ -155,6 +189,7 @@
 			.style('stroke-width', config.ribbonStrokeWidth)
 			.style('opacity', config.ribbonOpacity)
 			.on('mouseover', function (event: any, d: any) {
+				if (!config.showTooltip) return;
 				const sourceCountry = countries[d.source.index];
 				const targetCountry = countries[d.target.index];
 				const valueSP = d.source.value; // source -> partner
@@ -180,6 +215,7 @@
 					.style('top', event.pageY - 10 + 'px');
 			})
 			.on('mouseout', function () {
+				if (!config.showTooltip) return;
 				tooltipDiv.style('opacity', 0);
 			});
 	}
