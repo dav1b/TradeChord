@@ -90,14 +90,13 @@
 		if (!container || !data) return;
 
 		const { matrix, countries, countryLabels } = data;
-
 		const width = config.width;
 		const height = config.height;
 		const margin = config.margin;
 		const outerRadius = Math.min(width, height) / 2 - margin;
 		const innerRadius = outerRadius;
 
-		const chord = d3.chord().padAngle(config.padAngle).sortSubgroups(d3.descending);
+		const chord = d3.chord().padAngle(config.padAngle);
 		const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 		const rimArc = d3.arc().innerRadius(outerRadius + config.rimInnerOffset).outerRadius(outerRadius + config.rimOuterOffset);
 		const ribbon = d3.ribbon().radius(innerRadius);
@@ -129,7 +128,17 @@
 			.append('g')
 			.attr('transform', `translate(${width / 2},${height / 2})`);
 
-		const group = svg.append('g').selectAll('g').data(chords.groups).enter().append('g');
+		// Find the reporter's angle and rotate to make it horizontal
+		const reporterIndex = 0; // Reporter is always first
+		const reporterAngle = (chords.groups[reporterIndex].startAngle + chords.groups[reporterIndex].endAngle) / 2;
+		const rotationAngle = -reporterAngle + Math.PI / 2; // Rotate to make reporter horizontal (top)
+
+		const group = svg.append('g')
+			.attr('transform', `rotate(${rotationAngle * 180 / Math.PI})`)
+			.selectAll('g')
+			.data(chords.groups)
+			.enter()
+			.append('g');
 
 		group
 			.append('path')
@@ -146,14 +155,16 @@
 			.style('stroke', config.rimStroke)
 			.style('stroke-width', config.rimStrokeWidth);
 
+
 		if (config.showLabels) {
+			// Labels always outside the slices
 			group
 				.append('text')
 				.attr('dy', '.35em')
 				.attr('transform', (d: any) => {
 					const angle = ((d.startAngle + d.endAngle) / 2) * (180 / Math.PI) - 90;
 					const rotate = angle > 90 ? angle + 180 : angle;
-					return `rotate(${angle}) translate(${outerRadius + config.labelOffset}) ${
+					return `rotate(${angle}) translate(${outerRadius + config.labelOffset + 20}) ${
 						rotate > 90 ? 'rotate(180)' : ''
 					}`;
 				})
@@ -177,7 +188,7 @@
 			.style('pointer-events', 'none')
 			.style('opacity', 0);
 
-		svg
+		group
 			.append('g')
 			.selectAll('path')
 			.data(chords)
@@ -188,6 +199,7 @@
 			.style('stroke', config.ribbonStroke)
 			.style('stroke-width', config.ribbonStrokeWidth)
 			.style('opacity', config.ribbonOpacity)
+			.attr('opacity', config.ribbonOpacity)
 			.on('mouseover', function (event: any, d: any) {
 				if (!config.showTooltip) return;
 				const sourceCountry = countries[d.source.index];

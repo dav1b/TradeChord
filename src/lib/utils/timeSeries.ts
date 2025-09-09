@@ -140,3 +140,149 @@ export function buildExportRankSeries(
 
     return Array.from(partnerToSeries.entries()).map(([partner, series]) => ({ partner, series }));
 }
+
+// ---- Slope chart builder ----
+export interface SlopeDatum {
+    partner: string;
+    v1: number; // exports from reporter to partner in year1
+    v2: number; // exports from reporter to partner in year2
+}
+
+export function buildSlopeData(
+    data: TradeRecord[],
+    reporterCode: string,
+    year1: number,
+    year2: number,
+    topN: number = 10
+): SlopeDatum[] {
+    // Filter to reporter exports only for the two years
+    const filtered = data.filter(
+        (r) => r.indicator === 'XPRT-TRD-VL' && r.reporter === reporterCode && (parseInt(r.year) === year1 || parseInt(r.year) === year2)
+    );
+
+    const key = (y: number, p: string) => `${y}__${p}`;
+    const valueMap = new Map<string, number>();
+    filtered.forEach((r) => {
+        const v = (parseFloat(r.value) || 0) * 1000;
+        valueMap.set(key(parseInt(r.year), r.partner), (valueMap.get(key(parseInt(r.year), r.partner)) || 0) + v);
+    });
+
+    // Determine top partners by year2 values (most recent) and exclude ROW
+    const partnersSet = new Set<string>();
+    filtered.forEach((r) => { if (r.partner !== 'ROW') partnersSet.add(r.partner); });
+    const partners = Array.from(partnersSet);
+    partners.sort((a, b) => (valueMap.get(key(year2, b)) || 0) - (valueMap.get(key(year2, a)) || 0));
+    const top = partners.slice(0, Math.max(1, topN));
+
+    return top.map((p) => ({
+        partner: p,
+        v1: valueMap.get(key(year1, p)) || 0,
+        v2: valueMap.get(key(year2, p)) || 0,
+    }));
+}
+
+// Build slope data based on share of total exports/imports and trade-balance sign per year
+export interface SlopeShareDatum {
+    partner: string;
+    s1: number; // share as fraction (0..1) in year1
+    s2: number; // share as fraction (0..1) in year2
+    b1: boolean; // trade balance >= 0 in year1
+    b2: boolean; // trade balance >= 0 in year2
+    v1?: number; // value in year1
+    v2?: number; // value in year2
+    total1?: number; // total exports/imports in year1
+    total2?: number; // total exports/imports in year2
+}
+
+export function buildSlopeShareData(
+    data: TradeRecord[],
+    reporterCode: string,
+    year1: number,
+    year2: number,
+    topN: number = 10,
+    mode: 'exports' | 'imports' = 'exports'
+): SlopeShareDatum[] {
+    const y1 = year1; const y2 = year2;
+
+    const isYear = (r: TradeRecord) => parseInt(r.year) === y1 || parseInt(r.year) === y2;
+    const filtered = data.filter((r) => r.indicator === 'XPRT-TRD-VL' && isYear(r) && (r.reporter === reporterCode || r.partner === reporterCode));
+
+    // Totals by year for reporter exports and imports
+    const totals = new Map<number, { exports: number; imports: number }>();
+    totals.set(y1, { exports: 0, imports: 0 }); totals.set(y2, { exports: 0, imports: 0 });
+
+    filtered.forEach((r) => {
+        const y = parseInt(r.year); const v = (parseFloat(r.value) || 0) * 1000;
+        const cur = totals.get(y)!;
+        if (r.reporter === reporterCode) totals.set(y, { exports: cur.exports + v, imports: cur.imports });
+        if (r.partner === reporterCode) totals.set(y, { exports: cur.exports, imports: cur.imports + v });
+    });
+
+    const key = (y: number, p: string, type: 'exports' | 'imports') => `${y}__${p}__${type}`;
+    const values = new Map<string, number>();
+
+    filtered.forEach((r) => {
+        const y = parseInt(r.year); const v = (parseFloat(r.value) || 0) * 1000;
+        if (r.reporter === reporterCode) {
+            values.set(key(y, r.partner, 'exports'), (values.get(key(y, r.partner, 'exports')) || 0) + v);
+        }
+        if (r.partner === reporterCode) {
+            values.set(key(y, r.reporter, 'imports'), (values.get(key(y, r.reporter, 'imports')) || 0) + v);
+        }
+    });
+
+    // Determine top partners by selected mode in year2
+    const partnersSet = new Set<string>();
+    filtered.forEach((r) => { const p = r.reporter === reporterCode ? r.partner : r.reporter; if (p !== 'ROW') partnersSet.add(p); });
+    const partners = Array.from(partnersSet);
+    partners.sort((a, b) => (values.get(key(y2, b, mode)) || 0) - (values.get(key(y2, a, mode)) || 0));
+    const top = partners.slice(0, Math.max(1, topN));
+
+    const result: SlopeShareDatum[] = top.map((p) => {
+        const exp1 = values.get(key(y1, p, 'exports')) || 0;
+        const exp2 = values.get(key(y2, p, 'exports')) || 0;
+        const imp1 = values.get(key(y1, p, 'imports')) || 0;
+        const imp2 = values.get(key(y2, p, 'imports')) || 0;
+        const tot1 = totals.get(y1)!;
+        const tot2 = totals.get(y2)!;
+        const s1 = mode === 'exports' ? (tot1.exports ? exp1 / tot1.exports : 0) : (tot1.imports ? imp1 / tot1.imports : 0);
+        const s2 = mode === 'exports' ? (tot2.exports ? exp2 / tot2.exports : 0) : (tot2.imports ? imp2 / tot2.imports : 0);
+        const b1 = (exp1 - imp1) >= 0;
+        const b2 = (exp2 - imp2) >= 0;
+        const v1 = mode === 'exports' ? exp1 : imp1;
+        const v2 = mode === 'exports' ? exp2 : imp2;
+        const total1 = mode === 'exports' ? tot1.exports : tot1.imports;
+        const total2 = mode === 'exports' ? tot2.exports : tot2.imports;
+        return { partner: p, s1, s2, b1, b2, v1, v2, total1, total2 };
+    });
+
+    // Add ROW (Rest of World) - aggregate all partners not in top N
+    const topSet = new Set(top);
+    const remainingPartners = partners.filter(p => !topSet.has(p));
+    
+    if (remainingPartners.length > 0) {
+        let rowExp1 = 0, rowExp2 = 0, rowImp1 = 0, rowImp2 = 0;
+        
+        remainingPartners.forEach(p => {
+            rowExp1 += values.get(key(y1, p, 'exports')) || 0;
+            rowExp2 += values.get(key(y2, p, 'exports')) || 0;
+            rowImp1 += values.get(key(y1, p, 'imports')) || 0;
+            rowImp2 += values.get(key(y2, p, 'imports')) || 0;
+        });
+        
+        const tot1 = totals.get(y1)!;
+        const tot2 = totals.get(y2)!;
+        const s1 = mode === 'exports' ? (tot1.exports ? rowExp1 / tot1.exports : 0) : (tot1.imports ? rowImp1 / tot1.imports : 0);
+        const s2 = mode === 'exports' ? (tot2.exports ? rowExp2 / tot2.exports : 0) : (tot2.imports ? rowImp2 / tot2.imports : 0);
+        const b1 = (rowExp1 - rowImp1) >= 0;
+        const b2 = (rowExp2 - rowImp2) >= 0;
+        const v1 = mode === 'exports' ? rowExp1 : rowImp1;
+        const v2 = mode === 'exports' ? rowExp2 : rowImp2;
+        const total1 = mode === 'exports' ? tot1.exports : tot1.imports;
+        const total2 = mode === 'exports' ? tot2.exports : tot2.imports;
+        
+        result.push({ partner: 'ROW', s1, s2, b1, b2, v1, v2, total1, total2 });
+    }
+
+    return result;
+}

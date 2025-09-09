@@ -1,4 +1,4 @@
-interface TradeRecord {
+export interface TradeRecord {
 	year: string;
 	reporter: string;
 	partner: string;
@@ -209,9 +209,17 @@ export function buildCountryChord(data: TradeRecord[], countryCode: string, topN
 	});
 	const includeROW = remainder.length > 0 || counterpartTotals.has('ROW');
 
-	// Final countries: selected + top counterparts + ROW (last if included)
-	const countries = [countryCode, ...topCounterparts];
+	// Sort top counterparts by export value to reporter (ascending) for clockwise positioning
+	topCounterparts.sort((a, b) => {
+		const exportsA = counterpartTotals.get(a) || 0;
+		const exportsB = counterpartTotals.get(b) || 0;
+		return exportsA - exportsB; // Ascending order
+	});
+
+	// Final countries: reporter, ROW, then top counterparts in ascending order
+	const countries = [countryCode];
 	if (includeROW) countries.push('ROW');
+	countries.push(...topCounterparts);
 
 	// Prepare index
 	const idx = new Map(countries.map((c, i) => [c, i]));
