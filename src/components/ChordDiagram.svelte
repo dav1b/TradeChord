@@ -180,26 +180,32 @@
 			.append('div')
 			.attr('class', 'tooltip')
 			.style('position', 'absolute')
-			.style('background', 'rgba(0, 0, 0, 0.8)')
-			.style('color', 'white')
-			.style('padding', config.tooltipPadding)
-			.style('border-radius', config.tooltipBorderRadius)
-			.style('font-size', config.tooltipFontSize)
+			.style('background', '#ffffff')
+			.style('color', '#111827')
+			.style('border', '1px solid #E5E7EB')
+			.style('box-shadow', '0 4px 16px rgba(0,0,0,0.08)')
+			.style('border-radius', '8px')
+			.style('padding', '12px 16px')
+			.style('font-size', '12px')
 			.style('pointer-events', 'none')
 			.style('opacity', 0);
 
-		group
+		svg
 			.append('g')
+			.attr('transform', `rotate(${rotationAngle * 180 / Math.PI})`)
 			.selectAll('path')
 			.data(chords)
 			.enter()
 			.append('path')
 			.attr('d', ribbon as any)
-			.style('fill', (d: any) => getTradeBalanceColor(tradeBalances[d.source.index]))
+			.style('fill', (d: any) => {
+				// Use the same trade balance logic as the rim
+				return getTradeBalanceColor(tradeBalances[d.source.index]);
+			})
 			.style('stroke', config.ribbonStroke)
 			.style('stroke-width', config.ribbonStrokeWidth)
-			.style('opacity', config.ribbonOpacity)
-			.attr('opacity', config.ribbonOpacity)
+			.style('opacity', '0.7')
+			.attr('opacity', '0.7')
 			.on('mouseover', function (event: any, d: any) {
 				if (!config.showTooltip) return;
 				const sourceCountry = countries[d.source.index];
@@ -214,10 +220,15 @@
 				const psPct = targetTotal > 0 ? ((valuePS / targetTotal) * 100).toFixed(1) : '0.0';
 
 				const tooltipContent = `
-					<strong>${sourceCountry} ⇄ ${targetCountry}</strong><br/>
-					${sourceCountry} → ${targetCountry}: $${(valueSP / 1e9).toFixed(2)}B (${spPct}%)<br/>
-					${targetCountry} → ${sourceCountry}: $${(valuePS / 1e9).toFixed(2)}B (${psPct}%)<br/>
-					Balance (reporter - partner): $${(tradeBalance / 1e9).toFixed(2)}B
+					<div style="font-weight:700;margin-bottom:8px;color:#111827;">${sourceCountry} ⇄ ${targetCountry}</div>
+					<div style="display:grid;grid-template-columns:auto auto;row-gap:6px;column-gap:12px;align-items:baseline;">
+						<div style="color:#6B7280;">${sourceCountry} Exports</div>
+						<div style="color:#374151;font-weight:700;">$${(valueSP / 1e9).toFixed(1)}B</div>
+						<div style="color:#6B7280;">${targetCountry} Exports</div>
+						<div style="color:#374151;font-weight:700;">$${(valuePS / 1e9).toFixed(1)}B</div>
+						<div style="color:#6B7280;">Trade Balance</div>
+						<div style="color:${tradeBalance >= 0 ? '#08605F' : '#931F1D'};font-weight:700;">${tradeBalance >= 0 ? '+' : '-'}$${(Math.abs(tradeBalance) / 1e9).toFixed(1)}B</div>
+					</div>
 				`;
 
 				tooltipDiv

@@ -19,6 +19,7 @@ export interface ProductTreemapData {
   value: number;
   share: number;
   growth: number;
+  trendData?: ProductTrendData[]; // Mini trend data for the treemap
 }
 
 // Get product data for a specific country and year
@@ -104,6 +105,16 @@ export function getProductTreemapData(
   
   const prevYearMap = new Map(prevYearData.map(d => [d.product, d.value]));
   
+  // Get trend data for each product
+  const trendData = getProductTrendData(data, countryCode);
+  const trendDataMap = new Map<string, ProductTrendData[]>();
+  trendData.forEach(item => {
+    if (!trendDataMap.has(item.product)) {
+      trendDataMap.set(item.product, []);
+    }
+    trendDataMap.get(item.product)!.push(item);
+  });
+  
   return currentYearData.map(({ product, value, share }) => {
     const prevValue = prevYearMap.get(product) || 0;
     const growth = prevValue > 0 ? ((value - prevValue) / prevValue) * 100 : 0;
@@ -112,7 +123,8 @@ export function getProductTreemapData(
       product,
       value,
       share,
-      growth
+      growth,
+      trendData: trendDataMap.get(product) || []
     };
   });
 }

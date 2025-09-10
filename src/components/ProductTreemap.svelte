@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as d3 from 'd3';
-  import type { ProductTreemapData } from '$lib/utils/productAnalysis';
+  import type { ProductTreemapData, ProductTrendData } from '$lib/utils/productAnalysis';
+  import ProductTrendModal from './ProductTrendModal.svelte';
 
   export let data: ProductTreemapData[] = [];
   export let width: number = 800;
@@ -8,6 +9,9 @@
   export let margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
   let container: HTMLDivElement;
+  let modalOpen = false;
+  let selectedProduct = '';
+  let selectedTrendData: ProductTrendData[] = [];
 
   $: if (container && data) render();
 
@@ -62,6 +66,65 @@
     if (growth > 5) return config.colors.positive;
     if (growth < -5) return config.colors.negative;
     return config.colors.neutral;
+  }
+
+  function openModal(productName: string, trendData: ProductTrendData[]) {
+    selectedProduct = productName;
+    selectedTrendData = trendData;
+    modalOpen = true;
+  }
+
+  function closeModal() {
+    modalOpen = false;
+    selectedProduct = '';
+    selectedTrendData = [];
+  }
+
+  function renderMiniTrendChart(cell: any, d: any) {
+    if (!d.data.trendData || d.data.trendData.length < 2) return;
+    
+    const cellWidth = d.x1 - d.x0;
+    const cellHeight = d.y1 - d.y0;
+    
+    // Position directly below labels (after product name, value, and growth)
+    const labelBottom = 50; // Space for labels
+    const miniChartHeight = 16; // Fixed height for mini chart
+    const miniChartWidth = Math.min(84, cellWidth - 8); // Max 84px width
+    
+    // Check if there's enough space below labels
+    if (cellHeight < labelBottom + miniChartHeight + 8) return; // Not enough space
+    if (miniChartWidth < 30) return; // Too narrow
+    
+    const trendData = d.data.trendData.sort((a: any, b: any) => a.year - b.year);
+    const values = trendData.map((item: any) => item.value);
+    const minValue = Math.min(...values);
+    const maxValue = Math.max(...values);
+    
+    const xScale = d3.scaleLinear()
+      .domain([trendData[0].year, trendData[trendData.length - 1].year])
+      .range([2, miniChartWidth - 2]);
+    
+    const yScale = d3.scaleLinear()
+      .domain([minValue, maxValue])
+      .range([miniChartHeight - 2, 2]);
+    
+    const miniChart = cell.append('g')
+      .attr('class', 'mini-trend')
+      .attr('transform', `translate(4, ${labelBottom})`);
+    
+    // Draw mini bars
+    miniChart.selectAll('.mini-bar')
+      .data(trendData)
+      .enter()
+      .append('rect')
+      .attr('class', 'mini-bar')
+      .attr('x', (item: any) => xScale(item.year) - 1)
+      .attr('y', (item: any) => yScale(item.value))
+      .attr('width', 2)
+      .attr('height', (item: any) => miniChartHeight - yScale(item.value))
+      .attr('fill', '#ffffff')
+      .attr('opacity', 0.9)
+      .attr('stroke', 'none');
   }
 
   function render() {
@@ -140,7 +203,7 @@
         tooltip.style('opacity', 0);
       });
 
-    // Add text labels (only if there's enough space)
+    // Add text labels and mini trend charts (only if there's enough space)
     cells.each(function(d: any) {
       const cell = d3.select(this);
       const cellWidth = d.x1 - d.x0;
@@ -179,12 +242,25 @@
             .attr('opacity', 0.8)
             .text(formatGrowth(d.data.growth));
         }
+        
+        // Add mini trend chart if there's enough space and trend data
+        if (cellHeight > 70 && d.data.trendData && d.data.trendData.length > 1) {
+          renderMiniTrendChart(cell, d);
+        }
       }
     });
   }
 </script>
 
 <div bind:this={container}></div>
+
+<!-- Product Trend Modal -->
+<ProductTrendModal 
+  isOpen={modalOpen}
+  productName={selectedProduct}
+  trendData={selectedTrendData}
+  onClose={closeModal}
+/>
 
 <style>
   :global(svg text) {

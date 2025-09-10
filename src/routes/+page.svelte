@@ -5,6 +5,7 @@
   import SlopeChart from '$components/SlopeChart.svelte';
   import ProductTreemap from '$components/ProductTreemap.svelte';
   import ProductTrendChart from '$components/ProductTrendChart.svelte';
+  import AICommentary from '$components/AICommentary.svelte';
   import { onMount } from 'svelte';
   import * as d3 from 'd3';
   import { transformTradeData, buildCountryChord } from '$lib/utils/transform';
@@ -155,25 +156,33 @@
     {#if productTreemapData.length > 0}
       <div class="treemap-card">
         <h2>Product Export Breakdown — {selectedCountry} ({selectedYear})</h2>
-        <ProductTreemap data={productTreemapData} width={680} height={520} />
+        <ProductTreemap data={productTreemapData} width={880} height={520} />
       </div>
     {/if}
     <div class="slopes">
       {#if slopeData.length > 0}
         <div class="slope-card">
           <h3>Top {topN} Partners — Exports {compareYear} → {selectedYear}</h3>
-          <SlopeChart data={slopeData} year1={parseInt(compareYear)} year2={parseInt(selectedYear)} reporter={selectedCountry} mode="exports" width={680} height={260} />
+          <SlopeChart data={slopeData} year1={parseInt(compareYear)} year2={parseInt(selectedYear)} reporter={selectedCountry} mode="exports" width={340} height={260} />
         </div>
       {/if}
       {#if importSlopeData.length > 0}
         <div class="slope-card">
           <h3>Top {topN} Partners — Imports {compareYear} → {selectedYear}</h3>
-          <SlopeChart data={importSlopeData} year1={parseInt(compareYear)} year2={parseInt(selectedYear)} reporter={selectedCountry} mode="imports" width={680} height={260} />
+          <SlopeChart data={importSlopeData} year1={parseInt(compareYear)} year2={parseInt(selectedYear)} reporter={selectedCountry} mode="imports" width={340} height={260} />
         </div>
       {/if}
     </div>
   </div>
 </div>
+
+<!-- AI Commentary Section -->
+<AICommentary 
+  data={rawData} 
+  productData={productData} 
+  countryCode={selectedCountry} 
+  year={selectedYear} 
+/>
 
 <div class="footer">
   <div>Source: Local CSV derived from WITS/UN Comtrade. Year range {DASHBOARD.START_YEAR}–{DASHBOARD.END_YEAR}.</div>
@@ -184,11 +193,11 @@
 <style>
   .dashboard {
     display: grid;
-    grid-template-columns: 820px 1fr;
+    grid-template-columns: 820px 920px;
     gap: 20px;
     align-items: start;
     margin-top: 16px;
-    max-width: 1500px;
+    max-width: 1760px;
     min-height: 844px;
   }
 
