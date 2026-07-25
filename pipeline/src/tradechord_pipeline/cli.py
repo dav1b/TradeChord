@@ -21,6 +21,7 @@ from datetime import UTC, datetime
 from . import config as _config
 from .collection.flows import CollectionConfig, build_client, collect_reporter_flow
 from .models import Flow
+from .release import DEFAULT_TOLERANCE, run_release, run_validate
 
 _STAGING_FIELDS = ["year", "reporter", "partner", "product", "flow", "value_thousands"]
 
@@ -138,10 +139,42 @@ def _cmd_collect(args: argparse.Namespace) -> int:
     return 0
 
 
-def _not_implemented(args: argparse.Namespace) -> int:
-    print(f"[tradechord-data] '{args.command}' is not yet implemented (release exporter: M3).",
-          file=sys.stderr)
-    return 2
+def _print_report(report) -> None:
+    print(f"[validate] {report.summary()}", file=sys.stderr)
+    for name, statuses in report.unresolved[:10]:
+        print(f"    unresolved failure: {name} {statuses}", file=sys.stderr)
+    for item in report.recon_failures[:10]:
+        print(f"    reconcile: {item.reporter} {item.year} {item.flow} {item.product} "
+              f"rel_diff={item.rel_diff:.3f}", file=sys.stderr)
+    for key in report.duplicates[:10]:
+        print(f"    duplicate key: {key}", file=sys.stderr)
+
+
+def _cmd_validate(args: argparse.Namespace) -> int:
+    report = run_validate(args.input, tolerance=args.tolerance)
+    _print_report(report)
+    if report.ok:
+        print("[validate] OK", file=sys.stderr)
+        return 0
+    print("[validate] FAILED", file=sys.stderr)
+    return 1
+
+
+def _cmd_release(args: argparse.Namespace) -> int:
+    path, report = run_release(
+        args.input,
+        args.version,
+        args.releases_root,
+        tolerance=args.tolerance,
+        strict=args.strict,
+        force=args.force,
+    )
+    _print_report(report)
+    if path is None:
+        print("[release] REJECTED: validation failed (use --no-strict to override)", file=sys.stderr)
+        return 1
+    print(f"[release] wrote {path}", file=sys.stderr)
+    return 0
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -167,12 +200,21 @@ def _build_parser() -> argparse.ArgumentParser:
     c.set_defaults(func=_cmd_collect)
 
     v = sub.add_parser("validate", help="Validate a staging run against the contract")
-    v.set_defaults(func=_not_implemented)
+    v.add_argument("--input", required=True, help="Path to the staging run")
+    v.add_argument("--tolerance", type=float, default=DEFAULT_TOLERANCE,
+                   help="Reconciliation relative tolerance (default 0.02)")
+    v.set_defaults(func=_cmd_validate)
 
     r = sub.add_parser("release", help="Publish a validated release")
-    r.add_argument("--input", help="Path to the staging run to publish")
-    r.add_argument("--version", help="Release version, e.g. 2026-01")
-    r.set_defaults(func=_not_implemented)
+    r.add_argument("--input", required=True, help="Path to the staging run to publish")
+    r.add_argument("--version", required=True, help="Release version, e.g. 2026-01")
+    r.add_argument("--releases-root", dest="releases_root", default="data/releases",
+                   help="Root directory for committed releases")
+    r.add_argument("--tolerance", type=float, default=DEFAULT_TOLERANCE)
+    r.add_argument("--no-strict", dest="strict", action="store_false",
+                   help="Write the release even if validation fails (records issues)")
+    r.add_argument("--force", action="store_true", help="Overwrite an existing release version")
+    r.set_defaults(func=_cmd_release, strict=True)
 
     return parser
 

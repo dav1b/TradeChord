@@ -29,6 +29,7 @@ env/
 # ---- Pipeline working data (NEVER committed) ----
 data/staging/
 data/raw/
+pipeline/data/
 **/.cache/
 *.bin
 *.checkpoint*.jsonl

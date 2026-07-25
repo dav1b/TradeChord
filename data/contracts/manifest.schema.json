@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tradechord/contracts/manifest.schema.json",
+  "title": "TradeChord release manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "datasetVersion",
+    "generatedAt",
+    "source",
+    "artifactUnit",
+    "years",
+    "reporters",
+    "products",
+    "flows",
+    "artifacts"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "datasetVersion": { "type": "string" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "source": {
+      "type": "object",
+      "required": ["provider", "sourceUnit", "flows"],
+      "properties": {
+        "provider": { "type": "string" },
+        "sourceUnit": { "type": "string", "const": "thousands_current_usd" },
+        "flows": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["sourceIndicator", "valuation"],
+            "properties": {
+              "sourceIndicator": { "type": "string" },
+              "valuation": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "artifactUnit": { "type": "string", "const": "current_usd" },
+    "years": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "integer" },
+        "end": { "type": "integer" }
+      }
+    },
+    "reporters": { "type": "array", "items": { "type": "string" } },
+    "products": { "type": "array", "items": { "type": "string" } },
+    "flows": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["export", "import"] }
+    },
+    "coverage": { "type": "object" },
+    "row": {
+      "type": "object",
+      "properties": {
+        "synthetic": { "type": "boolean" },
+        "definition": { "type": "string" }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "required": ["matrix"],
+      "properties": {
+        "matrix": {
+          "type": "object",
+          "required": ["path", "sha256", "records"],
+          "properties": {
+            "path": { "type": "string" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "records": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tradechord/contracts/records.schema.json",
+  "title": "TradeChord canonical trade record",
+  "description": "Logical shape of one row in trade_matrix.csv.gz. Compound key: (year, reporter, partner, product, flow). Values are integer current USD.",
+  "type": "object",
+  "required": ["year", "reporter", "partner", "product", "flow", "value_usd"],
+  "additionalProperties": false,
+  "properties": {
+    "year": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+    "reporter": { "type": "string", "minLength": 1 },
+    "partner": { "type": "string", "minLength": 1, "description": "ISO3 code, or ROW for the synthetic remainder" },
+    "product": { "type": "string", "minLength": 1 },
+    "flow": { "type": "string", "enum": ["export", "import"] },
+    "value_usd": { "type": "integer", "minimum": 0, "description": "current USD (source thousands x 1000)" }
+  }
+}
