@@ -1,0 +1,40 @@
+name: web
+
+on:
+  push:
+    paths:
+      - 'web/**'
+      - '.nvmrc'
+      - '.github/workflows/web.yml'
+  pull_request:
+    paths:
+      - 'web/**'
+      - '.nvmrc'
+  workflow_dispatch:
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install
+        working-directory: web
+        run: npm ci
+
+      - name: Type check
+        working-directory: web
+        run: npm run check
+
+      - name: Build
+        working-directory: web
+        run: npm run build
+
+      - name: Large-file guard
+        run: |
+          big=$(find . -type f -size +20M -not -path './.git/*' -not -path '*/node_modules/*' -not -path './data/releases/*')
+          if [ -n "$big" ]; then echo "Unexpected large files:"; echo "$big"; exit 1; fi
