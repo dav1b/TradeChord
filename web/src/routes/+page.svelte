@@ -489,13 +489,6 @@
     font-size: 14px;
   }
 
-  .big-equation {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .big-op { font-size: 28px; font-weight: 700; color: #374151; }
   .big-stat { display: flex; align-items: baseline; gap: 8px; }
   .big-value { font-size: 36px; font-weight: 800; color: var(--c); }
   .big-label { font-size: 12px; color: #6B7280; font-weight: 600; }

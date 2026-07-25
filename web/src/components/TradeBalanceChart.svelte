@@ -37,7 +37,7 @@
 		// Create line generators
 		const line = d3.line<{ year: number; exports: number; imports: number; balance: number }>()
 			.x(d => xScale(d.year))
-			.y(d => yScale(d.value));
+			.y(d => yScale(d.exports)); // placeholder; overridden per-series below
 
 		// Create area generator for the colored region
 		const area = d3.area<{ year: number; exports: number; imports: number; balance: number }>()
