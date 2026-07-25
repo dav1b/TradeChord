@@ -286,3 +286,62 @@ export function buildSlopeShareData(
 
     return result;
 }
+
+// Build product slope data for comparing product shares between two years
+export function buildProductSlopeData(
+    data: TradeRecord[],
+    reporterCode: string,
+    year1: number,
+    year2: number,
+    topN: number = 10,
+    mode: 'exports' | 'imports' = 'exports'
+): SlopeShareDatum[] {
+    const y1 = year1; const y2 = year2;
+
+    const isYear = (r: TradeRecord) => parseInt(r.year) === y1 || parseInt(r.year) === y2;
+    const filtered = data.filter((r) => r.indicator === 'XPRT-TRD-VL' && isYear(r) && r.reporter === reporterCode);
+
+    // Totals by year for reporter exports and imports
+    const totals = new Map<number, { exports: number; imports: number }>();
+    totals.set(y1, { exports: 0, imports: 0 }); totals.set(y2, { exports: 0, imports: 0 });
+
+    filtered.forEach((r) => {
+        const y = parseInt(r.year); const v = (parseFloat(r.value) || 0) * 1000;
+        const cur = totals.get(y)!;
+        totals.set(y, { exports: cur.exports + v, imports: cur.imports });
+    });
+
+    const key = (y: number, p: string, type: 'exports' | 'imports') => `${y}__${p}__${type}`;
+    const values = new Map<string, number>();
+
+    filtered.forEach((r) => {
+        const y = parseInt(r.year); const v = (parseFloat(r.value) || 0) * 1000;
+        values.set(key(y, r.product, 'exports'), (values.get(key(y, r.product, 'exports')) || 0) + v);
+    });
+
+    // Determine top products by selected mode in year2
+    const productsSet = new Set<string>();
+    filtered.forEach((r) => { if (r.product) productsSet.add(r.product); });
+    const products = Array.from(productsSet);
+    products.sort((a, b) => (values.get(key(y2, b, mode)) || 0) - (values.get(key(y2, a, mode)) || 0));
+    const top = products.slice(0, Math.max(1, topN));
+
+    const result: SlopeShareDatum[] = top.map((p) => {
+        const exp1 = values.get(key(y1, p, 'exports')) || 0;
+        const exp2 = values.get(key(y2, p, 'exports')) || 0;
+        const tot1 = totals.get(y1)!;
+        const tot2 = totals.get(y2)!;
+        const s1 = mode === 'exports' ? (tot1.exports ? exp1 / tot1.exports : 0) : 0;
+        const s2 = mode === 'exports' ? (tot2.exports ? exp2 / tot2.exports : 0) : 0;
+        const b1 = s1 > 0;
+        const b2 = s2 > 0;
+        return {
+            partner: p, // Reusing partner field for product
+            s1, s2, b1, b2,
+            v1: exp1, v2: exp2,
+            total1: tot1.exports, total2: tot2.exports
+        };
+    });
+
+    return result;
+}

@@ -93,13 +93,34 @@
       .domain(d3.extent(data, d => d.year) as [number, number])
       .range([0, innerWidth]);
 
+    // For trade balance data, we need to handle negative values
+    const values = data.map(d => d.value);
+    const minValue = d3.min(values) || 0;
+    const maxValue = d3.max(values) || 0;
+    const hasNegativeValues = minValue < 0;
+    const hasPositiveValues = maxValue > 0;
+    
     const yValueScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.value) || 0])
+      .domain([minValue, maxValue])
       .range([innerHeight, 0]);
 
     const yGrowthScale = d3.scaleLinear()
       .domain(d3.extent(data, d => d.growth) as [number, number])
       .range([innerHeight, 0]);
+
+    // Add zero line for trade balance data
+    if (hasNegativeValues && hasPositiveValues) {
+      const zeroY = yValueScale(0);
+      g.append('line')
+        .attr('x1', 0)
+        .attr('x2', innerWidth)
+        .attr('y1', zeroY)
+        .attr('y2', zeroY)
+        .attr('stroke', config.colors.axis)
+        .attr('stroke-width', 1)
+        .attr('opacity', 0.5)
+        .attr('stroke-dasharray', '2,2');
+    }
 
     // Line generator for values
     const line = d3.line<ProductTrendData>()
@@ -126,7 +147,7 @@
         const html = `
           <div style="font-weight:700;margin-bottom:4px;">${product} (${d.year})</div>
           <div style="display:grid;grid-template-columns:auto auto;row-gap:2px;column-gap:8px;align-items:baseline;">
-            <div style="color:#6B7280;">Value</div><div style="color:#374151;font-weight:700;">${formatValue(d.value)}</div>
+            <div style="color:#6B7280;">Trade Balance</div><div style="color:${d.value >= 0 ? '#08605F' : '#931F1D'};font-weight:700;">${formatValue(d.value)}</div>
             <div style="color:#6B7280;">Growth</div><div style="color:${d.growth >= 0 ? config.colors.bar : config.colors.barNegative};font-weight:700;">${formatGrowth(d.growth)}</div>
           </div>`;
         tooltip.style('opacity', 1).html(html);
@@ -162,7 +183,7 @@
         const html = `
           <div style="font-weight:700;margin-bottom:4px;">${product} (${d.year})</div>
           <div style="display:grid;grid-template-columns:auto auto;row-gap:2px;column-gap:8px;align-items:baseline;">
-            <div style="color:#6B7280;">Value</div><div style="color:#374151;font-weight:700;">${formatValue(d.value)}</div>
+            <div style="color:#6B7280;">Trade Balance</div><div style="color:${d.value >= 0 ? '#08605F' : '#931F1D'};font-weight:700;">${formatValue(d.value)}</div>
             <div style="color:#6B7280;">Growth</div><div style="color:${d.growth >= 0 ? config.colors.bar : config.colors.barNegative};font-weight:700;">${formatGrowth(d.growth)}</div>
           </div>`;
         tooltip.style('opacity', 1).html(html);

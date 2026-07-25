@@ -14,7 +14,7 @@
   let chartType: 'bump' | 'trend' | 'trending' | 'chord' = 'bump';
 
   onMount(async () => {
-    rawData = await d3.csv('/data/export-matrix.csv');
+    rawData = await d3.csv('/data/complete_export_matrix.csv');
     if (!rawData) return;
 
     // Compute total exports per reporter across all years

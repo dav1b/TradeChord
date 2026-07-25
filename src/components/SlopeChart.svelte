@@ -104,7 +104,7 @@
       .attr('y1', d => y(d.s1))
       .attr('y2', d => y(d.s2))
       .attr('stroke', d => d.partner === 'ROW' ? '#9CA3AF' : lineColor)
-      .attr('stroke-width', d => d.partner === 'ROW' ? 3 : 2)
+      .attr('stroke-width', 2) // Same width for all lines
       .attr('opacity', d => d.partner === 'ROW' ? 0.8 : 1)
       .attr('stroke-dasharray', d => d.partner === 'ROW' ? '4,2' : null);
 
@@ -112,7 +112,7 @@
     groups.append('circle')
       .attr('cx', x(year1)!)
       .attr('cy', d => y(d.s1))
-      .attr('r', d => d.partner === 'ROW' ? 4 : 3)
+      .attr('r', 3) // Same size for all circles
       .attr('fill', d => d.partner === 'ROW' ? '#9CA3AF' : (d.b1 ? posColor : negColor))
       .attr('stroke', d => d.partner === 'ROW' ? '#6B7280' : 'none')
       .attr('stroke-width', d => d.partner === 'ROW' ? 1 : 0)
@@ -138,7 +138,7 @@
     groups.append('circle')
       .attr('cx', x(year2)!)
       .attr('cy', d => y(d.s2))
-      .attr('r', d => d.partner === 'ROW' ? 4 : 3)
+      .attr('r', 3) // Same size for all circles
       .attr('fill', d => d.partner === 'ROW' ? '#9CA3AF' : (d.b2 ? posColor : negColor))
       .attr('stroke', d => d.partner === 'ROW' ? '#6B7280' : 'none')
       .attr('stroke-width', d => d.partner === 'ROW' ? 1 : 0)
@@ -166,38 +166,55 @@
     const leftLabels: Array<{ y: number; text: any; isRow: boolean }> = [];
     const rightLabels: Array<{ y: number; text: any; isRow: boolean }> = [];
 
+    // Get top 3 partners in 2022 (excluding ROW)
+    const topPartners = data
+      .filter(d => d.partner !== 'ROW')
+      .sort((a, b) => b.s2 - a.s2)
+      .slice(0, 3)
+      .map(d => d.partner);
+
     // Left side labels
     groups.each(function(d) {
       const yPos = y(d.s1);
       const isRow = d.partner === 'ROW';
-      const text = d3.select(this).append('text')
-        .attr('x', x(year1)! - 8)
-        .attr('y', yPos)
-        .attr('dominant-baseline', 'middle')
-        .attr('text-anchor', 'end')
-        .style('font-size', '11px')
-        .style('font-weight', isRow ? 'bold' : 'normal')
-        .style('opacity', isRow ? 0.8 : 1)
-        .text(`${d.partner} ${(d.s1*100).toFixed(1)}%`);
+      const shouldShow = isRow || topPartners.includes(d.partner);
       
-      leftLabels.push({ y: yPos, text, isRow });
+      if (shouldShow) {
+        const text = d3.select(this).append('text')
+          .attr('x', x(year1)! - 8)
+          .attr('y', yPos)
+          .attr('dominant-baseline', 'middle')
+          .attr('text-anchor', 'end')
+          .style('font-size', '11px')
+          .style('font-weight', isRow ? 'normal' : 'normal')
+          .style('font-style', isRow ? 'italic' : 'normal')
+          .style('opacity', isRow ? 0.8 : 1)
+          .text(`${d.partner} ${(d.s1*100).toFixed(1)}%`);
+        
+        leftLabels.push({ y: yPos, text, isRow });
+      }
     });
 
     // Right side labels
     groups.each(function(d) {
       const yPos = y(d.s2);
       const isRow = d.partner === 'ROW';
-      const text = d3.select(this).append('text')
-        .attr('x', x(year2)! + 8)
-        .attr('y', yPos)
-        .attr('dominant-baseline', 'middle')
-        .attr('text-anchor', 'start')
-        .style('font-size', '11px')
-        .style('font-weight', isRow ? 'bold' : 'normal')
-        .style('opacity', isRow ? 0.8 : 1)
-        .text(`${(d.s2*100).toFixed(1)}%`);
+      const shouldShow = isRow || topPartners.includes(d.partner);
       
-      rightLabels.push({ y: yPos, text, isRow });
+      if (shouldShow) {
+        const text = d3.select(this).append('text')
+          .attr('x', x(year2)! + 8)
+          .attr('y', yPos)
+          .attr('dominant-baseline', 'middle')
+          .attr('text-anchor', 'start')
+          .style('font-size', '11px')
+          .style('font-weight', isRow ? 'normal' : 'normal')
+          .style('font-style', isRow ? 'italic' : 'normal')
+          .style('opacity', isRow ? 0.8 : 1)
+          .text(`${(d.s2*100).toFixed(1)}%`);
+        
+        rightLabels.push({ y: yPos, text, isRow });
+      }
     });
 
     // Collision detection and hiding overlapping labels (but always show ROW)
