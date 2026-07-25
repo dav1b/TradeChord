@@ -1,23 +1,52 @@
-node_modules
+# =============================================================
+# TradeChord monorepo ignore rules
+# web/  = SvelteKit dashboard (Node)   pipeline/ = data release tool (Python)
+# =============================================================
 
-# Output
+# ---- Node / SvelteKit (web) ----
+node_modules/
+.svelte-kit/
+build/
+dist/
 .output
 .vercel
 .netlify
 .wrangler
-/.svelte-kit
-/build
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
-# OS
-.DS_Store
-Thumbs.db
+# ---- Python (pipeline) ----
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
 
-# Env
+# ---- Pipeline working data (NEVER committed) ----
+data/staging/
+data/raw/
+**/.cache/
+*.bin
+*.checkpoint*.jsonl
+optimized_exports_*.csv
+optimized_exports_*.manifest.json
+*_matrix_*.csv
+*_matrix_*.json
+
+# ---- Committed releases: explicit re-inclusion ----
+!data/releases/
+!data/releases/**
+
+# ---- Secrets ----
 .env
 .env.*
 !.env.example
 !.env.test
 
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
+# ---- OS ----
+.DS_Store
+Thumbs.db
