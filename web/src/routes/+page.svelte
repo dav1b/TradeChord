@@ -4,6 +4,7 @@
 	import CountrySelect from '$lib/ui/CountrySelect.svelte';
 	import Card from '$lib/ui/Card.svelte';
 	import Hero from '$lib/dashboard/Hero.svelte';
+	import PartnerSlope from '$lib/dashboard/PartnerSlope.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -34,7 +35,9 @@
 		<Card title="Trade network" {source}><div class="placeholder">Chord — F3</div></Card>
 		<Card title="Partners" {source}><div class="placeholder">Partner treemap — F3</div></Card>
 		<Card title="Products" {source}><div class="placeholder">Product treemap — F3</div></Card>
-		<Card title="Partner shares" {source}><div class="placeholder">Slope — F3</div></Card>
+		<Card title="Partner export share · {data.projection.years[0]}→{year}" {source}>
+			<PartnerSlope projection={data.projection} />
+		</Card>
 	</div>
 
 	<footer class="foot">
