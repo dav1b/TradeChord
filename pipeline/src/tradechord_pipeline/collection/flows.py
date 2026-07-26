@@ -47,6 +47,7 @@ class CollectionConfig:
     sector_products: list[str]
     partners_export: list[str]
     partners_import: list[str]
+    partner_code_fixes: dict[str, str]
 
     @classmethod
     def from_module(cls, cfg=_config) -> CollectionConfig:
@@ -65,12 +66,15 @@ class CollectionConfig:
             sector_products=list(cfg.SECTOR_PRODUCTS),
             partners_export=list(cfg.TOP_50_EXPORTERS),
             partners_import=list(cfg.TOP_50_IMPORTERS),
+            partner_code_fixes=dict(getattr(cfg, "WITS_PARTNER_CODE_FIXES", {})),
         )
 
     def partner_universe(self, flow: Flow, reporter: str) -> list[str]:
-        base = set(self.partners_import if flow is Flow.IMPORT else self.partners_export)
-        base.discard(reporter)
-        return sorted(p for p in base if isinstance(p, str) and len(p) == 3 and p.isalpha())
+        base = self.partners_import if flow is Flow.IMPORT else self.partners_export
+        valid = (p for p in base if isinstance(p, str) and len(p) == 3 and p.isalpha())
+        fixed = {self.partner_code_fixes.get(p, p) for p in valid}
+        fixed.discard(reporter)
+        return sorted(fixed)
 
 
 @dataclass

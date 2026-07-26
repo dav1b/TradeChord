@@ -27,6 +27,12 @@ def test_unresolved_failures_flagged():
     assert len(bad) == 1 and bad[0][0] == "a.json"
 
 
+def test_not_found_is_not_a_failure():
+    # 404 (no series for the key) is data absence, not a collection failure.
+    manifests = {"a.json": {"flow": "export", "statuses": {"success": 10, "not_found": 3}}}
+    assert completeness.unresolved_failures(manifests) == []
+
+
 def test_invalid_values_flagged():
     good = CanonicalRecord(2020, "USA", "CAN", "Total", Flow.EXPORT, 100)
     negative = CanonicalRecord(2020, "USA", "CAN", "Total", Flow.EXPORT, -1)

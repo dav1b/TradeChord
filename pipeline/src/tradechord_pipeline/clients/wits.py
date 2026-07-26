@@ -136,6 +136,10 @@ class WitsClient:
                 time.sleep(backoff)
                 backoff *= 2
                 continue
+            if resp.status_code == 404:
+                # WITS returns 404 when no series exists for a dimension key.
+                # That is data absence, not an error — do not fail the run over it.
+                return FetchResult(RequestStatus.NOT_FOUND, None, http_status=404)
             return FetchResult(RequestStatus.HTTP_ERROR, None, http_status=resp.status_code)
 
         return FetchResult(RequestStatus.RETRY_EXHAUSTED, None, http_status=last_http)

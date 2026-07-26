@@ -419,6 +419,16 @@ INDIVIDUAL_PARTNERS = [
 # Default product (for backward compatibility)
 PRODUCT = "Total"
 
+# WITS partner-code corrections. The TOP_50 lists carry a few codes WITS does not
+# recognize as partners (they 404). Verified against the live API (2026-07):
+#   ROU -> ROM  (Romania)
+#   TWN -> OAS  (Taiwan, reported as "Other Asia, nes")
+# Applied only to the partner universe, not to reporters.
+WITS_PARTNER_CODE_FIXES = {
+    "ROU": "ROM",
+    "TWN": "OAS",
+}
+
 # Output Configuration
 OUTPUT_DIR = "data"
 OUTPUT_FILENAME_TEMPLATE = "trade_exports_{reporter}_to_{partner}_{product}_{start_year}-{end_year}.csv"

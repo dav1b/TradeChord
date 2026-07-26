@@ -40,7 +40,8 @@ class RequestStatus(str, Enum):
 
     SUCCESS = "success"                       # 200 with parsed observations
     AUTHORITATIVE_EMPTY = "authoritative_empty"  # 200, valid, no observations
-    HTTP_ERROR = "http_error"                 # non-retryable HTTP status
+    NOT_FOUND = "not_found"                    # 404: no series for this key (data absent)
+    HTTP_ERROR = "http_error"                 # other non-retryable HTTP status
     RETRY_EXHAUSTED = "retry_exhausted"       # retryable errors/network gave up
     PARSE_ERROR = "parse_error"               # 200 but response did not parse
 
