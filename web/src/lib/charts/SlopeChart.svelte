@@ -8,6 +8,7 @@
 	import { pct } from '$lib/format';
 	import { deltaColor } from '$lib/theme/tokens';
 	import { hideTip, showTip, type TradePoint } from '$lib/ui/tradepoint.svelte';
+	import { selectPartner, selection } from '$lib/ui/selection.svelte';
 
 	interface Row {
 		label: string;
@@ -60,6 +61,16 @@
 		t.set(0, { duration: 0 });
 		t.set(1);
 	});
+
+	function recessed(label: string): boolean {
+		return selection.partner != null && label !== selection.partner;
+	}
+	function keyselect(e: KeyboardEvent, label: string) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			selectPartner(label);
+		}
+	}
 </script>
 
 <div class="wrap" bind:clientWidth={width}>
@@ -72,12 +83,26 @@
 			{#each rows as r, i (r.label)}
 				{@const yb = y(r.a + (r.b - r.a) * $t)}
 				{@const col = deltaColor(r.b - r.a, true)}
-				<line x1={xL} y1={y(r.a)} x2={xR} y2={yb} stroke={col} stroke-width="1.5" opacity="0.85" />
+				{@const rec = recessed(r.label)}
+				<line
+					x1={xL}
+					y1={y(r.a)}
+					x2={xR}
+					y2={yb}
+					stroke={col}
+					stroke-width="1.5"
+					opacity={rec ? 0.12 : 0.85}
+				/>
 				<g
-					role="img"
+					class="hit"
+					role="button"
+					tabindex="-1"
 					aria-label="{r.label} {leftLabel}"
+					style:opacity={rec ? 0.3 : 1}
 					onmousemove={(e) => showTip(r.pointA, e)}
 					onmouseleave={hideTip}
+					onclick={() => selectPartner(r.label)}
+					onkeydown={(e) => keyselect(e, r.label)}
 				>
 					<circle cx={xL} cy={y(r.a)} r="11" fill="transparent" pointer-events="all" />
 					<circle cx={xL} cy={y(r.a)} r="3" fill={col} />
@@ -86,10 +111,15 @@
 					</text>
 				</g>
 				<g
-					role="img"
+					class="hit"
+					role="button"
+					tabindex="-1"
 					aria-label="{r.label} {rightLabel}"
+					style:opacity={rec ? 0.3 : 1}
 					onmousemove={(e) => showTip(r.pointB, e)}
 					onmouseleave={hideTip}
+					onclick={() => selectPartner(r.label)}
+					onkeydown={(e) => keyselect(e, r.label)}
 				>
 					<circle cx={xR} cy={yb} r="11" fill="transparent" pointer-events="all" />
 					<circle cx={xR} cy={yb} r="3" fill={col} />
@@ -120,6 +150,10 @@
 	.rule {
 		stroke: var(--chart-line);
 		stroke-width: 1;
+	}
+	.hit {
+		cursor: pointer;
+		transition: opacity var(--motion) var(--ease);
 	}
 	.lbl {
 		font-size: 11px;

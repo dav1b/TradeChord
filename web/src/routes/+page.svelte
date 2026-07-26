@@ -8,6 +8,7 @@
 	import PartnerTreemap from '$lib/dashboard/PartnerTreemap.svelte';
 	import ProductTreemap from '$lib/dashboard/ProductTreemap.svelte';
 	import PartnerChord from '$lib/dashboard/PartnerChord.svelte';
+	import { clearSelection, selection } from '$lib/ui/selection.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -15,6 +16,20 @@
 	const year = $derived(data.projection.years[data.projection.years.length - 1]);
 	const summary = $derived(data.projection.summaryByYear[String(year)]);
 	const source = $derived(`WITS · ${year}`);
+
+	// Reset the cross-filter when the reporter changes.
+	$effect(() => {
+		data.country;
+		clearSelection();
+	});
+
+	const partnersTitle = $derived(
+		selection.product ? `Partners · ${selection.product}` : 'Partners · exports, tinted by balance'
+	);
+	const productsTitle = $derived(
+		selection.partner ? `Products · ${selection.partner}` : 'Products · exports, tinted by balance'
+	);
+	const filterLabel = $derived(selection.partner ?? selection.product);
 
 	function selectCountry(code: string) {
 		goto(`?country=${code}`, { keepFocus: true, noScroll: true });
@@ -32,16 +47,22 @@
 		<CountrySelect value={data.country} options={data.countries} onchange={selectCountry} />
 	</header>
 
+	{#if filterLabel}
+		<button class="chip" onclick={clearSelection}>
+			Filtered · {filterLabel}<span class="x">×</span>
+		</button>
+	{/if}
+
 	<Hero {year} {summary} {source} />
 
 	<div class="grid">
 		<Card title="Trade network · top partners" {source}>
 			<PartnerChord projection={data.projection} {year} />
 		</Card>
-		<Card title="Partners · exports, tinted by balance" {source}>
+		<Card title={partnersTitle} {source}>
 			<PartnerTreemap projection={data.projection} {year} />
 		</Card>
-		<Card title="Products · exports, tinted by balance" {source}>
+		<Card title={productsTitle} {source}>
 			<ProductTreemap projection={data.projection} {year} />
 		</Card>
 		<Card title="Partner export share · {data.projection.years[0]}→{year}" {source}>
@@ -70,6 +91,26 @@
 		align-items: flex-end;
 		gap: var(--space-4);
 		flex-wrap: wrap;
+	}
+	.chip {
+		align-self: flex-start;
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		font-family: var(--font-mono);
+		font-size: 11px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--active-ink);
+		background: var(--active);
+		border: none;
+		border-radius: 999px;
+		padding: 6px 12px;
+		cursor: pointer;
+	}
+	.chip .x {
+		font-size: 14px;
+		line-height: 1;
 	}
 	.eyebrow {
 		font-family: var(--font-mono);

@@ -14,7 +14,24 @@
 		point: TradePoint;
 	}
 
-	let { items, height = 300 }: { items: TreemapItem[]; height?: number } = $props();
+	let {
+		items,
+		height = 300,
+		selectedLabel = null,
+		onselect
+	}: {
+		items: TreemapItem[];
+		height?: number;
+		selectedLabel?: string | null;
+		onselect?: (label: string) => void;
+	} = $props();
+
+	function keyselect(e: KeyboardEvent, label: string) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			onselect?.(label);
+		}
+	}
 
 	let width = $state(0);
 
@@ -44,13 +61,20 @@
 				{@const w = n.x1 - n.x0}
 				{@const h = n.y1 - n.y0}
 				{@const pos = n.data.point.balanceUsd >= 0}
+				{@const recessed = selectedLabel != null && n.data.label !== selectedLabel}
 				<g
+					class="tile"
 					transform="translate({n.x0},{n.y0})"
 					in:fade={{ duration: 260, delay: i * 12 }}
-					role="img"
+					role="button"
+					tabindex="-1"
 					aria-label={n.data.label}
+					style:opacity={recessed ? 0.28 : 1}
+					style:cursor={onselect ? 'pointer' : 'default'}
 					onmousemove={(e) => showTip(n.data.point, e)}
 					onmouseleave={hideTip}
+					onclick={() => onselect?.(n.data.label)}
+					onkeydown={(e) => keyselect(e, n.data.label)}
 				>
 					<rect
 						width={w}
@@ -78,6 +102,9 @@
 	}
 	svg {
 		display: block;
+	}
+	.tile {
+		transition: opacity var(--motion) var(--ease);
 	}
 	.name {
 		font-family: var(--font-body);

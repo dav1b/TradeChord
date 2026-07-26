@@ -13,6 +13,7 @@
 		showTip,
 		type TradePoint
 	} from '$lib/ui/tradepoint.svelte';
+	import { clearSelection, selectPartner, selection } from '$lib/ui/selection.svelte';
 	import type { FlowSummary, PartnerRow } from '$lib/data/types';
 
 	let {
@@ -64,6 +65,19 @@
 	function point(i: number): TradePoint {
 		return i === 0 ? countryPoint(reporter, year, reporterSummary) : partnerPoint(reporter, year, rows[i - 1]);
 	}
+	function recessed(i: number): boolean {
+		return selection.partner != null && i !== 0 && rows[i - 1]?.partner !== selection.partner;
+	}
+	function clickNode(i: number) {
+		if (i === 0) clearSelection();
+		else selectPartner(rows[i - 1].partner);
+	}
+	function keyNode(e: KeyboardEvent, i: number) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			clickNode(i);
+		}
+	}
 </script>
 
 <div class="wrap" bind:clientWidth={width} style:height="{height}px">
@@ -73,14 +87,18 @@
 				{#each layout as ch, i (ch.source.index + '-' + ch.target.index)}
 					{@const p = ch.source.index === 0 ? ch.target.index : ch.source.index}
 					<path
+						class="mark"
 						d={ribbonGen(ch) as unknown as string}
 						fill={color(p)}
-						opacity="0.32"
+						opacity={recessed(p) ? 0.06 : 0.32}
 						in:fade={{ duration: 300, delay: i * 14 }}
-						role="img"
+						role="button"
+						tabindex="-1"
 						aria-label={label(p)}
 						onmousemove={(e) => showTip(point(p), e)}
 						onmouseleave={hideTip}
+						onclick={() => clickNode(p)}
+						onkeydown={(e) => keyNode(e, p)}
 					/>
 				{/each}
 				{#each layout.groups as g (g.index)}
@@ -88,12 +106,17 @@
 					{@const lx = Math.sin(mid) * (R + 9)}
 					{@const ly = -Math.cos(mid) * (R + 9)}
 					<path
+						class="mark"
 						d={arcGen(g)}
 						fill={color(g.index)}
-						role="img"
+						opacity={recessed(g.index) ? 0.15 : 1}
+						role="button"
+						tabindex="-1"
 						aria-label={label(g.index)}
 						onmousemove={(e) => showTip(point(g.index), e)}
 						onmouseleave={hideTip}
+						onclick={() => clickNode(g.index)}
+						onkeydown={(e) => keyNode(e, g.index)}
 					/>
 					<text
 						x={lx}
@@ -117,6 +140,10 @@
 	}
 	svg {
 		display: block;
+	}
+	.mark {
+		cursor: pointer;
+		transition: opacity var(--motion) var(--ease);
 	}
 	.lbl {
 		font-family: var(--font-body);
