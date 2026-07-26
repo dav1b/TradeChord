@@ -7,6 +7,15 @@
 	import { cubicOut } from 'svelte/easing';
 	import { pct } from '$lib/format';
 	import { deltaColor } from '$lib/theme/tokens';
+	import { hideTip, showTip, type TradePoint } from '$lib/ui/tradepoint.svelte';
+
+	interface Row {
+		label: string;
+		a: number;
+		b: number;
+		pointA: TradePoint;
+		pointB: TradePoint;
+	}
 
 	let {
 		rows,
@@ -14,7 +23,7 @@
 		rightLabel,
 		height = 280
 	}: {
-		rows: { label: string; a: number; b: number }[];
+		rows: Row[];
 		leftLabel: string;
 		rightLabel: string;
 		height?: number;
@@ -64,14 +73,30 @@
 				{@const yb = y(r.a + (r.b - r.a) * $t)}
 				{@const col = deltaColor(r.b - r.a, true)}
 				<line x1={xL} y1={y(r.a)} x2={xR} y2={yb} stroke={col} stroke-width="1.5" opacity="0.85" />
-				<circle cx={xL} cy={y(r.a)} r="3" fill={col} />
-				<circle cx={xR} cy={yb} r="3" fill={col} />
-				<text x={xL - 8} y={leftY[i]} class="lbl" text-anchor="end" dominant-baseline="middle">
-					{r.label} · {pct(r.a)}
-				</text>
-				<text x={xR + 8} y={rightY[i]} class="val" text-anchor="start" dominant-baseline="middle">
-					{pct(r.b)}
-				</text>
+				<g
+					role="img"
+					aria-label="{r.label} {leftLabel}"
+					onmousemove={(e) => showTip(r.pointA, e)}
+					onmouseleave={hideTip}
+				>
+					<circle cx={xL} cy={y(r.a)} r="11" fill="transparent" pointer-events="all" />
+					<circle cx={xL} cy={y(r.a)} r="3" fill={col} />
+					<text x={xL - 8} y={leftY[i]} class="lbl" text-anchor="end" dominant-baseline="middle">
+						{r.label} · {pct(r.a)}
+					</text>
+				</g>
+				<g
+					role="img"
+					aria-label="{r.label} {rightLabel}"
+					onmousemove={(e) => showTip(r.pointB, e)}
+					onmouseleave={hideTip}
+				>
+					<circle cx={xR} cy={yb} r="11" fill="transparent" pointer-events="all" />
+					<circle cx={xR} cy={yb} r="3" fill={col} />
+					<text x={xR + 8} y={rightY[i]} class="val" text-anchor="start" dominant-baseline="middle">
+						{pct(r.b)}
+					</text>
+				</g>
 			{/each}
 		</svg>
 	{/if}

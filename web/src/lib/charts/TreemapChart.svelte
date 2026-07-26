@@ -6,12 +6,12 @@
 	import { hierarchy, treemap } from 'd3';
 	import { fade } from 'svelte/transition';
 	import { pct, usd } from '$lib/format';
+	import { hideTip, showTip, type TradePoint } from '$lib/ui/tradepoint.svelte';
 
 	export interface TreemapItem {
 		label: string;
 		value: number;
-		share: number;
-		balance: number;
+		point: TradePoint;
 	}
 
 	let { items, height = 300 }: { items: TreemapItem[]; height?: number } = $props();
@@ -43,8 +43,15 @@
 			{#each nodes as n, i (n.data.label)}
 				{@const w = n.x1 - n.x0}
 				{@const h = n.y1 - n.y0}
-				{@const pos = (n.data.balance ?? 0) >= 0}
-				<g transform="translate({n.x0},{n.y0})" in:fade={{ duration: 260, delay: i * 12 }}>
+				{@const pos = n.data.point.balanceUsd >= 0}
+				<g
+					transform="translate({n.x0},{n.y0})"
+					in:fade={{ duration: 260, delay: i * 12 }}
+					role="img"
+					aria-label={n.data.label}
+					onmousemove={(e) => showTip(n.data.point, e)}
+					onmouseleave={hideTip}
+				>
 					<rect
 						width={w}
 						height={h}
@@ -55,7 +62,9 @@
 					{#if w > 56 && h > 30}
 						<text x="8" y="17" class="name">{n.data.label}</text>
 						<text x="8" y="31" class="val">{usd(n.data.value, 1)}</text>
-						{#if h > 46}<text x="8" y="45" class="sub">{pct(n.data.share)} · exports</text>{/if}
+						{#if h > 46}
+							<text x="8" y="45" class="sub">{pct(n.data.point.share ?? 0)} · exports</text>
+						{/if}
 					{/if}
 				</g>
 			{/each}
