@@ -9,6 +9,8 @@
 	import ProductTreemap from '$lib/dashboard/ProductTreemap.svelte';
 	import PartnerChord from '$lib/dashboard/PartnerChord.svelte';
 	import { clearSelection, selection } from '$lib/ui/selection.svelte';
+	import { motionDuration } from '$lib/motion';
+	import { fade } from 'svelte/transition';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -48,7 +50,7 @@
 	</header>
 
 	{#if filterLabel}
-		<button class="chip" onclick={clearSelection}>
+		<button class="chip" onclick={clearSelection} transition:fade={{ duration: motionDuration(140) }}>
 			Filtered · {filterLabel}<span class="x">×</span>
 		</button>
 	{/if}

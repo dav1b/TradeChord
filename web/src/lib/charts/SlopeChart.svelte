@@ -9,6 +9,7 @@
 	import { deltaColor } from '$lib/theme/tokens';
 	import { hideTip, showTip, type TradePoint } from '$lib/ui/tradepoint.svelte';
 	import { selectPartner, selection } from '$lib/ui/selection.svelte';
+	import { motionDuration } from '$lib/motion';
 
 	interface Row {
 		label: string;
@@ -55,7 +56,7 @@
 	const rightY = $derived(dodge(rows.map((r) => y(r.b))));
 
 	// Entrance: lines swing from flat (both at left value) into their slope.
-	const t = tweened(1, { duration: 550, easing: cubicOut });
+	const t = tweened(1, { duration: motionDuration(550), easing: cubicOut });
 	$effect(() => {
 		rows; // re-animate when the data changes (e.g. country switch)
 		t.set(0, { duration: 0 });

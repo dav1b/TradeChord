@@ -14,6 +14,7 @@
 		type TradePoint
 	} from '$lib/ui/tradepoint.svelte';
 	import { clearSelection, selectPartner, selection } from '$lib/ui/selection.svelte';
+	import { motionDuration } from '$lib/motion';
 	import type { FlowSummary, PartnerRow } from '$lib/data/types';
 
 	let {
@@ -91,7 +92,7 @@
 						d={ribbonGen(ch) as unknown as string}
 						fill={color(p)}
 						opacity={recessed(p) ? 0.06 : 0.32}
-						in:fade={{ duration: 300, delay: i * 14 }}
+						in:fade={{ duration: motionDuration(300), delay: i * 14 }}
 						role="button"
 						tabindex="-1"
 						aria-label={label(p)}

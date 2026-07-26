@@ -7,6 +7,7 @@
 	import { fade } from 'svelte/transition';
 	import { pct, usd } from '$lib/format';
 	import { hideTip, showTip, type TradePoint } from '$lib/ui/tradepoint.svelte';
+	import { motionDuration } from '$lib/motion';
 
 	export interface TreemapItem {
 		label: string;
@@ -66,7 +67,7 @@
 				<g
 					class="tile"
 					transform="translate({n.x0},{n.y0})"
-					in:fade={{ duration: 260, delay: i * 12 }}
+					in:fade={{ duration: motionDuration(260), delay: i * 12 }}
 					role="button"
 					tabindex="-1"
 					aria-label={n.data.label}
