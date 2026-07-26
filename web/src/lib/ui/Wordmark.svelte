@@ -17,4 +17,11 @@
 		pointer-events: none;
 		z-index: 50;
 	}
+	/* On narrow screens the fixed mark would float over full-width charts; anchor it
+	   to the top of the page so it scrolls away with the header instead. */
+	@media (max-width: 700px) {
+		.wordmark {
+			position: absolute;
+		}
+	}
 </style>

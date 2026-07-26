@@ -147,5 +147,9 @@
 		.page {
 			padding: var(--space-5) var(--space-4) var(--space-6);
 		}
+		.head {
+			flex-direction: column;
+			align-items: flex-start;
+		}
 	}
 </style>

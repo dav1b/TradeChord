@@ -139,4 +139,16 @@
 		border-top: 1px solid var(--border-faint);
 		padding-top: var(--space-4);
 	}
+	@media (max-width: 640px) {
+		h1 {
+			font-size: 2rem;
+		}
+		.page {
+			padding: var(--space-5) var(--space-4) var(--space-6);
+		}
+		.head {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
 </style>
