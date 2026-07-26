@@ -1,0 +1,30 @@
+/* App-level layout tokens — NOT part of the DataJockey kit.
+   The kit tokenises colour/type; spacing, radius, motion, and container width are
+   left to the consuming app. Kept flat and minimal to match the 1px-rule aesthetic. */
+
+:root {
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 24px;
+	--space-6: 32px;
+	--space-8: 48px;
+
+	--radius: 4px;
+	--radius-lg: 8px;
+
+	/* Motion — respected only when the user hasn't asked to reduce it (see below). */
+	--motion-fast: 160ms;
+	--motion: 260ms;
+	--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+	--maxw: 1240px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--motion-fast: 0ms;
+		--motion: 0ms;
+	}
+}
