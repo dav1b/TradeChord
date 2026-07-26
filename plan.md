@@ -381,26 +381,24 @@ becomes required only after the quality-baseline commit makes it green.
 
 ## 12. Milestones
 
-**M1 — monorepo mechanics.** Checkpoint frontend; final ignore rules; move frontend to `web/`; record
-existing check failures; import curated pipeline to `pipeline/`; root README + Makefile; pin Python & Node;
-confirm no cache/shards/secrets entered Git.
+**M1 — monorepo mechanics. ✅ Done.** Checkpoint frontend; final ignore rules; move frontend to `web/`;
+record existing check failures; import curated pipeline to `pipeline/`; root README + Makefile; pin Python &
+Node; confirm no cache/shards/secrets entered Git.
 
-**M2 — minimal reliable pipeline.** `pyproject.toml`; extract WITS client, SDMX parser, collector, release
-exporter; verify import indicator via pilot request; add `flow` to canonical schema; add the five focused
-tests; replace silent failures with explicit request statuses in touched paths; deterministic gzip; stop
-glob-unioning; minimal CI.
+**M2 — minimal reliable pipeline. ✅ Done.** `pyproject.toml`; extract WITS client, SDMX parser, collector,
+release exporter; verify import indicator via pilot request; add `flow` to canonical schema; the five
+focused tests; explicit request statuses; deterministic gzip; stop glob-unioning; minimal CI.
 
-**M3 — first honest dual-flow release.** Export/import pilot; validate flow-specific WLD/ROW; full XPRT +
-MPRT collection; reject incomplete reporters; canonical normalized matrix; manifest + checksums; generate
-`overview.json` + per-country projections; commit both representations; update `current.json`.
+**M3 — first honest dual-flow release. 🔄 In progress.** Export/import pilot; validate flow-specific
+WLD/ROW; full XPRT + MPRT collection; canonical normalized matrix; manifest + checksums; generate
+`overview.json` + per-country projections; commit both representations; update `current.json`. *Added during
+build:* multi-year + top-K collection (year-range requests, consistent partners across years), WITS 404→
+not-found + `ROU→ROM`/`TWN→OAS` partner-code fixes, projection layer + `load.ts` typed loader.
 
-**M4 — web migration.** `/all` loads `overview.json`; `/` loads one country projection; remove full-CSV
-download, `createTotalRecords`, browser-side ×1000, mirror-derived imports, and browser-side canonical
-aggregation; pass prepared datasets into charts; surface dataset version and coverage.
-
-**M5 — application cleanup.** Move AI calls server-side; remove `{@html}` of model output; consolidate
-duplicate slope/treemap chart components; improve responsiveness/accessibility; add tests around
-stabilized behavior; set an explicit deployment adapter.
+**M4–M5 — superseded by the Frontend Rebuild (§16).** Rather than rewire the legacy components onto the
+projections (only to discard them), the presentation layer is **rebuilt** on the clean data layer with the
+DataJockey brand kit, mobile-responsive layout, reactive charts, and motion. The security/cleanup items
+formerly in M5 (server-side AI, remove `{@html}`, explicit deploy adapter) are absorbed into §16.
 
 ---
 
@@ -493,3 +491,72 @@ excluded.
 4. Checkpoint the current frontend (Commit 1).
 5. Move the frontend with `git mv` (Commit 3).
 6. Only then copy curated pipeline source into `pipeline/` (Commit 4).
+
+---
+
+## 16. Frontend Rebuild (DataJockey) — revises M4–M5
+
+The data layer is now the stable contract (typed projections + `web/src/lib/data/load.ts`). The presentation
+layer is **rebuilt on top of it**, not incrementally refactored — a full brand rebuild replaces those
+components anyway, so refactoring the legacy imperative-D3 layer first would be wasted work.
+
+### Guiding principles
+
+1. **Rebuild on the data layer, not the CSV.** Components receive typed projection props
+   (`summaryByYear`, `partnersByYear`, `productsByYear`, `overview`); no component parses the matrix,
+   multiplies by 1000, derives mirror imports, or aggregates in-browser.
+2. **Brand-kit-first.** All color, type, spacing, radii, and motion come from the **DataJockey brand kit** as
+   a `web/src/lib/theme/` tokens module (CSS custom properties + typed TS export). No ad-hoc hex values.
+3. **Mobile-first responsive.** Fluid layout with container queries; the fixed `820px 920px` grid and
+   hardcoded chart widths are gone. Charts are size-aware (`ResizeObserver`/`bind:clientWidth`).
+4. **Reactive charts: D3 for the math, Svelte for the DOM.** D3 computes scales/layouts
+   (`d3.chord`, `d3.treemap`, scales); Svelte renders the SVG and owns reactivity and transitions
+   (`tweened`/`crossfade`). Replaces the `onMount`/`afterUpdate` + `d3.select` pattern, which fights
+   responsiveness and animation.
+5. **Svelte 5 runes** baseline for new components (`$state`/`$derived`/`$props`).
+6. **Accessibility & touch as first-class**: keyboard/ARIA, balance encoded by more than red/green, tap
+   interactions (no hover-only affordances).
+
+### Prerequisites (blocking)
+
+- **The DataJockey brand kit** (private repo `dj-brand-kit`) — tokens, and any component/motion specs. The
+  agent cannot pull it from the sandbox (no `gh`, no SSH key, no token handling); provide via a local clone
+  path, `gh` install + auth, or pasted token values. First deliverable once available: the `theme/` module.
+- **M3 complete** — committed release + projections; the loader wired.
+
+### Phases (each shippable)
+
+**F0 — Foundations.** Finish M3 (release + projections). Wire `load.ts` (replaces the 14 MB CSV parse).
+Brand kit → `theme/` tokens. Adopt Svelte 5 runes; set the explicit deploy adapter.
+
+**F1 — Design system primitives.** Token-driven `Card`, `Stat`, `Grid`, `Tooltip`, `Legend`, `Controls`
+(country picker, year control), `Skeleton`. Mobile-first responsive shell (stacked → multi-column).
+
+**F2 — Reactive chart architecture.** Establish the "D3 math + Svelte DOM" pattern with a size-aware
+container and transition/tween utilities. Build **one reference chart** (slope) end-to-end to lock the
+pattern before scaling out.
+
+**F3 — Rebuild the charts** (on F2, fed by projection props):
+- **Chord** — animated ribbons, responsive radius, hover to isolate a partner's flows.
+- **Treemap** (partners + products) — tween on year/country change; dual-flow tiles (exports / imports /
+  balance) with mini-charts.
+- **Slopes** (partners + products) — animated line-draw; share change over the year range.
+- **Equation + mini-trends** — the exports − imports = balance hero, now with *real* balance.
+
+**F4 — Layout, screens & interactions.** Responsive `/` and `/all` compositions. Cross-chart interaction
+(selecting a partner highlights it across chord + treemap + slope); a synced year control; smooth country-
+change transitions; mobile tap tooltips.
+
+**F5 — Motion, a11y, polish.** Motion choreography (enter/update/exit, stagger), empty/error/loading states,
+keyboard + ARIA, color-independent balance encoding, performance pass.
+
+**F6 — Security & deploy.** AI commentary **server-side** (`+server.ts`); drop the client key + `{@html}`;
+finalize deploy adapter and CI.
+
+### Open decisions (need input)
+
+- **Brand kit contents** — tokens only, or also component specs / motion guidelines?
+- **Interaction ambition for v1** — is synchronized cross-chart highlighting + a year scrubber in scope for
+  the first cut (F4), or a later enhancement?
+- **Chord vs. treemap vs. slopes** confirmed for rebuild; decide whether `/all` (overview small-multiples)
+  is v1 or follows the single-country view.
