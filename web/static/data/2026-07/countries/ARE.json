@@ -1,0 +1,5515 @@
+{
+  "country": "ARE",
+  "datasetVersion": "2026-07",
+  "partnersByYear": {
+    "2002": [
+      {
+        "balanceUsd": 15699341130,
+        "exportShare": 0.6521039722104004,
+        "exportsUsd": 34015960344,
+        "importsUsd": 18316619214,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 7929433530,
+        "exportShare": 0.2049689724596173,
+        "exportsUsd": 10691878498,
+        "importsUsd": 2762444968,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 3548259236,
+        "exportShare": 0.06802200845803763,
+        "exportsUsd": 3548259236,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -1019923472,
+        "exportShare": 0.020463396538569188,
+        "exportsUsd": 1067440339,
+        "importsUsd": 2087363811,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -413749869,
+        "exportShare": 0.013580283282914841,
+        "exportsUsd": 708393749,
+        "importsUsd": 1122143618,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -2108136621,
+        "exportShare": 0.00975289162516247,
+        "exportsUsd": 508743987,
+        "importsUsd": 2616880608,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -1839297701,
+        "exportShare": 0.005999759352342831,
+        "exportsUsd": 312967847,
+        "importsUsd": 2152265548,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -1156101105,
+        "exportShare": 0.004532997829896058,
+        "exportsUsd": 236456579,
+        "importsUsd": 1392557684,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": 210514298,
+        "exportShare": 0.0040356705659523725,
+        "exportsUsd": 210514298,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": 174439695,
+        "exportShare": 0.003344101323916769,
+        "exportsUsd": 174439695,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": 168674183,
+        "exportShare": 0.003233573405874617,
+        "exportsUsd": 168674183,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -423807829,
+        "exportShare": 0.00236315257441041,
+        "exportsUsd": 123270073,
+        "importsUsd": 547077902,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -2919235769,
+        "exportShare": 0.0022909140700184422,
+        "exportsUsd": 119501867,
+        "importsUsd": 3038737636,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -2406611932,
+        "exportShare": 0.0021702998270818237,
+        "exportsUsd": 113210218,
+        "importsUsd": 2519822150,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -345208341,
+        "exportShare": 0.0018607647124228865,
+        "exportsUsd": 97063814,
+        "importsUsd": 442272155,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -1369542648,
+        "exportShare": 0.0012772417633819882,
+        "exportsUsd": 66625273,
+        "importsUsd": 1436167921,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -1612273650,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1612273650,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -1610494274,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1610494274,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -469751321,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 469751321,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -525227541,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 525227541,
+        "partner": "THA"
+      }
+    ],
+    "2003": [
+      {
+        "balanceUsd": 18989516176,
+        "exportShare": 0.6161317696283608,
+        "exportsUsd": 41364006354,
+        "importsUsd": 22374490178,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 9299466981,
+        "exportShare": 0.19034525444254116,
+        "exportsUsd": 12778828657,
+        "importsUsd": 3479361676,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 8166271661,
+        "exportShare": 0.12163955702688613,
+        "exportsUsd": 8166271661,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -2267803432,
+        "exportShare": 0.0150378375512028,
+        "exportsUsd": 1009565224,
+        "importsUsd": 3277368656,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -1507125233,
+        "exportShare": 0.012778470976390854,
+        "exportsUsd": 857882649,
+        "importsUsd": 2365007882,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -724244483,
+        "exportShare": 0.009625511402398153,
+        "exportsUsd": 646208708,
+        "importsUsd": 1370453191,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -732788747,
+        "exportShare": 0.008872122782453265,
+        "exportsUsd": 595629963,
+        "importsUsd": 1328418710,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -2192344746,
+        "exportShare": 0.006699151053846727,
+        "exportsUsd": 449747506,
+        "importsUsd": 2642092252,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": 220284954,
+        "exportShare": 0.003281223713413272,
+        "exportsUsd": 220284954,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -416604616,
+        "exportShare": 0.002710073553288151,
+        "exportsUsd": 181940788,
+        "importsUsd": 598545404,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 181722183,
+        "exportShare": 0.002706817353094511,
+        "exportsUsd": 181722183,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -3649602278,
+        "exportShare": 0.0026982488865718328,
+        "exportsUsd": 181146939,
+        "importsUsd": 3830749217,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 165591997,
+        "exportShare": 0.0024665524242198553,
+        "exportsUsd": 165591997,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -3018689771,
+        "exportShare": 0.002052154330825948,
+        "exportsUsd": 137771381,
+        "importsUsd": 3156461152,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -1586168738,
+        "exportShare": 0.0017616582259626127,
+        "exportsUsd": 118268925,
+        "importsUsd": 1704437663,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -635040494,
+        "exportShare": 0.0011935966485439786,
+        "exportsUsd": 80132111,
+        "importsUsd": 715172605,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -2683136492,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2683136492,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -1280922399,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1280922399,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -712755944,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 712755944,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -554626576,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 554626576,
+        "partner": "THA"
+      }
+    ],
+    "2004": [
+      {
+        "balanceUsd": 23270425136,
+        "exportShare": 0.5977232596969666,
+        "exportsUsd": 54176440816,
+        "importsUsd": 30906015680,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 14444204369,
+        "exportShare": 0.15936146393393313,
+        "exportsUsd": 14444204369,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": 9498380767,
+        "exportShare": 0.1536505492958593,
+        "exportsUsd": 13926578488,
+        "importsUsd": 4428197721,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -3229836359,
+        "exportShare": 0.042685122793352556,
+        "exportsUsd": 3868894160,
+        "importsUsd": 7098730519,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -1032120862,
+        "exportShare": 0.008256028806355654,
+        "exportsUsd": 748309939,
+        "importsUsd": 1780430801,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -1202133558,
+        "exportShare": 0.007906219962406084,
+        "exportsUsd": 716603965,
+        "importsUsd": 1918737523,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -3294042385,
+        "exportShare": 0.005497331383823739,
+        "exportsUsd": 498267122,
+        "importsUsd": 3792309507,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -412961772,
+        "exportShare": 0.005244025562882409,
+        "exportsUsd": 475307989,
+        "importsUsd": 888269761,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 368603658,
+        "exportShare": 0.0040667673379333105,
+        "exportsUsd": 368603658,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -2669552415,
+        "exportShare": 0.0031843001057050486,
+        "exportsUsd": 288618593,
+        "importsUsd": 2958171008,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -5042705772,
+        "exportShare": 0.002989626392705733,
+        "exportsUsd": 270973757,
+        "importsUsd": 5313679529,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 261703110,
+        "exportShare": 0.002887344270423839,
+        "exportsUsd": 261703110,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": 201217205,
+        "exportShare": 0.0022200093226536323,
+        "exportsUsd": 201217205,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -3337427612,
+        "exportShare": 0.002145324874634569,
+        "exportsUsd": 194447956,
+        "importsUsd": 3531875568,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -2009071612,
+        "exportShare": 0.0013291661774534412,
+        "exportsUsd": 120472964,
+        "importsUsd": 2129544576,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -1039687819,
+        "exportShare": 0.000853460082910912,
+        "exportsUsd": 77355915,
+        "importsUsd": 1117043734,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -2720205982,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2720205982,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -1650049389,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1650049389,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -1134594151,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1134594151,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -704144549,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 704144549,
+        "partner": "THA"
+      }
+    ],
+    "2005": [
+      {
+        "balanceUsd": 33127431908,
+        "exportShare": 0.555257371968339,
+        "exportsUsd": 64106125589,
+        "importsUsd": 30978693681,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 23319843409,
+        "exportShare": 0.24249658901424648,
+        "exportsUsd": 27996957042,
+        "importsUsd": 4677113633,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 11784462437,
+        "exportShare": 0.10207151941734277,
+        "exportsUsd": 11784462437,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -3419073711,
+        "exportShare": 0.04630596013072974,
+        "exportsUsd": 5346161700,
+        "importsUsd": 8765235411,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -1038011540,
+        "exportShare": 0.009147759705014694,
+        "exportsUsd": 1056136239,
+        "importsUsd": 2094147779,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -854288355,
+        "exportShare": 0.008629362153403734,
+        "exportsUsd": 996285690,
+        "importsUsd": 1850574045,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": 886999953,
+        "exportShare": 0.007682780051261291,
+        "exportsUsd": 886999953,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -4323575369,
+        "exportShare": 0.00689906406007149,
+        "exportsUsd": 796517596,
+        "importsUsd": 5120092965,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -678915663,
+        "exportShare": 0.0048979977334168935,
+        "exportsUsd": 565488499,
+        "importsUsd": 1244404162,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -4051602139,
+        "exportShare": 0.003899160693287234,
+        "exportsUsd": 450169773,
+        "importsUsd": 4501771912,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 339552807,
+        "exportShare": 0.0029410481061991393,
+        "exportsUsd": 339552807,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -6586815256,
+        "exportShare": 0.002634695788946158,
+        "exportsUsd": 304183515,
+        "importsUsd": 6890998771,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 288890369,
+        "exportShare": 0.0025022336883423865,
+        "exportsUsd": 288890369,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -4120224294,
+        "exportShare": 0.002454449686843709,
+        "exportsUsd": 283373563,
+        "importsUsd": 4403597857,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -2193555822,
+        "exportShare": 0.0011067031045342653,
+        "exportsUsd": 127772186,
+        "importsUsd": 2321328008,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -1319233721,
+        "exportShare": 0.0010733046980210003,
+        "exportsUsd": 123916240,
+        "importsUsd": 1443149961,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -2393403856,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2393403856,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -1769174770,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1769174770,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -1497003880,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1497003880,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -863325162,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 863325162,
+        "partner": "THA"
+      }
+    ],
+    "2006": [
+      {
+        "balanceUsd": 39155192380,
+        "exportShare": 0.5485813785302369,
+        "exportsUsd": 78175589348,
+        "importsUsd": 39020396968,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 30546579541,
+        "exportShare": 0.2552898029174044,
+        "exportsUsd": 36380073365,
+        "importsUsd": 5833493824,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 16287210123,
+        "exportShare": 0.1142922011360002,
+        "exportsUsd": 16287210123,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -3741835071,
+        "exportShare": 0.03322445211021912,
+        "exportsUsd": 4734650548,
+        "importsUsd": 8476485619,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -225947113,
+        "exportShare": 0.013896780140950164,
+        "exportsUsd": 1980360654,
+        "importsUsd": 2206307767,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -1897292858,
+        "exportShare": 0.009423558359289683,
+        "exportsUsd": 1342904184,
+        "importsUsd": 3240197042,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -5656429076,
+        "exportShare": 0.005049526192028002,
+        "exportsUsd": 719582730,
+        "importsUsd": 6376011806,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -929016075,
+        "exportShare": 0.0048144437036959096,
+        "exportsUsd": 686082300,
+        "importsUsd": 1615098375,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -3533409963,
+        "exportShare": 0.0034918586365145655,
+        "exportsUsd": 497607315,
+        "importsUsd": 4031017278,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -8128467254,
+        "exportShare": 0.00262707261497753,
+        "exportsUsd": 374370983,
+        "importsUsd": 8502838237,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 366662305,
+        "exportShare": 0.00257297852705117,
+        "exportsUsd": 366662305,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -5703021290,
+        "exportShare": 0.0017041526121770875,
+        "exportsUsd": 242850268,
+        "importsUsd": 5945871558,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 241385273,
+        "exportShare": 0.0016938723062229826,
+        "exportsUsd": 241385273,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": 201696526,
+        "exportShare": 0.001415364555619695,
+        "exportsUsd": 201696526,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -1710303616,
+        "exportShare": 0.0012766836251270012,
+        "exportsUsd": 181933800,
+        "importsUsd": 1892237416,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -3268654269,
+        "exportShare": 0.0006458740324855558,
+        "exportsUsd": 92040279,
+        "importsUsd": 3360694548,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -2408645084,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2408645084,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -2072066601,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2072066601,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -1785262364,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1785262364,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -1096975513,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1096975513,
+        "partner": "THA"
+      }
+    ],
+    "2007": [
+      {
+        "balanceUsd": 33752411022,
+        "exportShare": 0.5219280843622712,
+        "exportsUsd": 81751683566,
+        "importsUsd": 47999272544,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 31759100916,
+        "exportShare": 0.2541916540087082,
+        "exportsUsd": 39815055534,
+        "importsUsd": 8055954618,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 17767702923,
+        "exportShare": 0.11343452202586922,
+        "exportsUsd": 17767702923,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -2820989643,
+        "exportShare": 0.06017578376342301,
+        "exportsUsd": 9425573714,
+        "importsUsd": 12246563357,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -1198042168,
+        "exportShare": 0.011583827100118748,
+        "exportsUsd": 1814421174,
+        "importsUsd": 3012463342,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -1851249487,
+        "exportShare": 0.010572428706411124,
+        "exportsUsd": 1656001798,
+        "importsUsd": 3507251285,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -1049527806,
+        "exportShare": 0.005415969514920132,
+        "exportsUsd": 848324969,
+        "importsUsd": 1897852775,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 724300531,
+        "exportShare": 0.004624159065081655,
+        "exportsUsd": 724300531,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -7715670694,
+        "exportShare": 0.004467179226732383,
+        "exportsUsd": 699712151,
+        "importsUsd": 8415382845,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -11861481428,
+        "exportShare": 0.002784121455111917,
+        "exportsUsd": 436088080,
+        "importsUsd": 12297569508,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -4191812466,
+        "exportShare": 0.002781492115377249,
+        "exportsUsd": 435676236,
+        "importsUsd": 4627488702,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 269724267,
+        "exportShare": 0.0017220033134568485,
+        "exportsUsd": 269724267,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -2580155296,
+        "exportShare": 0.001720826321232938,
+        "exportsUsd": 269539910,
+        "importsUsd": 2849695206,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": 255593133,
+        "exportShare": 0.0016317857744806365,
+        "exportsUsd": 255593133,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -6935262028,
+        "exportShare": 0.0016062870513426203,
+        "exportsUsd": 251599166,
+        "importsUsd": 7186861194,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -4487383620,
+        "exportShare": 0.0013598761954620325,
+        "exportsUsd": 213002848,
+        "importsUsd": 4700386468,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -3100221369,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3100221369,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -2814547619,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2814547619,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2479491848,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2479491848,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -1810502004,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 1810502004,
+        "partner": "THA"
+      }
+    ],
+    "2008": [
+      {
+        "balanceUsd": 43145194896,
+        "exportShare": 0.4891575449430637,
+        "exportsUsd": 102723084440,
+        "importsUsd": 59577889544,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 45403185512,
+        "exportShare": 0.21620564529111988,
+        "exportsUsd": 45403185512,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": 22876000541,
+        "exportShare": 0.16422040076830055,
+        "exportsUsd": 34486284162,
+        "importsUsd": 11610283621,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -1631427334,
+        "exportShare": 0.07258213365576034,
+        "exportsUsd": 15242248068,
+        "importsUsd": 16873675402,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -2915219170,
+        "exportShare": 0.012998432056895269,
+        "exportsUsd": 2729670732,
+        "importsUsd": 5644889902,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -2914182431,
+        "exportShare": 0.007056591152246541,
+        "exportsUsd": 1481884142,
+        "importsUsd": 4396066573,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": 1334085684,
+        "exportShare": 0.006352788971307566,
+        "exportsUsd": 1334085684,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -1364777359,
+        "exportShare": 0.00616595875702541,
+        "exportsUsd": 1294851339,
+        "importsUsd": 2659628698,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -11014037699,
+        "exportShare": 0.0058579175141741345,
+        "exportsUsd": 1230162678,
+        "importsUsd": 12244200377,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -16213625218,
+        "exportShare": 0.005440229204658281,
+        "exportsUsd": 1142448133,
+        "importsUsd": 17356073351,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -5214938684,
+        "exportShare": 0.0033501299666028545,
+        "exportsUsd": 703527293,
+        "importsUsd": 5918465977,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -6949431291,
+        "exportShare": 0.0025000816761428556,
+        "exportsUsd": 525017152,
+        "importsUsd": 7474448443,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -9592148527,
+        "exportShare": 0.0024260237761442663,
+        "exportsUsd": 509464993,
+        "importsUsd": 10101613520,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -7121660639,
+        "exportShare": 0.0023940151428115427,
+        "exportsUsd": 502743180,
+        "importsUsd": 7624403819,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 380639297,
+        "exportShare": 0.0018125680809178558,
+        "exportsUsd": 380639297,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": 310703199,
+        "exportShare": 0.001479539042828961,
+        "exportsUsd": 310703199,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -3835326342,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3835326342,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -4243158558,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4243158558,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -3503877561,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3503877561,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2421697549,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2421697549,
+        "partner": "THA"
+      }
+    ],
+    "2009": [
+      {
+        "balanceUsd": 28874216504,
+        "exportShare": 0.5885936009339087,
+        "exportsUsd": 102842016922,
+        "importsUsd": 73967800418,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 47578073316,
+        "exportShare": 0.27230260876545775,
+        "exportsUsd": 47578073316,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -4102878337,
+        "exportShare": 0.0724616051861206,
+        "exportsUsd": 12660853966,
+        "importsUsd": 16763732303,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 811471081,
+        "exportShare": 0.019950646169923602,
+        "exportsUsd": 3485876652,
+        "importsUsd": 2674405571,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -791389050,
+        "exportShare": 0.014451005488790396,
+        "exportsUsd": 2524951934,
+        "importsUsd": 3316340984,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": 1110554929,
+        "exportShare": 0.006356016191230288,
+        "exportsUsd": 1110554929,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -829289515,
+        "exportShare": 0.005378417015371337,
+        "exportsUsd": 939743913,
+        "importsUsd": 1769033428,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -10408412218,
+        "exportShare": 0.00517948966667826,
+        "exportsUsd": 904986332,
+        "importsUsd": 11313398550,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": 550317090,
+        "exportShare": 0.0031496184862286405,
+        "exportsUsd": 550317090,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -4686576013,
+        "exportShare": 0.0024173804721982243,
+        "exportsUsd": 422376803,
+        "importsUsd": 5108952816,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -4323180715,
+        "exportShare": 0.00240111096296925,
+        "exportsUsd": 419534113,
+        "importsUsd": 4742714828,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -12604847342,
+        "exportShare": 0.0023910505365848165,
+        "exportsUsd": 417776305,
+        "importsUsd": 13022623647,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -2250698366,
+        "exportShare": 0.0017089780741360308,
+        "exportsUsd": 298601194,
+        "importsUsd": 2549299560,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -7886951384,
+        "exportShare": 0.001610072456736129,
+        "exportsUsd": 281319910,
+        "importsUsd": 8168271294,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 205951318,
+        "exportShare": 0.0011787169437822717,
+        "exportsUsd": 205951318,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -7243646232,
+        "exportShare": 0.0004696826498837566,
+        "exportsUsd": 82065301,
+        "importsUsd": 7325711533,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -3821097436,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3821097436,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -4893491727,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4893491727,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2766904853,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2766904853,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2047221047,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2047221047,
+        "partner": "THA"
+      }
+    ],
+    "2010": [
+      {
+        "balanceUsd": 2608415283,
+        "exportShare": 0.47838456796160556,
+        "exportsUsd": 94893319670,
+        "importsUsd": 92284904387,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 68028831917,
+        "exportShare": 0.34295294419798145,
+        "exportsUsd": 68028831917,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -808542504,
+        "exportShare": 0.11011627786067896,
+        "exportsUsd": 21842885109,
+        "importsUsd": 22651427613,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 1289369097,
+        "exportShare": 0.022283413617527552,
+        "exportsUsd": 4420182492,
+        "importsUsd": 3130813395,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -765529235,
+        "exportShare": 0.012571937669513315,
+        "exportsUsd": 2493794700,
+        "importsUsd": 3259323935,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": 1338930594,
+        "exportShare": 0.006749934937135137,
+        "exportsUsd": 1338930594,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -736377492,
+        "exportShare": 0.005510712833103114,
+        "exportsUsd": 1093116019,
+        "importsUsd": 1829493511,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -10352304397,
+        "exportShare": 0.004574073789334651,
+        "exportsUsd": 907322425,
+        "importsUsd": 11259626822,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -3981074098,
+        "exportShare": 0.0035941805033222088,
+        "exportsUsd": 712948833,
+        "importsUsd": 4694022931,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -12969621919,
+        "exportShare": 0.0031220262499873966,
+        "exportsUsd": 619291371,
+        "importsUsd": 13588913290,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 578646168,
+        "exportShare": 0.0029171220697512628,
+        "exportsUsd": 578646168,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": 376532651,
+        "exportShare": 0.001898209591554834,
+        "exportsUsd": 376532651,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -3776676309,
+        "exportShare": 0.001758556719532975,
+        "exportsUsd": 348830828,
+        "importsUsd": 4125507137,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -7763280887,
+        "exportShare": 0.001604458747139069,
+        "exportsUsd": 318263646,
+        "importsUsd": 8081544533,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -2177596332,
+        "exportShare": 0.0015259496123249414,
+        "exportsUsd": 302690417,
+        "importsUsd": 2480286749,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -7674397332,
+        "exportShare": 0.00043563363950756696,
+        "exportsUsd": 86413160,
+        "importsUsd": 7760810492,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -3481813913,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3481813913,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -3305729413,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3305729413,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2946871236,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2946871236,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2119910643,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2119910643,
+        "partner": "THA"
+      }
+    ],
+    "2011": [
+      {
+        "balanceUsd": 18592479896,
+        "exportShare": 0.44883520295123125,
+        "exportsUsd": 113356023517,
+        "importsUsd": 94763543621,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 95522513193,
+        "exportShare": 0.37822309979815083,
+        "exportsUsd": 95522513193,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -4390337071,
+        "exportShare": 0.09596493766888942,
+        "exportsUsd": 24236520798,
+        "importsUsd": 28626857869,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 701501905,
+        "exportShare": 0.019293205510780606,
+        "exportsUsd": 4872614811,
+        "importsUsd": 4171112906,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -926619948,
+        "exportShare": 0.012555358569930807,
+        "exportsUsd": 3170931139,
+        "importsUsd": 4097551087,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -389785396,
+        "exportShare": 0.01012144197322526,
+        "exportsUsd": 2556230899,
+        "importsUsd": 2946016295,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 2449251226,
+        "exportShare": 0.009697854044213174,
+        "exportsUsd": 2449251226,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": 1306548287,
+        "exportShare": 0.005173301315331359,
+        "exportsUsd": 1306548287,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -1254748479,
+        "exportShare": 0.004694723459333001,
+        "exportsUsd": 1185680578,
+        "importsUsd": 2440429057,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -13450295010,
+        "exportShare": 0.004271276774243054,
+        "exportsUsd": 1078736577,
+        "importsUsd": 14529031587,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -5103813555,
+        "exportShare": 0.002947362723503115,
+        "exportsUsd": 744374140,
+        "importsUsd": 5848187695,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -14286681217,
+        "exportShare": 0.002686932121974188,
+        "exportsUsd": 678600829,
+        "importsUsd": 14965282046,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -4916839875,
+        "exportShare": 0.002058990271456394,
+        "exportsUsd": 520010347,
+        "importsUsd": 5436850222,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -7930294967,
+        "exportShare": 0.0016518115942537426,
+        "exportsUsd": 417174929,
+        "importsUsd": 8347469896,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 305559204,
+        "exportShare": 0.0012098671344129227,
+        "exportsUsd": 305559204,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -8016348795,
+        "exportShare": 0.0006146340890708807,
+        "exportsUsd": 155229527,
+        "importsUsd": 8171578322,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -4349706943,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4349706943,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -6240765373,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 6240765373,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -3566681339,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3566681339,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2443935742,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2443935742,
+        "partner": "THA"
+      }
+    ],
+    "2012": [
+      {
+        "balanceUsd": 84718956897,
+        "exportShare": 0.5001595891500987,
+        "exportsUsd": 175117375832,
+        "importsUsd": 90398418935,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 97371182245,
+        "exportShare": 0.2781056435738298,
+        "exportsUsd": 97371182245,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -2171996672,
+        "exportShare": 0.06672313315891844,
+        "exportsUsd": 23361303551,
+        "importsUsd": 25533300223,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 12020936354,
+        "exportShare": 0.05146362466904488,
+        "exportsUsd": 18018598660,
+        "importsUsd": 5997662306,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": 7763239096,
+        "exportShare": 0.036281781922353,
+        "exportsUsd": 12703086332,
+        "importsUsd": 4939847236,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": 4564974632,
+        "exportShare": 0.013038202665920262,
+        "exportsUsd": 4564974632,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": 445914032,
+        "exportShare": 0.011211092373251685,
+        "exportsUsd": 3925261295,
+        "importsUsd": 3479347263,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -5802413902,
+        "exportShare": 0.0107841315794735,
+        "exportsUsd": 3775772501,
+        "importsUsd": 9578186403,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": 2476056777,
+        "exportShare": 0.007071962644556342,
+        "exportsUsd": 2476056777,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -21356230457,
+        "exportShare": 0.006298846913798865,
+        "exportsUsd": 2205371178,
+        "importsUsd": 23561601635,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -29712921569,
+        "exportShare": 0.006239797288381511,
+        "exportsUsd": 2184696546,
+        "importsUsd": 31897618115,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -5504816731,
+        "exportShare": 0.005353989175232704,
+        "exportsUsd": 1874554752,
+        "importsUsd": 7379371483,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 840898255,
+        "exportShare": 0.0024017224089819865,
+        "exportsUsd": 840898255,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -11283805924,
+        "exportShare": 0.002129372154928411,
+        "exportsUsd": 745542167,
+        "importsUsd": 12029348091,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -7228115021,
+        "exportShare": 0.0015910510677676131,
+        "exportsUsd": 557063573,
+        "importsUsd": 7785178594,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -13276893968,
+        "exportShare": 0.0011460592534623547,
+        "exportsUsd": 401261704,
+        "importsUsd": 13678155672,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -5876946098,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 5876946098,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -9770892180,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 9770892180,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -5442391864,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 5442391864,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -3674654083,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3674654083,
+        "partner": "THA"
+      }
+    ],
+    "2013": [
+      {
+        "balanceUsd": 154484601681,
+        "exportShare": 0.8637253321929717,
+        "exportsUsd": 320630115786,
+        "importsUsd": 166145514105,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": -3550626728,
+        "exportShare": 0.04403747934260396,
+        "exportsUsd": 16347491007,
+        "importsUsd": 19898117735,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 1586076909,
+        "exportShare": 0.015321140194228486,
+        "exportsUsd": 5687478150,
+        "importsUsd": 4101401241,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": 1051064814,
+        "exportShare": 0.014576909349839275,
+        "exportsUsd": 5411206501,
+        "importsUsd": 4360141687,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": 4228742648,
+        "exportShare": 0.011391544239219802,
+        "exportsUsd": 4228742648,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": 71596168,
+        "exportShare": 0.010529024271985394,
+        "exportsUsd": 3908559985,
+        "importsUsd": 3836963817,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -5775506828,
+        "exportShare": 0.009171889387804418,
+        "exportsUsd": 3404767519,
+        "importsUsd": 9180274347,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -7391932350,
+        "exportShare": 0.007243885112913612,
+        "exportsUsd": 2689058241,
+        "importsUsd": 10080990591,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 2671745999,
+        "exportShare": 0.007197248751460793,
+        "exportsUsd": 2671745999,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -17416497903,
+        "exportShare": 0.005396700654660958,
+        "exportsUsd": 2003350708,
+        "importsUsd": 19419848611,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -15703097780,
+        "exportShare": 0.0047598191686718675,
+        "exportsUsd": 1766929039,
+        "importsUsd": 17470026819,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 797562511,
+        "exportShare": 0.0021485035585924665,
+        "exportsUsd": 797562511,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -9707149219,
+        "exportShare": 0.0016642617789874093,
+        "exportsUsd": 617803400,
+        "importsUsd": 10324952619,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -9159738308,
+        "exportShare": 0.0011270311361126137,
+        "exportsUsd": 418373886,
+        "importsUsd": 9578112194,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -5119607355,
+        "exportShare": 0.0009921286343864714,
+        "exportsUsd": 368295692,
+        "importsUsd": 5487903047,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": 266201026,
+        "exportShare": 0.0007171022255608072,
+        "exportsUsd": 266201026,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -4169927418,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4169927418,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -4433857266,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4433857266,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -3500128982,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3500128982,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2967743532,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2967743532,
+        "partner": "THA"
+      }
+    ],
+    "2014": [
+      {
+        "balanceUsd": 128999331605,
+        "exportShare": 0.8715492358736818,
+        "exportsUsd": 298978925186,
+        "importsUsd": 169979593581,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": -6289136519,
+        "exportShare": 0.03247388884966306,
+        "exportsUsd": 11139942513,
+        "importsUsd": 17429079032,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 1631669423,
+        "exportShare": 0.016311097438706117,
+        "exportsUsd": 5595408934,
+        "importsUsd": 3963739511,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -1767049306,
+        "exportShare": 0.01355875053052582,
+        "exportsUsd": 4651235402,
+        "importsUsd": 6418284708,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -96283770,
+        "exportShare": 0.012841572928648352,
+        "exportsUsd": 4405212596,
+        "importsUsd": 4501496366,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 3474611536,
+        "exportShare": 0.010128790941618126,
+        "exportsUsd": 3474611536,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -766411730,
+        "exportShare": 0.008157963223750288,
+        "exportsUsd": 2798532746,
+        "importsUsd": 3564944476,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -4195223473,
+        "exportShare": 0.007301880801393956,
+        "exportsUsd": 2504859604,
+        "importsUsd": 6700083077,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -19673417564,
+        "exportShare": 0.00721914677026288,
+        "exportsUsd": 2476478268,
+        "importsUsd": 22149895832,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -17172812359,
+        "exportShare": 0.006079623562724795,
+        "exportsUsd": 2085572729,
+        "importsUsd": 19258385088,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": 1369610157,
+        "exportShare": 0.00399253119608873,
+        "exportsUsd": 1369610157,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": 1224605148,
+        "exportShare": 0.00356982914539006,
+        "exportsUsd": 1224605148,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -5133488003,
+        "exportShare": 0.002134650447371483,
+        "exportsUsd": 732277042,
+        "importsUsd": 5865765045,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -10847830521,
+        "exportShare": 0.0020370179575544905,
+        "exportsUsd": 698784893,
+        "importsUsd": 11546615414,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -9932398572,
+        "exportShare": 0.0017363303817385103,
+        "exportsUsd": 595636104,
+        "importsUsd": 10528034676,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 311376747,
+        "exportShare": 0.0009076899508814958,
+        "exportsUsd": 311376747,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -4821957587,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4821957587,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -5590827135,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 5590827135,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -3357456004,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3357456004,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2932571686,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2932571686,
+        "partner": "THA"
+      }
+    ],
+    "2015": [
+      {
+        "balanceUsd": 93581224386,
+        "exportShare": 0.8486734129095586,
+        "exportsUsd": 255008239551,
+        "importsUsd": 161427015165,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": -7291133640,
+        "exportShare": 0.03517226793221653,
+        "exportsUsd": 10568515509,
+        "importsUsd": 17859649149,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 2639546105,
+        "exportShare": 0.021936879198719554,
+        "exportsUsd": 6591563799,
+        "importsUsd": 3952017694,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -534059795,
+        "exportShare": 0.01375085133998907,
+        "exportsUsd": 4131837217,
+        "importsUsd": 4665897012,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": 301494403,
+        "exportShare": 0.013656329452307025,
+        "exportsUsd": 4103435408,
+        "importsUsd": 3801941005,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 4054191187,
+        "exportShare": 0.013492443527774832,
+        "exportsUsd": 4054191187,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -698545710,
+        "exportShare": 0.009053607701398812,
+        "exportsUsd": 2720415800,
+        "importsUsd": 3418961510,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -20332217024,
+        "exportShare": 0.008363087547950225,
+        "exportsUsd": 2512929238,
+        "importsUsd": 22845146262,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -16833392463,
+        "exportShare": 0.008323593803266083,
+        "exportsUsd": 2501062211,
+        "importsUsd": 19334454674,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": 2463004782,
+        "exportShare": 0.008196937785355204,
+        "exportsUsd": 2463004782,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -4263106058,
+        "exportShare": 0.006351767833931647,
+        "exportsUsd": 1908570610,
+        "importsUsd": 6171676668,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 1329905709,
+        "exportShare": 0.004425957447069911,
+        "exportsUsd": 1329905709,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -11118468034,
+        "exportShare": 0.0027059271229474277,
+        "exportsUsd": 813073323,
+        "importsUsd": 11931541357,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -9683058819,
+        "exportShare": 0.002375518004959769,
+        "exportsUsd": 713792438,
+        "importsUsd": 10396851257,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -4866379182,
+        "exportShare": 0.0021144915441137203,
+        "exportsUsd": 635359560,
+        "importsUsd": 5501738742,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": 422751477,
+        "exportShare": 0.0014069268484416695,
+        "exportsUsd": 422751477,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -4661970582,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4661970582,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -5277773318,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 5277773318,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2956689876,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2956689876,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2821371225,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2821371225,
+        "partner": "THA"
+      }
+    ],
+    "2016": [
+      {
+        "balanceUsd": 98964379507,
+        "exportShare": 0.8269090678995481,
+        "exportsUsd": 243976784369,
+        "importsUsd": 145012404862,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": -7413862358,
+        "exportShare": 0.038148186702169046,
+        "exportsUsd": 11255496260,
+        "importsUsd": 18669358618,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 3578552004,
+        "exportShare": 0.02516536278024055,
+        "exportsUsd": 7424957020,
+        "importsUsd": 3846405016,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": 288998985,
+        "exportShare": 0.01614205822601184,
+        "exportsUsd": 4762660868,
+        "importsUsd": 4473661883,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": 834571300,
+        "exportShare": 0.015347997506050351,
+        "exportsUsd": 4528375880,
+        "importsUsd": 3693804580,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 3744675022,
+        "exportShare": 0.012691804837240021,
+        "exportsUsd": 3744675022,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -18761737983,
+        "exportShare": 0.012414132663796672,
+        "exportsUsd": 3662748766,
+        "importsUsd": 22424486749,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -17128180747,
+        "exportShare": 0.011723004506411012,
+        "exportsUsd": 3458833690,
+        "importsUsd": 20587014437,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -1859285414,
+        "exportShare": 0.00949721711855236,
+        "exportsUsd": 2802122486,
+        "importsUsd": 4661407900,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -2476077129,
+        "exportShare": 0.009220998674341906,
+        "exportsUsd": 2720625148,
+        "importsUsd": 5196702277,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 2453547970,
+        "exportShare": 0.008315795579349057,
+        "exportsUsd": 2453547970,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -4234369802,
+        "exportShare": 0.0039892086821799394,
+        "exportsUsd": 1177002822,
+        "importsUsd": 5411372624,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": 1105048174,
+        "exportShare": 0.00374533322057565,
+        "exportsUsd": 1105048174,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -8806261318,
+        "exportShare": 0.0028912826700867576,
+        "exportsUsd": 853063385,
+        "importsUsd": 9659324703,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -11842847904,
+        "exportShare": 0.0025475488949227953,
+        "exportsUsd": 751645872,
+        "importsUsd": 12594493776,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 369103422,
+        "exportShare": 0.001251000038523889,
+        "exportsUsd": 369103422,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -4454562292,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4454562292,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -4769820926,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4769820926,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2704737282,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2704737282,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -2619590851,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2619590851,
+        "partner": "THA"
+      }
+    ],
+    "2017": [
+      {
+        "balanceUsd": 154061703208,
+        "exportShare": 0.7688910958475306,
+        "exportsUsd": 241123757186,
+        "importsUsd": 87062053978,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 7797418206,
+        "exportShare": 0.046344453271348916,
+        "exportsUsd": 14533590983,
+        "importsUsd": 6736172777,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -5582375735,
+        "exportShare": 0.04595168442075808,
+        "exportsUsd": 14410418922,
+        "importsUsd": 19992794657,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -15475719776,
+        "exportShare": 0.023761799258714727,
+        "exportsUsd": 7451685090,
+        "importsUsd": 22927404866,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -1759297414,
+        "exportShare": 0.018139869643916284,
+        "exportsUsd": 5688651549,
+        "importsUsd": 7447948963,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": 5306710089,
+        "exportShare": 0.016921941592544426,
+        "exportsUsd": 5306710089,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -41964457163,
+        "exportShare": 0.015900159810690186,
+        "exportsUsd": 4986279974,
+        "importsUsd": 46950737137,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 289637340,
+        "exportShare": 0.01281029935786323,
+        "exportsUsd": 4017301707,
+        "importsUsd": 3727664367,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -1298228886,
+        "exportShare": 0.011737931864056271,
+        "exportsUsd": 3681007945,
+        "importsUsd": 4979236831,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -3162213579,
+        "exportShare": 0.011262027822038384,
+        "exportsUsd": 3531764741,
+        "importsUsd": 6693978320,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 2340414521,
+        "exportShare": 0.007463071688954448,
+        "exportsUsd": 2340414521,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -11886645098,
+        "exportShare": 0.005800319483401776,
+        "exportsUsd": 1818976490,
+        "importsUsd": 13705621588,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 1731255641,
+        "exportShare": 0.005520596819391288,
+        "exportsUsd": 1731255641,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -9973908279,
+        "exportShare": 0.004903264508188499,
+        "exportsUsd": 1537660622,
+        "importsUsd": 11511568901,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -5797164286,
+        "exportShare": 0.00292384843465656,
+        "exportsUsd": 916917004,
+        "importsUsd": 6714081290,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": 522969641,
+        "exportShare": 0.0016676361759463598,
+        "exportsUsd": 522969641,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -6244672902,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 6244672902,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -7243833672,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 7243833672,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2118435891,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2118435891,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -3677053616,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3677053616,
+        "partner": "THA"
+      }
+    ],
+    "2018": [
+      {
+        "balanceUsd": 219781733824,
+        "exportShare": 0.7863870779712212,
+        "exportsUsd": 305090090268,
+        "importsUsd": 85308356444,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 14080351548,
+        "exportShare": 0.055823266321956166,
+        "exportsUsd": 21657432883,
+        "importsUsd": 7577081335,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -10210129321,
+        "exportShare": 0.03312260293334636,
+        "exportsUsd": 12850386536,
+        "importsUsd": 23060515857,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 3573456024,
+        "exportShare": 0.02426480982603021,
+        "exportsUsd": 9413879281,
+        "importsUsd": 5840423257,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": 6293345229,
+        "exportShare": 0.016221455639382078,
+        "exportsUsd": 6293345229,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -14650174871,
+        "exportShare": 0.016148313466138094,
+        "exportsUsd": 6264968679,
+        "importsUsd": 20915143550,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -32894172988,
+        "exportShare": 0.013185960278622101,
+        "exportsUsd": 5115681481,
+        "importsUsd": 38009854469,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 1367612552,
+        "exportShare": 0.011533752129183788,
+        "exportsUsd": 4474683749,
+        "importsUsd": 3107071197,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 820403684,
+        "exportShare": 0.011003536272182205,
+        "exportsUsd": 4268978940,
+        "importsUsd": 3448575256,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -4091838508,
+        "exportShare": 0.009265634984499817,
+        "exportsUsd": 3594735332,
+        "importsUsd": 7686573840,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -8618994421,
+        "exportShare": 0.00597593903595229,
+        "exportsUsd": 2318450838,
+        "importsUsd": 10937445259,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 2165139533,
+        "exportShare": 0.005580770418535056,
+        "exportsUsd": 2165139533,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": 2145899840,
+        "exportShare": 0.005531179014415562,
+        "exportsUsd": 2145899840,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -12840901029,
+        "exportShare": 0.0024906610829182893,
+        "exportsUsd": 966287514,
+        "importsUsd": 13807188543,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -5693447503,
+        "exportShare": 0.002457841086550683,
+        "exportsUsd": 953554528,
+        "importsUsd": 6647002031,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": 390757436,
+        "exportShare": 0.0010071995390661067,
+        "exportsUsd": 390757436,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -6507275804,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 6507275804,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -5562066044,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 5562066044,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2918839059,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2918839059,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -3354140015,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3354140015,
+        "partner": "THA"
+      }
+    ],
+    "2019": [
+      {
+        "balanceUsd": 165547217104,
+        "exportShare": 0.7598757230406684,
+        "exportsUsd": 295916878434,
+        "importsUsd": 130369661330,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 17159152140,
+        "exportShare": 0.061640626308982364,
+        "exportsUsd": 24004585446,
+        "importsUsd": 6845433306,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -12068172013,
+        "exportShare": 0.037670619695916736,
+        "exportsUsd": 14669993857,
+        "importsUsd": 26738165870,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 9542561506,
+        "exportShare": 0.03506753925771198,
+        "exportsUsd": 13656281464,
+        "importsUsd": 4113719958,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -31412808024,
+        "exportShare": 0.024057031127304965,
+        "exportsUsd": 9368481371,
+        "importsUsd": 40781289395,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": -13627961896,
+        "exportShare": 0.016415468803475924,
+        "exportsUsd": 6392643085,
+        "importsUsd": 20020604981,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": 5633530814,
+        "exportShare": 0.014466168078056766,
+        "exportsUsd": 5633530814,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": 297594659,
+        "exportShare": 0.009844375872022736,
+        "exportsUsd": 3833675547,
+        "importsUsd": 3536080888,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": 335950158,
+        "exportShare": 0.0077704188230703405,
+        "exportsUsd": 3026018614,
+        "importsUsd": 2690068456,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -4607653396,
+        "exportShare": 0.006891714250303069,
+        "exportsUsd": 2683826455,
+        "importsUsd": 7291479851,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 2606784139,
+        "exportShare": 0.006693879689851376,
+        "exportsUsd": 2606784139,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -7889418215,
+        "exportShare": 0.005619420386569384,
+        "exportsUsd": 2188359608,
+        "importsUsd": 10077777823,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": -10592596805,
+        "exportShare": 0.005195636263222377,
+        "exportsUsd": 2023326207,
+        "importsUsd": 12615923012,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 1844666067,
+        "exportShare": 0.00473686046178959,
+        "exportsUsd": 1844666067,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -5452833241,
+        "exportShare": 0.002845877323590587,
+        "exportsUsd": 1108264297,
+        "importsUsd": 6561097538,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": 470678491,
+        "exportShare": 0.001208640617463414,
+        "exportsUsd": 470678491,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -6765508070,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 6765508070,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -3839727223,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3839727223,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2779469961,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2779469961,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -3420691319,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3420691319,
+        "partner": "THA"
+      }
+    ],
+    "2020": [
+      {
+        "balanceUsd": 132108144923,
+        "exportShare": 0.7407642479870502,
+        "exportsUsd": 248375961807,
+        "importsUsd": 116267816884,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 15354884313,
+        "exportShare": 0.06510870634926844,
+        "exportsUsd": 21830747914,
+        "importsUsd": 6475863601,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -4977791717,
+        "exportShare": 0.03428687605323437,
+        "exportsUsd": 11496283521,
+        "importsUsd": 16474075238,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 6820040515,
+        "exportShare": 0.029373082166822027,
+        "exportsUsd": 9848703625,
+        "importsUsd": 3028663110,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -31366009926,
+        "exportShare": 0.02392425145844105,
+        "exportsUsd": 8021727537,
+        "importsUsd": 39387737463,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 7868415705,
+        "exportShare": 0.023467009448736243,
+        "exportsUsd": 7868415705,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": 2880351184,
+        "exportShare": 0.017660486073984807,
+        "exportsUsd": 5921506372,
+        "importsUsd": 3041155188,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": -125801984,
+        "exportShare": 0.016156754485135788,
+        "exportsUsd": 5417309820,
+        "importsUsd": 5543111804,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -11151518416,
+        "exportShare": 0.016007323500761266,
+        "exportsUsd": 5367206073,
+        "importsUsd": 16518724489,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": 46179062,
+        "exportShare": 0.006952145651574394,
+        "exportsUsd": 2331032940,
+        "importsUsd": 2284853878,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": -3649597865,
+        "exportShare": 0.0065787494464104364,
+        "exportsUsd": 2205834347,
+        "importsUsd": 5855432212,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": 1823916572,
+        "exportShare": 0.00543970591203412,
+        "exportsUsd": 1823916572,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": 1622701392,
+        "exportShare": 0.004839595456852067,
+        "exportsUsd": 1622701392,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -8041561786,
+        "exportShare": 0.0042236323800820446,
+        "exportsUsd": 1416170877,
+        "importsUsd": 9457732663,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -7273864450,
+        "exportShare": 0.004027290793101153,
+        "exportsUsd": 1350338150,
+        "importsUsd": 8624202600,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 399051213,
+        "exportShare": 0.0011901428365115412,
+        "exportsUsd": 399051213,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -4764431925,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4764431925,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -4084975435,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4084975435,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2139612093,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2139612093,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -3012682055,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3012682055,
+        "partner": "THA"
+      }
+    ],
+    "2021": [
+      {
+        "balanceUsd": 131985069761,
+        "exportShare": 0.742884264866079,
+        "exportsUsd": 315844522875,
+        "importsUsd": 183859453114,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 19185757427,
+        "exportShare": 0.062480102395747195,
+        "exportsUsd": 26564027620,
+        "importsUsd": 7378270193,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": 3102380884,
+        "exportShare": 0.0563989544149836,
+        "exportsUsd": 23978567982,
+        "importsUsd": 20876187098,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": 10732825777,
+        "exportShare": 0.025244216093111973,
+        "exportsUsd": 10732825777,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -42726794982,
+        "exportShare": 0.021330279724501983,
+        "exportsUsd": 9068777387,
+        "importsUsd": 51795572369,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 3366872001,
+        "exportShare": 0.020502737412423696,
+        "exportsUsd": 8716939666,
+        "importsUsd": 5350067665,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -9202105139,
+        "exportShare": 0.018050848549514484,
+        "exportsUsd": 7674495096,
+        "importsUsd": 16876600235,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": -5665450875,
+        "exportShare": 0.009209316208197925,
+        "exportsUsd": 3915431005,
+        "importsUsd": 9580881880,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": 630836898,
+        "exportShare": 0.008765155084418877,
+        "exportsUsd": 3726591552,
+        "importsUsd": 3095754654,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 2709142795,
+        "exportShare": 0.006372057794009354,
+        "exportsUsd": 2709142795,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -5341958302,
+        "exportShare": 0.006203078199534311,
+        "exportsUsd": 2637299465,
+        "importsUsd": 7979257767,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -2771764999,
+        "exportShare": 0.006108291727879269,
+        "exportsUsd": 2597000068,
+        "importsUsd": 5368765067,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -8323493923,
+        "exportShare": 0.005964855773911516,
+        "exportsUsd": 2536016867,
+        "importsUsd": 10859510790,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": 2357662837,
+        "exportShare": 0.0055453569608360405,
+        "exportsUsd": 2357662837,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": -6918611982,
+        "exportShare": 0.0032473809879469758,
+        "exportsUsd": 1380655840,
+        "importsUsd": 8299267822,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 719839670,
+        "exportShare": 0.0016931038069038444,
+        "exportsUsd": 719839670,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -6090134126,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 6090134126,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -3596889839,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3596889839,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2661372554,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2661372554,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -3861012527,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 3861012527,
+        "partner": "THA"
+      }
+    ],
+    "2022": [
+      {
+        "balanceUsd": 172130205789,
+        "exportShare": 0.7598470732230683,
+        "exportsUsd": 391793251396,
+        "importsUsd": 219663045607,
+        "partner": "ROW"
+      },
+      {
+        "balanceUsd": 18756948355,
+        "exportShare": 0.05449923467933364,
+        "exportsUsd": 28100960188,
+        "importsUsd": 9344011833,
+        "partner": "SAU"
+      },
+      {
+        "balanceUsd": -1884133887,
+        "exportShare": 0.04924722663645647,
+        "exportsUsd": 25392913556,
+        "importsUsd": 27277047443,
+        "partner": "IND"
+      },
+      {
+        "balanceUsd": -9894514807,
+        "exportShare": 0.022343626091263596,
+        "exportsUsd": 11520847053,
+        "importsUsd": 21415361860,
+        "partner": "USA"
+      },
+      {
+        "balanceUsd": 10320933860,
+        "exportShare": 0.02001650451738723,
+        "exportsUsd": 10320933860,
+        "importsUsd": 0,
+        "partner": "HKG"
+      },
+      {
+        "balanceUsd": -57109771425,
+        "exportShare": 0.019598712648914187,
+        "exportsUsd": 10105511520,
+        "importsUsd": 67215282945,
+        "partner": "CHN"
+      },
+      {
+        "balanceUsd": 3669339262,
+        "exportShare": 0.018905428684664268,
+        "exportsUsd": 9748039618,
+        "importsUsd": 6078700356,
+        "partner": "CHE"
+      },
+      {
+        "balanceUsd": -1701997215,
+        "exportShare": 0.015326423042210782,
+        "exportsUsd": 7902628473,
+        "importsUsd": 9604625688,
+        "partner": "TUR"
+      },
+      {
+        "balanceUsd": 866756552,
+        "exportShare": 0.008995557995767798,
+        "exportsUsd": 4638300310,
+        "importsUsd": 3771543758,
+        "partner": "BEL"
+      },
+      {
+        "balanceUsd": 3337646153,
+        "exportShare": 0.006473058562838674,
+        "exportsUsd": 3337646153,
+        "importsUsd": 0,
+        "partner": "SGP"
+      },
+      {
+        "balanceUsd": 2763801018,
+        "exportShare": 0.005360138560364385,
+        "exportsUsd": 2763801018,
+        "importsUsd": 0,
+        "partner": "NLD"
+      },
+      {
+        "balanceUsd": -5937845689,
+        "exportShare": 0.005309398318195713,
+        "exportsUsd": 2737638274,
+        "importsUsd": 8675483963,
+        "partner": "ITA"
+      },
+      {
+        "balanceUsd": -9283930698,
+        "exportShare": 0.005287153483725277,
+        "exportsUsd": 2726168366,
+        "importsUsd": 12010099064,
+        "partner": "JPN"
+      },
+      {
+        "balanceUsd": -5405369531,
+        "exportShare": 0.004496783297918697,
+        "exportsUsd": 2318636751,
+        "importsUsd": 7724006282,
+        "partner": "GBR"
+      },
+      {
+        "balanceUsd": -7155583069,
+        "exportShare": 0.0026309236136776923,
+        "exportsUsd": 1356559962,
+        "importsUsd": 8512143031,
+        "partner": "DEU"
+      },
+      {
+        "balanceUsd": 857352558,
+        "exportShare": 0.0016627566442132494,
+        "exportsUsd": 857352558,
+        "importsUsd": 0,
+        "partner": "OAS"
+      },
+      {
+        "balanceUsd": -7059819663,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 7059819663,
+        "partner": "FRA"
+      },
+      {
+        "balanceUsd": -4271663847,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4271663847,
+        "partner": "KOR"
+      },
+      {
+        "balanceUsd": -2962935304,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 2962935304,
+        "partner": "MYS"
+      },
+      {
+        "balanceUsd": -4907427248,
+        "exportShare": 0.0,
+        "exportsUsd": 0,
+        "importsUsd": 4907427248,
+        "partner": "THA"
+      }
+    ]
+  },
+  "productsByYear": {
+    "2002": [
+      {
+        "balanceUsd": 22622379591,
+        "exportShare": 0.4380697240018864,
+        "exportsUsd": 22851206241,
+        "importsUsd": 228826650,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 5500142975,
+        "exportShare": 0.31860954849568857,
+        "exportsUsd": 16619757322,
+        "importsUsd": 11119614347,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -4740417715,
+        "exportShare": 0.06470476634958611,
+        "exportsUsd": 3375220609,
+        "importsUsd": 8115638324,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -1170658198,
+        "exportShare": 0.03274555322314113,
+        "exportsUsd": 1708119391,
+        "importsUsd": 2878777589,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -3739999255,
+        "exportShare": 0.03207529848514476,
+        "exportsUsd": 1673156625,
+        "importsUsd": 5413155880,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -1259614808,
+        "exportShare": 0.0274663193541832,
+        "exportsUsd": 1432736603,
+        "importsUsd": 2692351411,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -3014721756,
+        "exportShare": 0.019810600593519596,
+        "exportsUsd": 1033388283,
+        "importsUsd": 4048110039,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -229817609,
+        "exportShare": 0.013765967114873648,
+        "exportsUsd": 718079649,
+        "importsUsd": 947897258,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -1264524410,
+        "exportShare": 0.013241438671558985,
+        "exportsUsd": 690718462,
+        "importsUsd": 1955242872,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -719895806,
+        "exportShare": 0.010696897575694836,
+        "exportsUsd": 557986547,
+        "importsUsd": 1277882353,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": 423219302,
+        "exportShare": 0.010638302794679795,
+        "exportsUsd": 554930044,
+        "importsUsd": 131710742,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -1322917850,
+        "exportShare": 0.009909652553322828,
+        "exportsUsd": 516921170,
+        "importsUsd": 1839839020,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -566670452,
+        "exportShare": 0.003221046921788074,
+        "exportsUsd": 168020759,
+        "importsUsd": 734691211,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -183952473,
+        "exportShare": 0.001951606087793357,
+        "exportsUsd": 101802409,
+        "importsUsd": 285754882,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -733350766,
+        "exportShare": 0.0018571227335641466,
+        "exportsUsd": 96873836,
+        "importsUsd": 830224602,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -87900771,
+        "exportShare": 0.0012361550435746136,
+        "exportsUsd": 64482050,
+        "importsUsd": 152382821,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2003": [
+      {
+        "balanceUsd": 25538527730,
+        "exportShare": 0.3845040330379087,
+        "exportsUsd": 25813678258,
+        "importsUsd": 275150528,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 11875521579,
+        "exportShare": 0.38270771752439114,
+        "exportsUsd": 25693082616,
+        "importsUsd": 13817561037,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -5205588798,
+        "exportShare": 0.060617624175169436,
+        "exportsUsd": 4069564199,
+        "importsUsd": 9275152997,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -3832398324,
+        "exportShare": 0.04172060616667908,
+        "exportsUsd": 2800912895,
+        "importsUsd": 6633311219,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -1172901324,
+        "exportShare": 0.028207666775899306,
+        "exportsUsd": 1893721709,
+        "importsUsd": 3066623033,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -4208126452,
+        "exportShare": 0.02467411374096969,
+        "exportsUsd": 1656496626,
+        "importsUsd": 5864623078,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -2101329628,
+        "exportShare": 0.022664372473374543,
+        "exportsUsd": 1521572646,
+        "importsUsd": 3622902274,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -558994157,
+        "exportShare": 0.01171844048558874,
+        "exportsUsd": 786717502,
+        "importsUsd": 1345711659,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -1647153116,
+        "exportShare": 0.011635003813212185,
+        "exportsUsd": 781115981,
+        "importsUsd": 2428269097,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -775376698,
+        "exportShare": 0.011057649690921278,
+        "exportsUsd": 742355312,
+        "importsUsd": 1517732010,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -1129644521,
+        "exportShare": 0.008299243166753557,
+        "exportsUsd": 557169690,
+        "importsUsd": 1686814211,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -61948051,
+        "exportShare": 0.0036412750428241603,
+        "exportsUsd": 244457000,
+        "importsUsd": 306405051,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -659892752,
+        "exportShare": 0.0032013984955686302,
+        "exportsUsd": 214925888,
+        "importsUsd": 874818640,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -161712100,
+        "exportShare": 0.0022690333507112536,
+        "exportsUsd": 152331554,
+        "importsUsd": 314043654,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -763204087,
+        "exportShare": 0.0018280861696581515,
+        "exportsUsd": 122728565,
+        "importsUsd": 885932652,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -74779298,
+        "exportShare": 0.0012537358903701497,
+        "exportsUsd": 84169559,
+        "importsUsd": 158948857,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2004": [
+      {
+        "balanceUsd": 38390063044,
+        "exportShare": 0.42835771029181857,
+        "exportsUsd": 38825486148,
+        "importsUsd": 435423104,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 11371952495,
+        "exportShare": 0.3389095650496099,
+        "exportsUsd": 30718085159,
+        "importsUsd": 19346132664,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -5059277912,
+        "exportShare": 0.07051434329505189,
+        "exportsUsd": 6391279048,
+        "importsUsd": 11450556960,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -7777822047,
+        "exportShare": 0.05208678780078421,
+        "exportsUsd": 4721042273,
+        "importsUsd": 12498864320,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -4365653196,
+        "exportShare": 0.025730265494004926,
+        "exportsUsd": 2332139804,
+        "importsUsd": 6697793000,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -1472120583,
+        "exportShare": 0.023708757517351967,
+        "exportsUsd": 2148914364,
+        "importsUsd": 3621034947,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -3342065344,
+        "exportShare": 0.018228000837293763,
+        "exportsUsd": 1652149540,
+        "importsUsd": 4994214884,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -803526393,
+        "exportShare": 0.00985120350119037,
+        "exportsUsd": 892893383,
+        "importsUsd": 1696419776,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -2316651788,
+        "exportShare": 0.008464651701816149,
+        "exportsUsd": 767219101,
+        "importsUsd": 3083870889,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -1299856514,
+        "exportShare": 0.008170176382433184,
+        "exportsUsd": 740528447,
+        "importsUsd": 2040384961,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -1355393404,
+        "exportShare": 0.007189997318529315,
+        "exportsUsd": 651686977,
+        "importsUsd": 2007080381,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -898981497,
+        "exportShare": 0.002582322248775415,
+        "exportsUsd": 234056524,
+        "importsUsd": 1133038021,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -188609785,
+        "exportShare": 0.0023585973982860214,
+        "exportsUsd": 213778551,
+        "importsUsd": 402388336,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -861089471,
+        "exportShare": 0.001672952470155589,
+        "exportsUsd": 151633066,
+        "importsUsd": 1012722537,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -136559526,
+        "exportShare": 0.0011723110835738448,
+        "exportsUsd": 106255932,
+        "importsUsd": 242815458,
+        "product": "41-43_HidesSkin"
+      },
+      {
+        "balanceUsd": -1318408071,
+        "exportShare": 0.0010023576093248512,
+        "exportsUsd": 90851689,
+        "importsUsd": 1409259760,
+        "product": "25-26_Minerals"
+      }
+    ],
+    "2005": [
+      {
+        "balanceUsd": 50900189905,
+        "exportShare": 0.4456795038285015,
+        "exportsUsd": 51455032724,
+        "importsUsd": 554842819,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 18210807880,
+        "exportShare": 0.2987852756215728,
+        "exportsUsd": 34495654394,
+        "importsUsd": 16284846514,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -6527225750,
+        "exportShare": 0.07323124795474305,
+        "exportsUsd": 8454766772,
+        "importsUsd": 14981992522,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -8555716373,
+        "exportShare": 0.06549345877964632,
+        "exportsUsd": 7561415851,
+        "importsUsd": 16117132224,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -4936876180,
+        "exportShare": 0.029315247316243947,
+        "exportsUsd": 3384533049,
+        "importsUsd": 8321409229,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -1456773859,
+        "exportShare": 0.019255427784253504,
+        "exportsUsd": 2223096773,
+        "importsUsd": 3679870632,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -4408802230,
+        "exportShare": 0.01724700625634792,
+        "exportsUsd": 1991218496,
+        "importsUsd": 6400020726,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -926816923,
+        "exportShare": 0.013494905396935087,
+        "exportsUsd": 1558027221,
+        "importsUsd": 2484844144,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -896379584,
+        "exportShare": 0.01120643639598954,
+        "exportsUsd": 1293816625,
+        "importsUsd": 2190196209,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -2663309990,
+        "exportShare": 0.008925836052017157,
+        "exportsUsd": 1030514489,
+        "importsUsd": 3693824479,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -1562999243,
+        "exportShare": 0.00727014722399194,
+        "exportsUsd": 839360258,
+        "importsUsd": 2402359501,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -953574846,
+        "exportShare": 0.004001668533683398,
+        "exportsUsd": 462004610,
+        "importsUsd": 1415579456,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -222752098,
+        "exportShare": 0.002065686894674043,
+        "exportsUsd": 238489735,
+        "importsUsd": 461241833,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -819524514,
+        "exportShare": 0.0016011425419085825,
+        "exportsUsd": 184856699,
+        "importsUsd": 1004381213,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -346940820,
+        "exportShare": 0.0013907005920984767,
+        "exportsUsd": 160560546,
+        "importsUsd": 507501366,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -194328030,
+        "exportShare": 0.0010363088273927282,
+        "exportsUsd": 119644956,
+        "importsUsd": 313972986,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2006": [
+      {
+        "balanceUsd": 71710684385,
+        "exportShare": 0.509374853384026,
+        "exportsUsd": 72588463482,
+        "importsUsd": 877779097,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 15369134055,
+        "exportShare": 0.2638713478245404,
+        "exportsUsd": 37602986422,
+        "importsUsd": 22233852367,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -6760658354,
+        "exportShare": 0.06398582808277614,
+        "exportsUsd": 9118300431,
+        "importsUsd": 15878958785,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -11600616597,
+        "exportShare": 0.04959823796323218,
+        "exportsUsd": 7067996901,
+        "importsUsd": 18668613498,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -6062130348,
+        "exportShare": 0.028125651464663518,
+        "exportsUsd": 4008045962,
+        "importsUsd": 10070176310,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -1613855111,
+        "exportShare": 0.016998063373095694,
+        "exportsUsd": 2422309021,
+        "importsUsd": 4036164132,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -6686217304,
+        "exportShare": 0.0168004995753356,
+        "exportsUsd": 2394155192,
+        "importsUsd": 9080372496,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -1283060495,
+        "exportShare": 0.011470094165036525,
+        "exportsUsd": 1634545769,
+        "importsUsd": 2917606264,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -910561494,
+        "exportShare": 0.009252812329327021,
+        "exportsUsd": 1318572021,
+        "importsUsd": 2229133515,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -3138110505,
+        "exportShare": 0.008417099463117665,
+        "exportsUsd": 1199478759,
+        "importsUsd": 4337589264,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": 320322843,
+        "exportShare": 0.007932739777496,
+        "exportsUsd": 1130455082,
+        "importsUsd": 810132239,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -1834848228,
+        "exportShare": 0.006603465029250879,
+        "exportsUsd": 941026784,
+        "importsUsd": 2775875012,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1227199685,
+        "exportShare": 0.003174577046397147,
+        "exportsUsd": 452393102,
+        "importsUsd": 1679592787,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -1115664136,
+        "exportShare": 0.0017874764674798253,
+        "exportsUsd": 254724334,
+        "importsUsd": 1370388470,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -279747061,
+        "exportShare": 0.001692085204016055,
+        "exportsUsd": 241130602,
+        "importsUsd": 520877663,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -246071964,
+        "exportShare": 0.0009151688502093599,
+        "exportsUsd": 130416137,
+        "importsUsd": 376488101,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2007": [
+      {
+        "balanceUsd": 76536624134,
+        "exportShare": 0.49599052403692684,
+        "exportsUsd": 77688979742,
+        "importsUsd": 1152355608,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 10440908866,
+        "exportShare": 0.2317346751280054,
+        "exportsUsd": 36297529104,
+        "importsUsd": 25856620238,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -7819851759,
+        "exportShare": 0.09555834537839805,
+        "exportsUsd": 14967685870,
+        "importsUsd": 22787537629,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -16103744478,
+        "exportShare": 0.05194914016752429,
+        "exportsUsd": 8137001621,
+        "importsUsd": 24240746099,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -8070841294,
+        "exportShare": 0.03766104228966891,
+        "exportsUsd": 5898999698,
+        "importsUsd": 13969840992,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -9644407086,
+        "exportShare": 0.017535289675293997,
+        "exportsUsd": 2746622563,
+        "importsUsd": 12391029649,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -2028253022,
+        "exportShare": 0.017454827617247853,
+        "exportsUsd": 2734019469,
+        "importsUsd": 4762272491,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -1684612828,
+        "exportShare": 0.014108940555690336,
+        "exportsUsd": 2209939795,
+        "importsUsd": 3894552623,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -904455281,
+        "exportShare": 0.009459734674464038,
+        "exportsUsd": 1481716081,
+        "importsUsd": 2386171362,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -4472875391,
+        "exportShare": 0.009143390502700563,
+        "exportsUsd": 1432165828,
+        "importsUsd": 5905041219,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -2613248846,
+        "exportShare": 0.006785518642184967,
+        "exportsUsd": 1062842927,
+        "importsUsd": 3676091773,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -291943032,
+        "exportShare": 0.004443418887342467,
+        "exportsUsd": 695990474,
+        "importsUsd": 987933506,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -1586316593,
+        "exportShare": 0.0039881762069537904,
+        "exportsUsd": 624683992,
+        "importsUsd": 2211000585,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -333979024,
+        "exportShare": 0.001888945382228635,
+        "exportsUsd": 295873071,
+        "importsUsd": 629852095,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -1477599993,
+        "exportShare": 0.0013868528927308246,
+        "exportsUsd": 217228316,
+        "importsUsd": 1694828309,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -312909057,
+        "exportShare": 0.0009111779626390183,
+        "exportsUsd": 142721449,
+        "importsUsd": 455630506,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2008": [
+      {
+        "balanceUsd": 101544472074,
+        "exportShare": 0.49197579233824806,
+        "exportsUsd": 103314916393,
+        "importsUsd": 1770444319,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 21050963944,
+        "exportShare": 0.2297233581861005,
+        "exportsUsd": 48241905220,
+        "importsUsd": 27190941276,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -8748085452,
+        "exportShare": 0.12783349938804126,
+        "exportsUsd": 26845034872,
+        "importsUsd": 35593120324,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -23812322049,
+        "exportShare": 0.04272901031347183,
+        "exportsUsd": 8973092166,
+        "importsUsd": 32785414215,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -15009506296,
+        "exportShare": 0.03326476566603305,
+        "exportsUsd": 6985600790,
+        "importsUsd": 21995107086,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -19512129585,
+        "exportShare": 0.014348646904488596,
+        "exportsUsd": 3013215850,
+        "importsUsd": 22525345435,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -2648083914,
+        "exportShare": 0.01341047954736361,
+        "exportsUsd": 2816200705,
+        "importsUsd": 5464284619,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -2123350781,
+        "exportShare": 0.013065323585465423,
+        "exportsUsd": 2743717953,
+        "importsUsd": 4867068734,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -4099528741,
+        "exportShare": 0.0082317731950813,
+        "exportsUsd": 1728672371,
+        "importsUsd": 5828201112,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -864617267,
+        "exportShare": 0.008079005123655638,
+        "exportsUsd": 1696591076,
+        "importsUsd": 2561208343,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -5679642894,
+        "exportShare": 0.007418534623668219,
+        "exportsUsd": 1557892271,
+        "importsUsd": 7237535165,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -1922751859,
+        "exportShare": 0.0035068929285046306,
+        "exportsUsd": 736447515,
+        "importsUsd": 2659199374,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -635777705,
+        "exportShare": 0.00341784606183966,
+        "exportsUsd": 717747673,
+        "importsUsd": 1353525378,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -485819839,
+        "exportShare": 0.0012181046380720362,
+        "exportsUsd": 255801974,
+        "importsUsd": 741621813,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -2172382644,
+        "exportShare": 0.0010336668333136444,
+        "exportsUsd": 217070035,
+        "importsUsd": 2389452679,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -367136225,
+        "exportShare": 0.0007433006666525086,
+        "exportsUsd": 156093140,
+        "importsUsd": 523229365,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2009": [
+      {
+        "balanceUsd": 13014843001,
+        "exportShare": 0.3451247669520117,
+        "exportsUsd": 60301924905,
+        "importsUsd": 47287081904,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": 56856520569,
+        "exportShare": 0.3358251319082653,
+        "exportsUsd": 58677046172,
+        "importsUsd": 1820525603,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -6418616245,
+        "exportShare": 0.13366014529842507,
+        "exportsUsd": 23353768887,
+        "importsUsd": 29772385132,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -20362170812,
+        "exportShare": 0.05197961234570874,
+        "exportsUsd": 9082137767,
+        "importsUsd": 29444308579,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -8010268495,
+        "exportShare": 0.04330430688273921,
+        "exportsUsd": 7566345020,
+        "importsUsd": 15576613515,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -7631299324,
+        "exportShare": 0.020540475965323112,
+        "exportsUsd": 3588934663,
+        "importsUsd": 11220233987,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -2059776882,
+        "exportShare": 0.015475388490662188,
+        "exportsUsd": 2703937254,
+        "importsUsd": 4763714136,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -1103729542,
+        "exportShare": 0.015064853386923049,
+        "exportsUsd": 2632206508,
+        "importsUsd": 3735936050,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -429451453,
+        "exportShare": 0.011362464278281442,
+        "exportsUsd": 1985306571,
+        "importsUsd": 2414758024,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -4064273484,
+        "exportShare": 0.008411894136596501,
+        "exportsUsd": 1469768203,
+        "importsUsd": 5534041687,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -5144800620,
+        "exportShare": 0.008030075907947118,
+        "exportsUsd": 1403055013,
+        "importsUsd": 6547855633,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -1199935623,
+        "exportShare": 0.004218988421853987,
+        "exportsUsd": 737162752,
+        "importsUsd": 1937098375,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -286320723,
+        "exportShare": 0.002564055178166422,
+        "exportsUsd": 448004541,
+        "importsUsd": 734325264,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -1898186547,
+        "exportShare": 0.0020999127486289876,
+        "exportsUsd": 366907255,
+        "importsUsd": 2265093802,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -454674008,
+        "exportShare": 0.0014397330433703218,
+        "exportsUsd": 251557356,
+        "importsUsd": 706231364,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -333859809,
+        "exportShare": 0.0008981950550968459,
+        "exportsUsd": 156937131,
+        "importsUsd": 490796940,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2010": [
+      {
+        "balanceUsd": 71990035948,
+        "exportShare": 0.3733129327391335,
+        "exportsUsd": 74051099964,
+        "importsUsd": 2061064016,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -6136183050,
+        "exportShare": 0.27007705039775765,
+        "exportsUsd": 53573023871,
+        "importsUsd": 59709206921,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -6832130489,
+        "exportShare": 0.16598712132364063,
+        "exportsUsd": 32925537360,
+        "importsUsd": 39757667849,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -15128418849,
+        "exportShare": 0.053172162016918566,
+        "exportsUsd": 10547336402,
+        "importsUsd": 25675755251,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -6830923442,
+        "exportShare": 0.04840128253395307,
+        "exportsUsd": 9600975206,
+        "importsUsd": 16431898648,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -7760928279,
+        "exportShare": 0.018193487890825862,
+        "exportsUsd": 3608896645,
+        "importsUsd": 11369824924,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -1165329756,
+        "exportShare": 0.015221363633155544,
+        "exportsUsd": 3019340133,
+        "importsUsd": 4184669889,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -1935678498,
+        "exportShare": 0.01471277966041883,
+        "exportsUsd": 2918456399,
+        "importsUsd": 4854134897,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -134701149,
+        "exportShare": 0.013629438647523215,
+        "exportsUsd": 2703562709,
+        "importsUsd": 2838263858,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -5677248019,
+        "exportShare": 0.008581290897450116,
+        "exportsUsd": 1702202025,
+        "importsUsd": 7379450044,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -4340781258,
+        "exportShare": 0.008373115929462296,
+        "exportsUsd": 1660908022,
+        "importsUsd": 6001689280,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1420994322,
+        "exportShare": 0.0039970474838930846,
+        "exportsUsd": 792862333,
+        "importsUsd": 2213856655,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -225854229,
+        "exportShare": 0.002353614643933818,
+        "exportsUsd": 466867708,
+        "importsUsd": 692721937,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -2137811031,
+        "exportShare": 0.0019637223762615824,
+        "exportsUsd": 389527898,
+        "importsUsd": 2527338929,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -495218052,
+        "exportShare": 0.0012513492503604521,
+        "exportsUsd": 248220140,
+        "importsUsd": 743438192,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -406835525,
+        "exportShare": 0.0007722405753118037,
+        "exportsUsd": 153183185,
+        "importsUsd": 560018710,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2011": [
+      {
+        "balanceUsd": 101754780614,
+        "exportShare": 0.41410916102007433,
+        "exportsUsd": 104585753271,
+        "importsUsd": 2830972657,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 9805420333,
+        "exportShare": 0.2465302202828421,
+        "exportsUsd": 62262686314,
+        "importsUsd": 52457265981,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -10101277465,
+        "exportShare": 0.17106827025621618,
+        "exportsUsd": 43204318063,
+        "importsUsd": 53305595528,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -16376192196,
+        "exportShare": 0.04949511804491085,
+        "exportsUsd": 12500289033,
+        "importsUsd": 28876481229,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -10815805571,
+        "exportShare": 0.03500053938518586,
+        "exportsUsd": 8839596225,
+        "importsUsd": 19655401796,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -10206215116,
+        "exportShare": 0.01976525384857313,
+        "exportsUsd": 4991833451,
+        "importsUsd": 15198048567,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -1400707942,
+        "exportShare": 0.013570100441036561,
+        "exportsUsd": 3427210287,
+        "importsUsd": 4827918229,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -2700951036,
+        "exportShare": 0.01160558014455564,
+        "exportsUsd": 2931058899,
+        "importsUsd": 5632009935,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -456804799,
+        "exportShare": 0.011435417154961927,
+        "exportsUsd": 2888083215,
+        "importsUsd": 3344888014,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -6666340906,
+        "exportShare": 0.009204512717935015,
+        "exportsUsd": 2324654914,
+        "importsUsd": 8990995820,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -5409062956,
+        "exportShare": 0.008231850508369503,
+        "exportsUsd": 2079003237,
+        "importsUsd": 7488066193,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1566006570,
+        "exportShare": 0.0035095814512286004,
+        "exportsUsd": 886365853,
+        "importsUsd": 2452372423,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -470256273,
+        "exportShare": 0.0028172026124787483,
+        "exportsUsd": 711501423,
+        "importsUsd": 1181757696,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -2614168180,
+        "exportShare": 0.0018002687166339337,
+        "exportsUsd": 454668666,
+        "importsUsd": 3068836846,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -613052938,
+        "exportShare": 0.001114269461026013,
+        "exportsUsd": 281415438,
+        "importsUsd": 894468376,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -552358998,
+        "exportShare": 0.0007426539539716235,
+        "exportsUsd": 187561712,
+        "importsUsd": 739920710,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2012": [
+      {
+        "balanceUsd": 109817164435,
+        "exportShare": 0.33775736328090417,
+        "exportsUsd": 118256621304,
+        "importsUsd": 8439456869,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 60973462075,
+        "exportShare": 0.23767831381828672,
+        "exportsUsd": 83216644269,
+        "importsUsd": 22243182194,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -6603864001,
+        "exportShare": 0.1729121944945062,
+        "exportsUsd": 60540536273,
+        "importsUsd": 67144400274,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -22401807634,
+        "exportShare": 0.11327948466396096,
+        "exportsUsd": 39661753009,
+        "importsUsd": 62063560643,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -17444413119,
+        "exportShare": 0.036552663869554414,
+        "exportsUsd": 12797928332,
+        "importsUsd": 30242341451,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -10453366159,
+        "exportShare": 0.02668972332009037,
+        "exportsUsd": 9344685998,
+        "importsUsd": 19798052157,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -246036896,
+        "exportShare": 0.018995574406708498,
+        "exportsUsd": 6650787498,
+        "importsUsd": 6896824394,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -887587754,
+        "exportShare": 0.01463147175992437,
+        "exportsUsd": 5122814787,
+        "importsUsd": 6010402541,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -8183934743,
+        "exportShare": 0.014585216589598512,
+        "exportsUsd": 5106619788,
+        "importsUsd": 13290554531,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -4371693014,
+        "exportShare": 0.01072377674988504,
+        "exportsUsd": 3754640887,
+        "importsUsd": 8126333901,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -4563800274,
+        "exportShare": 0.005574161411846694,
+        "exportsUsd": 1951642116,
+        "importsUsd": 6515442390,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1823777700,
+        "exportShare": 0.003780925417638944,
+        "exportsUsd": 1323788950,
+        "importsUsd": 3147566650,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -111231855,
+        "exportShare": 0.0028701738760378496,
+        "exportsUsd": 1004913888,
+        "importsUsd": 1116145743,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -2590852733,
+        "exportShare": 0.001559790573598421,
+        "exportsUsd": 546118555,
+        "importsUsd": 3136971288,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -1111483257,
+        "exportShare": 0.0014787638772659894,
+        "exportsUsd": 517749245,
+        "importsUsd": 1629232502,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -896697552,
+        "exportShare": 0.0009304018901928751,
+        "exportsUsd": 325755101,
+        "importsUsd": 1222452653,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2013": [
+      {
+        "balanceUsd": 25478338938,
+        "exportShare": 0.37717775163801753,
+        "exportsUsd": 140015050702,
+        "importsUsd": 114536711764,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": 127866433098,
+        "exportShare": 0.35187152787220033,
+        "exportsUsd": 130620932973,
+        "importsUsd": 2754499875,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -15569724864,
+        "exportShare": 0.12681734643656306,
+        "exportsUsd": 47076841394,
+        "importsUsd": 62646566258,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -16111517113,
+        "exportShare": 0.042105470721822094,
+        "exportsUsd": 15630295245,
+        "importsUsd": 31741812358,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -15238980983,
+        "exportShare": 0.02842089312764674,
+        "exportsUsd": 10550338070,
+        "importsUsd": 25789319053,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -5557217347,
+        "exportShare": 0.022229522220931025,
+        "exportsUsd": 8251991713,
+        "importsUsd": 13809209060,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -634661948,
+        "exportShare": 0.012143520767984146,
+        "exportsUsd": 4507889632,
+        "importsUsd": 5142551580,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -721518491,
+        "exportShare": 0.009219585308160187,
+        "exportsUsd": 3422473088,
+        "importsUsd": 4143991579,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -3469497225,
+        "exportShare": 0.008268871538262692,
+        "exportsUsd": 3069551326,
+        "importsUsd": 6539048551,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -8005809064,
+        "exportShare": 0.00622299061279669,
+        "exportsUsd": 2310084151,
+        "importsUsd": 10315893215,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -5277036973,
+        "exportShare": 0.0051991479206814385,
+        "exportsUsd": 1930015640,
+        "importsUsd": 7207052613,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1048636178,
+        "exportShare": 0.004255468093739576,
+        "exportsUsd": 1579705002,
+        "importsUsd": 2628341180,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -620074557,
+        "exportShare": 0.0029764690511383187,
+        "exportsUsd": 1104917942,
+        "importsUsd": 1724992499,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -3070597363,
+        "exportShare": 0.0017446279130341276,
+        "exportsUsd": 647636730,
+        "importsUsd": 3718234093,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -933279439,
+        "exportShare": 0.0007815817429822887,
+        "exportsUsd": 290136963,
+        "importsUsd": 1223416402,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -824442404,
+        "exportShare": 0.0005652250340397523,
+        "exportsUsd": 209821527,
+        "importsUsd": 1034263931,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2014": [
+      {
+        "balanceUsd": 24949823178,
+        "exportShare": 0.41086337088894126,
+        "exportsUsd": 140943831938,
+        "importsUsd": 115994008760,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": 100166254922,
+        "exportShare": 0.3004761313839923,
+        "exportsUsd": 103076254453,
+        "importsUsd": 2909999531,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -12847679336,
+        "exportShare": 0.11243638789850025,
+        "exportsUsd": 38570523640,
+        "importsUsd": 51418202976,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -20737276726,
+        "exportShare": 0.049081374713056125,
+        "exportsUsd": 16837025442,
+        "importsUsd": 37574302168,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -15225387726,
+        "exportShare": 0.03818730850060311,
+        "exportsUsd": 13099891528,
+        "importsUsd": 28325279254,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -4337256188,
+        "exportShare": 0.03008453141141545,
+        "exportsUsd": 10320290003,
+        "importsUsd": 14657546191,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -1025102200,
+        "exportShare": 0.013838383443997751,
+        "exportsUsd": 4747161535,
+        "importsUsd": 5772263735,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -1475784914,
+        "exportShare": 0.009976848268472106,
+        "exportsUsd": 3422488655,
+        "importsUsd": 4898273569,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -3961654393,
+        "exportShare": 0.009464652910022459,
+        "exportsUsd": 3246783587,
+        "importsUsd": 7208437980,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -9243724927,
+        "exportShare": 0.007230305771388913,
+        "exportsUsd": 2480306286,
+        "importsUsd": 11724031213,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -5506772600,
+        "exportShare": 0.0060945094952867904,
+        "exportsUsd": 2090679245,
+        "importsUsd": 7597451845,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1162179265,
+        "exportShare": 0.004518585767626326,
+        "exportsUsd": 1550069532,
+        "importsUsd": 2712248797,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": 94562738,
+        "exportShare": 0.003437217846603638,
+        "exportsUsd": 1179113761,
+        "importsUsd": 1084551023,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -3235895398,
+        "exportShare": 0.0028643021418021924,
+        "exportsUsd": 982578999,
+        "importsUsd": 4218474397,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -1115445521,
+        "exportShare": 0.0009085492919558963,
+        "exportsUsd": 311671538,
+        "importsUsd": 1427117059,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -902141257,
+        "exportShare": 0.0005375402663354441,
+        "exportsUsd": 184399463,
+        "importsUsd": 1086540720,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2015": [
+      {
+        "balanceUsd": 27300876555,
+        "exportShare": 0.4565501923904942,
+        "exportsUsd": 137183584471,
+        "importsUsd": 109882707916,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": 60550150789,
+        "exportShare": 0.20801315688378091,
+        "exportsUsd": 62503512109,
+        "importsUsd": 1953361320,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -5418432749,
+        "exportShare": 0.13882433446361622,
+        "exportsUsd": 41713748304,
+        "importsUsd": 47132181053,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -23276311509,
+        "exportShare": 0.05317996888958837,
+        "exportsUsd": 15979445143,
+        "importsUsd": 39255756652,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -17528147580,
+        "exportShare": 0.03752844185385395,
+        "exportsUsd": 11276495463,
+        "importsUsd": 28804643043,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -2533251133,
+        "exportShare": 0.035501597246356716,
+        "exportsUsd": 10667471936,
+        "importsUsd": 13200723069,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -904005613,
+        "exportShare": 0.015258292212369615,
+        "exportsUsd": 4584791012,
+        "importsUsd": 5488796625,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -1223704949,
+        "exportShare": 0.012427786866404661,
+        "exportsUsd": 3734284593,
+        "importsUsd": 4957989542,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -3552878800,
+        "exportShare": 0.010921085321099809,
+        "exportsUsd": 3281552950,
+        "importsUsd": 6834431750,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -8588870896,
+        "exportShare": 0.009344800435508512,
+        "exportsUsd": 2807912999,
+        "importsUsd": 11396783895,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -5324692693,
+        "exportShare": 0.008179536954920325,
+        "exportsUsd": 2457776204,
+        "importsUsd": 7782468897,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1108627674,
+        "exportShare": 0.005249977059768473,
+        "exportsUsd": 1577506008,
+        "importsUsd": 2686133682,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": 291793240,
+        "exportShare": 0.004349727348304964,
+        "exportsUsd": 1307000192,
+        "importsUsd": 1015206952,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -3193056394,
+        "exportShare": 0.002878666821347781,
+        "exportsUsd": 864977914,
+        "importsUsd": 4058034308,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -1205424091,
+        "exportShare": 0.001242376154544166,
+        "exportsUsd": 373307507,
+        "importsUsd": 1578731598,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -831464180,
+        "exportShare": 0.0005500590980413381,
+        "exportsUsd": 165281014,
+        "importsUsd": 996745194,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2016": [
+      {
+        "balanceUsd": 57728583161,
+        "exportShare": 0.495776014931313,
+        "exportsUsd": 146277072759,
+        "importsUsd": 88548489598,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": 44498813195,
+        "exportShare": 0.16117433961046915,
+        "exportsUsd": 47553955601,
+        "importsUsd": 3055142406,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -11467448507,
+        "exportShare": 0.14747424689907457,
+        "exportsUsd": 43511788578,
+        "importsUsd": 54979237085,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -24796912899,
+        "exportShare": 0.049542738035216326,
+        "exportsUsd": 14617420928,
+        "importsUsd": 39414333827,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -19413510798,
+        "exportShare": 0.03487246919379835,
+        "exportsUsd": 10289006648,
+        "importsUsd": 29702517446,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -1694479592,
+        "exportShare": 0.03436123938671242,
+        "exportsUsd": 10138169985,
+        "importsUsd": 11832649577,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": 1580972078,
+        "exportShare": 0.021699150968137213,
+        "exportsUsd": 6402262694,
+        "importsUsd": 4821290616,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -1215325904,
+        "exportShare": 0.013217387752247397,
+        "exportsUsd": 3899746522,
+        "importsUsd": 5115072426,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -2686005113,
+        "exportShare": 0.0112074343625635,
+        "exportsUsd": 3306716425,
+        "importsUsd": 5992721538,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -7779599966,
+        "exportShare": 0.00893568970283386,
+        "exportsUsd": 2636445680,
+        "importsUsd": 10416045646,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -5082289006,
+        "exportShare": 0.007420247003743831,
+        "exportsUsd": 2189319326,
+        "importsUsd": 7271608332,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -577393378,
+        "exportShare": 0.006407367957952341,
+        "exportsUsd": 1890472715,
+        "importsUsd": 2467866093,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": 19391990,
+        "exportShare": 0.0036606438349659743,
+        "exportsUsd": 1080060851,
+        "importsUsd": 1060668861,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -3132210017,
+        "exportShare": 0.0023555530830787893,
+        "exportsUsd": 694998143,
+        "importsUsd": 3827208160,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -945665082,
+        "exportShare": 0.001394613314898114,
+        "exportsUsd": 411476044,
+        "importsUsd": 1357141126,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -769377784,
+        "exportShare": 0.000500863962995155,
+        "exportsUsd": 147778255,
+        "importsUsd": 917156039,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2017": [
+      {
+        "balanceUsd": 91911638361,
+        "exportShare": 0.3453867195263439,
+        "exportsUsd": 108313054923,
+        "importsUsd": 16401416562,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": 53727877248,
+        "exportShare": 0.2011886022009037,
+        "exportsUsd": 63092617313,
+        "importsUsd": 9364740065,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -9165281073,
+        "exportShare": 0.1519103423528311,
+        "exportsUsd": 47638986459,
+        "importsUsd": 56804267532,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -36770259567,
+        "exportShare": 0.12279065118476543,
+        "exportsUsd": 38507069884,
+        "importsUsd": 75277329451,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -14774025646,
+        "exportShare": 0.05209375307826728,
+        "exportsUsd": 16336567735,
+        "importsUsd": 31110593381,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -2109779586,
+        "exportShare": 0.03997380157234743,
+        "exportsUsd": 12535758674,
+        "importsUsd": 14645538260,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": 217648048,
+        "exportShare": 0.0201903715348758,
+        "exportsUsd": 6331687634,
+        "importsUsd": 6114039586,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -8308324627,
+        "exportShare": 0.01776067830181086,
+        "exportsUsd": 5569737386,
+        "importsUsd": 13878062013,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": -3366372367,
+        "exportShare": 0.014414018672290948,
+        "exportsUsd": 4520227061,
+        "importsUsd": 7886599428,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -2875898732,
+        "exportShare": 0.012121694264566846,
+        "exportsUsd": 3801355589,
+        "importsUsd": 6677254321,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -5184797739,
+        "exportShare": 0.007131642124486138,
+        "exportsUsd": 2236478421,
+        "importsUsd": 7421276160,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1303191110,
+        "exportShare": 0.005392162154442849,
+        "exportsUsd": 1690978612,
+        "importsUsd": 2994169722,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -258320004,
+        "exportShare": 0.003395998948631216,
+        "exportsUsd": 1064983104,
+        "importsUsd": 1323303108,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -1279175200,
+        "exportShare": 0.0028171114732822807,
+        "exportsUsd": 883444361,
+        "importsUsd": 2162619561,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -3569414192,
+        "exportShare": 0.002324791540092154,
+        "exportsUsd": 729053144,
+        "importsUsd": 4298467336,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -1026221465,
+        "exportShare": 0.0011076610700620482,
+        "exportsUsd": 347361805,
+        "importsUsd": 1373583270,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2018": [
+      {
+        "balanceUsd": 106161361295,
+        "exportShare": 0.3134016481548643,
+        "exportsUsd": 121588642291,
+        "importsUsd": 15427280996,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": 92270517977,
+        "exportShare": 0.2652643687798842,
+        "exportsUsd": 102913097739,
+        "importsUsd": 10642579762,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -8761743851,
+        "exportShare": 0.12214716486526403,
+        "exportsUsd": 47388735902,
+        "importsUsd": 56150479753,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -17900563565,
+        "exportShare": 0.11526221131846241,
+        "exportsUsd": 44717619911,
+        "importsUsd": 62618183476,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": -10067351952,
+        "exportShare": 0.046457214495481604,
+        "exportsUsd": 18023739404,
+        "importsUsd": 28091091356,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -534340623,
+        "exportShare": 0.042486740849047536,
+        "exportsUsd": 16483337486,
+        "importsUsd": 17017678109,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -6661569659,
+        "exportShare": 0.020773673390234667,
+        "exportsUsd": 8059443075,
+        "importsUsd": 14721012734,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": 1096965233,
+        "exportShare": 0.02070761853455565,
+        "exportsUsd": 8033816151,
+        "importsUsd": 6936850918,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": 291952088,
+        "exportShare": 0.01782067669572938,
+        "exportsUsd": 6913785862,
+        "importsUsd": 6621833774,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -2505452147,
+        "exportShare": 0.011779299332518915,
+        "exportsUsd": 4569947291,
+        "importsUsd": 7075399438,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -3737333339,
+        "exportShare": 0.007839428699957088,
+        "exportsUsd": 3041418249,
+        "importsUsd": 6778751588,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1476647444,
+        "exportShare": 0.0050694372796790624,
+        "exportsUsd": 1966760544,
+        "importsUsd": 3443407988,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -2964250587,
+        "exportShare": 0.00384279525807091,
+        "exportsUsd": 1490867265,
+        "importsUsd": 4455117852,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -31055120,
+        "exportShare": 0.0035328619480798434,
+        "exportsUsd": 1370624214,
+        "importsUsd": 1401679334,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -979622113,
+        "exportShare": 0.0025079819072411007,
+        "exportsUsd": 973007375,
+        "importsUsd": 1952629488,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -924146086,
+        "exportShare": 0.0011068784909292863,
+        "exportsUsd": 429429308,
+        "importsUsd": 1353575394,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2019": [
+      {
+        "balanceUsd": 157309692999,
+        "exportShare": 0.5471317612772895,
+        "exportsUsd": 213068424191,
+        "importsUsd": 55758731192,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -11355649872,
+        "exportShare": 0.12642844650800467,
+        "exportsUsd": 49234776295,
+        "importsUsd": 60590426167,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -15784067429,
+        "exportShare": 0.12551602725060815,
+        "exportsUsd": 48879454694,
+        "importsUsd": 64663522123,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": 1659328730,
+        "exportShare": 0.0429218984844317,
+        "exportsUsd": 16714988821,
+        "importsUsd": 15055660091,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -8747493451,
+        "exportShare": 0.0406198858786317,
+        "exportsUsd": 15818520670,
+        "importsUsd": 24566014121,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -6913000299,
+        "exportShare": 0.02242955794629565,
+        "exportsUsd": 8734697755,
+        "importsUsd": 15647698054,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": 1740058592,
+        "exportShare": 0.021363567392183445,
+        "exportsUsd": 8319571192,
+        "importsUsd": 6579512600,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": 1120669966,
+        "exportShare": 0.019797035651882004,
+        "exportsUsd": 7709519879,
+        "importsUsd": 6588849913,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -5872087117,
+        "exportShare": 0.01580252413144049,
+        "exportsUsd": 6153945271,
+        "importsUsd": 12026032388,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -2397480173,
+        "exportShare": 0.012025253952982708,
+        "exportsUsd": 4682970523,
+        "importsUsd": 7080450696,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -3578927594,
+        "exportShare": 0.00850084220931505,
+        "exportsUsd": 3310465928,
+        "importsUsd": 6889393522,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1288696515,
+        "exportShare": 0.005215350400676117,
+        "exportsUsd": 2031003444,
+        "importsUsd": 3319699959,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -2858343663,
+        "exportShare": 0.004843280874932944,
+        "exportsUsd": 1886109155,
+        "importsUsd": 4744452818,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -187674528,
+        "exportShare": 0.0033374239227062143,
+        "exportsUsd": 1299686303,
+        "importsUsd": 1487360831,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -1047236950,
+        "exportShare": 0.002788981470320426,
+        "exportsUsd": 1086107459,
+        "importsUsd": 2133344409,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -817797781,
+        "exportShare": 0.001278162648299313,
+        "exportsUsd": 497752316,
+        "importsUsd": 1315550097,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2020": [
+      {
+        "balanceUsd": 130898539050,
+        "exportShare": 0.5169971736595752,
+        "exportsUsd": 173347553703,
+        "importsUsd": 42449014653,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -7963242970,
+        "exportShare": 0.13805845542613202,
+        "exportsUsd": 46290573209,
+        "importsUsd": 54253816179,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -15238595832,
+        "exportShare": 0.1341490608052673,
+        "exportsUsd": 44979765281,
+        "importsUsd": 60218361113,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": 1047190734,
+        "exportShare": 0.041791129546120964,
+        "exportsUsd": 14012436513,
+        "importsUsd": 12965245779,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -6411950753,
+        "exportShare": 0.03713914201980587,
+        "exportsUsd": 12452639480,
+        "importsUsd": 18864590233,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -4755489447,
+        "exportShare": 0.026258742572552833,
+        "exportsUsd": 8804475189,
+        "importsUsd": 13559964636,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": 2417225900,
+        "exportShare": 0.02561968782145363,
+        "exportsUsd": 8590202107,
+        "importsUsd": 6172976207,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": 2556044228,
+        "exportShare": 0.0250174537886802,
+        "exportsUsd": 8388274898,
+        "importsUsd": 5832230670,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": -4433667590,
+        "exportShare": 0.014026100985976057,
+        "exportsUsd": 4702908290,
+        "importsUsd": 9136575880,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -2150136636,
+        "exportShare": 0.011220374798430145,
+        "exportsUsd": 3762156975,
+        "importsUsd": 5912293611,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -3203976113,
+        "exportShare": 0.010829757462189353,
+        "exportsUsd": 3631184190,
+        "importsUsd": 6835160303,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -163508342,
+        "exportShare": 0.007940608826228669,
+        "exportsUsd": 2662461586,
+        "importsUsd": 2825969928,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -2855119177,
+        "exportShare": 0.003938550028417513,
+        "exportsUsd": 1320583646,
+        "importsUsd": 4175702823,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -204356604,
+        "exportShare": 0.0032410681444087286,
+        "exportsUsd": 1086720127,
+        "importsUsd": 1291076731,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -652905651,
+        "exportShare": 0.0026860746636011928,
+        "exportsUsd": 900632529,
+        "importsUsd": 1553538180,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -550213570,
+        "exportShare": 0.0010866194511602644,
+        "exportsUsd": 364340142,
+        "importsUsd": 914553712,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2021": [
+      {
+        "balanceUsd": 180532975321,
+        "exportShare": 0.5111557281051095,
+        "exportsUsd": 217322865342,
+        "importsUsd": 36789890021,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -12777268387,
+        "exportShare": 0.1483511560028308,
+        "exportsUsd": 63072947297,
+        "importsUsd": 75850215684,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -17674875144,
+        "exportShare": 0.12380952506583576,
+        "exportsUsd": 52638832482,
+        "importsUsd": 70313707626,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": 6366577820,
+        "exportShare": 0.05350619487817209,
+        "exportsUsd": 22748682926,
+        "importsUsd": 16382105106,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -7599064394,
+        "exportShare": 0.034729539517809375,
+        "exportsUsd": 14765603954,
+        "importsUsd": 22364668348,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -6446954877,
+        "exportShare": 0.025905997028926955,
+        "exportsUsd": 11014188425,
+        "importsUsd": 17461143302,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": 2843396620,
+        "exportShare": 0.025618631628893357,
+        "exportsUsd": 10892012210,
+        "importsUsd": 8048615590,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": 2783454779,
+        "exportShare": 0.022289788474756267,
+        "exportsUsd": 9476721932,
+        "importsUsd": 6693267153,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -58213947168,
+        "exportShare": 0.014691226092847698,
+        "exportsUsd": 6246118696,
+        "importsUsd": 64460065864,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -2372476560,
+        "exportShare": 0.012755548795109296,
+        "exportsUsd": 5423146530,
+        "importsUsd": 7795623090,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": -3546836834,
+        "exportShare": 0.009870158805055923,
+        "exportsUsd": 4196394709,
+        "importsUsd": 7743231543,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -1095803114,
+        "exportShare": 0.0061756799245895975,
+        "exportsUsd": 2625650820,
+        "importsUsd": 3721453934,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -356763344,
+        "exportShare": 0.003776784047342177,
+        "exportsUsd": 1605736737,
+        "importsUsd": 1962500081,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -3036608889,
+        "exportShare": 0.0034451932921487076,
+        "exportsUsd": 1464757679,
+        "importsUsd": 4501366568,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -867086719,
+        "exportShare": 0.00289553555187622,
+        "exportsUsd": 1231065306,
+        "importsUsd": 2098152025,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -907920308,
+        "exportShare": 0.0010233127886962693,
+        "exportsUsd": 435071457,
+        "importsUsd": 1342991765,
+        "product": "41-43_HidesSkin"
+      }
+    ],
+    "2022": [
+      {
+        "balanceUsd": 248950721363,
+        "exportShare": 0.522750968045896,
+        "exportsUsd": 269541475724,
+        "importsUsd": 20590754361,
+        "product": "27-27_Fuels"
+      },
+      {
+        "balanceUsd": -20548918226,
+        "exportShare": 0.14183180486800634,
+        "exportsUsd": 73131483872,
+        "importsUsd": 93680402098,
+        "product": "68-71_StoneGlas"
+      },
+      {
+        "balanceUsd": -22640384405,
+        "exportShare": 0.12020636440964501,
+        "exportsUsd": 61980948549,
+        "importsUsd": 84621332954,
+        "product": "84-85_MachElec"
+      },
+      {
+        "balanceUsd": 5885861879,
+        "exportShare": 0.0475303327426645,
+        "exportsUsd": 24507646685,
+        "importsUsd": 18621784806,
+        "product": "72-83_Metals"
+      },
+      {
+        "balanceUsd": -7205668252,
+        "exportShare": 0.0391456653516383,
+        "exportsUsd": 20184334515,
+        "importsUsd": 27390002767,
+        "product": "86-89_Transport"
+      },
+      {
+        "balanceUsd": -7781207921,
+        "exportShare": 0.02286299520697097,
+        "exportsUsd": 11788644774,
+        "importsUsd": 19569852695,
+        "product": "28-38_Chemicals"
+      },
+      {
+        "balanceUsd": 2279138857,
+        "exportShare": 0.022546383342553836,
+        "exportsUsd": 11625392988,
+        "importsUsd": 9346254131,
+        "product": "39-40_PlastiRub"
+      },
+      {
+        "balanceUsd": 2587435416,
+        "exportShare": 0.021422846660400376,
+        "exportsUsd": 11046073668,
+        "importsUsd": 8458638252,
+        "product": "16-24_FoodProd"
+      },
+      {
+        "balanceUsd": -94249561633,
+        "exportShare": 0.014996074426569424,
+        "exportsUsd": 7732293727,
+        "importsUsd": 101981855360,
+        "product": "90-99_Miscellan"
+      },
+      {
+        "balanceUsd": -2997215611,
+        "exportShare": 0.012949615979173466,
+        "exportsUsd": 6677096389,
+        "importsUsd": 9674312000,
+        "product": "50-63_TextCloth"
+      },
+      {
+        "balanceUsd": 1899868758,
+        "exportShare": 0.012283876685897994,
+        "exportsUsd": 6333827103,
+        "importsUsd": 4433958345,
+        "product": "44-49_Wood"
+      },
+      {
+        "balanceUsd": -4202774883,
+        "exportShare": 0.01072729217184919,
+        "exportsUsd": 5531219145,
+        "importsUsd": 9733994028,
+        "product": "06-15_Vegetable"
+      },
+      {
+        "balanceUsd": -3970427230,
+        "exportShare": 0.0034147372807225244,
+        "exportsUsd": 1760710897,
+        "importsUsd": 5731138127,
+        "product": "01-05_Animal"
+      },
+      {
+        "balanceUsd": -326431985,
+        "exportShare": 0.003109844686436749,
+        "exportsUsd": 1603501815,
+        "importsUsd": 1929933800,
+        "product": "25-26_Minerals"
+      },
+      {
+        "balanceUsd": -1369961456,
+        "exportShare": 0.002976658976738264,
+        "exportsUsd": 1534828441,
+        "importsUsd": 2904789897,
+        "product": "64-67_Footwear"
+      },
+      {
+        "balanceUsd": -1182483507,
+        "exportShare": 0.0012445391648369707,
+        "exportsUsd": 641710764,
+        "importsUsd": 1824194271,
+        "product": "41-43_HidesSkin"
+      }
+    ]
+  },
+  "schemaVersion": 1,
+  "summaryByYear": {
+    "2002": {
+      "balanceUsd": 9511299999,
+      "exportsUsd": 52163400000,
+      "importsUsd": 42652100001
+    },
+    "2003": {
+      "balanceUsd": 15061000003,
+      "exportsUsd": 67135000000,
+      "importsUsd": 52073999997
+    },
+    "2004": {
+      "balanceUsd": 18566000008,
+      "exportsUsd": 90638000006,
+      "importsUsd": 72071999998
+    },
+    "2005": {
+      "balanceUsd": 34638977345,
+      "exportsUsd": 115452993198,
+      "importsUsd": 80814015853
+    },
+    "2006": {
+      "balanceUsd": 44641400001,
+      "exportsUsd": 142505000001,
+      "importsUsd": 97863600000
+    },
+    "2007": {
+      "balanceUsd": 29632495316,
+      "exportsUsd": 156634000000,
+      "importsUsd": 127001504684
+    },
+    "2008": {
+      "balanceUsd": 34514300767,
+      "exportsUsd": 210000000004,
+      "importsUsd": 175485699237
+    },
+    "2009": {
+      "balanceUsd": 10474000003,
+      "exportsUsd": 174724999998,
+      "importsUsd": 164250999995
+    },
+    "2010": {
+      "balanceUsd": 11361000000,
+      "exportsUsd": 198362000000,
+      "importsUsd": 187001000000
+    },
+    "2011": {
+      "balanceUsd": 41611000001,
+      "exportsUsd": 252556000001,
+      "importsUsd": 210945000000
+    },
+    "2012": {
+      "balanceUsd": 89100079819,
+      "exportsUsd": 350123000000,
+      "importsUsd": 261022920181
+    },
+    "2013": {
+      "balanceUsd": 76261778087,
+      "exportsUsd": 371217682098,
+      "importsUsd": 294955904011
+    },
+    "2014": {
+      "balanceUsd": 44434340387,
+      "exportsUsd": 343043069605,
+      "importsUsd": 298608729218
+    },
+    "2015": {
+      "balanceUsd": 13453952323,
+      "exportsUsd": 300478647819,
+      "importsUsd": 287024695496
+    },
+    "2016": {
+      "balanceUsd": 24267542378,
+      "exportsUsd": 295046691154,
+      "importsUsd": 270779148776
+    },
+    "2017": {
+      "balanceUsd": 55866102349,
+      "exportsUsd": 313599362105,
+      "importsUsd": 257733259756
+    },
+    "2018": {
+      "balanceUsd": 143276720107,
+      "exportsUsd": 387964272067,
+      "importsUsd": 244687551960
+    },
+    "2019": {
+      "balanceUsd": 100981294915,
+      "exportsUsd": 389427993896,
+      "importsUsd": 288446698981
+    },
+    "2020": {
+      "balanceUsd": 88335837227,
+      "exportsUsd": 335296907865,
+      "importsUsd": 246961070638
+    },
+    "2021": {
+      "balanceUsd": 77630798802,
+      "exportsUsd": 425159796502,
+      "importsUsd": 347528997700
+    },
+    "2022": {
+      "balanceUsd": 95127991164,
+      "exportsUsd": 515621189056,
+      "importsUsd": 420493197892
+    }
+  },
+  "years": [
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ]
+}

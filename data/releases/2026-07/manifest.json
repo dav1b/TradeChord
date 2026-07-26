@@ -1,0 +1,101 @@
+{
+  "artifactUnit": "current_usd",
+  "artifacts": {
+    "matrix": {
+      "path": "trade_matrix.csv.gz",
+      "records": 321175,
+      "sha256": "96e769fea45a2264fc3d1299908b85996879af177795ad4100e2b4aeb3c48ebc"
+    }
+  },
+  "coverage": {
+    "export": {
+      "method": "top_k",
+      "min_achieved": 3.689680392457166e-06,
+      "reconciled": true
+    },
+    "import": {
+      "method": "top_k",
+      "min_achieved": 0.04531730230746701,
+      "reconciled": true
+    }
+  },
+  "datasetVersion": "2026-07",
+  "flows": [
+    "export",
+    "import"
+  ],
+  "generatedAt": "2026-07-26T12:22:13.147458Z",
+  "products": [
+    "01-05_Animal",
+    "06-15_Vegetable",
+    "16-24_FoodProd",
+    "25-26_Minerals",
+    "27-27_Fuels",
+    "28-38_Chemicals",
+    "39-40_PlastiRub",
+    "41-43_HidesSkin",
+    "44-49_Wood",
+    "50-63_TextCloth",
+    "64-67_Footwear",
+    "68-71_StoneGlas",
+    "72-83_Metals",
+    "84-85_MachElec",
+    "86-89_Transport",
+    "90-99_Miscellan"
+  ],
+  "reporters": [
+    "ARE",
+    "AUS",
+    "AUT",
+    "BEL",
+    "BRA",
+    "CAN",
+    "CHE",
+    "CHN",
+    "CZE",
+    "DEU",
+    "ESP",
+    "FRA",
+    "GBR",
+    "HKG",
+    "IDN",
+    "IND",
+    "IRL",
+    "ITA",
+    "JPN",
+    "KOR",
+    "MEX",
+    "MYS",
+    "NLD",
+    "NOR",
+    "POL",
+    "SAU",
+    "SGP",
+    "THA",
+    "TUR",
+    "USA"
+  ],
+  "row": {
+    "definition": "Reporter WLD total minus explicitly collected partners, per flow.",
+    "synthetic": true
+  },
+  "schemaVersion": 1,
+  "source": {
+    "flows": {
+      "export": {
+        "sourceIndicator": "XPRT-TRD-VL",
+        "valuation": "reported export value"
+      },
+      "import": {
+        "sourceIndicator": "MPRT-TRD-VL",
+        "valuation": "reported import value"
+      }
+    },
+    "provider": "World Bank WITS",
+    "sourceUnit": "thousands_current_usd"
+  },
+  "years": {
+    "end": 2022,
+    "start": 2002
+  }
+}
