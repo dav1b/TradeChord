@@ -1,19 +1,22 @@
-"""Collect one reporter-year for a single flow (export or import).
+"""Collect one reporter for a single flow across a whole year range.
 
-Behavior-preserving port of the legacy ``build_reporter_one_year`` collector,
-generalized over :class:`Flow` and instrumented with explicit request statuses:
+Strategy (multi-year, fixed top-K):
 
-  Phase 1  rank partners            (partner=ALL if supported, else fan out)
-  Phase 2  WLD prefilter per product to skip empty sectors
-  Phase 3  bilateral per-product for ranked partners, to a coverage target,
-           with a synthetic flow-specific ROW remainder
+  Phase 1  rank partners once, by total across the range (partner=ALL if supported,
+           else fan out over the universe) and keep the top K
+  Phase 2  WLD per product across the range -> per-year world totals, drop empty sectors
+  Phase 3  bilateral history for each top-K partner (one year-range request per
+           partner, or per partner*product when product=ALL is unsupported)
+  ROW      per (product, year): world total minus the explicit top-K partners
 
-The indicator is derived from the flow, so exports and imports share one code
-path (see docs/data-methodology.md).
+Using year *ranges* (startPeriod..endPeriod) collapses the year dimension into a
+single request, and a fixed top-K keeps the *same* partners tracked across all
+years (better for trend/slope charts than a per-year coverage walk).
 """
 
 from __future__ import annotations
 
+from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 
@@ -29,6 +32,7 @@ from ..models import (
 from ..parsing.sdmx import SdmxParseError, parse_sdmx
 
 _DATASET = "df_wits_tradestats_trade"
+_DEFAULT_TOP_K = 15
 
 
 @dataclass
@@ -39,7 +43,6 @@ class CollectionConfig:
     concurrency: int
     use_cache: bool
     cache_dir: str
-    coverage_target: float
     include_row_remainder: bool
     allow_partner_all: bool
     allow_product_all: bool
@@ -58,7 +61,6 @@ class CollectionConfig:
             concurrency=cfg.CONCURRENCY,
             use_cache=cfg.USE_CACHE,
             cache_dir=cfg.CACHE_DIR,
-            coverage_target=getattr(cfg, "COVERAGE_TARGET", 0.9),
             include_row_remainder=getattr(cfg, "INCLUDE_ROW_REMAINDER", True),
             allow_partner_all=getattr(cfg, "ALLOW_PARTNER_ALL", True),
             allow_product_all=getattr(cfg, "ALLOW_PRODUCT_ALL", True),
@@ -80,7 +82,7 @@ class CollectionConfig:
 @dataclass
 class CollectionResult:
     reporter: str
-    year: int
+    years: list[int]
     flow: Flow
     observations: list[Observation]
     statuses: StatusRecorder
@@ -94,15 +96,15 @@ def build_client(cc: CollectionConfig) -> WitsClient:
     return WitsClient(cc.base_url, cc.timeout, limiter, cache)
 
 
-def _endpoint(reporter: str, partner: str, product: str, indicator: str, year: int) -> str:
+def _endpoint(reporter, partner, product, indicator, start, end) -> str:
     return (
         f"SDMX/V21/rest/data/{_DATASET}/"
-        f"A.{reporter}.{partner}.{product}.{indicator}?startPeriod={year}&endPeriod={year}"
+        f"A.{reporter}.{partner}.{product}.{indicator}?startPeriod={start}&endPeriod={end}"
     )
 
 
-def _fetch(client: WitsClient, endpoint: str, flow: Flow, statuses: StatusRecorder) -> list[Observation]:
-    res = client.get(endpoint)
+def _fetch(client, reporter, partner, product, indicator, start, end, flow, statuses) -> list[Observation]:
+    res = client.get(_endpoint(reporter, partner, product, indicator, start, end))
     if res.status is not RequestStatus.SUCCESS:
         statuses.record(res.status)
         return []
@@ -115,145 +117,131 @@ def _fetch(client: WitsClient, endpoint: str, flow: Flow, statuses: StatusRecord
     return rows
 
 
-def _sum(rows: list[Observation], year: int) -> float:
-    return sum(r.value_thousands for r in rows if r.year == year)
-
-
-def _probe(client, reporter, year, indicator) -> tuple[bool, bool]:
-    # Probe outcomes are capability detection, not data completeness: an expected
-    # 4xx for an unsupported ALL query must not count toward run failures. Use a
-    # throwaway recorder so it never poisons the release gate.
+def _probe(client, reporter, ref_year, indicator) -> tuple[bool, bool]:
+    # Capability detection only; a throwaway recorder keeps it off the failure gate.
     probe = StatusRecorder()
     partner_all = bool(
-        _fetch(client, _endpoint(reporter, "ALL", "Total", indicator, year), Flow.EXPORT, probe)
+        _fetch(client, reporter, "ALL", "Total", indicator, ref_year, ref_year, Flow.EXPORT, probe)
     )
     product_all = bool(
-        _fetch(client, _endpoint(reporter, "WLD", "ALL", indicator, year), Flow.EXPORT, probe)
+        _fetch(client, reporter, "WLD", "ALL", indicator, ref_year, ref_year, Flow.EXPORT, probe)
     )
     return partner_all, product_all
 
 
 def collect_reporter_flow(
     reporter: str,
-    year: int,
+    years: list[int],
     flow: Flow,
     *,
     cc: CollectionConfig | None = None,
     client: WitsClient | None = None,
-    exhaustive: bool = False,
+    top_k: int | None = None,
 ) -> CollectionResult:
     cc = cc or CollectionConfig.from_module()
     client = client or build_client(cc)
+    if top_k is None:
+        top_k = cc.top_k_partners or _DEFAULT_TOP_K
+
     indicator = indicator_for(flow)
+    yset = set(years)
+    y0, y1 = min(years), max(years)
     statuses = StatusRecorder()
     manifest: dict = {
         "reporter": reporter,
-        "year": year,
+        "years": sorted(yset),
         "flow": flow.value,
         "indicator": indicator,
     }
 
-    partner_all_ok = cc.allow_partner_all
-    product_all_ok = cc.allow_product_all
-    pa, pr = _probe(client, reporter, year, indicator)
-    partner_all_ok = partner_all_ok and pa
-    product_all_ok = product_all_ok and pr
+    pa, pr = _probe(client, reporter, y1, indicator)
+    partner_all_ok = cc.allow_partner_all and pa
+    product_all_ok = cc.allow_product_all and pr
     manifest["probe"] = {"partner_all": pa, "product_all": pr}
 
-    # ---- Phase 1: rank partners ----
+    # ---- Phase 1: rank partners by total across the range ----
     partner_rows: list[Observation] = []
     if partner_all_ok:
-        partner_rows = _fetch(
-            client, _endpoint(reporter, "ALL", "Total", indicator, year), flow, statuses
-        )
+        partner_rows = _fetch(client, reporter, "ALL", "Total", indicator, y0, y1, flow, statuses)
     else:
         universe = cc.partner_universe(flow, reporter)
 
         def totals(p: str) -> list[Observation]:
-            return _fetch(client, _endpoint(reporter, p, "Total", indicator, year), flow, statuses)
+            return _fetch(client, reporter, p, "Total", indicator, y0, y1, flow, statuses)
 
         with ThreadPoolExecutor(max_workers=cc.concurrency) as ex:
             for fut in as_completed({ex.submit(totals, p): p for p in universe}):
                 partner_rows.extend(fut.result() or [])
 
-    by_partner: dict[str, float] = {}
+    by_partner: dict[str, float] = defaultdict(float)
     for r in partner_rows:
-        if r.partner and r.partner not in ("WLD", "ROW"):
-            by_partner[r.partner] = by_partner.get(r.partner, 0.0) + r.value_thousands
-    ranked = [p for p, _ in sorted(by_partner.items(), key=lambda kv: kv[1], reverse=True)]
-    if cc.top_k_partners:
-        ranked = ranked[: cc.top_k_partners]
-    manifest["phase1_ranked_partners"] = len(ranked)
+        if r.partner and r.partner not in ("WLD", "ROW") and r.year in yset:
+            by_partner[r.partner] += r.value_thousands
+    ranked = [p for p, _ in sorted(by_partner.items(), key=lambda kv: kv[1], reverse=True)][:top_k]
+    manifest["ranked_partners"] = len(ranked)
 
-    # ---- Phase 2: WLD prefilter per product ----
-    wld_totals: dict[str, float] = {}
+    # ---- Phase 2: WLD per product across the range ----
+    wld: dict[str, dict[int, float]] = {}
 
-    def product_total(prod: str) -> float:
-        rows = _fetch(client, _endpoint(reporter, "WLD", prod, indicator, year), flow, statuses)
-        return _sum(rows, year)
+    def wld_fetch(prod: str) -> tuple[str, dict[int, float]]:
+        rows = _fetch(client, reporter, "WLD", prod, indicator, y0, y1, flow, statuses)
+        return prod, {r.year: r.value_thousands for r in rows if r.year in yset}
 
-    valid_products: list[str] = []
     with ThreadPoolExecutor(max_workers=min(cc.concurrency, 6)) as ex:
-        futs = {ex.submit(product_total, prod): prod for prod in cc.sector_products}
-        for fut in as_completed(futs):
-            prod = futs[fut]
-            val = fut.result()
-            wld_totals[prod] = val
-            if val > 0:
-                valid_products.append(prod)
-    manifest["phase2_valid_products"] = len(valid_products)
-    manifest["wld_totals"] = {p: wld_totals[p] for p in valid_products}
+        for fut in as_completed({ex.submit(wld_fetch, p): p for p in cc.sector_products}):
+            prod, year_values = fut.result()
+            if any(v > 0 for v in year_values.values()):
+                wld[prod] = year_values
+    valid_products = sorted(wld)
+    valid_set = set(valid_products)
+    manifest["valid_products"] = len(valid_products)
 
-    # ---- Phase 3: bilateral per product for ranked partners ----
+    # ---- Phase 3: bilateral history for each top-K partner ----
     observations: list[Observation] = []
-
     if product_all_ok:
         def partner_all_products(partner: str) -> list[Observation]:
-            rows = _fetch(client, _endpoint(reporter, partner, "ALL", indicator, year), flow, statuses)
-            return [r for r in rows if r.product in valid_products]
+            rows = _fetch(client, reporter, partner, "ALL", indicator, y0, y1, flow, statuses)
+            return [r for r in rows if r.product in valid_set and r.year in yset]
 
         with ThreadPoolExecutor(max_workers=cc.concurrency) as ex:
             for fut in as_completed({ex.submit(partner_all_products, p): p for p in ranked}):
                 observations.extend(fut.result() or [])
     else:
-        coverage: dict[str, dict] = {}
-        batch_size = min(8, cc.concurrency)
+        def partner_product(partner: str, prod: str) -> list[Observation]:
+            rows = _fetch(client, reporter, partner, prod, indicator, y0, y1, flow, statuses)
+            return [r for r in rows if r.year in yset]
 
-        def product_partner(prod: str, partner: str) -> list[Observation]:
-            return _fetch(client, _endpoint(reporter, partner, prod, indicator, year), flow, statuses)
+        tasks = [(p, prod) for p in ranked for prod in valid_products]
+        with ThreadPoolExecutor(max_workers=cc.concurrency) as ex:
+            futs = {ex.submit(partner_product, p, prod): (p, prod) for p, prod in tasks}
+            for fut in as_completed(futs):
+                observations.extend(fut.result() or [])
 
-        for prod in valid_products:
-            wld_total = wld_totals.get(prod, 0.0)
-            target = wld_total * cc.coverage_target
-            accumulated = 0.0
-            covered = 0
-            idx = 0
-            while idx < len(ranked):
-                if not exhaustive and accumulated >= target:
-                    break
-                batch = ranked[idx : idx + batch_size]
-                idx += batch_size
-                with ThreadPoolExecutor(max_workers=batch_size) as ex:
-                    for fut in as_completed({ex.submit(product_partner, prod, p): p for p in batch}):
-                        rows = fut.result() or []
-                        observations.extend(rows)
-                        accumulated += _sum(rows, year)
-                        covered += 1
-            achieved = accumulated / wld_total if wld_total > 0 else 1.0
-            coverage[prod] = {
-                "wld_total": wld_total,
-                "accumulated": accumulated,
-                "achieved": achieved,
-                "num_partners": covered,
-            }
-            if cc.include_row_remainder:
-                remainder = max(0.0, wld_total - accumulated)
+    # ---- ROW remainder per (product, year) = WLD - explicit top-K ----
+    sums: dict[tuple[str, int], float] = defaultdict(float)
+    for o in observations:
+        sums[(o.product, o.year)] += o.value_thousands
+    if cc.include_row_remainder:
+        for prod, year_values in wld.items():
+            for year, total in year_values.items():
+                remainder = total - sums.get((prod, year), 0.0)
                 if remainder > 0:
-                    observations.append(
-                        Observation(year, reporter, "ROW", prod, flow, remainder)
-                    )
-        manifest["coverage"] = coverage
+                    observations.append(Observation(year, reporter, "ROW", prod, flow, remainder))
 
+    # ---- coverage summary (min achieved fraction across years, per product) ----
+    coverage: dict[str, dict] = {}
+    for prod, year_values in wld.items():
+        fractions = [
+            min(1.0, sums.get((prod, year), 0.0) / total)
+            for year, total in year_values.items()
+            if total > 0
+        ]
+        coverage[prod] = {"min_achieved": min(fractions) if fractions else 1.0}
+
+    manifest["coverage"] = coverage
+    manifest["wld_totals"] = {
+        prod: {str(y): v for y, v in year_values.items()} for prod, year_values in wld.items()
+    }
     manifest["statuses"] = statuses.as_dict()
     manifest["observations"] = len(observations)
-    return CollectionResult(reporter, year, flow, observations, statuses, manifest)
+    return CollectionResult(reporter, sorted(yset), flow, observations, statuses, manifest)

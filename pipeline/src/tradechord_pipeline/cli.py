@@ -58,7 +58,7 @@ def _resolve_flows(spec: str) -> list[Flow]:
 
 def _write_staging(run_dir: str, result) -> str:
     os.makedirs(run_dir, exist_ok=True)
-    stem = f"{result.reporter}_{result.flow.value}_{result.year}"
+    stem = f"{result.reporter}_{result.flow.value}"
     csv_path = os.path.join(run_dir, f"{stem}.csv")
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=_STAGING_FIELDS)
@@ -85,48 +85,44 @@ def _cmd_collect(args: argparse.Namespace) -> int:
     flows = _resolve_flows(args.flows)
 
     cc = CollectionConfig.from_module()
-    cc.coverage_target = args.coverage_target
     cc.concurrency = args.concurrency
     cc.max_reqs_per_sec = args.max_rps
-    if args.top_k is not None:
-        cc.top_k_partners = args.top_k
 
     run_id = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     run_dir = os.path.join(args.out, run_id)
     client = build_client(cc)  # one client => one global rate limiter for the run
 
-    print(f"[collect] run={run_id} reporters={len(reporters)} years={years} "
-          f"flows={[f.value for f in flows]}", file=sys.stderr)
+    print(f"[collect] run={run_id} reporters={len(reporters)} "
+          f"years={min(years)}-{max(years)} flows={[f.value for f in flows]} "
+          f"top_k={args.top_k}", file=sys.stderr)
 
     started = time.time()
     total_obs = 0
     unresolved = 0
     for reporter in reporters:
-        for year in years:
-            for flow in flows:
-                result = collect_reporter_flow(
-                    reporter, year, flow, cc=cc, client=client, exhaustive=args.exhaustive
-                )
-                _write_staging(run_dir, result)
-                total_obs += len(result.observations)
-                if result.statuses.had_unresolved_failures:
-                    unresolved += 1
-                print(
-                    f"  {reporter} {year} {flow.value}: "
-                    f"{len(result.observations)} obs  statuses={result.statuses.as_dict()}",
-                    file=sys.stderr,
-                )
+        for flow in flows:
+            result = collect_reporter_flow(
+                reporter, years, flow, cc=cc, client=client, top_k=args.top_k
+            )
+            _write_staging(run_dir, result)
+            total_obs += len(result.observations)
+            if result.statuses.had_unresolved_failures:
+                unresolved += 1
+            print(
+                f"  {reporter} {flow.value}: {len(result.observations)} obs  "
+                f"statuses={result.statuses.as_dict()}",
+                file=sys.stderr,
+            )
 
-    # Run-level manifest
     run_manifest = {
         "run_id": run_id,
         "generated_at": datetime.now(UTC).isoformat(),
         "reporters": reporters,
         "years": years,
         "flows": [f.value for f in flows],
-        "coverage_target": cc.coverage_target,
+        "top_k": args.top_k,
         "observations": total_obs,
-        "reporter_year_flows_with_unresolved_failures": unresolved,
+        "reporter_flows_with_unresolved_failures": unresolved,
     }
     with open(os.path.join(run_dir, "run.manifest.json"), "w", encoding="utf-8") as f:
         json.dump(run_manifest, f, indent=2, sort_keys=True)
@@ -134,7 +130,7 @@ def _cmd_collect(args: argparse.Namespace) -> int:
     elapsed = time.time() - started
     print(f"[collect] done: {total_obs} observations in {elapsed:.1f}s -> {run_dir}", file=sys.stderr)
     if unresolved:
-        print(f"[collect] WARNING: {unresolved} reporter-year-flows had unresolved failures "
+        print(f"[collect] WARNING: {unresolved} reporter-flows had unresolved failures "
               f"(a release will reject these).", file=sys.stderr)
     return 0
 
@@ -190,14 +186,10 @@ def _build_parser() -> argparse.ArgumentParser:
     c.add_argument("--years", default=str(_config.END_YEAR), help="e.g. 2002-2005,2010")
     c.add_argument("--flows", default="both", help="export | import | both")
     c.add_argument("--out", default="data/staging", help="Staging root directory")
-    c.add_argument("--coverage-target", dest="coverage_target", type=float,
-                   default=getattr(_config, "COVERAGE_TARGET", 0.9))
     c.add_argument("--concurrency", type=int, default=_config.CONCURRENCY)
     c.add_argument("--max-rps", dest="max_rps", type=float, default=_config.MAX_REQS_PER_SEC)
-    c.add_argument("--top-k", dest="top_k", type=int, default=None,
-                   help="Cap ranked partners per product (default: config)")
-    c.add_argument("--exhaustive", action="store_true",
-                   help="Fetch all partners (ignore coverage short-circuit)")
+    c.add_argument("--top-k", dest="top_k", type=int, default=15,
+                   help="Number of top partners tracked across years (rest -> ROW)")
     c.set_defaults(func=_cmd_collect)
 
     v = sub.add_parser("validate", help="Validate a staging run against the contract")

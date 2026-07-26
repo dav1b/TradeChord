@@ -75,10 +75,11 @@ def load_staging(run_dir: str) -> Staging:
             manifest = json.load(f)
         per_file[name] = manifest
         reporter = manifest.get("reporter")
-        year = manifest.get("year")
         flow = manifest.get("flow")
-        for product, total in (manifest.get("wld_totals") or {}).items():
-            wld_totals[(reporter, int(year), flow, product)] = float(total)
+        # wld_totals is {product: {year: value}} (one manifest per reporter-flow).
+        for product, year_map in (manifest.get("wld_totals") or {}).items():
+            for year_str, total in year_map.items():
+                wld_totals[(reporter, int(year_str), flow, product)] = float(total)
 
     run_manifest = {}
     run_path = os.path.join(run_dir, "run.manifest.json")
@@ -155,10 +156,8 @@ def _coverage_summary(staging: Staging, flows: list[str]) -> dict:
                 continue
             cov = m.get("coverage")
             if cov:
-                method = "coverage_target"
-                achieved.extend(c["achieved"] for c in cov.values())
-            elif m.get("probe", {}).get("product_all"):
-                method = "product_all_batch"
+                method = "top_k"
+                achieved.extend(c["min_achieved"] for c in cov.values())
         summary[flow] = {
             "method": method,
             "min_achieved": min(achieved) if achieved else None,
