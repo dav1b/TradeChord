@@ -10,10 +10,7 @@ const config = {
 	kit: {
 		// Deploy target: Vercel. The AI commentary server route (F6) needs SSR, so
 		// this is not a pure-static build.
-		adapter: adapter(),
-		alias: {
-			$components: 'src/components'
-		}
+		adapter: adapter()
 	}
 };
 
