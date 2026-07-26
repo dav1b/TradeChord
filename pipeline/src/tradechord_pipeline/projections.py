@@ -74,9 +74,39 @@ def _breakdown(recs: list[CanonicalRecord], year: int, name: str) -> list[dict]:
     return rows
 
 
+def _cross_cells(recs: list[CanonicalRecord], year: int) -> list[dict]:
+    """Partner × product cells for one year (both flows) — powers cross-filtering.
+
+    Only the headline year is emitted (the year scrubber is deferred); when it
+    lands this becomes keyed by year.
+    """
+    exp: dict[tuple[str, str], int] = defaultdict(int)
+    imp: dict[tuple[str, str], int] = defaultdict(int)
+    for r in recs:
+        if r.year != year:
+            continue
+        key = (r.partner, r.product)
+        if r.flow is Flow.EXPORT:
+            exp[key] += r.value_usd
+        else:
+            imp[key] += r.value_usd
+    cells = []
+    for partner, product in sorted(set(exp) | set(imp)):
+        e, i = exp.get((partner, product), 0), imp.get((partner, product), 0)
+        cells.append({
+            "partner": partner,
+            "product": product,
+            "exportsUsd": e,
+            "importsUsd": i,
+            "balanceUsd": e - i,
+        })
+    return cells
+
+
 def build_country_projection(country: str, recs: list[CanonicalRecord], dataset_version: str) -> dict:
     years = sorted({r.year for r in recs})
     totals = _totals_by_year(recs)
+    cross_year = years[-1] if years else None
     return {
         "schemaVersion": SCHEMA_VERSION,
         "datasetVersion": dataset_version,
@@ -85,6 +115,8 @@ def build_country_projection(country: str, recs: list[CanonicalRecord], dataset_
         "summaryByYear": {str(y): totals[y] for y in years},
         "partnersByYear": {str(y): _breakdown(recs, y, "partner") for y in years},
         "productsByYear": {str(y): _breakdown(recs, y, "product") for y in years},
+        "crossYear": cross_year,
+        "crossCells": _cross_cells(recs, cross_year) if cross_year is not None else [],
     }
 
 

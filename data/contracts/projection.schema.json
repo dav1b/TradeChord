@@ -11,7 +11,9 @@
     "years",
     "summaryByYear",
     "partnersByYear",
-    "productsByYear"
+    "productsByYear",
+    "crossYear",
+    "crossCells"
   ],
   "properties": {
     "schemaVersion": { "type": "integer", "const": 1 },
@@ -37,9 +39,26 @@
     "productsByYear": {
       "type": "object",
       "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/productRow" } }
+    },
+    "crossYear": { "type": ["integer", "null"] },
+    "crossCells": {
+      "type": "array",
+      "description": "partner × product cells for crossYear (both flows), for cross-filtering",
+      "items": { "$ref": "#/$defs/crossCell" }
     }
   },
   "$defs": {
+    "crossCell": {
+      "type": "object",
+      "required": ["partner", "product", "exportsUsd", "importsUsd", "balanceUsd"],
+      "properties": {
+        "partner": { "type": "string" },
+        "product": { "type": "string" },
+        "exportsUsd": { "type": "integer" },
+        "importsUsd": { "type": "integer" },
+        "balanceUsd": { "type": "integer" }
+      }
+    },
     "partnerRow": {
       "type": "object",
       "required": ["partner", "exportsUsd", "importsUsd", "balanceUsd", "exportShare"],

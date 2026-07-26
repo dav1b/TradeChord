@@ -1,5 +1,2234 @@
 {
   "country": "IRL",
+  "crossCells": [
+    {
+      "balanceUsd": 78697781,
+      "exportsUsd": 78697781,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": 348288,
+      "exportsUsd": 348288,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 39032173,
+      "exportsUsd": 39032173,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": 1034,
+      "exportsUsd": 1034,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": 463466,
+      "exportsUsd": 463466,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 1143743148,
+      "exportsUsd": 1143743148,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": 10396067,
+      "exportsUsd": 10396067,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 168860,
+      "exportsUsd": 168860,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": 1100800,
+      "exportsUsd": 1100800,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": 1327695,
+      "exportsUsd": 1327695,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": 92110,
+      "exportsUsd": 92110,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": 16801318,
+      "exportsUsd": 16801318,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": 1708625,
+      "exportsUsd": 1708625,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 164500086,
+      "exportsUsd": 164500086,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": 4270779,
+      "exportsUsd": 4270779,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 188824437,
+      "exportsUsd": 188824437,
+      "importsUsd": 0,
+      "partner": "AUS",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 299589605,
+      "exportsUsd": 334099524,
+      "importsUsd": 34509919,
+      "partner": "BEL",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -127356366,
+      "exportsUsd": 30864379,
+      "importsUsd": 158220745,
+      "partner": "BEL",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -161121814,
+      "exportsUsd": 57280352,
+      "importsUsd": 218402166,
+      "partner": "BEL",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": 51663547,
+      "exportsUsd": 53764800,
+      "importsUsd": 2101253,
+      "partner": "BEL",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -44555676,
+      "exportsUsd": 35148055,
+      "importsUsd": 79703731,
+      "partner": "BEL",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 16045925749,
+      "exportsUsd": 17132294558,
+      "importsUsd": 1086368809,
+      "partner": "BEL",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -135938770,
+      "exportsUsd": 132942058,
+      "importsUsd": 268880828,
+      "partner": "BEL",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 212282,
+      "exportsUsd": 2163774,
+      "importsUsd": 1951492,
+      "partner": "BEL",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -49319997,
+      "exportsUsd": 29507696,
+      "importsUsd": 78827693,
+      "partner": "BEL",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -42463118,
+      "exportsUsd": 13113384,
+      "importsUsd": 55576502,
+      "partner": "BEL",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -1770746,
+      "exportsUsd": 179451,
+      "importsUsd": 1950197,
+      "partner": "BEL",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -23786906,
+      "exportsUsd": 15058660,
+      "importsUsd": 38845566,
+      "partner": "BEL",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -71404965,
+      "exportsUsd": 20262153,
+      "importsUsd": 91667118,
+      "partner": "BEL",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 38323017,
+      "exportsUsd": 220352827,
+      "importsUsd": 182029810,
+      "partner": "BEL",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -141132523,
+      "exportsUsd": 7082689,
+      "importsUsd": 148215212,
+      "partner": "BEL",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 378796919,
+      "exportsUsd": 453616266,
+      "importsUsd": 74819347,
+      "partner": "BEL",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 44706184,
+      "exportsUsd": 44706184,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": 1054199,
+      "exportsUsd": 1054199,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 128453248,
+      "exportsUsd": 128453248,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": 2884,
+      "exportsUsd": 2884,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": 1744248,
+      "exportsUsd": 1744248,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 3000598491,
+      "exportsUsd": 3000598491,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": 11743131,
+      "exportsUsd": 11743131,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 96823,
+      "exportsUsd": 96823,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": 3027082,
+      "exportsUsd": 3027082,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": 3644278,
+      "exportsUsd": 3644278,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": 146217,
+      "exportsUsd": 146217,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": 14196548,
+      "exportsUsd": 14196548,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": 6170074,
+      "exportsUsd": 6170074,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 110584736,
+      "exportsUsd": 110584736,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": 145773358,
+      "exportsUsd": 145773358,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 94625805,
+      "exportsUsd": 94625805,
+      "importsUsd": 0,
+      "partner": "CAN",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 88998143,
+      "exportsUsd": 89827542,
+      "importsUsd": 829399,
+      "partner": "CHE",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -22975346,
+      "exportsUsd": 1760263,
+      "importsUsd": 24735609,
+      "partner": "CHE",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -24308901,
+      "exportsUsd": 22214676,
+      "importsUsd": 46523577,
+      "partner": "CHE",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": 681,
+      "exportsUsd": 10991,
+      "importsUsd": 10310,
+      "partner": "CHE",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -69225,
+      "exportsUsd": 18161,
+      "importsUsd": 87386,
+      "partner": "CHE",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": -2651736113,
+      "exportsUsd": 2899916520,
+      "importsUsd": 5551652633,
+      "partner": "CHE",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": 14606638,
+      "exportsUsd": 43200285,
+      "importsUsd": 28593647,
+      "partner": "CHE",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 80617,
+      "exportsUsd": 584985,
+      "importsUsd": 504368,
+      "partner": "CHE",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": 2934512,
+      "exportsUsd": 7096534,
+      "importsUsd": 4162022,
+      "partner": "CHE",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": 7698601,
+      "exportsUsd": 11750008,
+      "importsUsd": 4051407,
+      "partner": "CHE",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -1550614,
+      "exportsUsd": 88607,
+      "importsUsd": 1639221,
+      "partner": "CHE",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -14429445,
+      "exportsUsd": 27925207,
+      "importsUsd": 42354652,
+      "partner": "CHE",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -8850933,
+      "exportsUsd": 12695675,
+      "importsUsd": 21546608,
+      "partner": "CHE",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -13161626,
+      "exportsUsd": 160730122,
+      "importsUsd": 173891748,
+      "partner": "CHE",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -290173115,
+      "exportsUsd": 7138526,
+      "importsUsd": 297311641,
+      "partner": "CHE",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": -381896274,
+      "exportsUsd": 164010600,
+      "importsUsd": 545906874,
+      "partner": "CHE",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 296825966,
+      "exportsUsd": 321509548,
+      "importsUsd": 24683582,
+      "partner": "CHN",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -35017530,
+      "exportsUsd": 77699,
+      "importsUsd": 35095229,
+      "partner": "CHN",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 210128377,
+      "exportsUsd": 287230177,
+      "importsUsd": 77101800,
+      "partner": "CHN",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -3815210,
+      "exportsUsd": 141329,
+      "importsUsd": 3956539,
+      "partner": "CHN",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -13653252,
+      "exportsUsd": 686,
+      "importsUsd": 13653938,
+      "partner": "CHN",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": -3216401838,
+      "exportsUsd": 2214090562,
+      "importsUsd": 5430492400,
+      "partner": "CHN",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -355474062,
+      "exportsUsd": 92272817,
+      "importsUsd": 447746879,
+      "partner": "CHN",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -54048131,
+      "exportsUsd": 58394148,
+      "importsUsd": 112442279,
+      "partner": "CHN",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -232037522,
+      "exportsUsd": 5277590,
+      "importsUsd": 237315112,
+      "partner": "CHN",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -866068624,
+      "exportsUsd": 4290314,
+      "importsUsd": 870358938,
+      "partner": "CHN",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -284024367,
+      "exportsUsd": 17552,
+      "importsUsd": 284041919,
+      "partner": "CHN",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": 61814323,
+      "exportsUsd": 278152385,
+      "importsUsd": 216338062,
+      "partner": "CHN",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -499062013,
+      "exportsUsd": 34486262,
+      "importsUsd": 533548275,
+      "partner": "CHN",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 4302647733,
+      "exportsUsd": 9556367108,
+      "importsUsd": 5253719375,
+      "partner": "CHN",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": 278287511,
+      "exportsUsd": 560841686,
+      "importsUsd": 282554175,
+      "partner": "CHN",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": -863310458,
+      "exportsUsd": 507069206,
+      "importsUsd": 1370379664,
+      "partner": "CHN",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 531615875,
+      "exportsUsd": 757872433,
+      "importsUsd": 226256558,
+      "partner": "DEU",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -191941795,
+      "exportsUsd": 22737084,
+      "importsUsd": 214678879,
+      "partner": "DEU",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -226322898,
+      "exportsUsd": 244711109,
+      "importsUsd": 471034007,
+      "partner": "DEU",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -1403743,
+      "exportsUsd": 10953476,
+      "importsUsd": 12357219,
+      "partner": "DEU",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -4795945,
+      "exportsUsd": 34448376,
+      "importsUsd": 39244321,
+      "partner": "DEU",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 18824125131,
+      "exportsUsd": 21465852587,
+      "importsUsd": 2641727456,
+      "partner": "DEU",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -367314852,
+      "exportsUsd": 920567665,
+      "importsUsd": 1287882517,
+      "partner": "DEU",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 3851877,
+      "exportsUsd": 12589150,
+      "importsUsd": 8737273,
+      "partner": "DEU",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -131114791,
+      "exportsUsd": 28113404,
+      "importsUsd": 159228195,
+      "partner": "DEU",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -44533159,
+      "exportsUsd": 60446757,
+      "importsUsd": 104979916,
+      "partner": "DEU",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -34398735,
+      "exportsUsd": 878038,
+      "importsUsd": 35276773,
+      "partner": "DEU",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -161416220,
+      "exportsUsd": 49354184,
+      "importsUsd": 210770404,
+      "partner": "DEU",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -222957399,
+      "exportsUsd": 202469323,
+      "importsUsd": 425426722,
+      "partner": "DEU",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 379385272,
+      "exportsUsd": 1820701631,
+      "importsUsd": 1441316359,
+      "partner": "DEU",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -3022073949,
+      "exportsUsd": 216114008,
+      "importsUsd": 3238187957,
+      "partner": "DEU",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 156019530,
+      "exportsUsd": 729843044,
+      "importsUsd": 573823514,
+      "partner": "DEU",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": -53527909,
+      "exportsUsd": 0,
+      "importsUsd": 53527909,
+      "partner": "DNK",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -21695806,
+      "exportsUsd": 0,
+      "importsUsd": 21695806,
+      "partner": "DNK",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -42257206,
+      "exportsUsd": 0,
+      "importsUsd": 42257206,
+      "partner": "DNK",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -1585915,
+      "exportsUsd": 0,
+      "importsUsd": 1585915,
+      "partner": "DNK",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -24273764,
+      "exportsUsd": 0,
+      "importsUsd": 24273764,
+      "partner": "DNK",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": -233060105,
+      "exportsUsd": 0,
+      "importsUsd": 233060105,
+      "partner": "DNK",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -40404095,
+      "exportsUsd": 0,
+      "importsUsd": 40404095,
+      "partner": "DNK",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -1420730,
+      "exportsUsd": 0,
+      "importsUsd": 1420730,
+      "partner": "DNK",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -32943863,
+      "exportsUsd": 0,
+      "importsUsd": 32943863,
+      "partner": "DNK",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -22388751,
+      "exportsUsd": 0,
+      "importsUsd": 22388751,
+      "partner": "DNK",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -1928562,
+      "exportsUsd": 0,
+      "importsUsd": 1928562,
+      "partner": "DNK",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -3339160,
+      "exportsUsd": 0,
+      "importsUsd": 3339160,
+      "partner": "DNK",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -39397257,
+      "exportsUsd": 0,
+      "importsUsd": 39397257,
+      "partner": "DNK",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -144881799,
+      "exportsUsd": 0,
+      "importsUsd": 144881799,
+      "partner": "DNK",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -10761216,
+      "exportsUsd": 0,
+      "importsUsd": 10761216,
+      "partner": "DNK",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": -58163311,
+      "exportsUsd": 0,
+      "importsUsd": 58163311,
+      "partner": "DNK",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 221334394,
+      "exportsUsd": 263703124,
+      "importsUsd": 42368730,
+      "partner": "ESP",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -169216408,
+      "exportsUsd": 3167210,
+      "importsUsd": 172383618,
+      "partner": "ESP",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -7970241,
+      "exportsUsd": 107828899,
+      "importsUsd": 115799140,
+      "partner": "ESP",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -39271069,
+      "exportsUsd": 118884,
+      "importsUsd": 39389953,
+      "partner": "ESP",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": 10640218,
+      "exportsUsd": 17919174,
+      "importsUsd": 7278956,
+      "partner": "ESP",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 484113429,
+      "exportsUsd": 1739968144,
+      "importsUsd": 1255854715,
+      "partner": "ESP",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -10472027,
+      "exportsUsd": 107631703,
+      "importsUsd": 118103730,
+      "partner": "ESP",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -3241253,
+      "exportsUsd": 1240529,
+      "importsUsd": 4481782,
+      "partner": "ESP",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -67411304,
+      "exportsUsd": 9464022,
+      "importsUsd": 76875326,
+      "partner": "ESP",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -126789823,
+      "exportsUsd": 46511819,
+      "importsUsd": 173301642,
+      "partner": "ESP",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -17510778,
+      "exportsUsd": 2916720,
+      "importsUsd": 20427498,
+      "partner": "ESP",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -73589775,
+      "exportsUsd": 19050301,
+      "importsUsd": 92640076,
+      "partner": "ESP",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -121049122,
+      "exportsUsd": 59483660,
+      "importsUsd": 180532782,
+      "partner": "ESP",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 165672301,
+      "exportsUsd": 313499396,
+      "importsUsd": 147827095,
+      "partner": "ESP",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -267337188,
+      "exportsUsd": 61631644,
+      "importsUsd": 328968832,
+      "partner": "ESP",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 67469867,
+      "exportsUsd": 115697078,
+      "importsUsd": 48227211,
+      "partner": "ESP",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 855674944,
+      "exportsUsd": 999474128,
+      "importsUsd": 143799184,
+      "partner": "FRA",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -193324425,
+      "exportsUsd": 13124587,
+      "importsUsd": 206449012,
+      "partner": "FRA",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -198592645,
+      "exportsUsd": 205703041,
+      "importsUsd": 404295686,
+      "partner": "FRA",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -6134103,
+      "exportsUsd": 2450325,
+      "importsUsd": 8584428,
+      "partner": "FRA",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -8504014,
+      "exportsUsd": 49164871,
+      "importsUsd": 57668885,
+      "partner": "FRA",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 2095804394,
+      "exportsUsd": 4812075002,
+      "importsUsd": 2716270608,
+      "partner": "FRA",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": 10932913,
+      "exportsUsd": 217734942,
+      "importsUsd": 206802029,
+      "partner": "FRA",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -15960172,
+      "exportsUsd": 8183291,
+      "importsUsd": 24143463,
+      "partner": "FRA",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -19021450,
+      "exportsUsd": 25715924,
+      "importsUsd": 44737374,
+      "partner": "FRA",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -4163539,
+      "exportsUsd": 34821506,
+      "importsUsd": 38985045,
+      "partner": "FRA",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -4813196,
+      "exportsUsd": 1949204,
+      "importsUsd": 6762400,
+      "partner": "FRA",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": 13027404,
+      "exportsUsd": 38310727,
+      "importsUsd": 25283323,
+      "partner": "FRA",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -101746486,
+      "exportsUsd": 37263281,
+      "importsUsd": 139009767,
+      "partner": "FRA",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 365567339,
+      "exportsUsd": 716328246,
+      "importsUsd": 350760907,
+      "partner": "FRA",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -9272349420,
+      "exportsUsd": 45174837,
+      "importsUsd": 9317524257,
+      "partner": "FRA",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 169905311,
+      "exportsUsd": 338345383,
+      "importsUsd": 168440072,
+      "partner": "FRA",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 1803599973,
+      "exportsUsd": 3107574496,
+      "importsUsd": 1303974523,
+      "partner": "GBR",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -300288132,
+      "exportsUsd": 436038020,
+      "importsUsd": 736326152,
+      "partner": "GBR",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 315924715,
+      "exportsUsd": 2855994479,
+      "importsUsd": 2540069764,
+      "partner": "GBR",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": 116667546,
+      "exportsUsd": 215894155,
+      "importsUsd": 99226609,
+      "partner": "GBR",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -7557974571,
+      "exportsUsd": 1141166814,
+      "importsUsd": 8699141385,
+      "partner": "GBR",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 908552914,
+      "exportsUsd": 7561178278,
+      "importsUsd": 6652625364,
+      "partner": "GBR",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -352292874,
+      "exportsUsd": 972809906,
+      "importsUsd": 1325102780,
+      "partner": "GBR",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -22126751,
+      "exportsUsd": 16828153,
+      "importsUsd": 38954904,
+      "partner": "GBR",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -407073638,
+      "exportsUsd": 861914329,
+      "importsUsd": 1268987967,
+      "partner": "GBR",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -150081978,
+      "exportsUsd": 285792969,
+      "importsUsd": 435874947,
+      "partner": "GBR",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -95436902,
+      "exportsUsd": 39559874,
+      "importsUsd": 134996776,
+      "partner": "GBR",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -216232494,
+      "exportsUsd": 434770250,
+      "importsUsd": 651002744,
+      "partner": "GBR",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -665320965,
+      "exportsUsd": 846078465,
+      "importsUsd": 1511399430,
+      "partner": "GBR",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -286773065,
+      "exportsUsd": 2764236307,
+      "importsUsd": 3051009372,
+      "partner": "GBR",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -687874857,
+      "exportsUsd": 533268320,
+      "importsUsd": 1221143177,
+      "partner": "GBR",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 7690609,
+      "exportsUsd": 1296733420,
+      "importsUsd": 1289042811,
+      "partner": "GBR",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 362307550,
+      "exportsUsd": 404436078,
+      "importsUsd": 42128528,
+      "partner": "ITA",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -31554037,
+      "exportsUsd": 4167651,
+      "importsUsd": 35721688,
+      "partner": "ITA",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -95913874,
+      "exportsUsd": 95148919,
+      "importsUsd": 191062793,
+      "partner": "ITA",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -1003986,
+      "exportsUsd": 676977,
+      "importsUsd": 1680963,
+      "partner": "ITA",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -9571653,
+      "exportsUsd": 776976,
+      "importsUsd": 10348629,
+      "partner": "ITA",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 2922913640,
+      "exportsUsd": 3431599846,
+      "importsUsd": 508686206,
+      "partner": "ITA",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -37417251,
+      "exportsUsd": 111452164,
+      "importsUsd": 148869415,
+      "partner": "ITA",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -2526935,
+      "exportsUsd": 18105647,
+      "importsUsd": 20632582,
+      "partner": "ITA",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -22325235,
+      "exportsUsd": 18379556,
+      "importsUsd": 40704791,
+      "partner": "ITA",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -47397199,
+      "exportsUsd": 13572713,
+      "importsUsd": 60969912,
+      "partner": "ITA",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -23706517,
+      "exportsUsd": 426232,
+      "importsUsd": 24132749,
+      "partner": "ITA",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -469276353,
+      "exportsUsd": 75138249,
+      "importsUsd": 544414602,
+      "partner": "ITA",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -80671961,
+      "exportsUsd": 42674662,
+      "importsUsd": 123346623,
+      "partner": "ITA",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -125916955,
+      "exportsUsd": 382906821,
+      "importsUsd": 508823776,
+      "partner": "ITA",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -79543805,
+      "exportsUsd": 3472130,
+      "importsUsd": 83015935,
+      "partner": "ITA",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 44311637,
+      "exportsUsd": 187690596,
+      "importsUsd": 143378959,
+      "partner": "ITA",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 173078091,
+      "exportsUsd": 173832691,
+      "importsUsd": 754600,
+      "partner": "JPN",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -608059,
+      "exportsUsd": 222935,
+      "importsUsd": 830994,
+      "partner": "JPN",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 29927443,
+      "exportsUsd": 32343122,
+      "importsUsd": 2415679,
+      "partner": "JPN",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -2005144,
+      "exportsUsd": 55111,
+      "importsUsd": 2060255,
+      "partner": "JPN",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -8770344,
+      "exportsUsd": 674489,
+      "importsUsd": 9444833,
+      "partner": "JPN",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 1817962193,
+      "exportsUsd": 2262795695,
+      "importsUsd": 444833502,
+      "partner": "JPN",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -49205582,
+      "exportsUsd": 52637281,
+      "importsUsd": 101842863,
+      "partner": "JPN",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -5140620,
+      "exportsUsd": 151976,
+      "importsUsd": 5292596,
+      "partner": "JPN",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -701779,
+      "exportsUsd": 1435297,
+      "importsUsd": 2137076,
+      "partner": "JPN",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": 5342842,
+      "exportsUsd": 11063711,
+      "importsUsd": 5720869,
+      "partner": "JPN",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -497112,
+      "exportsUsd": 135695,
+      "importsUsd": 632807,
+      "partner": "JPN",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -86487621,
+      "exportsUsd": 68961149,
+      "importsUsd": 155448770,
+      "partner": "JPN",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": 13928301,
+      "exportsUsd": 45483100,
+      "importsUsd": 31554799,
+      "partner": "JPN",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -1748422595,
+      "exportsUsd": 150129367,
+      "importsUsd": 1898551962,
+      "partner": "JPN",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": 256757775,
+      "exportsUsd": 670303869,
+      "importsUsd": 413546094,
+      "partner": "JPN",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 685861686,
+      "exportsUsd": 943638379,
+      "importsUsd": 257776693,
+      "partner": "JPN",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": -9640,
+      "exportsUsd": 0,
+      "importsUsd": 9640,
+      "partner": "KOR",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -114456,
+      "exportsUsd": 0,
+      "importsUsd": 114456,
+      "partner": "KOR",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -2603657,
+      "exportsUsd": 0,
+      "importsUsd": 2603657,
+      "partner": "KOR",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -247,
+      "exportsUsd": 0,
+      "importsUsd": 247,
+      "partner": "KOR",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -12948419,
+      "exportsUsd": 0,
+      "importsUsd": 12948419,
+      "partner": "KOR",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": -183563647,
+      "exportsUsd": 0,
+      "importsUsd": 183563647,
+      "partner": "KOR",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -58645530,
+      "exportsUsd": 0,
+      "importsUsd": 58645530,
+      "partner": "KOR",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -58358,
+      "exportsUsd": 0,
+      "importsUsd": 58358,
+      "partner": "KOR",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -6895453,
+      "exportsUsd": 0,
+      "importsUsd": 6895453,
+      "partner": "KOR",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -12132364,
+      "exportsUsd": 0,
+      "importsUsd": 12132364,
+      "partner": "KOR",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -160891,
+      "exportsUsd": 0,
+      "importsUsd": 160891,
+      "partner": "KOR",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -19608528,
+      "exportsUsd": 0,
+      "importsUsd": 19608528,
+      "partner": "KOR",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -61043953,
+      "exportsUsd": 0,
+      "importsUsd": 61043953,
+      "partner": "KOR",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -953883867,
+      "exportsUsd": 0,
+      "importsUsd": 953883867,
+      "partner": "KOR",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -522557423,
+      "exportsUsd": 0,
+      "importsUsd": 522557423,
+      "partner": "KOR",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": -22424311,
+      "exportsUsd": 0,
+      "importsUsd": 22424311,
+      "partner": "KOR",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 1113003,
+      "exportsUsd": 1113003,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": 545542,
+      "exportsUsd": 545542,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 22080050,
+      "exportsUsd": 22080050,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": 1838446370,
+      "exportsUsd": 1838446370,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": 12254510,
+      "exportsUsd": 12254510,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 100387,
+      "exportsUsd": 100387,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": 450461,
+      "exportsUsd": 450461,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": 17108134,
+      "exportsUsd": 17108134,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": 19711,
+      "exportsUsd": 19711,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": 5724081,
+      "exportsUsd": 5724081,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": 3367122,
+      "exportsUsd": 3367122,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 43334366,
+      "exportsUsd": 43334366,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": 24527501,
+      "exportsUsd": 24527501,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 362730196,
+      "exportsUsd": 362730196,
+      "importsUsd": 0,
+      "partner": "MEX",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 902088547,
+      "exportsUsd": 1220703304,
+      "importsUsd": 318614757,
+      "partner": "NLD",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -519925470,
+      "exportsUsd": 67805287,
+      "importsUsd": 587730757,
+      "partner": "NLD",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -214901993,
+      "exportsUsd": 303444540,
+      "importsUsd": 518346533,
+      "partner": "NLD",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -2376737,
+      "exportsUsd": 10152587,
+      "importsUsd": 12529324,
+      "partner": "NLD",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -317860338,
+      "exportsUsd": 176118504,
+      "importsUsd": 493978842,
+      "partner": "NLD",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 6489035693,
+      "exportsUsd": 7697197109,
+      "importsUsd": 1208161416,
+      "partner": "NLD",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": 42695576,
+      "exportsUsd": 401260169,
+      "importsUsd": 358564593,
+      "partner": "NLD",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 39368,
+      "exportsUsd": 6238295,
+      "importsUsd": 6198927,
+      "partner": "NLD",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -47067152,
+      "exportsUsd": 83514266,
+      "importsUsd": 130581418,
+      "partner": "NLD",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -47581307,
+      "exportsUsd": 40047469,
+      "importsUsd": 87628776,
+      "partner": "NLD",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -5726845,
+      "exportsUsd": 5735490,
+      "importsUsd": 11462335,
+      "partner": "NLD",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -26239239,
+      "exportsUsd": 7312945,
+      "importsUsd": 33552184,
+      "partner": "NLD",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -62118951,
+      "exportsUsd": 38417249,
+      "importsUsd": 100536200,
+      "partner": "NLD",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 87887325,
+      "exportsUsd": 667992952,
+      "importsUsd": 580105627,
+      "partner": "NLD",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -289017000,
+      "exportsUsd": 7416735,
+      "importsUsd": 296433735,
+      "partner": "NLD",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 4118004977,
+      "exportsUsd": 4367617724,
+      "importsUsd": 249612747,
+      "partner": "NLD",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": -36651882,
+      "exportsUsd": 0,
+      "importsUsd": 36651882,
+      "partner": "NOR",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -603655,
+      "exportsUsd": 0,
+      "importsUsd": 603655,
+      "partner": "NOR",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -3299336,
+      "exportsUsd": 0,
+      "importsUsd": 3299336,
+      "partner": "NOR",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -462400,
+      "exportsUsd": 0,
+      "importsUsd": 462400,
+      "partner": "NOR",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -86300876,
+      "exportsUsd": 0,
+      "importsUsd": 86300876,
+      "partner": "NOR",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": -484984963,
+      "exportsUsd": 0,
+      "importsUsd": 484984963,
+      "partner": "NOR",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -11352605,
+      "exportsUsd": 0,
+      "importsUsd": 11352605,
+      "partner": "NOR",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -68369,
+      "exportsUsd": 0,
+      "importsUsd": 68369,
+      "partner": "NOR",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -4579204,
+      "exportsUsd": 0,
+      "importsUsd": 4579204,
+      "partner": "NOR",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -355478,
+      "exportsUsd": 0,
+      "importsUsd": 355478,
+      "partner": "NOR",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -49509,
+      "exportsUsd": 0,
+      "importsUsd": 49509,
+      "partner": "NOR",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -28676554,
+      "exportsUsd": 0,
+      "importsUsd": 28676554,
+      "partner": "NOR",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -18874956,
+      "exportsUsd": 0,
+      "importsUsd": 18874956,
+      "partner": "NOR",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -11547212,
+      "exportsUsd": 0,
+      "importsUsd": 11547212,
+      "partner": "NOR",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -1592194,
+      "exportsUsd": 0,
+      "importsUsd": 1592194,
+      "partner": "NOR",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": -6608108,
+      "exportsUsd": 0,
+      "importsUsd": 6608108,
+      "partner": "NOR",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 1262423785,
+      "exportsUsd": 1510480883,
+      "importsUsd": 248057098,
+      "partner": "ROW",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -931507777,
+      "exportsUsd": 52213722,
+      "importsUsd": 983721499,
+      "partner": "ROW",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 325659367,
+      "exportsUsd": 1866676730,
+      "importsUsd": 1541017363,
+      "partner": "ROW",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -13121824,
+      "exportsUsd": 226793736,
+      "importsUsd": 239915560,
+      "partner": "ROW",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -2259287905,
+      "exportsUsd": 212592580,
+      "importsUsd": 2471880485,
+      "partner": "ROW",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 8079165407,
+      "exportsUsd": 10567366388,
+      "importsUsd": 2488200981,
+      "partner": "ROW",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -364308226,
+      "exportsUsd": 480573028,
+      "importsUsd": 844881254,
+      "partner": "ROW",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -65690734,
+      "exportsUsd": 15633133,
+      "importsUsd": 81323867,
+      "partner": "ROW",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -526276801,
+      "exportsUsd": 160005261,
+      "importsUsd": 686282062,
+      "partner": "ROW",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -1845309811,
+      "exportsUsd": 87462887,
+      "importsUsd": 1932772698,
+      "partner": "ROW",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -319113200,
+      "exportsUsd": 3302343,
+      "importsUsd": 322415543,
+      "partner": "ROW",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": 26884935,
+      "exportsUsd": 496179549,
+      "importsUsd": 469294614,
+      "partner": "ROW",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -689060324,
+      "exportsUsd": 310439219,
+      "importsUsd": 999499543,
+      "partner": "ROW",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -5261645074,
+      "exportsUsd": 5708441946,
+      "importsUsd": 10970087020,
+      "partner": "ROW",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -658693003,
+      "exportsUsd": 385969996,
+      "importsUsd": 1044662999,
+      "partner": "ROW",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 425868158,
+      "exportsUsd": 1954880029,
+      "importsUsd": 1529011871,
+      "partner": "ROW",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": -40713,
+      "exportsUsd": 0,
+      "importsUsd": 40713,
+      "partner": "SGP",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -132899,
+      "exportsUsd": 0,
+      "importsUsd": 132899,
+      "partner": "SGP",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": -14871318,
+      "exportsUsd": 0,
+      "importsUsd": 14871318,
+      "partner": "SGP",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -124,
+      "exportsUsd": 0,
+      "importsUsd": 124,
+      "partner": "SGP",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -38927999,
+      "exportsUsd": 0,
+      "importsUsd": 38927999,
+      "partner": "SGP",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": -204192706,
+      "exportsUsd": 0,
+      "importsUsd": 204192706,
+      "partner": "SGP",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -15614027,
+      "exportsUsd": 0,
+      "importsUsd": 15614027,
+      "partner": "SGP",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -25077,
+      "exportsUsd": 0,
+      "importsUsd": 25077,
+      "partner": "SGP",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -616559,
+      "exportsUsd": 0,
+      "importsUsd": 616559,
+      "partner": "SGP",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -4744751,
+      "exportsUsd": 0,
+      "importsUsd": 4744751,
+      "partner": "SGP",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -63098,
+      "exportsUsd": 0,
+      "importsUsd": 63098,
+      "partner": "SGP",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -955491,
+      "exportsUsd": 0,
+      "importsUsd": 955491,
+      "partner": "SGP",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -1459838,
+      "exportsUsd": 0,
+      "importsUsd": 1459838,
+      "partner": "SGP",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -456497558,
+      "exportsUsd": 0,
+      "importsUsd": 456497558,
+      "partner": "SGP",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -2436848,
+      "exportsUsd": 0,
+      "importsUsd": 2436848,
+      "partner": "SGP",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": -70563830,
+      "exportsUsd": 0,
+      "importsUsd": 70563830,
+      "partner": "SGP",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 191440669,
+      "exportsUsd": 191440669,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": 1107710,
+      "exportsUsd": 1107710,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 55831542,
+      "exportsUsd": 55831542,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": 570228,
+      "exportsUsd": 570228,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": 70790,
+      "exportsUsd": 70790,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 421030530,
+      "exportsUsd": 421030530,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": 36603653,
+      "exportsUsd": 36603653,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": 1409813,
+      "exportsUsd": 1409813,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": 1957030,
+      "exportsUsd": 1957030,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": 6217395,
+      "exportsUsd": 6217395,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": 30405,
+      "exportsUsd": 30405,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": 5452668,
+      "exportsUsd": 5452668,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": 57083978,
+      "exportsUsd": 57083978,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": 290309253,
+      "exportsUsd": 290309253,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": 4786661,
+      "exportsUsd": 4786661,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 27809678,
+      "exportsUsd": 27809678,
+      "importsUsd": 0,
+      "partner": "SWE",
+      "product": "90-99_Miscellan"
+    },
+    {
+      "balanceUsd": 409942374,
+      "exportsUsd": 455584225,
+      "importsUsd": 45641851,
+      "partner": "USA",
+      "product": "01-05_Animal"
+    },
+    {
+      "balanceUsd": -83143004,
+      "exportsUsd": 14160630,
+      "importsUsd": 97303634,
+      "partner": "USA",
+      "product": "06-15_Vegetable"
+    },
+    {
+      "balanceUsd": 751254997,
+      "exportsUsd": 1165322409,
+      "importsUsd": 414067412,
+      "partner": "USA",
+      "product": "16-24_FoodProd"
+    },
+    {
+      "balanceUsd": -10271351,
+      "exportsUsd": 2637390,
+      "importsUsd": 12908741,
+      "partner": "USA",
+      "product": "25-26_Minerals"
+    },
+    {
+      "balanceUsd": -1509231758,
+      "exportsUsd": 226153857,
+      "importsUsd": 1735385615,
+      "partner": "USA",
+      "product": "27-27_Fuels"
+    },
+    {
+      "balanceUsd": 45320958140,
+      "exportsUsd": 50865008093,
+      "importsUsd": 5544049953,
+      "partner": "USA",
+      "product": "28-38_Chemicals"
+    },
+    {
+      "balanceUsd": -336417567,
+      "exportsUsd": 699034695,
+      "importsUsd": 1035452262,
+      "partner": "USA",
+      "product": "39-40_PlastiRub"
+    },
+    {
+      "balanceUsd": -402529,
+      "exportsUsd": 4069357,
+      "importsUsd": 4471886,
+      "partner": "USA",
+      "product": "41-43_HidesSkin"
+    },
+    {
+      "balanceUsd": -170807498,
+      "exportsUsd": 51591204,
+      "importsUsd": 222398702,
+      "partner": "USA",
+      "product": "44-49_Wood"
+    },
+    {
+      "balanceUsd": -24935490,
+      "exportsUsd": 37976516,
+      "importsUsd": 62912006,
+      "partner": "USA",
+      "product": "50-63_TextCloth"
+    },
+    {
+      "balanceUsd": -1688000,
+      "exportsUsd": 2763896,
+      "importsUsd": 4451896,
+      "partner": "USA",
+      "product": "64-67_Footwear"
+    },
+    {
+      "balanceUsd": -66587051,
+      "exportsUsd": 143359086,
+      "importsUsd": 209946137,
+      "partner": "USA",
+      "product": "68-71_StoneGlas"
+    },
+    {
+      "balanceUsd": -149894370,
+      "exportsUsd": 194486084,
+      "importsUsd": 344380454,
+      "partner": "USA",
+      "product": "72-83_Metals"
+    },
+    {
+      "balanceUsd": -2588158078,
+      "exportsUsd": 3427265326,
+      "importsUsd": 6015423404,
+      "partner": "USA",
+      "product": "84-85_MachElec"
+    },
+    {
+      "balanceUsd": -5397217331,
+      "exportsUsd": 817462530,
+      "importsUsd": 6214679861,
+      "partner": "USA",
+      "product": "86-89_Transport"
+    },
+    {
+      "balanceUsd": 6880511276,
+      "exportsUsd": 8463746779,
+      "importsUsd": 1583235503,
+      "partner": "USA",
+      "product": "90-99_Miscellan"
+    }
+  ],
+  "crossYear": 2022,
   "datasetVersion": "2026-07",
   "partnersByYear": {
     "2002": [

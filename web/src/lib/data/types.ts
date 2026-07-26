@@ -28,6 +28,15 @@ export interface ProductRow {
 	exportShare: number;
 }
 
+/** A partner × product cell for the headline year (cross-filtering). */
+export interface CrossCell {
+	partner: string;
+	product: string;
+	exportsUsd: number;
+	importsUsd: number;
+	balanceUsd: number;
+}
+
 /** Per-country projection: web/static/data/<version>/countries/<CODE>.json */
 export interface CountryProjection {
 	schemaVersion: number;
@@ -37,6 +46,8 @@ export interface CountryProjection {
 	summaryByYear: Record<string, FlowSummary>;
 	partnersByYear: Record<string, PartnerRow[]>;
 	productsByYear: Record<string, ProductRow[]>;
+	crossYear: number | null;
+	crossCells: CrossCell[];
 }
 
 export interface ReporterYearTotals extends FlowSummary {

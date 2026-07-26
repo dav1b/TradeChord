@@ -51,6 +51,18 @@ def test_overview_reports_reporter_totals():
     assert ov["reporters"][0]["totalsByYear"][0]["balanceUsd"] == -80_000
 
 
+def test_cross_cells_are_partner_product_dual_flow():
+    d = build_country_projection("USA", _records(), "v1")
+    assert d["crossYear"] == 2022
+    can = next(c for c in d["crossCells"] if c["partner"] == "CAN")
+    assert (can["product"], can["exportsUsd"], can["importsUsd"], can["balanceUsd"]) == (
+        "84-85_MachElec",
+        100_000,
+        40_000,
+        60_000,
+    )
+
+
 def test_generated_projection_matches_schema():
     schema = json.loads((CONTRACTS / "projection.schema.json").read_text())
     jsonschema.validate(build_country_projection("USA", _records(), "v1"), schema)
