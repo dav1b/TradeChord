@@ -88,6 +88,14 @@
 					<rect width="3" height={h} fill={pos ? 'var(--delta-pos)' : 'var(--delta-neg)'} />
 					{#if w > 56 && h > 30}
 						<text x="8" y="17" class="name">{n.data.label}</text>
+						<text
+							x={w - 7}
+							y="16"
+							class="delta-mark"
+							text-anchor="end"
+							fill={pos ? 'var(--delta-pos-mark)' : 'var(--delta-neg-mark)'}
+							aria-hidden="true"
+						>{pos ? '▲' : '▼'}</text>
 						<text x="8" y="31" class="val">{usd(n.data.value, 1)}</text>
 						{#if h > 46}
 							<text x="8" y="45" class="sub">{pct(n.data.point.share ?? 0)} · exports</text>
@@ -132,5 +140,8 @@
 		font-family: var(--font-mono);
 		font-size: 10px;
 		fill: var(--text-3);
+	}
+	.delta-mark {
+		font-size: 9px;
 	}
 </style>
