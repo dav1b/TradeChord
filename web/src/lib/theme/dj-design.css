@@ -1,0 +1,287 @@
+/* ── DataJockey Design System ────────────────────────────────────────────────
+   Canonical token file. Source of truth: dj-brand-kit/guidance/00-index.md through 05-dashboard-application.md
+   Rule: if a colour, weight, size, or copy choice cannot be traced to those files, it
+   does not ship. ──────────────────────────────────────────────────────────── */
+
+/* ── Font faces ─────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/DMSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/DMSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/DMSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/DMSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('/fonts/DMMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Neue Machina';
+  src: url('/fonts/PPNeueMachina-PlainUltraboldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Core palette ────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Brand carriers */
+  --dj-carbon:          #13181B;
+  --dj-navy:            #003A6C;
+  --dj-parchment:       #EFEEEA;
+  --dj-alabaster:       #CCD5DA;
+
+  /* Extended — highlight / attention, use in priority order */
+  --dj-honey-bronze:    #FFBF65;
+  --dj-ember-copper:    #F76A45;
+  --dj-lagoon-teal:     #3EC5E0;
+  --dj-fern-green:      #4BB814;
+  --dj-plum-violet:     #B234A7;
+
+  /* Parchment-only mark variants. Use for thin lines, small marks, dots, and
+     standalone coloured text; never use these darkened values on Navy/Carbon. */
+  --dj-honey-bronze-mark: #885207;
+  --dj-ember-copper-mark: #912308;
+  --dj-lagoon-teal-mark:  #0A6476;
+  --dj-fern-green-mark:   #0E622A;
+
+  /* ── Semantic surface tokens ──────────────────────────────────────────────── */
+
+  --bg:           var(--dj-parchment);   /* page background */
+  --surface:      #FFFFFF;               /* card/panel surface */
+  --surface-dim:  var(--dj-alabaster);   /* subtle inset, disabled states */
+  --border:       #D4D0C8;               /* 1px rule system — no drop shadows */
+  --border-faint: #E4E1DB;
+
+  /* ── Semantic text tokens ─────────────────────────────────────────────────── */
+
+  --text-1:  var(--dj-carbon);           /* primary / headings */
+  --text-2:  #3D4347;                    /* secondary body */
+  --text-3:  #6B7276;                    /* supporting / labels */
+  --text-4:  #888885;                    /* micro / disabled — warm grey, ~2.85:1 on Parchment */
+
+  /* ── Semantic accent tokens ───────────────────────────────────────────────── */
+
+  --accent:          var(--dj-navy);
+  --accent-highlight: var(--dj-honey-bronze);
+  --active:          var(--dj-navy);    /* selected/active interactive state — pills, tabs, focus rings */
+  --active-ink:      var(--dj-parchment); /* text/mark sitting on an --active fill */
+  --protagonist:     var(--dj-navy);    /* the one data series the page headline is about — see 02-color-system.md */
+
+  /* Delta / directional — base tokens are fills; -mark tokens are Parchment
+     lines, dots, and standalone text. */
+  --delta-pos:      var(--dj-lagoon-teal);
+  --delta-neg:      var(--dj-ember-copper);
+  --delta-pos-mark: var(--dj-lagoon-teal-mark);
+  --delta-neg-mark: var(--dj-ember-copper-mark);
+
+  /* Rental-specific */
+  --new:         var(--dj-lagoon-teal);   /* new leases */
+  --new-mark:    var(--dj-lagoon-teal-mark);
+  --new-dim:     rgba(62, 197, 224, 0.15);
+  --new-text:    var(--dj-carbon);
+  --renewed:     var(--dj-fern-green);    /* renewals */
+  --renewed-mark: var(--dj-fern-green-mark);
+  --renewed-dim: rgba(75, 184, 20, 0.18);
+  --renewed-text: var(--dj-carbon);
+
+  /* ── Typography tokens ────────────────────────────────────────────────────── */
+
+  --font-head:  'DM Sans', system-ui, sans-serif;
+  --font-body:  'DM Sans', system-ui, sans-serif;
+  --font-mono:  'DM Mono', monospace;
+  --font-mark:  'PP Neue Machina', sans-serif;   /* restricted — one instance per screen max */
+
+  /* ── Chart tokens (sales cards / BackToBackChart / AreaCard3) ───────────────── */
+
+  /* Volume boxes */
+  --box-fill:       rgba(0, 58, 108, 0.07);   /* light navy tint — total volume box */
+  --box-stroke:     rgba(0, 58, 108, 0.18);
+
+  /* Off-plan portion (inner box) — Honey Bronze, primary highlight */
+  --offplan:        rgba(255, 191, 101, 0.80);
+  --offplan-text:   var(--dj-carbon);
+
+  /* Reference / ghost line */
+  --ghost-stroke:   var(--dj-alabaster);
+
+  /* Divider lines within charts */
+  --divider:        var(--border);
+
+  /* Growth bars — base tokens fill bars; -mark tokens draw Parchment lines. */
+  --bar-pos:        var(--dj-lagoon-teal);
+  --bar-neg:        var(--dj-ember-copper);
+  --bar-pos-mark:   var(--dj-lagoon-teal-mark);
+  --bar-neg-mark:   var(--dj-ember-copper-mark);
+
+  /* Chart internals — wired to semantic text tokens */
+  --chart-label:    var(--text-3);
+  --chart-value:    var(--text-2);
+  --chart-faint:    var(--text-4);
+  --chart-line:     var(--border);
+
+  /* Theme aliases */
+  --op:             var(--dj-honey-bronze);   /* off-plan */
+  --op-mark:        var(--dj-honey-bronze-mark);
+  --re:             var(--dj-plum-violet);    /* ready */
+  --re-mark:        var(--dj-plum-violet);    /* base already clears Parchment */
+
+  /* Payment mix bars */
+  --cash:           var(--dj-lagoon-teal);
+  --cash-mark:      var(--dj-lagoon-teal-mark);
+  --mort:           var(--dj-navy);
+  --cash-text:      var(--dj-carbon);
+  --mort-text:      var(--dj-parchment);
+
+  /* Highlight marks on Parchment; fill highlights continue to use
+     --accent-highlight. */
+  --accent-highlight-mark: var(--dj-honey-bronze-mark);
+
+  /* Sequential — magnitude without a natural zero, light to dark Navy. */
+  --sequential-1: #CEE2F3;
+  --sequential-2: #79B6EC;
+  --sequential-3: #0D87F2;
+  --sequential-4: #0057A3;
+  --sequential-5: var(--dj-navy);
+
+  /* Diverging — deviation from a meaningful centre. Endpoint values match the
+     Ember/Lagoon mark primitives but remain independently defined. */
+  --diverging-neg-2: #912308;
+  --diverging-neg-1: #E1512D;
+  --diverging-mid:   var(--dj-alabaster);
+  --diverging-pos-1: #2DC3E1;
+  --diverging-pos-2: #0A6476;
+}
+
+/* ── Surface themes — ink-on-background pairings (02-color-system.md) ─────────
+   Apply on <body> for a full page, or on a section container for a themed band.
+   Data-dense chart panels stay on the Parchment default — themes carry
+   headlines, heroes, index headers, callouts, and export dark variants.
+   Wordmark per theme: logo-parchment.svg on Navy/Carbon, logo-navy.svg
+   elsewhere (04-components.md). */
+
+.dj-theme-navy {
+  --bg:           var(--dj-navy);
+  --surface:      #0D4677;                    /* Navy lifted one step */
+  --surface-dim:  rgba(239, 238, 234, 0.08);
+  --border:       rgba(239, 238, 234, 0.25);
+  --border-faint: rgba(239, 238, 234, 0.14);
+
+  /* Parchment ink ramp — see 02-color-system.md */
+  --text-1: var(--dj-parchment);
+  --text-2: rgba(239, 238, 234, 0.80);
+  --text-3: rgba(239, 238, 234, 0.60);
+  --text-4: rgba(239, 238, 234, 0.42);
+
+  /* Brand carrier inverts on dark surfaces */
+  --accent:      var(--dj-parchment);
+  --active:      var(--dj-parchment);
+  --active-ink:  var(--dj-navy);
+  --protagonist: var(--dj-parchment);
+  /* Honey is approved as a mark directly on Navy. */
+  --accent-highlight-mark: var(--dj-honey-bronze);
+
+  background: var(--bg);
+  color: var(--text-1);
+}
+
+.dj-theme-carbon {
+  --bg:           var(--dj-carbon);
+  --surface:      #1C2327;                    /* Carbon lifted one step */
+  --surface-dim:  rgba(239, 238, 234, 0.07);
+  --border:       rgba(239, 238, 234, 0.20);
+  --border-faint: rgba(239, 238, 234, 0.12);
+
+  --text-1: var(--dj-parchment);
+  --text-2: rgba(239, 238, 234, 0.80);
+  --text-3: rgba(239, 238, 234, 0.60);
+  --text-4: rgba(239, 238, 234, 0.42);
+
+  --accent:      var(--dj-parchment);
+  --active:      var(--dj-parchment);
+  --active-ink:  var(--dj-carbon);
+  --protagonist: var(--dj-parchment);
+  /* Honey is approved as a mark directly on Carbon. */
+  --accent-highlight-mark: var(--dj-honey-bronze);
+
+  background: var(--bg);
+  color: var(--text-1);
+}
+
+.dj-theme-alabaster {
+  --bg:           var(--dj-alabaster);
+  --surface:      #FFFFFF;
+  --surface-dim:  rgba(19, 24, 27, 0.06);
+  --border:       #AEB9BF;                    /* default borders vanish on Alabaster */
+  --border-faint: #BDC7CC;
+  /* Carbon text ramp carries over; avoid --text-4 here — --text-3 is the floor */
+
+  background: var(--bg);
+  color: var(--text-1);
+}
+
+/* ── Base reset ──────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ── Utility classes ─────────────────────────────────────────────────────────── */
+
+.dj-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.dj-emphasis {
+  font-family: var(--font-mark);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+}
