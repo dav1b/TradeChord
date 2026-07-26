@@ -1,0 +1,428 @@
+/* ── Carousel slide layout — 08-carousel-application.md ──────────────────────
+   1080×1350 portrait canvas, 64px safe area, fixed deck shape.
+   Sits on top of tokens/dj-design.css; all colour comes from tokens. */
+
+/* Font faces with kit-relative paths — the tokens file uses absolute /fonts/
+   URLs that only resolve inside a web app. Declared after the tokens import,
+   so these same-descriptor faces win the cascade. */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../../fonts/DMSans-Light.ttf') format('truetype');
+  font-weight: 300; font-style: normal;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../../fonts/DMSans-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../../fonts/DMSans-Medium.ttf') format('truetype');
+  font-weight: 500; font-style: normal;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('../../fonts/DMMono-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal;
+}
+
+@page { size: 1080px 1350px; margin: 0; }
+
+html { font-size: 16px; }
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.slide {
+  width: 1080px;
+  height: 1350px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 150px 64px 64px;          /* safe area; top clears the chrome row */
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+}
+.slide:not(:last-child) { break-after: page; }
+
+/* ── Deck chrome — fixed positions, identical on every slide ────────────────── */
+.deck-eyebrow {
+  position: absolute;
+  top: 64px; left: 64px;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.slide-index {
+  position: absolute;
+  top: 64px; right: 64px;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+.wordmark-corner {
+  position: absolute;
+  right: 48px; bottom: 48px;
+  height: 80px;      /* tight-cropped artwork — all 80px are wordmark */
+  width: auto;
+  display: block;
+}
+
+/* Interior-slide monogram: 24px, bottom-right, 24px inset, 45% opacity */
+.corner-monogram {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  height: 24px;
+  width: auto;
+  opacity: 0.45;
+}
+.corner-monogram svg { height: 24px; width: auto; display: block; }
+
+/* ── Slide body — content region; judgment + source close the slide foot ───── */
+.slide-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.slide-body--center { justify-content: center; }
+
+/* ── Judgment sentence — fixed position, closes every data slide ────────────── */
+.judgment {
+  font-family: var(--font-head);
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--text-1);
+  max-width: 22em;
+  margin-top: 44px;
+}
+
+/* ── Hook ── */
+.slide--hook { justify-content: center; }
+.slide--hook .statement {
+  font-family: var(--font-head);
+  font-size: 96px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  max-width: 12em;
+}
+/* Legacy hook_stat (old brief format — backward compat) */
+.hook-stat {
+  font-family: var(--font-head);
+  font-size: 200px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 48px;
+}
+/* New hook.number + hook.number_label (object hook format) */
+.hook-number {
+  font-family: var(--font-head);
+  font-size: 160px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 20px;
+  color: var(--accent-highlight);   /* the deck's hero number always pops Honey Bronze */
+}
+
+/* Honey Bronze pop — one emphasis phrase in hook / so-what copy */
+.pop { color: var(--accent-highlight); }
+.hook-number-label {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 44px;
+}
+.slide--hook.has-stat .statement { font-size: 64px; line-height: 1.15; }
+
+/* ── Puzzle slide — question + common assumption ── */
+.slide--puzzle { justify-content: center; }
+.puzzle-question {
+  font-family: var(--font-head);
+  font-size: 64px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  max-width: 14em;
+}
+.puzzle-assumption-label {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 72px;
+  margin-bottom: 20px;
+}
+.puzzle-assumption {
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--text-2);
+  line-height: 1.4;
+  max-width: 22em;
+}
+
+/* ── Big Number beat — metric → delta → source (04-components.md) ── */
+.slide--number .metric {
+  font-family: var(--font-head);
+  font-size: 220px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.slide--number .label {
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--text-2);
+  margin-top: 28px;
+  max-width: 20em;
+  line-height: 1.3;
+}
+.slide--number .delta {
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text-3);
+  margin-top: 20px;
+}
+
+/* ── Chart beat ── */
+.chart-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 48px;
+}
+.slide--chart .title {
+  font-family: var(--font-head);
+  font-size: 52px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  max-width: 16em;
+  flex: 1;
+}
+/* Takeaway sits at the top of the chart slide; the chart below proves it */
+.chart-head .judgment {
+  margin-top: 0;
+  flex: 1;
+  font-size: 40px;
+  line-height: 1.25;
+  max-width: 20em;
+}
+/* Hero-chart number — Honey Bronze pop, top-right, subordinate to the takeaway */
+.chart-stat { flex-shrink: 0; text-align: right; }
+.chart-stat-num {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 84px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--accent-highlight);
+}
+.chart-stat-label {
+  display: block;
+  margin: 12px 0 0 auto;
+  max-width: 9em;
+  font-family: var(--font-mono);
+  font-size: 19px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.slide--chart .chart-frame {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  margin-top: 40px;
+}
+.slide--chart .chart-frame svg { width: 100%; height: auto; max-height: 100%; }
+
+/* ── Setup slide — primes the reader for the chart that follows ── */
+.slide--setup { justify-content: center; }
+.setup-kicker {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 36px;
+}
+.slide--setup .statement {
+  font-family: var(--font-head);
+  font-size: 54px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  max-width: 15em;
+}
+
+/* ── Concept slide — explanatory ladder(s), no data, no judgment ── */
+.slide--concept .slide-body.concept { justify-content: center; }
+.concept-title {
+  font-family: var(--font-head);
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  max-width: 18em;
+  margin-bottom: 56px;
+}
+.ladder { display: flex; flex-direction: column; align-items: flex-start; }
+.ladder-step {
+  font-family: var(--font-head);
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-1);
+  line-height: 1.1;
+}
+.ladder-link {
+  width: 2px; height: 40px; margin: 10px 0 10px 18px;
+  background: var(--text-3);
+}
+.concept-cols { display: flex; gap: 96px; }
+.concept-col { flex: 1; }
+.concept-col-head {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--text-3);
+}
+.concept-col .ladder-step { font-size: 34px; }
+.concept-col .ladder-link { height: 28px; }
+/* Punchline concept — a conclusion headline + one plain line of support */
+.concept--statement .concept-title { font-size: 60px; letter-spacing: -0.03em; line-height: 1.12; max-width: 14em; }
+.concept-body {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--text-2);
+  line-height: 1.4;
+  max-width: 20em;
+  margin-top: 36px;
+}
+
+/* ── Context — always Alabaster, always slide 2; the series premise ── */
+.slide--context { justify-content: center; }
+.slide--context .statement {
+  font-family: var(--font-head);
+  font-size: 60px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  max-width: 15em;
+}
+
+/* ── So What — always Carbon; the decision the numbers inform ── */
+.slide--sowhat { justify-content: center; }
+.sowhat-kicker,
+.context-kicker {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 36px;
+}
+.slide--sowhat .statement {
+  font-family: var(--font-head);
+  font-size: 72px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  max-width: 13em;
+}
+
+/* ── CTA — content-driven close, wordmark lower-right like the cover ── */
+.slide--cta { justify-content: center; }
+.slide--cta .statement {
+  font-family: var(--font-head);
+  font-size: 64px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  max-width: 13em;
+}
+.cta-urls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 44px;
+}
+.cta-url {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  text-decoration: none;
+}
+
+/* Deck-level source — legacy foot-of-CTA position (now on the appendix). */
+.deck-source {
+  position: absolute;
+  left: 64px; bottom: 64px;
+  max-width: 500px;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  line-height: 1.6;
+}
+
+/* ── Appendix — always Alabaster, always last: source, calcs, definitions ── */
+.slide--appendix { justify-content: center; }
+.appendix-kicker {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 40px;
+}
+.appendix-source {
+  font-family: var(--font-mono);
+  font-size: 27px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  color: var(--text-1);
+  max-width: 24em;
+}
+.appendix-notes {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  max-width: 26em;
+  font-family: var(--font-mono);
+  font-size: 24px;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+.appendix-notes li { padding: 12px 0 12px 22px; text-indent: -22px; }
+.appendix-notes li::before { content: "· "; }

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+
+carousel/briefs/out/
+carousel/renderer/.build-*.html
+carousel-briefs/out/
+*.pdf
+
+# Private font purchase evidence (keep local; contains order/license details)
+/fonts/118752.pdf
+/fonts/EULA - Pangram (Commercial) APR2023.pdf

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataJockey colour system specimen</title>
+  <link rel="stylesheet" href="../tokens/dj-design.css">
+  <style>
+    body { padding: 48px; }
+    main { max-width: 1180px; margin: 0 auto; display: grid; gap: 48px; }
+    header { border-bottom: 2px solid var(--dj-navy); padding-bottom: 24px; }
+    h1 { font-size: 44px; font-weight: 500; letter-spacing: -0.035em; }
+    h2 { font-size: 24px; font-weight: 500; margin-bottom: 18px; }
+    .sub { color: var(--text-2); margin-top: 8px; }
+    .palette { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+    .swatch { min-height: 156px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; color: var(--dj-carbon); }
+    .swatch strong { font-size: 17px; font-weight: 500; }
+    .meta { font-family: var(--font-mono); font-size: 12px; }
+    .honey { background: var(--dj-honey-bronze); }
+    .lagoon { background: var(--dj-lagoon-teal); }
+    .ember { background: var(--dj-ember-copper); }
+    .fern { background: var(--dj-fern-green); }
+    .plum { background: var(--dj-plum-violet); color: var(--dj-parchment); }
+    .marks { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+    .mark-sample { min-height: 132px; padding: 16px; border: 1px solid var(--border); display: grid; align-content: center; gap: 14px; }
+    .mark-line { height: 3px; background: currentColor; }
+    .mark-row { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: currentColor; flex: 0 0 auto; }
+    .honey-mark { color: var(--dj-honey-bronze-mark); }
+    .lagoon-mark { color: var(--dj-lagoon-teal-mark); }
+    .ember-mark { color: var(--dj-ember-copper-mark); }
+    .fern-mark { color: var(--dj-fern-green-mark); }
+    .plum-mark { color: var(--dj-plum-violet); }
+    .surfaces { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .surface { min-height: 230px; padding: 24px; }
+    .surface h3 { font-size: 19px; font-weight: 500; margin-bottom: 28px; }
+    .surface-marks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    .surface-mark { display: grid; justify-items: center; gap: 10px; color: var(--text-2); font-family: var(--font-mono); font-size: 11px; text-align: center; }
+    .surface-mark i { display: block; width: 42px; height: 42px; border-radius: 50%; }
+    .surface-mark.no { opacity: .46; text-decoration: line-through; }
+    .on-honey i { background: var(--dj-honey-bronze); }
+    .on-lagoon i { background: var(--dj-lagoon-teal); }
+    .on-ember i { background: var(--dj-ember-copper); }
+    .on-fern i { background: var(--dj-fern-green); }
+    .on-plum i { background: var(--dj-plum-violet); }
+    .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .role { border-top: 1px solid var(--border); padding-top: 16px; }
+    .role-title { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); text-transform: uppercase; margin-bottom: 16px; }
+    .bars { display: grid; gap: 9px; }
+    .bar { height: 28px; min-width: 4px; }
+    .pair { display: grid; grid-template-columns: 1.45fr 1fr; gap: 8px; }
+    .positive { background: var(--delta-pos); }
+    .negative { background: var(--delta-neg); }
+    .offplan { background: var(--op); }
+    .ready { background: var(--re); }
+    .new { background: var(--new); }
+    .renewed { background: var(--renewed); }
+    .legend { display: flex; justify-content: space-between; margin-top: 9px; font-size: 12px; color: var(--text-2); }
+    .scales { display: grid; gap: 22px; }
+    .scale { display: grid; grid-template-columns: repeat(5, 1fr); height: 64px; }
+    .seq1 { background: var(--sequential-1); }
+    .seq2 { background: var(--sequential-2); }
+    .seq3 { background: var(--sequential-3); }
+    .seq4 { background: var(--sequential-4); }
+    .seq5 { background: var(--sequential-5); }
+    .divn2 { background: var(--diverging-neg-2); }
+    .divn1 { background: var(--diverging-neg-1); }
+    .divmid { background: var(--diverging-mid); }
+    .divp1 { background: var(--diverging-pos-1); }
+    .divp2 { background: var(--diverging-pos-2); }
+    .scale-labels { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--text-3); }
+    footer { padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-3); font-family: var(--font-mono); font-size: 11px; }
+    @media (max-width: 800px) {
+      body { padding: 24px; }
+      .palette, .marks { grid-template-columns: 1fr 1fr; }
+      .surfaces, .roles { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="dj-eyebrow">DataJockey · Colour system review</div>
+    <h1>Vivid fills. Legible marks. Fixed meaning.</h1>
+    <p class="sub">Base palette, Parchment-safe marks, dark surfaces, semantic pairings, and ordered scales.</p>
+  </header>
+
+  <section>
+    <h2>Base fills</h2>
+    <div class="palette">
+      <div class="swatch honey"><strong>Honey Bronze</strong><span class="meta">#FFBF65 · highlight / off-plan</span></div>
+      <div class="swatch lagoon"><strong>Lagoon Teal</strong><span class="meta">#3EC5E0 · positive / new / cash</span></div>
+      <div class="swatch ember"><strong>Ember Copper</strong><span class="meta">#F76A45 · negative</span></div>
+      <div class="swatch fern"><strong>Fern Green</strong><span class="meta">#4BB814 · renewed</span></div>
+      <div class="swatch plum"><strong>Plum Violet</strong><span class="meta">#B234A7 · ready</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Parchment-safe lines, dots, and labels</h2>
+    <div class="marks">
+      <div class="mark-sample honey-mark"><div class="mark-line"></div><div class="mark-row"><span class="dot"></span>Off-plan · 5.55:1</div></div>
+      <div class="mark-sample lagoon-mark"><div class="mark-line"></div><div class="mark-row"><span class="dot"></span>Positive · 5.84:1</div></div>
+      <div class="mark-sample ember-mark"><div class="mark-line"></div><div class="mark-row"><span class="dot"></span>Negative · 7.39:1</div></div>
+      <div class="mark-sample fern-mark"><div class="mark-line"></div><div class="mark-row"><span class="dot"></span>Renewed · 6.46:1</div></div>
+      <div class="mark-sample plum-mark"><div class="mark-line"></div><div class="mark-row"><span class="dot"></span>Ready · 4.59:1</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Dark-surface behavior</h2>
+    <div class="surfaces">
+      <div class="surface dj-theme-carbon">
+        <h3>Carbon</h3>
+        <div class="surface-marks">
+          <div class="surface-mark on-honey"><i></i>Honey</div>
+          <div class="surface-mark on-lagoon"><i></i>Lagoon</div>
+          <div class="surface-mark on-ember"><i></i>Ember</div>
+          <div class="surface-mark on-fern"><i></i>Fern</div>
+          <div class="surface-mark on-plum"><i></i>Plum · fill</div>
+        </div>
+      </div>
+      <div class="surface dj-theme-navy">
+        <h3>Navy</h3>
+        <div class="surface-marks">
+          <div class="surface-mark on-honey"><i></i>Honey</div>
+          <div class="surface-mark on-lagoon"><i></i>Lagoon</div>
+          <div class="surface-mark on-ember"><i></i>Ember · fill</div>
+          <div class="surface-mark on-fern"><i></i>Fern · fill</div>
+          <div class="surface-mark on-plum no"><i></i>Plum · never</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Semantic pairings</h2>
+    <div class="roles">
+      <div class="role">
+        <div class="role-title">Movement</div>
+        <div class="bars"><div class="bar positive" style="width:82%"></div><div class="bar negative" style="width:48%"></div></div>
+        <div class="legend"><span>Positive</span><span>Negative</span></div>
+      </div>
+      <div class="role">
+        <div class="role-title">Property status</div>
+        <div class="pair"><div class="bar offplan"></div><div class="bar ready"></div></div>
+        <div class="legend"><span>Off-plan</span><span>Ready</span></div>
+      </div>
+      <div class="role">
+        <div class="role-title">Lease type</div>
+        <div class="pair"><div class="bar new"></div><div class="bar renewed"></div></div>
+        <div class="legend"><span>New</span><span>Renewed</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ordered scales</h2>
+    <div class="scales">
+      <div>
+        <div class="scale"><i class="seq1"></i><i class="seq2"></i><i class="seq3"></i><i class="seq4"></i><i class="seq5"></i></div>
+        <div class="scale-labels"><span>Lower magnitude</span><span>Higher magnitude</span></div>
+      </div>
+      <div>
+        <div class="scale"><i class="divn2"></i><i class="divn1"></i><i class="divmid"></i><i class="divp1"></i><i class="divp2"></i></div>
+        <div class="scale-labels"><span>Negative deviation</span><span>Neutral</span><span>Positive deviation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Specimen reads live values from tokens/dj-design.css · July 2026</footer>
+</main>
+</body>
+</html>

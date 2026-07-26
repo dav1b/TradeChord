@@ -1,0 +1,49 @@
+# Example story brief — format defined in guidance/08-carousel-application.md.
+# The illustrative numbers are synthetic; replace them with sourced findings.
+project: example-market
+slug: demand-shifted-not-disappeared
+series: Market Signals
+sector: Housing
+carousel: 1
+takeaway: Demand shifted
+source: "Illustrative data · replace before publishing"
+hook:
+  headline: "Demand didn't disappear. It moved to a different part of the market."
+  number: "−41%"
+  number_label: "Change in ready-home transactions"
+puzzle:
+  question: "If the whole market weakened, why did one segment hold up?"
+  misconception: "A falling headline number means every buyer reacted the same way."
+beats:
+  - type: big_number
+    value: "−41%"
+    label: "Ready-property sales, transactions per month"
+    delta: "Earlier period → later period"
+    judgment: "Buyers who needed keys today stepped back; longer-horizon demand held."
+  - type: chart
+    kind: bar
+    setup: "Compare the change in transactions across the two segments."
+    title: "The decline wasn't evenly shared"
+    stat: "29 pts"
+    stat_label: "Gap between segments"
+    unit: "%"
+    x_label: "Change in monthly transactions"
+    data:
+      - { label: "Ready sales", value: -41, accent: true }
+      - { label: "Off-plan sales", value: -12 }
+    judgment: "The shift separated buyers by urgency, not simply confidence."
+synthesis:
+  kind: slope
+  setup: "Now compare how each segment's share of the market changed."
+  title: "Off-plan's market share expanded"
+  unit: "%"
+  from_label: "Earlier"
+  to_label: "Later"
+  data:
+    - { label: "Off-plan share", from: 71, to: 79, protagonist: true }
+    - { label: "Ready share", from: 29, to: 21 }
+  judgment: "Nearly four-fifths of activity now sits in the longer-horizon segment."
+so_what: "A weaker headline can hide *better negotiating conditions* in the segment buyers can use today."
+cta:
+  next: "Next in Market Signals: what changed inside asking prices."
+  theme: alabaster
