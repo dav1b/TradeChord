@@ -7,6 +7,7 @@
 	import PartnerSlope from '$lib/dashboard/PartnerSlope.svelte';
 	import PartnerTreemap from '$lib/dashboard/PartnerTreemap.svelte';
 	import ProductTreemap from '$lib/dashboard/ProductTreemap.svelte';
+	import PartnerChord from '$lib/dashboard/PartnerChord.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -34,7 +35,9 @@
 	<Hero {year} {summary} {source} />
 
 	<div class="grid">
-		<Card title="Trade network" {source}><div class="placeholder">Chord — F3</div></Card>
+		<Card title="Trade network · top partners" {source}>
+			<PartnerChord projection={data.projection} {year} />
+		</Card>
 		<Card title="Partners · exports, tinted by balance" {source}>
 			<PartnerTreemap projection={data.projection} {year} />
 		</Card>
@@ -85,18 +88,6 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 		gap: var(--space-4);
-	}
-	.placeholder {
-		min-height: 260px;
-		display: grid;
-		place-items: center;
-		color: var(--text-4);
-		font-family: var(--font-mono);
-		font-size: 12px;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		border: 1px dashed var(--border);
-		border-radius: var(--radius);
 	}
 	.foot {
 		display: flex;
