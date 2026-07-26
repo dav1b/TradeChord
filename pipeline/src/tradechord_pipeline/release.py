@@ -21,6 +21,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from glob import glob
 
+from . import projections
 from .models import INDICATOR_BY_FLOW, Flow, Observation
 from .normalize import CANONICAL_FIELDS, CanonicalRecord, normalize
 from .validation import completeness, reconciliation
@@ -217,8 +218,13 @@ def _write_matrix_gz(records: list[CanonicalRecord], path: str) -> str:
         return hashlib.sha256(f.read()).hexdigest()
 
 
-def write_release(records: list[CanonicalRecord], manifest: dict, out_dir: str, force: bool = False) -> str:
-    """Build the release in a temp dir, then promote atomically to ``out_dir``."""
+def write_release(
+    records: list[CanonicalRecord], manifest: dict, out_dir: str, force: bool = False
+) -> tuple[str, str]:
+    """Build the release in a temp dir, then promote atomically to ``out_dir``.
+
+    Returns (out_dir, manifest_sha256).
+    """
     if os.path.exists(out_dir):
         if not force:
             raise FileExistsError(f"release already exists: {out_dir} (use --force)")
@@ -245,7 +251,30 @@ def write_release(records: list[CanonicalRecord], manifest: dict, out_dir: str, 
     except BaseException:
         shutil.rmtree(tmp, ignore_errors=True)
         raise
-    return out_dir
+    return out_dir, manifest_sha
+
+
+def write_web_projections(
+    records: list[CanonicalRecord], version: str, web_root: str, manifest_sha: str, force: bool = False
+) -> str:
+    """Write committed browser projections under web_root/<version>/ + current.json."""
+    version_dir = os.path.join(web_root, version)
+    if os.path.exists(version_dir):
+        if not force:
+            raise FileExistsError(f"web projections already exist: {version_dir} (use --force)")
+        shutil.rmtree(version_dir)
+    os.makedirs(web_root, exist_ok=True)
+    projections.write_projections(records, version, version_dir)
+
+    with open(os.path.join(web_root, "current.json"), "w", encoding="utf-8") as f:
+        json.dump(
+            {"schemaVersion": SCHEMA_VERSION, "datasetVersion": version, "manifestSha256": manifest_sha},
+            f,
+            indent=2,
+            sort_keys=True,
+        )
+        f.write("\n")
+    return version_dir
 
 
 # --------------------------------------------------------------------------- #
@@ -262,6 +291,7 @@ def run_release(
     run_dir: str,
     version: str,
     releases_root: str,
+    web_root: str,
     tolerance: float = DEFAULT_TOLERANCE,
     strict: bool = True,
     force: bool = False,
@@ -274,5 +304,6 @@ def run_release(
 
     manifest = build_manifest(version, staging, records)
     out_dir = os.path.join(releases_root, version)
-    path = write_release(records, manifest, out_dir, force=force)
+    path, manifest_sha = write_release(records, manifest, out_dir, force=force)
+    write_web_projections(records, version, web_root, manifest_sha, force=force)
     return path, report

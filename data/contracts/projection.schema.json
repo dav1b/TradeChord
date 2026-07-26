@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tradechord/contracts/projection.schema.json",
+  "title": "TradeChord per-country projection",
+  "description": "Shape of web/static/data/<version>/countries/<CODE>.json consumed by the / route.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "datasetVersion",
+    "country",
+    "years",
+    "summaryByYear",
+    "partnersByYear",
+    "productsByYear"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "datasetVersion": { "type": "string" },
+    "country": { "type": "string" },
+    "years": { "type": "array", "items": { "type": "integer" } },
+    "summaryByYear": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["exportsUsd", "importsUsd", "balanceUsd"],
+        "properties": {
+          "exportsUsd": { "type": "integer" },
+          "importsUsd": { "type": "integer" },
+          "balanceUsd": { "type": "integer" }
+        }
+      }
+    },
+    "partnersByYear": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/partnerRow" } }
+    },
+    "productsByYear": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/productRow" } }
+    }
+  },
+  "$defs": {
+    "partnerRow": {
+      "type": "object",
+      "required": ["partner", "exportsUsd", "importsUsd", "balanceUsd", "exportShare"],
+      "properties": {
+        "partner": { "type": "string" },
+        "exportsUsd": { "type": "integer" },
+        "importsUsd": { "type": "integer" },
+        "balanceUsd": { "type": "integer" },
+        "exportShare": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "productRow": {
+      "type": "object",
+      "required": ["product", "exportsUsd", "importsUsd", "balanceUsd", "exportShare"],
+      "properties": {
+        "product": { "type": "string" },
+        "exportsUsd": { "type": "integer" },
+        "importsUsd": { "type": "integer" },
+        "balanceUsd": { "type": "integer" },
+        "exportShare": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

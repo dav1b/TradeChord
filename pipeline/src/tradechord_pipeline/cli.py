@@ -165,6 +165,7 @@ def _cmd_release(args: argparse.Namespace) -> int:
         args.input,
         args.version,
         args.releases_root,
+        args.web_root,
         tolerance=args.tolerance,
         strict=args.strict,
         force=args.force,
@@ -210,6 +211,8 @@ def _build_parser() -> argparse.ArgumentParser:
     r.add_argument("--version", required=True, help="Release version, e.g. 2026-01")
     r.add_argument("--releases-root", dest="releases_root", default="data/releases",
                    help="Root directory for committed releases")
+    r.add_argument("--web-root", dest="web_root", default="web/static/data",
+                   help="Root directory for committed browser projections")
     r.add_argument("--tolerance", type=float, default=DEFAULT_TOLERANCE)
     r.add_argument("--no-strict", dest="strict", action="store_false",
                    help="Write the release even if validation fails (records issues)")
