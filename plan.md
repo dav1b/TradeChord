@@ -553,10 +553,16 @@ keyboard + ARIA, color-independent balance encoding, performance pass.
 **F6 — Security & deploy.** AI commentary **server-side** (`+server.ts`); drop the client key + `{@html}`;
 finalize deploy adapter and CI.
 
-### Open decisions (need input)
+### Decisions (resolved)
 
-- **Brand kit contents** — tokens only, or also component specs / motion guidelines?
-- **Interaction ambition for v1** — is synchronized cross-chart highlighting + a year scrubber in scope for
-  the first cut (F4), or a later enhancement?
-- **Chord vs. treemap vs. slopes** confirmed for rebuild; decide whether `/all` (overview small-multiples)
-  is v1 or follows the single-country view.
+- **Brand kit** — full DataJockey kit (tokens + guidance: color, typography, components, dashboard) added as
+  a **git subtree** at `dj-brand-kit/`; web copies under `web/src/lib/theme/` + `web/static/{fonts,brand}/`.
+- **Deploy target** — **Vercel** (`@sveltejs/adapter-vercel`; Kit upgraded to 2.70.x). SSR retained for the
+  F6 AI route.
+- **Cross-chart highlighting** — **in scope for v1** (F4), using the kit's lit/recessed pattern.
+- **Year scrubber** — **deferred**; v1 uses the fixed range with the headline year.
+- **Charts to rebuild** — chord, treemap (partner + product), slopes (partner + product), equation +
+  mini-trends.
+
+Still open:
+- Whether `/all` (overview small-multiples) is v1 or follows the single-country view.
