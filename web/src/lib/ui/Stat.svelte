@@ -6,6 +6,7 @@
 		label,
 		delta,
 		deltaColor = 'var(--text-3)',
+		valueColor = 'var(--text-1)',
 		source,
 		size = 'md'
 	}: {
@@ -14,13 +15,15 @@
 		delta?: string;
 		/** Colour for the delta line — e.g. deltaColor(balance) from theme/tokens. */
 		deltaColor?: string;
+		/** Colour for the metric itself (e.g. teal/ember for a balance). */
+		valueColor?: string;
 		source?: string;
 		size?: 'md' | 'lg';
 	} = $props();
 </script>
 
 <div class="stat" class:lg={size === 'lg'}>
-	<div class="value">{value}</div>
+	<div class="value" style:color={valueColor}>{value}</div>
 	<div class="label">{label}</div>
 	{#if delta}<div class="delta" style:color={deltaColor}>{delta}</div>{/if}
 	{#if source}<div class="source">{source}</div>{/if}
