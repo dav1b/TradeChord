@@ -5,6 +5,8 @@
 	import Card from '$lib/ui/Card.svelte';
 	import Hero from '$lib/dashboard/Hero.svelte';
 	import PartnerSlope from '$lib/dashboard/PartnerSlope.svelte';
+	import PartnerTreemap from '$lib/dashboard/PartnerTreemap.svelte';
+	import ProductTreemap from '$lib/dashboard/ProductTreemap.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -33,8 +35,12 @@
 
 	<div class="grid">
 		<Card title="Trade network" {source}><div class="placeholder">Chord — F3</div></Card>
-		<Card title="Partners" {source}><div class="placeholder">Partner treemap — F3</div></Card>
-		<Card title="Products" {source}><div class="placeholder">Product treemap — F3</div></Card>
+		<Card title="Partners · exports, tinted by balance" {source}>
+			<PartnerTreemap projection={data.projection} {year} />
+		</Card>
+		<Card title="Products · exports, tinted by balance" {source}>
+			<ProductTreemap projection={data.projection} {year} />
+		</Card>
 		<Card title="Partner export share · {data.projection.years[0]}→{year}" {source}>
 			<PartnerSlope projection={data.projection} />
 		</Card>
