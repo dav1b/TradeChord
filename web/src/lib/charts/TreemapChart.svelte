@@ -61,7 +61,8 @@
 				{@const w = n.x1 - n.x0}
 				{@const h = n.y1 - n.y0}
 				{@const pos = n.data.point.balanceUsd >= 0}
-				{@const recessed = selectedLabel != null && n.data.label !== selectedLabel}
+				{@const isSel = selectedLabel === n.data.label}
+				{@const recessed = selectedLabel != null && !isSel}
 				<g
 					class="tile"
 					transform="translate({n.x0},{n.y0})"
@@ -80,7 +81,8 @@
 						width={w}
 						height={h}
 						fill={pos ? 'var(--pos-dim)' : 'var(--neg-dim)'}
-						stroke="var(--border)"
+						stroke={isSel ? 'var(--active)' : 'var(--border)'}
+						stroke-width={isSel ? 2 : 1}
 					/>
 					<rect width="3" height={h} fill={pos ? 'var(--delta-pos)' : 'var(--delta-neg)'} />
 					{#if w > 56 && h > 30}
@@ -105,6 +107,13 @@
 	}
 	.tile {
 		transition: opacity var(--motion) var(--ease);
+	}
+	.tile:focus {
+		outline: none;
+	}
+	.tile:focus-visible {
+		outline: 2px solid var(--active);
+		outline-offset: -2px;
 	}
 	.name {
 		font-family: var(--font-body);

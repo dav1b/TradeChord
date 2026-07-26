@@ -155,6 +155,12 @@
 		cursor: pointer;
 		transition: opacity var(--motion) var(--ease);
 	}
+	.hit:focus {
+		outline: none;
+	}
+	.hit:focus-visible {
+		outline: 2px solid var(--active);
+	}
 	.lbl {
 		font-size: 11px;
 		fill: var(--text-2);
