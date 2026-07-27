@@ -1,7 +1,10 @@
 # TradeChord Monorepo & Data-Product Plan
 
 Status: architecture implemented. This remains the decision record; active
-follow-up work is tracked in Git history and the “Implementation status” below.
+follow-up work, optional improvements, and new decisions are tracked in
+[`docs/refactor-roadmap.md`](./docs/refactor-roadmap.md).
+Vercel production architecture and performance budgets are tracked in
+[`docs/deployment-performance.md`](./docs/deployment-performance.md).
 
 ## Implementation status (2026-07-27)
 
@@ -576,15 +579,18 @@ change transitions; mobile tap tooltips.
 **F5 — Motion, a11y, polish.** Motion choreography (enter/update/exit, stagger), empty/error/loading states,
 keyboard + ARIA, color-independent balance encoding, performance pass.
 
-**F6 — Security & deploy.** AI commentary **server-side** (`+server.ts`); drop the client key + `{@html}`;
-finalize deploy adapter and CI.
+**F6 — Security & deploy.** Finalize the Vercel adapter and CI. The earlier
+AI-commentary proposal was removed; do not retain runtime SSR solely for a
+feature that no longer exists.
 
 ### Decisions (resolved)
 
 - **Brand kit** — full DataJockey kit (tokens + guidance: color, typography, components, dashboard) added as
   a **git subtree** at `dj-brand-kit/`; web copies under `web/src/lib/theme/` + `web/static/{fonts,brand}/`.
-- **Deploy target** — **Vercel** (`@sveltejs/adapter-vercel`; Kit upgraded to 2.70.x). SSR retained for the
-  F6 AI route.
+- **Deploy target** — **Vercel** (`@sveltejs/adapter-vercel`; Kit upgraded to
+  2.70.x). This original SSR decision is superseded by the static-first plan in
+  `docs/deployment-performance.md`; isolate runtime SSR only if a future
+  feature demonstrates a real need.
 - **Cross-chart highlighting** — **in scope for v1** (F4), using the kit's lit/recessed pattern.
 - **Year scrubber** — **deferred**; v1 uses the fixed range with the headline year.
 - **Charts to rebuild** — chord, treemap (partner + product), slopes (partner + product), equation +

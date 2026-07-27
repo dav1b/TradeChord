@@ -13,7 +13,13 @@ A fresh clone runs the dashboard with **Node alone**. Python and WITS access are
 deliberately publishing a new data release. The pipeline is an offline release tool, never part of a web
 build or deploy.
 
-See [`plan.md`](./plan.md) for the full architecture and refactor plan of record.
+See [`docs/refactor-roadmap.md`](./docs/refactor-roadmap.md) for the living
+implementation record and roadmap. [`plan.md`](./plan.md) preserves the
+detailed architecture and original refactor plan of record.
+
+The production target is Vercel with `web/` as the project root. Deployment,
+caching, payload, and performance requirements are documented in
+[`docs/deployment-performance.md`](./docs/deployment-performance.md).
 
 ## Web development (Node only)
 
@@ -36,7 +42,8 @@ make data-validate
 make data-release      # -> data/releases/<version>/ + web/static/data/<version>/
 ```
 
-See [`docs/data-release.md`](./docs/data-release.md) and [`docs/data-methodology.md`](./docs/data-methodology.md).
+See [`docs/data-release.md`](./docs/data-release.md) and
+[`docs/data-methodology.md`](./docs/data-methodology.md).
 
 ## Layout
 
@@ -45,5 +52,5 @@ web/        SvelteKit dashboard (Node)
 pipeline/   WITS collection + release tool (Python)
 data/       contracts/ (schemas) and releases/ (committed canonical artifacts)
 docs/       architecture, methodology, release process
-plan.md     refactor plan of record
+plan.md     original detailed refactor plan and decision record
 ```

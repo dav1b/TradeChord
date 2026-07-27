@@ -58,6 +58,19 @@ PYTHONPATH=pipeline/src pipeline/.venv/bin/python \
 Then run `make test` and `make build`, inspect representative reporters, and
 commit the canonical release, projections, and pointer together.
 
+The Vercel deployment must build only the committed `web/` project. It must
+never collect WITS data or run the Python release pipeline. Versioned browser
+artifacts are immutable CDN resources; `current.json` is the small mutable
+pointer and requires a revalidating or short-lived browser cache policy.
+
+After a release preview deploys, verify that:
+
+- `current.json` identifies the intended version and manifest hash;
+- all referenced country/detail projections return successfully;
+- versioned data has the intended immutable cache headers;
+- `current.json` does not receive a year-long immutable browser cache;
+- direct and refreshed analytical URLs reconstruct the expected scene.
+
 ## Projection-only compatibility release
 
 When projection semantics change without recollecting WITS, preserve the
