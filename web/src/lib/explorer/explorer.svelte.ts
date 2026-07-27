@@ -1,6 +1,6 @@
 import { getContext, setContext } from 'svelte';
 
-export type ExplorerRepresentation = 'chord' | 'rank';
+export type ExplorerRepresentation = 'chord' | 'rank' | 'relationship';
 export type ExplorerFlow = 'export' | 'import' | 'both';
 export type ExplorerLevel = 'country' | 'relationship' | 'product' | 'history' | 'change' | 'quality';
 
@@ -26,6 +26,7 @@ export interface ExplorerController {
 	readonly state: ExplorerState;
 	sync(input: ExplorerInput): void;
 	selectPartner(code: string): void;
+	openRelationship(code: string): void;
 	selectProduct(code: string): void;
 	clearSelection(): void;
 	setRepresentation(representation: ExplorerRepresentation): void;
@@ -63,6 +64,13 @@ export function createExplorer(input: ExplorerInput, onchange: OnChange): Explor
 			state.level = state.partner ? 'relationship' : 'country';
 			changed();
 		},
+		openRelationship(code) {
+			state.partner = code;
+			state.product = null;
+			state.level = 'relationship';
+			state.representation = 'relationship';
+			changed();
+		},
 		selectProduct(code) {
 			state.product = state.product === code ? null : code;
 			state.partner = null;
@@ -77,7 +85,10 @@ export function createExplorer(input: ExplorerInput, onchange: OnChange): Explor
 		},
 		setRepresentation(representation) {
 			if (state.representation === representation) return;
+			if (representation === 'relationship' && !state.partner) return;
 			state.representation = representation;
+			state.level =
+				representation === 'relationship' && state.partner ? 'relationship' : 'country';
 			changed();
 		}
 	};

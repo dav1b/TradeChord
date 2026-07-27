@@ -77,7 +77,7 @@
 	}
 	function clickNode(i: number) {
 		if (i === 0) explorer.clearSelection();
-		else explorer.selectPartner(rows[i - 1].partner);
+		else if (rows[i - 1].partner !== 'ROW') explorer.openRelationship(rows[i - 1].partner);
 	}
 	function keyNode(e: KeyboardEvent, i: number) {
 		if (e.key === 'Enter' || e.key === ' ') {

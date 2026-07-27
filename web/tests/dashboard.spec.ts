@@ -16,6 +16,20 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 	await expect(page).toHaveURL(/[?&]country=DEU/);
 	await expect(page.getByRole('heading', { level: 1 })).toContainText('Germany');
 
+	const networkCard = page.locator('section.card').filter({ hasText: 'Trade network · top partners' });
+	const firstRibbon = networkCard.locator('svg path[role="button"][tabindex="0"]').first();
+	await firstRibbon.focus();
+	await firstRibbon.press('Enter');
+	await expect(page).toHaveURL(/[?&]view=relationship/);
+	await expect(page.getByText('Bilateral relationship · 2022')).toBeVisible();
+	await expect(page.getByText('Reported exports', { exact: true })).toBeVisible();
+	await expect(page.getByText('Reported imports', { exact: true })).toBeVisible();
+	await page.getByRole('button', { name: 'Network', exact: true }).first().click();
+	await expect(page).not.toHaveURL(/[?&]view=relationship/);
+	const retainedFilter = page.getByRole('button', { name: /Filtered ·/ });
+	await expect(retainedFilter).toBeVisible();
+	await retainedFilter.click();
+
 	await page.getByRole('button', { name: 'Rank partners' }).click();
 	await expect(page).toHaveURL(/[?&]view=rank/);
 	const ranking = page.getByRole('list', { name: 'Partners ranked by total trade' });
@@ -29,7 +43,7 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 	await expect(page).toHaveURL(/[?&]view=rank/);
 	await expect(page).not.toHaveURL(/[?&]partner=/);
 
-	await page.getByRole('button', { name: 'Network' }).click();
+	await page.getByRole('button', { name: 'Network', exact: true }).click();
 	await expect(page).not.toHaveURL(/[?&]view=rank/);
 
 	const partnerCard = page.locator('section.card').filter({ hasText: 'Partners · exports' });
@@ -42,6 +56,10 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 		'true'
 	);
 	await expect(page.getByRole('list', { name: 'Partners ranked by total trade' })).toBeVisible();
+
+	await page.goto('/?country=DEU&view=relationship&partner=CHN');
+	await expect(page.getByText('DEU ↔ CHN')).toBeVisible();
+	await expect(page.getByText('Reported balance')).toBeVisible();
 
 	await page.goto('/all');
 	await expect(page.getByRole('heading', { level: 1, name: 'Reporters' })).toBeVisible();

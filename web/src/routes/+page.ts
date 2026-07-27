@@ -17,8 +17,7 @@ export const load: PageLoad = async ({ fetch, url }) => {
 			: countryCodes[0];
 
 	const projection = await loadCountry(current.datasetVersion, country, fetch);
-	const representation: 'rank' | 'chord' =
-		url.searchParams.get('view') === 'rank' ? 'rank' : 'chord';
+	const view = url.searchParams.get('view');
 	const partnerParam = url.searchParams.get('partner');
 	const productParam = url.searchParams.get('product');
 	const partnerCodes = new Set(
@@ -31,6 +30,8 @@ export const load: PageLoad = async ({ fetch, url }) => {
 	);
 	const partner = partnerParam && partnerCodes.has(partnerParam) ? partnerParam : null;
 	const product = productParam && productCodes.has(productParam) ? productParam : null;
+	const representation: 'rank' | 'chord' | 'relationship' =
+		view === 'rank' ? 'rank' : view === 'relationship' && partner ? 'relationship' : 'chord';
 
 	return {
 		version: current.datasetVersion,

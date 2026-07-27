@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ChordChart from '$lib/charts/ChordChart.svelte';
 	import RankedPartners from '$lib/charts/RankedPartners.svelte';
+	import BilateralRelationship from '$lib/charts/BilateralRelationship.svelte';
 	import { useExplorer } from '$lib/explorer/explorer.svelte';
 	import type { CountryProjection } from '$lib/data/types';
 
@@ -24,6 +25,11 @@
 	});
 
 	const summary = $derived(projection.summaryByYear[String(year)]);
+	const relationshipRow = $derived(
+		(projection.partnersByYear[String(year)] ?? []).find(
+			(row) => row.partner === explorer.state.partner
+		) ?? null
+	);
 </script>
 
 <div class="scene-controls" role="group" aria-label="Trade network representation">
@@ -37,10 +43,23 @@
 		aria-pressed={explorer.state.representation === 'rank'}
 		onclick={() => explorer.setRepresentation('rank')}>Rank partners</button
 	>
+	{#if explorer.state.partner}
+		<button
+			class:active={explorer.state.representation === 'relationship'}
+			aria-pressed={explorer.state.representation === 'relationship'}
+			onclick={() => explorer.setRepresentation('relationship')}>Relationship</button
+		>
+	{/if}
 </div>
 
 <div class="scene" aria-live="polite">
-	{#if explorer.state.representation === 'chord'}
+	{#if explorer.state.representation === 'relationship' && relationshipRow}
+		<BilateralRelationship
+			reporter={projection.country}
+			{year}
+			row={relationshipRow}
+		/>
+	{:else if explorer.state.representation === 'chord'}
 		<ChordChart reporter={projection.country} {year} {rows} reporterSummary={summary} />
 	{:else}
 		<RankedPartners reporter={projection.country} {rows} />

@@ -70,6 +70,11 @@
 			: 'Products · exports, tinted by balance'
 	);
 	const filterLabel = $derived(explorer.state.partner ?? explorer.state.product);
+	const networkTitle = $derived(
+		explorer.state.representation === 'relationship' && explorer.state.partner
+			? `Bilateral trade · ${explorer.state.partner}`
+			: 'Trade network · top partners'
+	);
 
 	function selectCountry(code: string) {
 		const view = explorer.state.representation === 'rank' ? '&view=rank' : '';
@@ -101,7 +106,7 @@
 	<Hero {year} {summary} {source} />
 
 	<div class="grid">
-		<Card title="Trade network · top partners" {source}>
+		<Card title={networkTitle} {source}>
 			<PartnerChord projection={data.projection} {year} />
 		</Card>
 		<Card title={partnersTitle} {source}>

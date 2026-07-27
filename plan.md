@@ -24,12 +24,21 @@ Completed:
 - Atomic browser projection promotion, per-file hashes, release verification,
   coverage summaries, country names, browser loading/error states, and
   Playwright route/interaction coverage.
+- The first continuous-scene interactions: network ↔ ranked partners and
+  network → bilateral reported export/import relationship, with stable
+  semantic keys, URL restoration, keyboard activation, and reversible
+  selection.
+- Vercel cache policy configuration for immutable versioned projections and a
+  separately revalidated active-release pointer.
 
 Operational follow-up:
 
 - Run and review the full 30-reporter recollection before publishing the next
   historical-data release. The active `2026-07.1` release is intentionally a
   schema-v2 compatibility projection of the existing canonical matrix.
+- Verify the configured cache headers on the next production deployment, then
+  complete visual, interruption, focus-restoration, and screen-reader QA for
+  the first continuous-scene prototype.
 
 This document merges the pipeline repo (`TradeChord_datapipeline`) and the dashboard repo
 (`TradeChord`) into one repository with a clean data contract, and sets the path to a more

@@ -239,7 +239,7 @@ The production Playwright journey passed country navigation, representation
 switching, partner selection and re-ranking, browser history, direct scene URL
 restoration, cross-filtering, and `/all`, with no captured console errors.
 
-Header verification found:
+The first production header verification found:
 
 - public routes and data return `200`;
 - `current.json` identifies schema 2 and release `2026-07.1`;
@@ -247,10 +247,14 @@ Header verification found:
 - versioned projection responses still advertise
   `Cache-Control: public, max-age=0, must-revalidate`.
 
-The versioned projection header does not yet meet the intended immutable-cache
-policy. Adding and verifying a one-year immutable browser policy for
-`/data/<version>/...` is the next deployment-hardening task. `current.json`
-must remain separately revalidated.
+`web/vercel.json` now declares the intended split policy:
+
+- `/data/<version>/...`: `public, max-age=31536000, immutable`;
+- `/data/current.json`: `public, max-age=0, must-revalidate`.
+
+The next deployment must verify that Vercel applies these exact response
+headers in production. The task is complete only when the live responses, not
+just the configuration file, confirm the policy.
 
 ## 9. Build and deployment gates
 
@@ -327,8 +331,8 @@ remain useful gates, but they do not replace field performance.
 ### Phase 2: static and cache hardening
 
 1. Prerender the finite public route set.
-2. Add and verify differentiated cache headers for versioned data and
-   `current.json`.
+2. Verify the newly configured differentiated cache headers for versioned
+   data and `current.json` on the next production deployment.
 3. Add direct-entry and refresh tests.
 4. Add payload and bundle reports to CI.
 

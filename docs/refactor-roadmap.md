@@ -316,7 +316,7 @@ After activation:
 6. Record the release date, source range, validation result, and any accepted
    caveats in the methodology documentation.
 
-### 6.6 Establish the first Vercel baseline — Next
+### 6.6 Establish the first Vercel baseline — In progress
 
 Treat deployment as the next validation environment, not as the last step
 after the revised frontend is complete:
@@ -352,8 +352,10 @@ Baseline progress:
 - Initial compressed page and country transfers are inside provisional
   budgets.
 - Production data resolves schema 2 release `2026-07.1`.
-- Versioned data is edge-cached but still uses browser revalidation; immutable
-  cache headers remain to be implemented and verified.
+- Differentiated cache rules are implemented in `web/vercel.json`: versioned
+  projections receive a one-year immutable policy, while `current.json`
+  revalidates. Production response headers still need verification after the
+  next deployment.
 - Field Core Web Vitals still require Speed Insights traffic and are not yet
   complete.
 
@@ -961,7 +963,7 @@ The continuous scene must remain understandable without animation:
 
 ### 7.14 Implementation sequence — Planned
 
-#### Phase A: interaction prototype — First increment implemented
+#### Phase A: interaction prototype — Two increments implemented
 
 Build an isolated prototype using a small fixed fixture:
 
@@ -980,6 +982,13 @@ Current increment:
 - Partner ribbons and ranked bars share semantic partner keys.
 - Ranked selection pins the chosen partner and re-ranks the remainder with
   FLIP.
+- A keyboard-activated partner ribbon now opens a bilateral relationship scene
+  with reported export/import bars and the explicitly defined reported
+  balance.
+- The partner band retains its semantic key across the network and bilateral
+  representations; export and import marks have stable flow keys.
+- Returning to the network preserves the partner selection, and direct
+  `?view=relationship&partner=<code>` URLs restore the scene.
 - URL restoration and browser history are covered by Playwright.
 - Keyboard-operable network marks and ranked controls are present.
 - Reduced-motion duration policy is shared by FLIP and cross-view movement.
@@ -988,8 +997,9 @@ Still required before Phase A is complete:
 
 - visual QA on representative mobile and desktop browsers;
 - explicit animation-interruption stress testing;
-- a bilateral ribbon → paired-flow-bar transformation;
-- focused screen-reader and focus-restoration review.
+- focused screen-reader and focus-restoration review;
+- richer ribbon-to-band geometry interpolation after the interaction and
+  accessibility behavior are proven.
 
 Acceptance criteria:
 
