@@ -25,3 +25,12 @@ export function productKey(
 ): TradeEntityId {
 	return `product:${reporter}:${partner ?? 'all'}:${flow}:${product}`;
 }
+
+export function yearPointKey(
+	reporter: string,
+	partner: string,
+	flow: 'export' | 'import',
+	year: number
+): TradeEntityId {
+	return `${flowKey(reporter, partner, flow)}:year:${year}`;
+}

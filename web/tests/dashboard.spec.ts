@@ -131,3 +131,38 @@ test('scene actions transfer focus and survive rapid reduced-motion reversal', a
 		await evidenceTray.evaluate((element) => element.scrollWidth > element.clientWidth)
 	).toBe(true);
 });
+
+test('evidence opens a reversible bilateral history with one authoritative year', async ({
+	page
+}) => {
+	await page.goto('/?country=DEU&view=relationship&partner=CHN');
+	await expect(page.getByLabel('Reporter')).toHaveAttribute('data-ready', 'true');
+
+	await page.getByRole('button', { name: 'Open CHN history' }).click();
+	await expect(page).toHaveURL(/[?&]view=history/);
+	await expect(page).toHaveURL(/[?&]year=2022/);
+	const timeline = page.locator('section.timeline');
+	await expect(timeline).toBeVisible();
+	await expect(timeline).toBeFocused();
+	await expect(
+		page.getByRole('heading', { level: 2, name: 'How has DEU’s trade with CHN changed?' })
+	).toBeVisible();
+
+	const scrubber = page.getByRole('slider', { name: 'Scrub year' });
+	await scrubber.fill('2012');
+	await expect(page).toHaveURL(/[?&]year=2012/);
+	await expect(scrubber).toBeFocused();
+	await expect(page.getByText('Selected year').locator('..')).toContainText('2012');
+	await expect(page.getByText('WITS · 2012').first()).toBeVisible();
+
+	await page.getByRole('button', { name: 'Relationship', exact: true }).click();
+	await expect(page).toHaveURL(/[?&]view=relationship/);
+	await expect(page).toHaveURL(/[?&]year=2012/);
+	await page.goBack();
+	await expect(page).toHaveURL(/[?&]view=history/);
+	await expect(page).toHaveURL(/[?&]year=2012/);
+
+	await page.goto('/?country=DEU&view=history&partner=CHN&year=2010');
+	await expect(page.getByRole('heading', { name: 'Bilateral trade through time' })).toBeVisible();
+	await expect(page.getByText('Selected year').locator('..')).toContainText('2010');
+});

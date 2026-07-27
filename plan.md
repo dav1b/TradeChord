@@ -38,6 +38,10 @@ Completed:
 - Full-width, question-led `TradeExplorer` shell with an expanded primary
   canvas and a single selection-driven evidence tray; narrow screens use
   snap-scrolling evidence rather than stacked dashboard cards.
+- Evidence-driven bilateral history: selecting partner history opens a
+  full-width export/import timeline with authoritative year state, shallow URL
+  replacement while scrubbing, keyboard interaction, responsive geometry,
+  direct links, and reversible navigation.
 - Vercel cache policy configuration for immutable versioned projections and a
   separately revalidated active-release pointer, verified in production.
 - Persistent Vercel project configuration with `web/` as the root and Node 22;
@@ -55,6 +59,8 @@ Operational follow-up:
 - Design a versioned partner×product history projection before adding
   historical product drill-down; the active release only contains headline
   `crossYear` detail.
+- Add comparison-year state and a reconciled change interval after the
+  bilateral history interaction is reviewed.
 
 This document merges the pipeline repo (`TradeChord_datapipeline`) and the dashboard repo
 (`TradeChord`) into one repository with a clean data contract, and sets the path to a more

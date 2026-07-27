@@ -24,6 +24,9 @@
 		if (explorer.state.representation === 'products' && explorer.state.partner) {
 			return `What makes up ${projection.country}’s ${explorer.state.flow}s with ${explorer.state.partner}?`;
 		}
+		if (explorer.state.representation === 'history' && explorer.state.partner) {
+			return `How has ${projection.country}’s trade with ${explorer.state.partner} changed?`;
+		}
 		if (explorer.state.representation === 'relationship' && explorer.state.partner) {
 			return `How does ${projection.country} trade with ${explorer.state.partner}?`;
 		}
@@ -35,6 +38,8 @@
 	const sceneLabel = $derived(
 		explorer.state.representation === 'products'
 			? `${explorer.state.flow === 'export' ? 'Export' : 'Import'} composition`
+			: explorer.state.representation === 'history'
+				? 'Bilateral history'
 			: explorer.state.representation === 'relationship'
 				? 'Bilateral relationship'
 				: explorer.state.representation === 'rank'
@@ -45,7 +50,11 @@
 		explorer.state.product ? `Partners trading ${explorer.state.product}` : 'Partner structure'
 	);
 	const productContextTitle = $derived(
-		explorer.state.partner ? `Products traded with ${explorer.state.partner}` : 'Product structure'
+		`${explorer.state.partner ? `Products traded with ${explorer.state.partner}` : 'Product structure'}${
+			projection.crossYear && projection.crossYear !== year
+				? ` · ${projection.crossYear} detail`
+				: ''
+		}`
 	);
 </script>
 
@@ -86,10 +95,17 @@
 				<ProductTreemap {projection} {year} />
 			</section>
 			<section class="evidence-pane trend" aria-labelledby="trend-context-title">
-				<h4 id="trend-context-title">
-					Partner export share · {projection.years[0]}→{year}
-				</h4>
-				<PartnerSlope {projection} />
+				<div class="pane-heading">
+					<h4 id="trend-context-title">
+						Partner history · {projection.years[0]}→{projection.years.at(-1)}
+					</h4>
+					{#if explorer.state.partner}
+						<button onclick={() => explorer.openHistory()}>
+							Open {explorer.state.partner} history
+						</button>
+					{/if}
+				</div>
+				<PartnerSlope {projection} onselect={(partner) => explorer.openHistory(partner)} />
 			</section>
 		</div>
 	</aside>
@@ -189,6 +205,26 @@
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
 		color: var(--text-3);
+	}
+	.pane-heading {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-3);
+	}
+	.pane-heading button {
+		border: 0;
+		padding: 0;
+		background: transparent;
+		color: var(--active);
+		font-family: var(--font-mono);
+		font-size: 9px;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+	.pane-heading button:focus-visible {
+		outline: 2px solid var(--active);
+		outline-offset: 3px;
 	}
 	.scene-source {
 		padding: var(--space-3) var(--space-5);

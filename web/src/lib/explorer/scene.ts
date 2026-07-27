@@ -1,6 +1,6 @@
 import { flowKey, partnerKey, productKey, type TradeEntityId } from './entity';
 
-export type SceneRepresentation = 'chord' | 'rank' | 'relationship' | 'products';
+export type SceneRepresentation = 'chord' | 'rank' | 'relationship' | 'products' | 'history';
 export type SceneFlow = 'export' | 'import' | 'both';
 export type SceneLevel = 'country' | 'relationship' | 'product' | 'history' | 'change' | 'quality';
 export type SceneDirection = 'expand' | 'contract' | 'reorder' | 'select' | 'reset';
@@ -25,6 +25,8 @@ export type SceneAction =
 	| { type: 'select-partner'; partner: string }
 	| { type: 'open-relationship'; partner: string }
 	| { type: 'open-products'; flow: 'export' | 'import' }
+	| { type: 'open-history'; partner?: string }
+	| { type: 'select-year'; year: number }
 	| { type: 'select-relationship-product'; product: string }
 	| { type: 'select-national-product'; product: string }
 	| { type: 'show-representation'; representation: SceneRepresentation }
@@ -48,7 +50,12 @@ export function stateFromInput(input: SceneInput): SceneState {
 
 export function normalizeScene(state: SceneState): SceneState {
 	const next = { ...state };
-	if (!next.partner && (next.representation === 'relationship' || next.representation === 'products')) {
+	if (
+		!next.partner &&
+		(next.representation === 'relationship' ||
+			next.representation === 'products' ||
+			next.representation === 'history')
+	) {
 		next.representation = 'chord';
 	}
 	if (next.representation === 'products' && next.flow === 'both') {
@@ -56,7 +63,9 @@ export function normalizeScene(state: SceneState): SceneState {
 	}
 	if (!next.partner && next.flow !== 'both') next.flow = 'both';
 	next.level =
-		next.representation === 'products' && next.product
+		next.representation === 'history'
+			? 'history'
+			: next.representation === 'products' && next.product
 			? 'product'
 			: next.partner
 				? 'relationship'
@@ -86,6 +95,16 @@ export function reduceScene(state: SceneState, action: SceneAction): SceneState 
 			next.product = null;
 			next.representation = 'products';
 			break;
+		case 'open-history':
+			if (action.partner) next.partner = action.partner;
+			if (!next.partner) return state;
+			next.product = null;
+			next.flow = 'both';
+			next.representation = 'history';
+			break;
+		case 'select-year':
+			next.year = action.year;
+			break;
 		case 'select-relationship-product':
 			if (!next.partner || next.representation !== 'products') return state;
 			next.product = next.product === action.product ? null : action.product;
@@ -97,7 +116,9 @@ export function reduceScene(state: SceneState, action: SceneAction): SceneState 
 			break;
 		case 'show-representation':
 			if (
-				(action.representation === 'relationship' || action.representation === 'products') &&
+				(action.representation === 'relationship' ||
+					action.representation === 'products' ||
+					action.representation === 'history') &&
 				!next.partner
 			)
 				return state;
@@ -109,7 +130,9 @@ export function reduceScene(state: SceneState, action: SceneAction): SceneState 
 			next.product = null;
 			next.flow = 'both';
 			next.representation =
-				next.representation === 'relationship' || next.representation === 'products'
+				next.representation === 'relationship' ||
+				next.representation === 'products' ||
+				next.representation === 'history'
 					? 'chord'
 					: next.representation;
 			break;
@@ -124,10 +147,17 @@ export function transitionFor(
 	revision: number
 ): SceneTransition {
 	let direction: SceneDirection = 'select';
-	if (action.type === 'open-relationship' || action.type === 'open-products') direction = 'expand';
+	if (
+		action.type === 'open-relationship' ||
+		action.type === 'open-products' ||
+		action.type === 'open-history'
+	)
+		direction = 'expand';
 	if (
 		action.type === 'show-representation' &&
-		(previous.representation === 'relationship' || previous.representation === 'products') &&
+		(previous.representation === 'relationship' ||
+			previous.representation === 'products' ||
+			previous.representation === 'history') &&
 		(next.representation === 'chord' || next.representation === 'relationship')
 	)
 		direction = 'contract';
@@ -138,7 +168,7 @@ export function transitionFor(
 		revision,
 		action: action.type,
 		direction,
-		focusEntity: focusForScene(next),
+		focusEntity: action.type === 'select-year' ? null : focusForScene(next),
 		announcement: describeScene(next)
 	};
 }
@@ -157,6 +187,9 @@ export function describeScene(state: SceneState): string {
 	if (state.representation === 'products' && state.partner && state.flow !== 'both') {
 		const selected = state.product ? `, ${state.product} selected` : '';
 		return `${state.reporter} ${state.flow} products with ${state.partner}, ${state.year}${selected}`;
+	}
+	if (state.representation === 'history' && state.partner) {
+		return `${state.reporter} bilateral history with ${state.partner}, ${state.year} selected`;
 	}
 	if (state.representation === 'relationship' && state.partner) {
 		return `${state.reporter} bilateral relationship with ${state.partner}, ${state.year}`;

@@ -1079,19 +1079,35 @@ Still to migrate:
 
 - treat contextual evidence marks as transformable scene entities rather than
   embedded legacy chart renderers;
-- allow selected evidence to move into the primary canvas;
+- extend the implemented history evidence → primary-canvas pattern to partner
+  and product composition evidence;
 - replace the temporary representation pill with scene-aware question and
   measure controls;
-- add the first full-width historical representation.
 
-#### Phase D: add product and history transformations
+#### Phase D: add product and history transformations — Bilateral history implemented
 
-1. Transform bilateral flows into product composition.
-2. Carry product identity into time-series representation.
-3. Add year and comparison-year transitions.
-4. Prefetch or split projection data only if measured latency requires it.
-5. Add Playwright coverage for forward, backward, linked, and interrupted
-   transitions.
+Implemented:
+
+1. Bilateral flows transform into product composition.
+2. Partner history evidence opens a full-width bilateral export/import
+   timeline.
+3. The selected year is authoritative across hero totals, scene values,
+   partner context, URL state, and accessible descriptions.
+4. Timeline points, keyboard arrow movement, and a range scrubber update the
+   same state. Scrubbing replaces the current shallow URL entry.
+5. Direct `?view=history&partner=<code>&year=<year>` entry, forward
+   transformation, relationship return, browser Back, focus transfer, and
+   slider focus retention are covered by Playwright.
+6. The complete country projection already supplies partner history, so no
+   extra fetch or projection split was introduced.
+
+Still required:
+
+- carry product identity into history after publishing a versioned
+  partner×product history detail artifact;
+- add a comparison year and change interval;
+- reconstruct or ghost the national network behind year scrubbing only after
+  profiling the interaction cost.
 
 #### Phase E: add comparison representations
 

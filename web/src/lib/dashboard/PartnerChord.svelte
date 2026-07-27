@@ -3,6 +3,7 @@
 	import RankedPartners from '$lib/charts/RankedPartners.svelte';
 	import BilateralRelationship from '$lib/charts/BilateralRelationship.svelte';
 	import ProductComposition from '$lib/charts/ProductComposition.svelte';
+	import BilateralTimeline from '$lib/charts/BilateralTimeline.svelte';
 	import SceneStage from '$lib/explorer/SceneStage.svelte';
 	import { deriveTradeScene } from '$lib/explorer/scene-graph';
 	import { useExplorer } from '$lib/explorer/explorer.svelte';
@@ -48,10 +49,23 @@
 				onclick={() => explorer.setRepresentation('products')}>Products</button
 			>
 		{/if}
+		{#if explorer.state.partner}
+			<button
+				class:active={explorer.state.representation === 'history'}
+				aria-pressed={explorer.state.representation === 'history'}
+				onclick={() => explorer.setRepresentation('history')}>History</button
+			>
+		{/if}
 	</div>
 
 	<div class="scene">
-		{#if explorer.state.representation === 'products' && relationshipRow}
+		{#if explorer.state.representation === 'history' && explorer.state.partner}
+			<BilateralTimeline
+				reporter={projection.country}
+				partner={explorer.state.partner}
+				points={graph.history}
+			/>
+		{:else if explorer.state.representation === 'products' && relationshipRow}
 			<ProductComposition
 				reporter={projection.country}
 				year={projection.crossYear ?? year}

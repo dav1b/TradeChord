@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto, pushState } from '$app/navigation';
+	import { goto, pushState, replaceState } from '$app/navigation';
 	import { page } from '$app/state';
 	import Wordmark from '$lib/ui/Wordmark.svelte';
 	import CountrySelect from '$lib/ui/CountrySelect.svelte';
@@ -19,27 +19,35 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const year = $derived(data.projection.years[data.projection.years.length - 1]);
-	const summary = $derived(data.projection.summaryByYear[String(year)]);
-	const source = $derived(`WITS · ${year}`);
+	const latestYear = $derived(data.projection.years[data.projection.years.length - 1]);
 
-	function navigateExplorer({ state }: ExplorerChange) {
+	function navigateExplorer({ state, transition }: ExplorerChange) {
 		const params = new URLSearchParams();
 		params.set('country', state.reporter);
 		if (state.representation !== 'chord') params.set('view', state.representation);
+		if (state.representation === 'history' || state.year !== latestYear)
+			params.set('year', String(state.year));
 		if (state.representation === 'products') params.set('flow', state.flow);
 		if (state.partner) params.set('partner', state.partner);
 		if (state.product) params.set('product', state.product);
-		pushState(`?${params}`, {});
+		const target = `?${params}`;
+		if (transition.action === 'select-year') replaceState(target, {});
+		else pushState(target, {});
 	}
 
 	function explorerInputFromUrl(url: URL): ExplorerInput {
+		const yearParam = Number(url.searchParams.get('year'));
+		const year = data.projection.years.includes(yearParam) ? yearParam : latestYear;
 		const partnerCodes = new Set(
-			(data.projection.partnersByYear[String(year)] ?? []).map((row) => row.partner)
+			data.projection.years.flatMap((candidateYear) =>
+				(data.projection.partnersByYear[String(candidateYear)] ?? []).map((row) => row.partner)
+			)
 		);
 		const productCodes = new Set(
-			(data.projection.productsByYear[String(year)] ?? []).map((row) =>
-				row.product.replace(/^\d+-\d+_/, '')
+			data.projection.years.flatMap((candidateYear) =>
+				(data.projection.productsByYear[String(candidateYear)] ?? []).map((row) =>
+					row.product.replace(/^\d+-\d+_/, '')
+				)
 			)
 		);
 		const partnerParam = url.searchParams.get('partner');
@@ -52,6 +60,8 @@
 		const representation: ExplorerRepresentation =
 			view === 'rank'
 				? 'rank'
+				: view === 'history' && partner
+					? 'history'
 				: view === 'products' && partner && flow !== 'both'
 					? 'products'
 					: view === 'relationship' && partner
@@ -65,7 +75,7 @@
 			createExplorer(
 				{
 					reporter: data.country,
-					year,
+					year: data.explorer.year,
 					flow: data.explorer.flow,
 					partner: data.explorer.partner,
 					product: data.explorer.product,
@@ -75,6 +85,9 @@
 			)
 		)
 	);
+	const year = $derived(explorer.state.year);
+	const summary = $derived(data.projection.summaryByYear[String(year)]);
+	const source = $derived(`WITS · ${year}`);
 
 	// Analytical actions use shallow URL state. Back/forward reparses that URL
 	// into the same reducer without re-running the country data loader.

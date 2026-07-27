@@ -93,6 +93,16 @@ cards are supporting evidence panes driven by the same selection. On narrow
 screens they become a snap-scrolling evidence tray instead of lengthening the
 page into a stack of independent dashboards.
 
+The first evidence-to-primary transformation is also implemented. Selecting a
+partner in the history evidence, or choosing History for an active
+relationship, opens a full-width bilateral export/import timeline. `year` is
+authoritative scene state: it updates the hero, relationship graph,
+contextual evidence, accessible summary, and shallow URL together. Scrubbing
+uses URL replacement so it does not flood browser Back history; entering and
+leaving the history representation still creates reversible history entries.
+Product context remains explicitly labeled with `crossYear` when it cannot
+follow the selected historical year.
+
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns
 state, geometry, visual continuity, URL navigation, motion, and accessible

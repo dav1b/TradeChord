@@ -30,10 +30,23 @@
 		handledRevision = revision;
 		void tick().then(() => {
 			if (!focusEntity || revision !== transition.revision) return;
-			const target = Array.from(stage.querySelectorAll<HTMLElement>('[data-entity-id]')).find(
-				(element) => element.dataset.entityId === focusEntity && !element.inert
-			);
-			target?.focus({ preventScroll: true });
+			const started = performance.now();
+			function transferFocus() {
+				if (revision !== transition.revision) return;
+				// During crossfade both representations may briefly share the
+				// semantic ID. Prefer the newly inserted (later) element.
+				const target = Array.from(
+					stage.querySelectorAll<HTMLElement>('[data-entity-id]')
+				)
+					.reverse()
+					.find((element) => element.dataset.entityId === focusEntity && !element.inert);
+				if (target) {
+					target.focus({ preventScroll: true });
+					return;
+				}
+				if (performance.now() - started < 800) requestAnimationFrame(transferFocus);
+			}
+			transferFocus();
 		});
 	});
 </script>

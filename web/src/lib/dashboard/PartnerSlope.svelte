@@ -4,7 +4,15 @@
 	import { partnerPoint } from '$lib/ui/tradepoint.svelte';
 	import type { CountryProjection, PartnerRow } from '$lib/data/types';
 
-	let { projection, topN = 7 }: { projection: CountryProjection; topN?: number } = $props();
+	let {
+		projection,
+		topN = 7,
+		onselect
+	}: {
+		projection: CountryProjection;
+		topN?: number;
+		onselect?: (partner: string) => void;
+	} = $props();
 
 	const reporter = $derived(projection.country);
 	const y1 = $derived(projection.years[0]);
@@ -36,4 +44,4 @@
 	});
 </script>
 
-<SlopeChart {rows} leftLabel={String(y1)} rightLabel={String(y2)} />
+<SlopeChart {rows} leftLabel={String(y1)} rightLabel={String(y2)} {onselect} />

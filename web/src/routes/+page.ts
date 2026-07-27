@@ -17,25 +17,34 @@ export const load: PageLoad = async ({ fetch, url }) => {
 			: countryCodes[0];
 
 	const projection = await loadCountry(current.datasetVersion, country, fetch);
+	const latestYear = projection.years.at(-1) ?? 0;
+	const yearParam = Number(url.searchParams.get('year'));
+	const year = projection.years.includes(yearParam) ? yearParam : latestYear;
 	const view = url.searchParams.get('view');
 	const flowParam = url.searchParams.get('flow');
 	const partnerParam = url.searchParams.get('partner');
 	const productParam = url.searchParams.get('product');
 	const partnerCodes = new Set(
-		(projection.partnersByYear[String(projection.years.at(-1))] ?? []).map((row) => row.partner)
+		projection.years.flatMap((candidateYear) =>
+			(projection.partnersByYear[String(candidateYear)] ?? []).map((row) => row.partner)
+		)
 	);
 	const productCodes = new Set(
-		(projection.productsByYear[String(projection.years.at(-1))] ?? []).map((row) =>
-			row.product.replace(/^\d+-\d+_/, '')
+		projection.years.flatMap((candidateYear) =>
+			(projection.productsByYear[String(candidateYear)] ?? []).map((row) =>
+				row.product.replace(/^\d+-\d+_/, '')
+			)
 		)
 	);
 	const partner = partnerParam && partnerCodes.has(partnerParam) ? partnerParam : null;
 	const product = productParam && productCodes.has(productParam) ? productParam : null;
 	const flow: 'export' | 'import' | 'both' =
 		flowParam === 'export' || flowParam === 'import' ? flowParam : 'both';
-	const representation: 'rank' | 'chord' | 'relationship' | 'products' =
+	const representation: 'rank' | 'chord' | 'relationship' | 'products' | 'history' =
 		view === 'rank'
 			? 'rank'
+			: view === 'history' && partner
+				? 'history'
 			: view === 'products' && partner && flow !== 'both'
 				? 'products'
 				: view === 'relationship' && partner
@@ -47,6 +56,6 @@ export const load: PageLoad = async ({ fetch, url }) => {
 		countries,
 		country,
 		projection,
-		explorer: { representation, flow, partner, product }
+		explorer: { representation, year, flow, partner, product }
 	};
 };

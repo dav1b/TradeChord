@@ -13,6 +13,15 @@ export interface SceneEntity<T> {
 	datum: T;
 }
 
+export interface PartnerHistoryPoint {
+	year: number;
+	exportsUsd: number;
+	importsUsd: number;
+	balanceUsd: number | null;
+	exportAvailable: boolean;
+	importAvailable: boolean;
+}
+
 export interface TradeSceneGraph {
 	id: string;
 	label: string;
@@ -21,6 +30,7 @@ export interface TradeSceneGraph {
 	selectedPartner: SceneEntity<PartnerRow> | null;
 	flows: SceneEntity<PartnerRow>[];
 	products: SceneEntity<CrossCell>[];
+	history: PartnerHistoryPoint[];
 	path: TradeEntityId[];
 }
 
@@ -127,6 +137,22 @@ export function deriveTradeScene(
 	}
 	const selectedProduct = products.find((entity) => entity.selected);
 	if (selectedProduct) path.push(selectedProduct.id);
+	const history = state.partner
+		? projection.years.map((year) => {
+				const row =
+					(projection.partnersByYear[String(year)] ?? []).find(
+						(candidate) => candidate.partner === state.partner
+					) ?? null;
+				return {
+					year,
+					exportsUsd: row?.exportsUsd ?? 0,
+					importsUsd: row?.importsUsd ?? 0,
+					balanceUsd: row?.balanceUsd ?? null,
+					exportAvailable: row?.exportAvailable ?? false,
+					importAvailable: row?.importAvailable ?? false
+				};
+			})
+		: [];
 
 	return {
 		id: `${state.reporter}:${state.year}:${state.representation}`,
@@ -147,6 +173,7 @@ export function deriveTradeScene(
 		selectedPartner,
 		flows,
 		products,
+		history,
 		path
 	};
 }

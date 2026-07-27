@@ -36,6 +36,8 @@ export interface ExplorerController {
 	selectPartner(code: string): void;
 	openRelationship(code: string): void;
 	openProducts(flow: 'export' | 'import'): void;
+	openHistory(partner?: string): void;
+	selectYear(year: number): void;
 	selectRelationshipProduct(code: string): void;
 	selectProduct(code: string): void;
 	clearSelection(): void;
@@ -113,6 +115,12 @@ export function createExplorer(input: ExplorerInput, onchange: OnChange): Explor
 		},
 		openProducts(flow) {
 			dispatch({ type: 'open-products', flow });
+		},
+		openHistory(partner) {
+			dispatch({ type: 'open-history', partner });
+		},
+		selectYear(year) {
+			dispatch({ type: 'select-year', year });
 		},
 		selectRelationshipProduct(code) {
 			dispatch({ type: 'select-relationship-product', product: code });

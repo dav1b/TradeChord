@@ -23,11 +23,13 @@
 		rows,
 		leftLabel,
 		rightLabel,
+		onselect,
 		height = 280
 	}: {
 		rows: Row[];
 		leftLabel: string;
 		rightLabel: string;
+		onselect?: (label: string) => void;
 		height?: number;
 	} = $props();
 	const explorer = useExplorer();
@@ -70,8 +72,12 @@
 	function keyselect(e: KeyboardEvent, label: string) {
 		if (e.key === 'Enter' || e.key === ' ') {
 			e.preventDefault();
-			explorer.selectPartner(label);
+			activate(label);
 		}
+	}
+	function activate(label: string) {
+		if (onselect) onselect(label);
+		else explorer.selectPartner(label);
 	}
 </script>
 
@@ -98,12 +104,12 @@
 				<g
 					class="hit"
 					role="button"
-					tabindex="-1"
+					tabindex="0"
 					aria-label="{r.label} {leftLabel}"
 					style:opacity={rec ? 0.3 : 1}
 					onmousemove={(e) => showTip(r.pointA, e)}
 					onmouseleave={hideTip}
-					onclick={() => explorer.selectPartner(r.label)}
+					onclick={() => activate(r.label)}
 					onkeydown={(e) => keyselect(e, r.label)}
 				>
 					<circle cx={xL} cy={y(r.a)} r="11" fill="transparent" pointer-events="all" />
@@ -115,12 +121,12 @@
 				<g
 					class="hit"
 					role="button"
-					tabindex="-1"
+					tabindex="0"
 					aria-label="{r.label} {rightLabel}"
 					style:opacity={rec ? 0.3 : 1}
 					onmousemove={(e) => showTip(r.pointB, e)}
 					onmouseleave={hideTip}
-					onclick={() => explorer.selectPartner(r.label)}
+					onclick={() => activate(r.label)}
 					onkeydown={(e) => keyselect(e, r.label)}
 				>
 					<circle cx={xR} cy={yb} r="11" fill="transparent" pointer-events="all" />
