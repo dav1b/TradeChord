@@ -247,14 +247,15 @@ The first production header verification found:
 - versioned projection responses still advertise
   `Cache-Control: public, max-age=0, must-revalidate`.
 
-`web/vercel.json` now declares the intended split policy:
+`web/vercel.json` declares the intended split policy:
 
 - `/data/<version>/...`: `public, max-age=31536000, immutable`;
 - `/data/current.json`: `public, max-age=0, must-revalidate`.
 
-The next deployment must verify that Vercel applies these exact response
-headers in production. The task is complete only when the live responses, not
-just the configuration file, confirm the policy.
+The deployment of commit `b2867b5` verified that Vercel applies both exact
+policies in production. The connected project is also persistently configured
+with `web/` as its root and Node 22; this matters because a repository-root
+build cannot find the web lockfile and fails at `npm ci`.
 
 ## 9. Build and deployment gates
 
@@ -331,8 +332,8 @@ remain useful gates, but they do not replace field performance.
 ### Phase 2: static and cache hardening
 
 1. Prerender the finite public route set.
-2. Verify the newly configured differentiated cache headers for versioned
-   data and `current.json` on the next production deployment.
+2. Differentiated cache headers for versioned data and `current.json` are
+   configured and verified in production.
 3. Add direct-entry and refresh tests.
 4. Add payload and bundle reports to CI.
 

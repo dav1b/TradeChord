@@ -29,15 +29,16 @@ Completed:
   semantic keys, URL restoration, keyboard activation, and reversible
   selection.
 - Vercel cache policy configuration for immutable versioned projections and a
-  separately revalidated active-release pointer.
+  separately revalidated active-release pointer, verified in production.
+- Persistent Vercel project configuration with `web/` as the root and Node 22;
+  the production bilateral journey passes in Chromium.
 
 Operational follow-up:
 
 - Run and review the full 30-reporter recollection before publishing the next
   historical-data release. The active `2026-07.1` release is intentionally a
   schema-v2 compatibility projection of the existing canonical matrix.
-- Verify the configured cache headers on the next production deployment, then
-  complete visual, interruption, focus-restoration, and screen-reader QA for
+- Complete visual, interruption, focus-restoration, and screen-reader QA for
   the first continuous-scene prototype.
 
 This document merges the pipeline repo (`TradeChord_datapipeline`) and the dashboard repo

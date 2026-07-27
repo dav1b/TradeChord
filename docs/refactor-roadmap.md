@@ -316,7 +316,7 @@ After activation:
 6. Record the release date, source range, validation result, and any accepted
    caveats in the methodology documentation.
 
-### 6.6 Establish the first Vercel baseline — In progress
+### 6.6 Establish the first Vercel baseline — Implemented; field metrics pending
 
 Treat deployment as the next validation environment, not as the last step
 after the revised frontend is complete:
@@ -352,10 +352,11 @@ Baseline progress:
 - Initial compressed page and country transfers are inside provisional
   budgets.
 - Production data resolves schema 2 release `2026-07.1`.
-- Differentiated cache rules are implemented in `web/vercel.json`: versioned
-  projections receive a one-year immutable policy, while `current.json`
-  revalidates. Production response headers still need verification after the
-  next deployment.
+- The persistent Vercel project settings use `web/` as the root and Node 22.
+- Differentiated cache rules in `web/vercel.json` are verified in production:
+  versioned projections receive `public, max-age=31536000, immutable`, while
+  `current.json` receives `public, max-age=0, must-revalidate`.
+- The bilateral relationship journey passes against production in Chromium.
 - Field Core Web Vitals still require Speed Insights traffic and are not yet
   complete.
 
