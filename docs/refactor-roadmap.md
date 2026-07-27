@@ -164,6 +164,15 @@ These decisions are implemented and should be treated as defaults:
   country projections on `/all`.
 - Added browser interaction coverage for initial loading, country selection,
   URL updates, cross-filtering, release display, and the overview route.
+- Introduced the first centralized explorer controller for durable
+  representation and partner/product selection state.
+- Added stable semantic country, partner, flow, and product key helpers.
+- Replaced the module-global cross-filter with page-scoped explorer context.
+- Implemented the first continuous-scene prototype: the partner chord
+  transforms into an exact ranked partner view and reverses without losing
+  selection.
+- Made representation and selection linkable through `view`, `partner`, and
+  `product` URL state, including browser back/forward restoration.
 
 ### 3.7 Testing, CI, and documentation — Done
 
@@ -940,7 +949,7 @@ The continuous scene must remain understandable without animation:
 
 ### 7.14 Implementation sequence — Planned
 
-#### Phase A: interaction prototype
+#### Phase A: interaction prototype — First increment implemented
 
 Build an isolated prototype using a small fixed fixture:
 
@@ -952,6 +961,23 @@ Build an isolated prototype using a small fixed fixture:
 
 The prototype should prove semantic-key continuity and transition quality
 before the production dashboard is reorganized.
+
+Current increment:
+
+- Network ↔ ranked partners is implemented against production projection data.
+- Partner ribbons and ranked bars share semantic partner keys.
+- Ranked selection pins the chosen partner and re-ranks the remainder with
+  FLIP.
+- URL restoration and browser history are covered by Playwright.
+- Keyboard-operable network marks and ranked controls are present.
+- Reduced-motion duration policy is shared by FLIP and cross-view movement.
+
+Still required before Phase A is complete:
+
+- visual QA on representative mobile and desktop browsers;
+- explicit animation-interruption stress testing;
+- a bilateral ribbon → paired-flow-bar transformation;
+- focused screen-reader and focus-restoration review.
 
 Acceptance criteria:
 

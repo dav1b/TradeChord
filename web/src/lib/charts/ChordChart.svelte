@@ -5,7 +5,6 @@
 	// reporter arc vs the partner arcs reflects the balance. Ribbons/arcs coloured by
 	// each partner's balance (teal surplus / ember deficit); reporter is navy.
 	import { arc as d3arc, chord as d3chord, ribbon as d3ribbon } from 'd3';
-	import { fade } from 'svelte/transition';
 	import {
 		countryPoint,
 		hideTip,
@@ -13,8 +12,9 @@
 		showTip,
 		type TradePoint
 	} from '$lib/ui/tradepoint.svelte';
-	import { clearSelection, selectPartner, selection } from '$lib/ui/selection.svelte';
-	import { motionDuration } from '$lib/motion';
+	import { partnerKey } from '$lib/explorer/entity';
+	import { receiveEntity, sendEntity } from '$lib/explorer/scene-transitions';
+	import { useExplorer } from '$lib/explorer/explorer.svelte';
 	import type { FlowSummary, PartnerRow } from '$lib/data/types';
 
 	let {
@@ -30,6 +30,7 @@
 		reporterSummary: FlowSummary;
 		height?: number;
 	} = $props();
+	const explorer = useExplorer();
 
 	let width = $state(0);
 	const band = 10;
@@ -68,11 +69,15 @@
 		return i === 0 ? countryPoint(reporter, year, reporterSummary) : partnerPoint(reporter, year, rows[i - 1]);
 	}
 	function recessed(i: number): boolean {
-		return selection.partner != null && i !== 0 && rows[i - 1]?.partner !== selection.partner;
+		return (
+			explorer.state.partner != null &&
+			i !== 0 &&
+			rows[i - 1]?.partner !== explorer.state.partner
+		);
 	}
 	function clickNode(i: number) {
-		if (i === 0) clearSelection();
-		else selectPartner(rows[i - 1].partner);
+		if (i === 0) explorer.clearSelection();
+		else explorer.selectPartner(rows[i - 1].partner);
 	}
 	function keyNode(e: KeyboardEvent, i: number) {
 		if (e.key === 'Enter' || e.key === ' ') {
@@ -86,16 +91,17 @@
 	{#if layout}
 		<svg {width} {height}>
 			<g transform="translate({width / 2},{height / 2})">
-				{#each layout as ch, i (ch.source.index + '-' + ch.target.index)}
+				{#each layout as ch (partnerKey(reporter, rows[(ch.source.index === 0 ? ch.target.index : ch.source.index) - 1].partner))}
 					{@const p = ch.source.index === 0 ? ch.target.index : ch.source.index}
 					<path
 						class="mark"
 						d={ribbonGen(ch) as unknown as string}
 						fill={color(p)}
 						opacity={recessed(p) ? 0.06 : 0.32}
-						in:fade={{ duration: motionDuration(300), delay: i * 14 }}
+						in:receiveEntity={{ key: partnerKey(reporter, rows[p - 1].partner) }}
+						out:sendEntity={{ key: partnerKey(reporter, rows[p - 1].partner) }}
 						role="button"
-						tabindex="-1"
+						tabindex="0"
 						aria-label={label(p)}
 						onmousemove={(e) => showTip(point(p), e)}
 						onmouseleave={hideTip}
@@ -113,7 +119,7 @@
 						fill={color(g.index)}
 						opacity={recessed(g.index) ? 0.15 : 1}
 						role="button"
-						tabindex="-1"
+						tabindex={g.index === 0 ? -1 : 0}
 						aria-label={label(g.index)}
 						onmousemove={(e) => showTip(point(g.index), e)}
 						onmouseleave={hideTip}

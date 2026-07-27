@@ -8,8 +8,13 @@
 	import PartnerTreemap from '$lib/dashboard/PartnerTreemap.svelte';
 	import ProductTreemap from '$lib/dashboard/ProductTreemap.svelte';
 	import PartnerChord from '$lib/dashboard/PartnerChord.svelte';
-	import { clearSelection, selection } from '$lib/ui/selection.svelte';
+	import {
+		createExplorer,
+		provideExplorer,
+		type ExplorerState
+	} from '$lib/explorer/explorer.svelte';
 	import { motionDuration } from '$lib/motion';
+	import { untrack } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import type { PageData } from './$types';
 
@@ -19,22 +24,56 @@
 	const summary = $derived(data.projection.summaryByYear[String(year)]);
 	const source = $derived(`WITS · ${year}`);
 
-	// Reset the cross-filter when the reporter changes.
+	function navigateExplorer(state: Readonly<ExplorerState>) {
+		const params = new URLSearchParams();
+		params.set('country', state.reporter);
+		if (state.representation !== 'chord') params.set('view', state.representation);
+		if (state.partner) params.set('partner', state.partner);
+		if (state.product) params.set('product', state.product);
+		goto(`?${params}`, { keepFocus: true, noScroll: true });
+	}
+
+	const explorer = provideExplorer(
+		untrack(() =>
+			createExplorer(
+				{
+					reporter: data.country,
+					year,
+					partner: data.explorer.partner,
+					product: data.explorer.product,
+					representation: data.explorer.representation
+				},
+				navigateExplorer
+			)
+		)
+	);
+
+	// Apply URL/back-forward navigation to the single scene state.
 	$effect(() => {
-		data.country;
-		clearSelection();
+		explorer.sync({
+			reporter: data.country,
+			year,
+			partner: data.explorer.partner,
+			product: data.explorer.product,
+			representation: data.explorer.representation
+		});
 	});
 
 	const partnersTitle = $derived(
-		selection.product ? `Partners · ${selection.product}` : 'Partners · exports, tinted by balance'
+		explorer.state.product
+			? `Partners · ${explorer.state.product}`
+			: 'Partners · exports, tinted by balance'
 	);
 	const productsTitle = $derived(
-		selection.partner ? `Products · ${selection.partner}` : 'Products · exports, tinted by balance'
+		explorer.state.partner
+			? `Products · ${explorer.state.partner}`
+			: 'Products · exports, tinted by balance'
 	);
-	const filterLabel = $derived(selection.partner ?? selection.product);
+	const filterLabel = $derived(explorer.state.partner ?? explorer.state.product);
 
 	function selectCountry(code: string) {
-		goto(`?country=${code}`, { keepFocus: true, noScroll: true });
+		const view = explorer.state.representation === 'rank' ? '&view=rank' : '';
+		goto(`?country=${code}${view}`, { keepFocus: true, noScroll: true });
 	}
 </script>
 
@@ -50,7 +89,11 @@
 	</header>
 
 	{#if filterLabel}
-		<button class="chip" onclick={clearSelection} transition:fade={{ duration: motionDuration(140) }}>
+		<button
+			class="chip"
+			onclick={() => explorer.clearSelection()}
+			transition:fade={{ duration: motionDuration(140) }}
+		>
 			Filtered · {filterLabel}<span class="x">×</span>
 		</button>
 	{/if}

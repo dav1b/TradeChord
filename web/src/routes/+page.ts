@@ -17,6 +17,26 @@ export const load: PageLoad = async ({ fetch, url }) => {
 			: countryCodes[0];
 
 	const projection = await loadCountry(current.datasetVersion, country, fetch);
+	const representation: 'rank' | 'chord' =
+		url.searchParams.get('view') === 'rank' ? 'rank' : 'chord';
+	const partnerParam = url.searchParams.get('partner');
+	const productParam = url.searchParams.get('product');
+	const partnerCodes = new Set(
+		(projection.partnersByYear[String(projection.years.at(-1))] ?? []).map((row) => row.partner)
+	);
+	const productCodes = new Set(
+		(projection.productsByYear[String(projection.years.at(-1))] ?? []).map((row) =>
+			row.product.replace(/^\d+-\d+_/, '')
+		)
+	);
+	const partner = partnerParam && partnerCodes.has(partnerParam) ? partnerParam : null;
+	const product = productParam && productCodes.has(productParam) ? productParam : null;
 
-	return { version: current.datasetVersion, countries, country, projection };
+	return {
+		version: current.datasetVersion,
+		countries,
+		country,
+		projection,
+		explorer: { representation, partner, product }
+	};
 };

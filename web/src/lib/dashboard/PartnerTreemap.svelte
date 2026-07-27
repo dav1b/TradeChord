@@ -1,18 +1,19 @@
 <script lang="ts">
 	import TreemapChart from '$lib/charts/TreemapChart.svelte';
 	import { partnerPoint } from '$lib/ui/tradepoint.svelte';
-	import { selectPartner, selection } from '$lib/ui/selection.svelte';
+	import { useExplorer } from '$lib/explorer/explorer.svelte';
 	import type { CountryProjection } from '$lib/data/types';
 
 	let { projection, year }: { projection: CountryProjection; year: number } = $props();
+	const explorer = useExplorer();
 	const reporter = $derived(projection.country);
 	const clean = (p: string) => p.replace(/^\d+-\d+_/, '');
 
 	const items = $derived.by(() => {
 		// Cross-filtered: partners for the selected product.
-		if (selection.product) {
+		if (explorer.state.product) {
 			const cells = projection.crossCells.filter(
-				(c) => clean(c.product) === selection.product && c.exportsUsd > 0
+				(c) => clean(c.product) === explorer.state.product && c.exportsUsd > 0
 			);
 			const total = cells.reduce((s, c) => s + c.exportsUsd, 0) || 1;
 			return cells
@@ -31,7 +32,7 @@
 							importAvailable: c.importAvailable,
 							exportShare: c.exportsUsd / total
 						},
-						selection.product ?? undefined
+						explorer.state.product ?? undefined
 					)
 				}))
 				.sort((a, b) => b.value - a.value);
@@ -43,4 +44,8 @@
 	});
 </script>
 
-<TreemapChart {items} selectedLabel={selection.partner} onselect={selectPartner} />
+<TreemapChart
+	{items}
+	selectedLabel={explorer.state.partner}
+	onselect={(code) => explorer.selectPartner(code)}
+/>

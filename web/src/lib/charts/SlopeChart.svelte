@@ -8,7 +8,7 @@
 	import { pct } from '$lib/format';
 	import { deltaColor } from '$lib/theme/tokens';
 	import { hideTip, showTip, type TradePoint } from '$lib/ui/tradepoint.svelte';
-	import { selectPartner, selection } from '$lib/ui/selection.svelte';
+	import { useExplorer } from '$lib/explorer/explorer.svelte';
 	import { motionDuration } from '$lib/motion';
 
 	interface Row {
@@ -30,6 +30,7 @@
 		rightLabel: string;
 		height?: number;
 	} = $props();
+	const explorer = useExplorer();
 
 	let width = $state(0);
 	const margin = { top: 24, right: 92, bottom: 10, left: 96 };
@@ -64,12 +65,12 @@
 	});
 
 	function recessed(label: string): boolean {
-		return selection.partner != null && label !== selection.partner;
+		return explorer.state.partner != null && label !== explorer.state.partner;
 	}
 	function keyselect(e: KeyboardEvent, label: string) {
 		if (e.key === 'Enter' || e.key === ' ') {
 			e.preventDefault();
-			selectPartner(label);
+			explorer.selectPartner(label);
 		}
 	}
 </script>
@@ -102,7 +103,7 @@
 					style:opacity={rec ? 0.3 : 1}
 					onmousemove={(e) => showTip(r.pointA, e)}
 					onmouseleave={hideTip}
-					onclick={() => selectPartner(r.label)}
+					onclick={() => explorer.selectPartner(r.label)}
 					onkeydown={(e) => keyselect(e, r.label)}
 				>
 					<circle cx={xL} cy={y(r.a)} r="11" fill="transparent" pointer-events="all" />
@@ -119,7 +120,7 @@
 					style:opacity={rec ? 0.3 : 1}
 					onmousemove={(e) => showTip(r.pointB, e)}
 					onmouseleave={hideTip}
-					onclick={() => selectPartner(r.label)}
+					onclick={() => explorer.selectPartner(r.label)}
 					onkeydown={(e) => keyselect(e, r.label)}
 				>
 					<circle cx={xR} cy={yb} r="11" fill="transparent" pointer-events="all" />
