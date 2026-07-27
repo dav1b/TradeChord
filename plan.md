@@ -28,6 +28,9 @@ Completed:
   network → bilateral reported export/import relationship, with stable
   semantic keys, URL restoration, keyboard activation, and reversible
   selection.
+- Bilateral reported export/import flow → product composition, with
+  URL-addressable flow and product state, stable flow/product keys, keyboard
+  selection, coverage disclosure, and desktop/mobile visual QA.
 - Vercel cache policy configuration for immutable versioned projections and a
   separately revalidated active-release pointer, verified in production.
 - Persistent Vercel project configuration with `web/` as the root and Node 22;
@@ -40,6 +43,9 @@ Operational follow-up:
   schema-v2 compatibility projection of the existing canonical matrix.
 - Complete visual, interruption, focus-restoration, and screen-reader QA for
   the first continuous-scene prototype.
+- Design a versioned partner×product history projection before adding
+  historical product drill-down; the active release only contains headline
+  `crossYear` detail.
 
 This document merges the pipeline repo (`TradeChord_datapipeline`) and the dashboard repo
 (`TradeChord`) into one repository with a clean data contract, and sets the path to a more

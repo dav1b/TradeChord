@@ -964,7 +964,7 @@ The continuous scene must remain understandable without animation:
 
 ### 7.14 Implementation sequence — Planned
 
-#### Phase A: interaction prototype — Two increments implemented
+#### Phase A: interaction prototype — Three increments implemented
 
 Build an isolated prototype using a small fixed fixture:
 
@@ -990,6 +990,14 @@ Current increment:
   representations; export and import marks have stable flow keys.
 - Returning to the network preserves the partner selection, and direct
   `?view=relationship&partner=<code>` URLs restore the scene.
+- Either reported-flow bar opens a partner-and-flow-specific product
+  composition using the committed `crossCells` projection. The flow band and
+  product tiles retain stable semantic keys.
+- Product tiles are keyboard-selectable, disclose value and share, and can be
+  restored through
+  `?view=products&partner=<code>&flow=<export|import>&product=<code>`.
+- The composition reports how much of the bilateral flow is represented by
+  published product detail and shows an explicit unavailable state.
 - URL restoration and browser history are covered by Playwright.
 - Keyboard-operable network marks and ranked controls are present.
 - Reduced-motion duration policy is shared by FLIP and cross-view movement.
@@ -999,8 +1007,15 @@ Still required before Phase A is complete:
 - visual QA on representative mobile and desktop browsers;
 - explicit animation-interruption stress testing;
 - focused screen-reader and focus-restoration review;
-- richer ribbon-to-band geometry interpolation after the interaction and
-  accessibility behavior are proven.
+- richer ribbon-to-band and band-to-tile geometry interpolation after the
+  interaction and accessibility behavior are proven.
+
+Current data boundary:
+
+- Partner×product detail is currently published only for `crossYear` (the
+  release headline year). Historical product composition and product history
+  must be backed by a future versioned detail projection; the client must not
+  infer those values from national product totals.
 
 Acceptance criteria:
 

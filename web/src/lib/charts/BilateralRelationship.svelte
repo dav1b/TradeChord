@@ -57,10 +57,13 @@
 	</div>
 
 	<div class="flows">
-		<div
+		<button
 			class="flow"
 			in:fly={{ y: 10, duration: motionDuration(260), delay: motionDuration(180) }}
 			out:fade={{ duration: motionDuration(100) }}
+			disabled={!row.exportAvailable}
+			aria-label="Open reported export product composition"
+			onclick={() => explorer.openProducts('export')}
 		>
 			<div class="flow-head">
 				<span>Reported exports</span>
@@ -71,15 +74,20 @@
 					class="export-bar"
 					style:width={`${(row.exportsUsd / maximum) * 100}%`}
 					data-entity-id={flowKey(reporter, row.partner, 'export')}
+					in:receiveEntity={{ key: flowKey(reporter, row.partner, 'export') }}
+					out:sendEntity={{ key: flowKey(reporter, row.partner, 'export') }}
 				></span>
 			</div>
-			<p>{reporter} reported exports to {row.partner}</p>
-		</div>
+			<p>{reporter} reported exports to {row.partner} · Open product composition</p>
+		</button>
 
-		<div
+		<button
 			class="flow"
 			in:fly={{ y: 10, duration: motionDuration(260), delay: motionDuration(260) }}
 			out:fade={{ duration: motionDuration(100) }}
+			disabled={!row.importAvailable}
+			aria-label="Open reported import product composition"
+			onclick={() => explorer.openProducts('import')}
 		>
 			<div class="flow-head">
 				<span>Reported imports</span>
@@ -90,10 +98,12 @@
 					class="import-bar"
 					style:width={`${(row.importsUsd / maximum) * 100}%`}
 					data-entity-id={flowKey(reporter, row.partner, 'import')}
+					in:receiveEntity={{ key: flowKey(reporter, row.partner, 'import') }}
+					out:sendEntity={{ key: flowKey(reporter, row.partner, 'import') }}
 				></span>
 			</div>
-			<p>{reporter} reported imports from {row.partner}</p>
-		</div>
+			<p>{reporter} reported imports from {row.partner} · Open product composition</p>
+		</button>
 	</div>
 
 	<div
@@ -200,6 +210,22 @@
 		justify-content: space-between;
 		align-items: baseline;
 		gap: var(--space-3);
+	}
+	.flow {
+		width: 100%;
+		border: 0;
+		padding: 0;
+		background: transparent;
+		color: inherit;
+		text-align: left;
+		cursor: pointer;
+	}
+	.flow:disabled {
+		cursor: default;
+	}
+	.flow:focus-visible {
+		outline: 2px solid var(--active);
+		outline-offset: 4px;
 	}
 	.flow-head strong {
 		font-size: 1rem;

@@ -1,6 +1,6 @@
 import { getContext, setContext } from 'svelte';
 
-export type ExplorerRepresentation = 'chord' | 'rank' | 'relationship';
+export type ExplorerRepresentation = 'chord' | 'rank' | 'relationship' | 'products';
 export type ExplorerFlow = 'export' | 'import' | 'both';
 export type ExplorerLevel = 'country' | 'relationship' | 'product' | 'history' | 'change' | 'quality';
 
@@ -17,7 +17,7 @@ export interface ExplorerState {
 
 export type ExplorerInput = Pick<
 	ExplorerState,
-	'reporter' | 'year' | 'partner' | 'product' | 'representation'
+	'reporter' | 'year' | 'flow' | 'partner' | 'product' | 'representation'
 >;
 
 type OnChange = (state: Readonly<ExplorerState>) => void;
@@ -27,6 +27,8 @@ export interface ExplorerController {
 	sync(input: ExplorerInput): void;
 	selectPartner(code: string): void;
 	openRelationship(code: string): void;
+	openProducts(flow: 'export' | 'import'): void;
+	selectRelationshipProduct(code: string): void;
 	selectProduct(code: string): void;
 	clearSelection(): void;
 	setRepresentation(representation: ExplorerRepresentation): void;
@@ -38,8 +40,14 @@ export function createExplorer(input: ExplorerInput, onchange: OnChange): Explor
 	const state = $state<ExplorerState>({
 		...input,
 		comparisonYear: null,
-		flow: 'both',
-		level: input.partner ? 'relationship' : input.product ? 'product' : 'country'
+		level:
+			input.representation === 'products' && input.product
+				? 'product'
+				: input.partner
+					? 'relationship'
+					: input.product
+						? 'product'
+						: 'country'
 	});
 
 	function changed() {
@@ -53,22 +61,46 @@ export function createExplorer(input: ExplorerInput, onchange: OnChange): Explor
 		sync(next) {
 			state.reporter = next.reporter;
 			state.year = next.year;
+			state.flow = next.flow;
 			state.partner = next.partner;
 			state.product = next.product;
 			state.representation = next.representation;
-			state.level = next.partner ? 'relationship' : next.product ? 'product' : 'country';
+			state.level =
+				next.representation === 'products' && next.product
+					? 'product'
+					: next.partner
+						? 'relationship'
+						: next.product
+							? 'product'
+							: 'country';
 		},
 		selectPartner(code) {
 			state.partner = state.partner === code ? null : code;
 			state.product = null;
+			state.flow = 'both';
 			state.level = state.partner ? 'relationship' : 'country';
 			changed();
 		},
 		openRelationship(code) {
 			state.partner = code;
 			state.product = null;
+			state.flow = 'both';
 			state.level = 'relationship';
 			state.representation = 'relationship';
+			changed();
+		},
+		openProducts(flow) {
+			if (!state.partner) return;
+			state.flow = flow;
+			state.product = null;
+			state.level = 'product';
+			state.representation = 'products';
+			changed();
+		},
+		selectRelationshipProduct(code) {
+			if (!state.partner || state.representation !== 'products') return;
+			state.product = state.product === code ? null : code;
+			state.level = state.product ? 'product' : 'relationship';
 			changed();
 		},
 		selectProduct(code) {
@@ -80,15 +112,23 @@ export function createExplorer(input: ExplorerInput, onchange: OnChange): Explor
 		clearSelection() {
 			state.partner = null;
 			state.product = null;
+			state.flow = 'both';
 			state.level = 'country';
 			changed();
 		},
 		setRepresentation(representation) {
 			if (state.representation === representation) return;
-			if (representation === 'relationship' && !state.partner) return;
+			if ((representation === 'relationship' || representation === 'products') && !state.partner)
+				return;
 			state.representation = representation;
 			state.level =
-				representation === 'relationship' && state.partner ? 'relationship' : 'country';
+				representation === 'products'
+					? state.product
+						? 'product'
+						: 'relationship'
+					: representation === 'relationship' && state.partner
+						? 'relationship'
+						: 'country';
 			changed();
 		}
 	};

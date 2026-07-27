@@ -2,6 +2,7 @@
 	import ChordChart from '$lib/charts/ChordChart.svelte';
 	import RankedPartners from '$lib/charts/RankedPartners.svelte';
 	import BilateralRelationship from '$lib/charts/BilateralRelationship.svelte';
+	import ProductComposition from '$lib/charts/ProductComposition.svelte';
 	import { useExplorer } from '$lib/explorer/explorer.svelte';
 	import type { CountryProjection } from '$lib/data/types';
 
@@ -30,6 +31,9 @@
 			(row) => row.partner === explorer.state.partner
 		) ?? null
 	);
+	const relationshipCells = $derived(
+		projection.crossCells.filter((cell) => cell.partner === explorer.state.partner)
+	);
 </script>
 
 <div class="scene-controls" role="group" aria-label="Trade network representation">
@@ -50,10 +54,24 @@
 			onclick={() => explorer.setRepresentation('relationship')}>Relationship</button
 		>
 	{/if}
+	{#if explorer.state.partner && explorer.state.flow !== 'both'}
+		<button
+			class:active={explorer.state.representation === 'products'}
+			aria-pressed={explorer.state.representation === 'products'}
+			onclick={() => explorer.setRepresentation('products')}>Products</button
+		>
+	{/if}
 </div>
 
 <div class="scene" aria-live="polite">
-	{#if explorer.state.representation === 'relationship' && relationshipRow}
+	{#if explorer.state.representation === 'products' && relationshipRow}
+		<ProductComposition
+			reporter={projection.country}
+			year={projection.crossYear ?? year}
+			row={relationshipRow}
+			cells={relationshipCells}
+		/>
+	{:else if explorer.state.representation === 'relationship' && relationshipRow}
 		<BilateralRelationship
 			reporter={projection.country}
 			{year}

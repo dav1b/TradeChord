@@ -60,6 +60,30 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 	await page.goto('/?country=DEU&view=relationship&partner=CHN');
 	await expect(page.getByText('DEU ↔ CHN')).toBeVisible();
 	await expect(page.getByText('Reported balance')).toBeVisible();
+	await page.getByRole('button', { name: 'Open reported import product composition' }).click();
+	await expect(page).toHaveURL(/[?&]view=products/);
+	await expect(page).toHaveURL(/[?&]flow=import/);
+	await expect(page.getByRole('heading', { name: 'Reported imports by product' })).toBeVisible();
+	const productMap = page.locator('.treemap');
+	const firstProduct = productMap.getByRole('button').first();
+	await expect(firstProduct).toBeVisible();
+	await firstProduct.focus();
+	await firstProduct.press('Enter');
+	await expect(firstProduct).toHaveAttribute('aria-pressed', 'true');
+	await expect(page).toHaveURL(/[?&]product=/);
+	await page
+		.getByRole('navigation', { name: 'Analytical path' })
+		.getByRole('button', { name: 'CHN', exact: true })
+		.click();
+	await expect(page).toHaveURL(/[?&]view=relationship/);
+	await expect(page.getByText('DEU ↔ CHN')).toBeVisible();
+
+	await page.goto('/?country=DEU&view=products&partner=CHN&flow=import&product=MachElec');
+	await expect(page.getByRole('heading', { name: 'Reported imports by product' })).toBeVisible();
+	await expect(page.locator('[data-entity-id$=\"MachElec\"]')).toHaveAttribute(
+		'aria-pressed',
+		'true'
+	);
 
 	await page.goto('/all');
 	await expect(page.getByRole('heading', { level: 1, name: 'Reporters' })).toBeVisible();

@@ -28,6 +28,7 @@
 		const params = new URLSearchParams();
 		params.set('country', state.reporter);
 		if (state.representation !== 'chord') params.set('view', state.representation);
+		if (state.representation === 'products') params.set('flow', state.flow);
 		if (state.partner) params.set('partner', state.partner);
 		if (state.product) params.set('product', state.product);
 		goto(`?${params}`, { keepFocus: true, noScroll: true });
@@ -39,6 +40,7 @@
 				{
 					reporter: data.country,
 					year,
+					flow: data.explorer.flow,
 					partner: data.explorer.partner,
 					product: data.explorer.product,
 					representation: data.explorer.representation
@@ -53,6 +55,7 @@
 		explorer.sync({
 			reporter: data.country,
 			year,
+			flow: data.explorer.flow,
 			partner: data.explorer.partner,
 			product: data.explorer.product,
 			representation: data.explorer.representation
@@ -71,8 +74,12 @@
 	);
 	const filterLabel = $derived(explorer.state.partner ?? explorer.state.product);
 	const networkTitle = $derived(
-		explorer.state.representation === 'relationship' && explorer.state.partner
-			? `Bilateral trade · ${explorer.state.partner}`
+		explorer.state.partner &&
+			(explorer.state.representation === 'relationship' ||
+				explorer.state.representation === 'products')
+			? explorer.state.representation === 'products'
+				? `${explorer.state.flow === 'export' ? 'Export' : 'Import'} products · ${explorer.state.partner}`
+				: `Bilateral trade · ${explorer.state.partner}`
 			: 'Trade network · top partners'
 	);
 
