@@ -283,4 +283,17 @@
 			font-size: 1.4rem;
 		}
 	}
+	@container trade-scene (min-width: 720px) {
+		.relationship {
+			min-height: 450px;
+		}
+		.flows {
+			grid-template-columns: 1fr 1fr;
+			gap: var(--space-6);
+			margin-top: var(--space-6);
+		}
+		.balance {
+			max-width: 50%;
+		}
+	}
 </style>

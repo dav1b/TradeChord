@@ -86,6 +86,13 @@ contracts. `SceneStage.svelte` owns responsive mode, transition revision,
 announcements, and focus movement. D3 continues to calculate layout; Svelte
 continues to own DOM lifecycle.
 
+The route now presents this machinery through one full-width
+`TradeExplorer` surface. The active scene is the dominant object and its
+question is persistent scene chrome. The former partner, product, and trend
+cards are supporting evidence panes driven by the same selection. On narrow
+screens they become a snap-scrolling evidence tray instead of lengthening the
+page into a stack of independent dashboards.
+
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns
 state, geometry, visual continuity, URL navigation, motion, and accessible

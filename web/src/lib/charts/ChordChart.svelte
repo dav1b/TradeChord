@@ -14,6 +14,7 @@
 	} from '$lib/ui/tradepoint.svelte';
 	import { partnerKey } from '$lib/explorer/entity';
 	import { receiveEntity, sendEntity } from '$lib/explorer/scene-transitions';
+	import { useSceneViewport } from '$lib/explorer/scene-viewport.svelte';
 	import { useExplorer } from '$lib/explorer/explorer.svelte';
 	import type { FlowSummary, PartnerRow } from '$lib/data/types';
 
@@ -31,10 +32,14 @@
 		height?: number;
 	} = $props();
 	const explorer = useExplorer();
+	const viewport = useSceneViewport();
 
 	let width = $state(0);
+	const sceneHeight = $derived(
+		viewport.mode === 'wide' ? Math.max(height, 520) : viewport.mode === 'compact' ? 320 : 400
+	);
 	const band = 10;
-	const R = $derived(Math.max(20, Math.min(width, height) / 2 - 40));
+	const R = $derived(Math.max(20, Math.min(width, sceneHeight) / 2 - 40));
 
 	const matrix = $derived.by(() => {
 		const n = rows.length + 1;
@@ -87,10 +92,10 @@
 	}
 </script>
 
-<div class="wrap" bind:clientWidth={width} style:height="{height}px">
+<div class="wrap" bind:clientWidth={width} style:height="{sceneHeight}px">
 	{#if layout}
-		<svg {width} {height}>
-			<g transform="translate({width / 2},{height / 2})">
+		<svg {width} height={sceneHeight}>
+			<g transform="translate({width / 2},{sceneHeight / 2})">
 				{#each layout as ch (partnerKey(reporter, rows[(ch.source.index === 0 ? ch.target.index : ch.source.index) - 1].partner))}
 					{@const p = ch.source.index === 0 ? ch.target.index : ch.source.index}
 					<path

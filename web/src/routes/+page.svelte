@@ -3,12 +3,8 @@
 	import { page } from '$app/state';
 	import Wordmark from '$lib/ui/Wordmark.svelte';
 	import CountrySelect from '$lib/ui/CountrySelect.svelte';
-	import Card from '$lib/ui/Card.svelte';
 	import Hero from '$lib/dashboard/Hero.svelte';
-	import PartnerSlope from '$lib/dashboard/PartnerSlope.svelte';
-	import PartnerTreemap from '$lib/dashboard/PartnerTreemap.svelte';
-	import ProductTreemap from '$lib/dashboard/ProductTreemap.svelte';
-	import PartnerChord from '$lib/dashboard/PartnerChord.svelte';
+	import TradeExplorer from '$lib/dashboard/TradeExplorer.svelte';
 	import {
 		createExplorer,
 		provideExplorer,
@@ -87,26 +83,7 @@
 		untrack(() => explorer.sync(next));
 	});
 
-	const partnersTitle = $derived(
-		explorer.state.product
-			? `Partners · ${explorer.state.product}`
-			: 'Partners · exports, tinted by balance'
-	);
-	const productsTitle = $derived(
-		explorer.state.partner
-			? `Products · ${explorer.state.partner}`
-			: 'Products · exports, tinted by balance'
-	);
 	const filterLabel = $derived(explorer.state.partner ?? explorer.state.product);
-	const networkTitle = $derived(
-		explorer.state.partner &&
-			(explorer.state.representation === 'relationship' ||
-				explorer.state.representation === 'products')
-			? explorer.state.representation === 'products'
-				? `${explorer.state.flow === 'export' ? 'Export' : 'Import'} products · ${explorer.state.partner}`
-				: `Bilateral trade · ${explorer.state.partner}`
-			: 'Trade network · top partners'
-	);
 
 	function selectCountry(code: string) {
 		const view = explorer.state.representation === 'rank' ? '&view=rank' : '';
@@ -137,20 +114,7 @@
 
 	<Hero {year} {summary} {source} />
 
-	<div class="grid">
-		<Card title={networkTitle} {source}>
-			<PartnerChord projection={data.projection} {year} />
-		</Card>
-		<Card title={partnersTitle} {source}>
-			<PartnerTreemap projection={data.projection} {year} />
-		</Card>
-		<Card title={productsTitle} {source}>
-			<ProductTreemap projection={data.projection} {year} />
-		</Card>
-		<Card title="Partner export share · {data.projection.years[0]}→{year}" {source}>
-			<PartnerSlope projection={data.projection} />
-		</Card>
-	</div>
+	<TradeExplorer projection={data.projection} {year} {source} />
 
 	<footer class="foot">
 		<span>Source: World Bank WITS · dual-flow release {data.version}</span>
@@ -236,11 +200,6 @@
 	}
 	.method p {
 		margin-top: var(--space-2);
-	}
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: var(--space-4);
 	}
 	.foot {
 		display: flex;

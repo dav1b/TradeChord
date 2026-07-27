@@ -8,7 +8,13 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 
 	await page.goto('/');
 	await expect(page.getByRole('heading', { level: 1 })).toContainText('United States');
-	await expect(page.getByText('dual-flow release 2026-07.1')).toBeVisible();
+	await expect(page.getByText('dual-flow release 2026-07.1').first()).toBeVisible();
+	await expect(
+		page.getByRole('heading', {
+			level: 2,
+			name: 'How is USA connected to its trading partners?'
+		})
+	).toBeVisible();
 
 	const reporter = page.getByLabel('Reporter');
 	await expect(reporter).toHaveAttribute('data-ready', 'true');
@@ -16,12 +22,12 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 	await expect(page).toHaveURL(/[?&]country=DEU/);
 	await expect(page.getByRole('heading', { level: 1 })).toContainText('Germany');
 
-	const networkCard = page.locator('section.card').filter({ hasText: 'Trade network · top partners' });
-	const firstRibbon = networkCard.locator('svg path[role="button"][tabindex="0"]').first();
+	const tradeScene = page.locator('section.trade-scene');
+	const firstRibbon = tradeScene.locator('svg path[role="button"][tabindex="0"]').first();
 	await firstRibbon.focus();
 	await firstRibbon.press('Enter');
 	await expect(page).toHaveURL(/[?&]view=relationship/);
-	await expect(page.getByText('Bilateral relationship · 2022')).toBeVisible();
+	await expect(page.getByText('Bilateral relationship · 2022').first()).toBeVisible();
 	await expect(page.getByText('Reported exports', { exact: true })).toBeVisible();
 	await expect(page.getByText('Reported imports', { exact: true })).toBeVisible();
 	await page.getByRole('button', { name: 'Network', exact: true }).first().click();
@@ -46,8 +52,8 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 	await page.getByRole('button', { name: 'Network', exact: true }).click();
 	await expect(page).not.toHaveURL(/[?&]view=rank/);
 
-	const partnerCard = page.locator('section.card').filter({ hasText: 'Partners · exports' });
-	await partnerCard.getByRole('button').first().click();
+	const partnerContext = page.locator('section.evidence-pane').first();
+	await partnerContext.getByRole('button').first().click();
 	await expect(page.getByRole('button', { name: /Filtered ·/ })).toBeVisible();
 
 	await page.goto('/?country=DEU&view=rank&partner=CHN');
@@ -120,4 +126,8 @@ test('scene actions transfer focus and survive rapid reduced-motion reversal', a
 
 	await page.setViewportSize({ width: 390, height: 844 });
 	await expect(page.locator('section.stage')).toHaveAttribute('data-layout', 'compact');
+	const evidenceTray = page.locator('.evidence-grid');
+	expect(
+		await evidenceTray.evaluate((element) => element.scrollWidth > element.clientWidth)
+	).toBe(true);
 });

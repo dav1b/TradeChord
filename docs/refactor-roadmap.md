@@ -1060,16 +1060,29 @@ Still to extract as representations evolve:
 - geometry identity should gain direct unit tests when a lightweight unit-test
   runner is added.
 
-#### Phase C: migrate the country experience — In progress
+#### Phase C: migrate the country experience — Primary shell implemented
 
 1. The shared `SceneStage` shell is implemented.
 2. Network, rank, bilateral relationship, and bilateral product composition
    render from the shared graph.
 3. Preserve current data correctness and unavailable-value handling.
-4. The remaining dashboard cards still act as contextual views and should be
-   absorbed into a full-width responsive scene incrementally.
-5. The current production route is the compatibility surface; every migration
+4. The former dashboard grid is now one full-width, question-led
+   `TradeExplorer`. Partner, product, and trend views form one contextual
+   evidence tray driven by the same selection.
+5. Wide scenes receive expanded chord, bilateral, and product geometry.
+   Narrow scenes retain a compact primary canvas and a horizontally
+   snap-scrolling evidence tray.
+6. The current production route is the compatibility surface; every migration
    must retain its direct-link and data-correctness tests.
+
+Still to migrate:
+
+- treat contextual evidence marks as transformable scene entities rather than
+  embedded legacy chart renderers;
+- allow selected evidence to move into the primary canvas;
+- replace the temporary representation pill with scene-aware question and
+  measure controls;
+- add the first full-width historical representation.
 
 #### Phase D: add product and history transformations
 

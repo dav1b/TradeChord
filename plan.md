@@ -35,6 +35,9 @@ Completed:
   derived semantic scene graph, geometry contracts, shallow URL history,
   responsive scene context, transition revision/direction, accessible
   announcements, and entity-based focus transfer.
+- Full-width, question-led `TradeExplorer` shell with an expanded primary
+  canvas and a single selection-driven evidence tray; narrow screens use
+  snap-scrolling evidence rather than stacked dashboard cards.
 - Vercel cache policy configuration for immutable versioned projections and a
   separately revalidated active-release pointer, verified in production.
 - Persistent Vercel project configuration with `web/` as the root and Node 22;
@@ -47,8 +50,8 @@ Operational follow-up:
   schema-v2 compatibility projection of the existing canonical matrix.
 - Complete manual VoiceOver/NVDA reading-order review and physical
   touch-device QA for the first continuous-scene prototype.
-- Incrementally absorb the remaining contextual dashboard cards into the
-  shared full-width scene instead of adding more independent chart state.
+- Migrate the contextual evidence renderers from embedded legacy charts into
+  transformable scene marks that can move into the primary canvas.
 - Design a versioned partner×product history projection before adding
   historical product drill-down; the active release only contains headline
   `crossYear` detail.

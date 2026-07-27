@@ -28,7 +28,7 @@
 
 	const explorer = useExplorer();
 	const viewport = useSceneViewport();
-	const height = $derived(viewport.mode === 'compact' ? 250 : 270);
+	const height = $derived(viewport.mode === 'compact' ? 260 : viewport.mode === 'wide' ? 400 : 320);
 	const timing = $derived(choreography(explorer.transition.direction));
 	let width = $state(0);
 
