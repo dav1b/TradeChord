@@ -345,6 +345,18 @@ The intended production architecture is static-first:
 Full requirements and phased deployment work are recorded in
 [deployment-performance.md](./deployment-performance.md).
 
+Baseline progress:
+
+- Production Git/Vercel deployment is live at `trade-chord.vercel.app`.
+- The production interaction journey passes in Chromium.
+- Initial compressed page and country transfers are inside provisional
+  budgets.
+- Production data resolves schema 2 release `2026-07.1`.
+- Versioned data is edge-cached but still uses browser revalidation; immutable
+  cache headers remain to be implemented and verified.
+- Field Core Web Vitals still require Speed Insights traffic and are not yet
+  complete.
+
 ## 7. Revised frontend direction: one continuous visual scene
 
 ### 7.1 Product vision — Planned

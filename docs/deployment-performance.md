@@ -224,6 +224,34 @@ Test at least:
 - cold cache and warm cache;
 - reduced-motion mode.
 
+### First production baseline — 2026-07-27
+
+Measured against `https://trade-chord.vercel.app` after the first
+Network ↔ Rank deployment:
+
+| Resource | Compressed transfer | Observed TTFB | Result |
+|---|---:|---:|---|
+| `/` | 57,174 B | 0.311 s | Within initial transfer budget |
+| `/all` | 20,902 B | 0.345 s | Within initial transfer budget |
+| USA country projection | 35,360 B | 0.115 s | Within initial data budget |
+
+The production Playwright journey passed country navigation, representation
+switching, partner selection and re-ranking, browser history, direct scene URL
+restoration, cross-filtering, and `/all`, with no captured console errors.
+
+Header verification found:
+
+- public routes and data return `200`;
+- `current.json` identifies schema 2 and release `2026-07.1`;
+- Vercel edge caching is active for data resources;
+- versioned projection responses still advertise
+  `Cache-Control: public, max-age=0, must-revalidate`.
+
+The versioned projection header does not yet meet the intended immutable-cache
+policy. Adding and verifying a one-year immutable browser policy for
+`/data/<version>/...` is the next deployment-hardening task. `current.json`
+must remain separately revalidated.
+
 ## 9. Build and deployment gates
 
 The Vercel build should stay deterministic and network-independent apart from
