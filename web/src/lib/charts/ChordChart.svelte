@@ -102,6 +102,7 @@
 						out:sendEntity={{ key: partnerKey(reporter, rows[p - 1].partner) }}
 						role="button"
 						tabindex="0"
+						data-entity-id={partnerKey(reporter, rows[p - 1].partner)}
 						aria-label={label(p)}
 						onmousemove={(e) => showTip(point(p), e)}
 						onmouseleave={hideTip}
@@ -120,6 +121,7 @@
 						opacity={recessed(g.index) ? 0.15 : 1}
 						role="button"
 						tabindex={g.index === 0 ? -1 : 0}
+						data-entity-id={g.index === 0 ? undefined : partnerKey(reporter, rows[g.index - 1].partner)}
 						aria-label={label(g.index)}
 						onmousemove={(e) => showTip(point(g.index), e)}
 						onmouseleave={hideTip}

@@ -27,7 +27,12 @@
 	}
 </script>
 
-<section class="relationship" aria-labelledby="relationship-title">
+<section
+	class="relationship"
+	aria-labelledby="relationship-title"
+	tabindex="-1"
+	data-entity-id={partnerKey(reporter, row.partner)}
+>
 	<nav class="trail" aria-label="Analytical path">
 		<button onclick={returnToNetwork}>← Network</button>
 		<span>{reporter}</span>
@@ -62,6 +67,7 @@
 			in:fly={{ y: 10, duration: motionDuration(260), delay: motionDuration(180) }}
 			out:fade={{ duration: motionDuration(100) }}
 			disabled={!row.exportAvailable}
+			data-entity-id={flowKey(reporter, row.partner, 'export')}
 			aria-label="Open reported export product composition"
 			onclick={() => explorer.openProducts('export')}
 		>
@@ -86,6 +92,7 @@
 			in:fly={{ y: 10, duration: motionDuration(260), delay: motionDuration(260) }}
 			out:fade={{ duration: motionDuration(100) }}
 			disabled={!row.importAvailable}
+			data-entity-id={flowKey(reporter, row.partner, 'import')}
 			aria-label="Open reported import product composition"
 			onclick={() => explorer.openProducts('import')}
 		>

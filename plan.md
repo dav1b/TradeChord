@@ -31,6 +31,10 @@ Completed:
 - Bilateral reported export/import flow → product composition, with
   URL-addressable flow and product state, stable flow/product keys, keyboard
   selection, coverage disclosure, and desktop/mobile visual QA.
+- Svelte-native continuous-scene foundation: pure scene actions/reducer,
+  derived semantic scene graph, geometry contracts, shallow URL history,
+  responsive scene context, transition revision/direction, accessible
+  announcements, and entity-based focus transfer.
 - Vercel cache policy configuration for immutable versioned projections and a
   separately revalidated active-release pointer, verified in production.
 - Persistent Vercel project configuration with `web/` as the root and Node 22;
@@ -41,8 +45,10 @@ Operational follow-up:
 - Run and review the full 30-reporter recollection before publishing the next
   historical-data release. The active `2026-07.1` release is intentionally a
   schema-v2 compatibility projection of the existing canonical matrix.
-- Complete visual, interruption, focus-restoration, and screen-reader QA for
-  the first continuous-scene prototype.
+- Complete manual VoiceOver/NVDA reading-order review and physical
+  touch-device QA for the first continuous-scene prototype.
+- Incrementally absorb the remaining contextual dashboard cards into the
+  shared full-width scene instead of adding more independent chart state.
 - Design a versioned partner×product history projection before adding
   historical product drill-down; the active release only contains headline
   `crossYear` detail.

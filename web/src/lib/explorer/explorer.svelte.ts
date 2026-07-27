@@ -1,30 +1,38 @@
 import { getContext, setContext } from 'svelte';
+import {
+	describeScene,
+	focusForScene,
+	normalizeScene,
+	reduceScene,
+	stateFromInput,
+	transitionFor,
+	type SceneAction,
+	type SceneFlow,
+	type SceneInput,
+	type SceneLevel,
+	type SceneRepresentation,
+	type SceneState,
+	type SceneTransition
+} from './scene';
 
-export type ExplorerRepresentation = 'chord' | 'rank' | 'relationship' | 'products';
-export type ExplorerFlow = 'export' | 'import' | 'both';
-export type ExplorerLevel = 'country' | 'relationship' | 'product' | 'history' | 'change' | 'quality';
+export type ExplorerRepresentation = SceneRepresentation;
+export type ExplorerFlow = SceneFlow;
+export type ExplorerLevel = SceneLevel;
+export type ExplorerState = SceneState;
+export type ExplorerInput = SceneInput;
 
-export interface ExplorerState {
-	reporter: string;
-	year: number;
-	comparisonYear: number | null;
-	flow: ExplorerFlow;
-	partner: string | null;
-	product: string | null;
-	level: ExplorerLevel;
-	representation: ExplorerRepresentation;
+export interface ExplorerChange {
+	state: Readonly<ExplorerState>;
+	transition: Readonly<SceneTransition>;
 }
 
-export type ExplorerInput = Pick<
-	ExplorerState,
-	'reporter' | 'year' | 'flow' | 'partner' | 'product' | 'representation'
->;
-
-type OnChange = (state: Readonly<ExplorerState>) => void;
+type OnChange = (change: ExplorerChange) => void;
 
 export interface ExplorerController {
 	readonly state: ExplorerState;
+	readonly transition: SceneTransition;
 	sync(input: ExplorerInput): void;
+	dispatch(action: SceneAction): void;
 	selectPartner(code: string): void;
 	openRelationship(code: string): void;
 	openProducts(flow: 'export' | 'import'): void;
@@ -37,99 +45,86 @@ export interface ExplorerController {
 const EXPLORER = Symbol('tradechord-explorer');
 
 export function createExplorer(input: ExplorerInput, onchange: OnChange): ExplorerController {
-	const state = $state<ExplorerState>({
-		...input,
-		comparisonYear: null,
-		level:
-			input.representation === 'products' && input.product
-				? 'product'
-				: input.partner
-					? 'relationship'
-					: input.product
-						? 'product'
-						: 'country'
+	const initial = stateFromInput(input);
+	const state = $state<ExplorerState>(initial);
+	const transition = $state<SceneTransition>({
+		revision: 0,
+		action: 'sync',
+		direction: 'reset',
+		focusEntity: null,
+		announcement: describeScene(initial)
 	});
 
-	function changed() {
-		onchange(state);
+	function apply(next: ExplorerState) {
+		Object.assign(state, next);
+	}
+
+	function dispatch(action: SceneAction) {
+		const previous = { ...state };
+		const next = reduceScene(previous, action);
+		if (next === previous) return;
+		apply(next);
+		Object.assign(transition, transitionFor(previous, next, action, transition.revision + 1));
+		onchange({ state, transition });
 	}
 
 	return {
 		get state() {
 			return state;
 		},
-		sync(next) {
-			state.reporter = next.reporter;
-			state.year = next.year;
-			state.flow = next.flow;
-			state.partner = next.partner;
-			state.product = next.product;
-			state.representation = next.representation;
-			state.level =
-				next.representation === 'products' && next.product
-					? 'product'
-					: next.partner
-						? 'relationship'
-						: next.product
-							? 'product'
-							: 'country';
+		get transition() {
+			return transition;
 		},
+		sync(nextInput) {
+			const next = normalizeScene({
+				...state,
+				...nextInput
+			});
+			const changed =
+				next.reporter !== state.reporter ||
+				next.year !== state.year ||
+				next.flow !== state.flow ||
+				next.partner !== state.partner ||
+				next.product !== state.product ||
+				next.representation !== state.representation;
+			if (!changed) return;
+			const previousRepresentation = state.representation;
+			apply(next);
+			Object.assign(transition, {
+				revision: transition.revision + 1,
+				action: 'sync',
+				direction:
+					(previousRepresentation === 'products' && next.representation !== 'products') ||
+					(previousRepresentation === 'relationship' && next.representation === 'chord')
+						? 'contract'
+						: next.representation === 'rank'
+							? 'reorder'
+							: 'select',
+				focusEntity: focusForScene(next),
+				announcement: describeScene(next)
+			});
+		},
+		dispatch,
 		selectPartner(code) {
-			state.partner = state.partner === code ? null : code;
-			state.product = null;
-			state.flow = 'both';
-			state.level = state.partner ? 'relationship' : 'country';
-			changed();
+			dispatch({ type: 'select-partner', partner: code });
 		},
 		openRelationship(code) {
-			state.partner = code;
-			state.product = null;
-			state.flow = 'both';
-			state.level = 'relationship';
-			state.representation = 'relationship';
-			changed();
+			dispatch({ type: 'open-relationship', partner: code });
 		},
 		openProducts(flow) {
-			if (!state.partner) return;
-			state.flow = flow;
-			state.product = null;
-			state.level = 'product';
-			state.representation = 'products';
-			changed();
+			dispatch({ type: 'open-products', flow });
 		},
 		selectRelationshipProduct(code) {
-			if (!state.partner || state.representation !== 'products') return;
-			state.product = state.product === code ? null : code;
-			state.level = state.product ? 'product' : 'relationship';
-			changed();
+			dispatch({ type: 'select-relationship-product', product: code });
 		},
 		selectProduct(code) {
-			state.product = state.product === code ? null : code;
-			state.partner = null;
-			state.level = state.product ? 'product' : 'country';
-			changed();
+			dispatch({ type: 'select-national-product', product: code });
 		},
 		clearSelection() {
-			state.partner = null;
-			state.product = null;
-			state.flow = 'both';
-			state.level = 'country';
-			changed();
+			dispatch({ type: 'clear-selection' });
 		},
 		setRepresentation(representation) {
-			if (state.representation === representation) return;
-			if ((representation === 'relationship' || representation === 'products') && !state.partner)
-				return;
-			state.representation = representation;
-			state.level =
-				representation === 'products'
-					? state.product
-						? 'product'
-						: 'relationship'
-					: representation === 'relationship' && state.partner
-						? 'relationship'
-						: 'country';
-			changed();
+			dispatch({ type: 'show-representation', representation });
 		}
 	};
 }

@@ -49,6 +49,7 @@
 				onclick={() => activate(row)}
 				onkeydown={(event) => keyActivate(event, row)}
 				disabled={row.partner === 'ROW'}
+				data-entity-id={partnerKey(reporter, row.partner)}
 				aria-pressed={selected}
 				aria-label="{row.partner}, rank {index + 1}, total trade {usd(total)}"
 			>

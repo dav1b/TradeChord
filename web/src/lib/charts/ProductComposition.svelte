@@ -2,8 +2,14 @@
 	import { hierarchy, treemap } from 'd3';
 	import { fade } from 'svelte/transition';
 	import { flowKey, productKey } from '$lib/explorer/entity';
-	import { receiveEntity, sendEntity } from '$lib/explorer/scene-transitions';
+	import {
+		choreography,
+		receiveEntity,
+		sendEntity
+	} from '$lib/explorer/scene-transitions';
 	import { useExplorer } from '$lib/explorer/explorer.svelte';
+	import type { RectGeometry } from '$lib/explorer/geometry';
+	import { useSceneViewport } from '$lib/explorer/scene-viewport.svelte';
 	import { motionDuration } from '$lib/motion';
 	import { pct, usd } from '$lib/format';
 	import type { CrossCell, PartnerRow } from '$lib/data/types';
@@ -21,7 +27,9 @@
 	} = $props();
 
 	const explorer = useExplorer();
-	const height = 270;
+	const viewport = useSceneViewport();
+	const height = $derived(viewport.mode === 'compact' ? 250 : 270);
+	const timing = $derived(choreography(explorer.transition.direction));
 	let width = $state(0);
 
 	const flow = $derived(explorer.state.flow === 'import' ? 'import' : 'export');
@@ -44,7 +52,7 @@
 	const detailTotal = $derived(products.reduce((sum, product) => sum + product.value, 0));
 	const coverage = $derived(flowTotal > 0 ? Math.min(1, detailTotal / flowTotal) : 0);
 
-	interface ProductNode {
+	interface ProductNode extends RectGeometry {
 		data: (typeof products)[number];
 		x0: number;
 		y0: number;
@@ -60,7 +68,13 @@
 			.sum((datum: any) => datum.value ?? 0)
 			.sort((a: any, b: any) => (b.value ?? 0) - (a.value ?? 0));
 		treemap().size([width, height]).paddingInner(3).round(true)(root);
-		return root.leaves() as ProductNode[];
+		return (root.leaves() as ProductNode[]).map((node) => ({
+			...node,
+			x: node.x0,
+			y: node.y0,
+			width: node.x1 - node.x0,
+			height: node.y1 - node.y0
+		}));
 	});
 
 	function returnToRelationship() {
@@ -72,7 +86,12 @@
 	}
 </script>
 
-<section class="composition" aria-labelledby="composition-title">
+<section
+	class="composition"
+	aria-labelledby="composition-title"
+	tabindex="-1"
+	data-entity-id={flowKey(reporter, row.partner, flow)}
+>
 	<nav class="trail" aria-label="Analytical path">
 		<button onclick={returnToNetwork}>Network</button>
 		<span aria-hidden="true">→</span>
@@ -106,16 +125,16 @@
 		</p>
 		<div class="treemap" bind:clientWidth={width} style:height="{height}px">
 			{#each nodes as node, index (productKey(reporter, row.partner, flow, node.data.code))}
-				{@const tileWidth = node.x1 - node.x0}
-				{@const tileHeight = node.y1 - node.y0}
+				{@const tileWidth = node.width}
+				{@const tileHeight = node.height}
 				{@const share = detailTotal ? node.data.value / detailTotal : 0}
 				{@const selected = explorer.state.product === node.data.code}
 				<button
 					class:selected
 					class:recessed={explorer.state.product != null && !selected}
 					class:imports={flow === 'import'}
-					style:left="{node.x0}px"
-					style:top="{node.y0}px"
+					style:left="{node.x}px"
+					style:top="{node.y}px"
 					style:width="{tileWidth}px"
 					style:height="{tileHeight}px"
 					data-entity-id={productKey(reporter, row.partner, flow, node.data.code)}
@@ -128,7 +147,7 @@
 							class="label"
 							in:fade={{
 								duration: motionDuration(180),
-								delay: motionDuration(420 + index * 12)
+								delay: motionDuration(timing.label + index * 12)
 							}}
 						>
 							<strong>{node.data.code}</strong>

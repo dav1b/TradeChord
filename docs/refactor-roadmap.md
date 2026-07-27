@@ -680,7 +680,7 @@ This journey is the integration target for the eventual complete experience.
 It crosses several features that need new data, so it should be delivered in
 independently verified increments rather than one large frontend rewrite.
 
-### 7.5 Proposed explorer state
+### 7.5 Explorer state — Foundation implemented
 
 Use one explicit scene/navigation model rather than allowing every component
 to keep unrelated local selection state. A conceptual state shape is:
@@ -710,7 +710,8 @@ type ExplorerState = {
 };
 ```
 
-The exact type remains an implementation decision, but it must:
+The production foundation now implements this model as a normalized
+`SceneState` plus a discriminated `SceneAction` reducer. It:
 
 - have one authoritative source of truth;
 - be serializable into the URL;
@@ -724,8 +725,11 @@ Every durable user action changes this state. The visual layer derives nodes,
 links, dimensions, labels, opacity, selected paths, and annotation copy from
 it. No representation owns a separate filter state.
 
-Meaningful analytical state belongs in SvelteKit routing. Transient interface
-state remains local:
+Meaningful analytical state belongs in SvelteKit routing. Scene actions now
+use shallow URL pushes, so they create browser history and shareable URLs
+without rerunning the page loader. Direct entry remains SSR-compatible and
+country changes still load a new projection. Transient interface state
+remains local:
 
 - hovered entity;
 - tooltip position;
@@ -742,9 +746,9 @@ A URL such as:
 should reproduce the same analytical scene without forcing a hard document
 navigation at every step.
 
-### 7.6 Scene architecture
+### 7.6 Scene architecture — Foundation implemented
 
-The frontend should be reorganized around a scene graph:
+The frontend is now organized around this scene graph:
 
 ```text
 TradeScene
@@ -964,7 +968,7 @@ The continuous scene must remain understandable without animation:
 
 ### 7.14 Implementation sequence — Planned
 
-#### Phase A: interaction prototype — Three increments implemented
+#### Phase A: interaction prototype — Implemented; human assistive-tech review remains
 
 Build an isolated prototype using a small fixed fixture:
 
@@ -1001,12 +1005,17 @@ Current increment:
 - URL restoration and browser history are covered by Playwright.
 - Keyboard-operable network marks and ranked controls are present.
 - Reduced-motion duration policy is shared by FLIP and cross-view movement.
+- Rapid representation reversal is covered under reduced motion.
+- Entity-based focus transfer is implemented across partner, flow, and product
+  transformations.
+- Scene changes produce concise atomic screen-reader announcements.
+- Desktop and narrow-viewport layouts have been visually inspected; the scene
+  stage exposes compact, standard, and wide responsive modes.
 
 Still required before Phase A is complete:
 
-- visual QA on representative mobile and desktop browsers;
-- explicit animation-interruption stress testing;
-- focused screen-reader and focus-restoration review;
+- manual VoiceOver/NVDA reading-order and announcement review;
+- physical touch-device review;
 - richer ribbon-to-band and band-to-tile geometry interpolation after the
   interaction and accessibility behavior are proven.
 
@@ -1025,22 +1034,42 @@ Acceptance criteria:
 - Fast repeated selection does not leave stale geometry.
 - The interaction remains complete with reduced motion enabled.
 
-#### Phase B: formalize scene state and geometry
+#### Phase B: formalize scene state and geometry — Foundation implemented
 
-1. Define the production `SceneState` and URL encoding.
-2. Separate selection state from hover state.
-3. Extract pure geometry functions for the first two scenes.
-4. Define stable entity-key helpers.
-5. Establish shared duration, easing, and reduced-motion policy.
-6. Add unit tests for state transitions and geometry identity.
+Implemented:
 
-#### Phase C: migrate the country experience
+1. Production `SceneState`, normalized reducer, discriminated actions, and URL
+   encoding.
+2. Durable selection in scene state; hover and tooltip state remain local.
+3. A derived `TradeSceneGraph` for country, partner, flow, and product
+   entities.
+4. Renderer-independent rectangle, path, line, and scene-mark geometry
+   contracts.
+5. Stable country, partner, flow, and product entity-key helpers.
+6. Shared direction vocabulary, choreography timing, crossfade, and
+   reduced-motion policy.
+7. Shallow routing for local analytical changes and full navigation only for
+   data-boundary changes.
+8. Playwright coverage for deep links, Back, focus transfer, reduced motion,
+   rapid reversal, and responsive mode.
 
-1. Introduce the shared `TradeScene` shell.
-2. Move the existing country and partner views into the first scene states.
+Still to extract as representations evolve:
+
+- pure chord path generation currently remains inside `ChordChart`;
+- pure rank/bar layout currently remains inside `RankedPartners`;
+- geometry identity should gain direct unit tests when a lightweight unit-test
+  runner is added.
+
+#### Phase C: migrate the country experience — In progress
+
+1. The shared `SceneStage` shell is implemented.
+2. Network, rank, bilateral relationship, and bilateral product composition
+   render from the shared graph.
 3. Preserve current data correctness and unavailable-value handling.
-4. Replace independent chart drill-downs incrementally.
-5. Keep a feature flag or parallel route until the new scene reaches parity.
+4. The remaining dashboard cards still act as contextual views and should be
+   absorbed into a full-width responsive scene incrementally.
+5. The current production route is the compatibility surface; every migration
+   must retain its direct-link and data-correctness tests.
 
 #### Phase D: add product and history transformations
 

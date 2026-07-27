@@ -50,13 +50,41 @@ The pipeline owns units, flows, reconciliation, totals, shares, availability,
 and projection generation. The web app owns selection, top-N presentation,
 layout, formatting, interaction, and accessibility.
 
-## Planned frontend evolution
+## Continuous-scene frontend foundation
 
-The next frontend is planned as one continuous visual scene rather than a set
-of independent dashboard drill-downs. Country, partner, flow, product, year,
-value, share, and balance objects will keep stable semantic identities while
-their visual representations transform between overview, bilateral,
-composition, history, and contribution states.
+The frontend is evolving as one continuous visual scene rather than a set of
+independent dashboard drill-downs. Country, partner, flow, product, year,
+value, share, and balance objects keep stable semantic identities while their
+visual representations transform between overview, bilateral, composition,
+history, and contribution states.
+
+The implemented foundation is:
+
+```text
+SceneState + SceneAction reducer
+  → derived TradeSceneGraph with stable entity IDs
+  → pure geometry contracts
+  → Svelte SceneStage
+      ├── shallow URL history
+      ├── responsive viewport context
+      ├── transition direction/revision
+      ├── semantic announcements
+      └── entity-based focus transfer
+  → representation renderers
+```
+
+Analytical actions use SvelteKit shallow routing. This updates a shareable URL
+and browser history without rerunning the country page loader or detaching the
+scene. Direct entry remains server-loadable, country changes remain full data
+navigations, and browser Back reparses the URL into the same reducer.
+
+`scene.ts` owns normalized state, actions, reducer semantics, direction,
+focus target, and accessible scene descriptions. `scene-graph.ts` derives the
+country, partner, flow, product, and selected-path entities exactly once.
+`geometry.ts` defines renderer-independent rectangle, path, and line
+contracts. `SceneStage.svelte` owns responsive mode, transition revision,
+announcements, and focus movement. D3 continues to calculate layout; Svelte
+continues to own DOM lifecycle.
 
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns

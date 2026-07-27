@@ -3,6 +3,8 @@
 	import RankedPartners from '$lib/charts/RankedPartners.svelte';
 	import BilateralRelationship from '$lib/charts/BilateralRelationship.svelte';
 	import ProductComposition from '$lib/charts/ProductComposition.svelte';
+	import SceneStage from '$lib/explorer/SceneStage.svelte';
+	import { deriveTradeScene } from '$lib/explorer/scene-graph';
 	import { useExplorer } from '$lib/explorer/explorer.svelte';
 	import type { CountryProjection } from '$lib/data/types';
 
@@ -13,76 +15,58 @@
 	}: { projection: CountryProjection; year: number; topN?: number } = $props();
 	const explorer = useExplorer();
 
-	// Top bilateral partners by total trade (exports + imports), plus ROW.
-	const rows = $derived.by(() => {
-		const all = projection.partnersByYear[String(year)] ?? [];
-		const named = all
-			.filter((p) => p.partner !== 'ROW' && p.exportAvailable && p.importAvailable)
-			.slice()
-			.sort((a, b) => b.exportsUsd + b.importsUsd - (a.exportsUsd + a.importsUsd))
-			.slice(0, topN);
-		const row = all.find((p) => p.partner === 'ROW');
-		return row ? [...named, row] : named;
-	});
-
+	const graph = $derived(deriveTradeScene(projection, explorer.state, topN));
+	const rows = $derived(graph.partners.map((entity) => entity.datum));
 	const summary = $derived(projection.summaryByYear[String(year)]);
-	const relationshipRow = $derived(
-		(projection.partnersByYear[String(year)] ?? []).find(
-			(row) => row.partner === explorer.state.partner
-		) ?? null
-	);
-	const relationshipCells = $derived(
-		projection.crossCells.filter((cell) => cell.partner === explorer.state.partner)
-	);
+	const relationshipRow = $derived(graph.selectedPartner?.datum ?? null);
+	const relationshipCells = $derived(graph.products.map((entity) => entity.datum));
 </script>
 
-<div class="scene-controls" role="group" aria-label="Trade network representation">
-	<button
-		class:active={explorer.state.representation === 'chord'}
-		aria-pressed={explorer.state.representation === 'chord'}
-		onclick={() => explorer.setRepresentation('chord')}>Network</button
-	>
-	<button
-		class:active={explorer.state.representation === 'rank'}
-		aria-pressed={explorer.state.representation === 'rank'}
-		onclick={() => explorer.setRepresentation('rank')}>Rank partners</button
-	>
-	{#if explorer.state.partner}
+<SceneStage {graph} transition={explorer.transition}>
+	<div class="scene-controls" role="group" aria-label="Trade network representation">
 		<button
-			class:active={explorer.state.representation === 'relationship'}
-			aria-pressed={explorer.state.representation === 'relationship'}
-			onclick={() => explorer.setRepresentation('relationship')}>Relationship</button
+			class:active={explorer.state.representation === 'chord'}
+			aria-pressed={explorer.state.representation === 'chord'}
+			onclick={() => explorer.setRepresentation('chord')}>Network</button
 		>
-	{/if}
-	{#if explorer.state.partner && explorer.state.flow !== 'both'}
 		<button
-			class:active={explorer.state.representation === 'products'}
-			aria-pressed={explorer.state.representation === 'products'}
-			onclick={() => explorer.setRepresentation('products')}>Products</button
+			class:active={explorer.state.representation === 'rank'}
+			aria-pressed={explorer.state.representation === 'rank'}
+			onclick={() => explorer.setRepresentation('rank')}>Rank partners</button
 		>
-	{/if}
-</div>
+		{#if explorer.state.partner}
+			<button
+				class:active={explorer.state.representation === 'relationship'}
+				aria-pressed={explorer.state.representation === 'relationship'}
+				onclick={() => explorer.setRepresentation('relationship')}>Relationship</button
+			>
+		{/if}
+		{#if explorer.state.partner && explorer.state.flow !== 'both'}
+			<button
+				class:active={explorer.state.representation === 'products'}
+				aria-pressed={explorer.state.representation === 'products'}
+				onclick={() => explorer.setRepresentation('products')}>Products</button
+			>
+		{/if}
+	</div>
 
-<div class="scene" aria-live="polite">
-	{#if explorer.state.representation === 'products' && relationshipRow}
-		<ProductComposition
-			reporter={projection.country}
-			year={projection.crossYear ?? year}
-			row={relationshipRow}
-			cells={relationshipCells}
-		/>
-	{:else if explorer.state.representation === 'relationship' && relationshipRow}
-		<BilateralRelationship
-			reporter={projection.country}
-			{year}
-			row={relationshipRow}
-		/>
-	{:else if explorer.state.representation === 'chord'}
-		<ChordChart reporter={projection.country} {year} {rows} reporterSummary={summary} />
-	{:else}
-		<RankedPartners reporter={projection.country} {rows} />
-	{/if}
-</div>
+	<div class="scene">
+		{#if explorer.state.representation === 'products' && relationshipRow}
+			<ProductComposition
+				reporter={projection.country}
+				year={projection.crossYear ?? year}
+				row={relationshipRow}
+				cells={relationshipCells}
+			/>
+		{:else if explorer.state.representation === 'relationship' && relationshipRow}
+			<BilateralRelationship reporter={projection.country} {year} row={relationshipRow} />
+		{:else if explorer.state.representation === 'chord'}
+			<ChordChart reporter={projection.country} {year} {rows} reporterSummary={summary} />
+		{:else}
+			<RankedPartners reporter={projection.country} {rows} />
+		{/if}
+	</div>
+</SceneStage>
 
 <style>
 	.scene-controls {

@@ -90,3 +90,34 @@ test('dashboard navigation, country selection, cross-filtering, and overview', a
 	await expect(page.locator('.cell')).toHaveCount(30);
 	expect(consoleErrors).toEqual([]);
 });
+
+test('scene actions transfer focus and survive rapid reduced-motion reversal', async ({ page }) => {
+	await page.emulateMedia({ reducedMotion: 'reduce' });
+	await page.goto('/?country=DEU&view=relationship&partner=CHN');
+	await expect(page.getByLabel('Reporter')).toHaveAttribute('data-ready', 'true');
+
+	const relationship = page.locator('section.relationship');
+	await expect(relationship).toBeVisible();
+
+	await page.getByRole('button', { name: 'Open reported import product composition' }).click();
+	const composition = page.locator('section.composition');
+	await expect(composition).toBeVisible();
+	await expect(composition).toBeFocused();
+	await expect(page.locator('.announcement')).toContainText('DEU import products with CHN');
+
+	await page.getByRole('button', { name: 'Relationship', exact: true }).click();
+	await expect(relationship).toBeVisible();
+	await expect(relationship).toBeFocused();
+
+	await page.getByRole('button', { name: 'Products', exact: true }).click();
+	await expect(composition).toBeVisible();
+	await page
+		.getByRole('group', { name: 'Trade network representation' })
+		.getByRole('button', { name: 'Network', exact: true })
+		.click();
+	await expect(page.locator('section.stage svg path[role="button"]').first()).toBeVisible();
+	await expect(page).not.toHaveURL(/[?&]view=/);
+
+	await page.setViewportSize({ width: 390, height: 844 });
+	await expect(page.locator('section.stage')).toHaveAttribute('data-layout', 'compact');
+});

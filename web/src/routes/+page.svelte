@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { goto, pushState } from '$app/navigation';
+	import { page } from '$app/state';
 	import Wordmark from '$lib/ui/Wordmark.svelte';
 	import CountrySelect from '$lib/ui/CountrySelect.svelte';
 	import Card from '$lib/ui/Card.svelte';
@@ -11,7 +12,9 @@
 	import {
 		createExplorer,
 		provideExplorer,
-		type ExplorerState
+		type ExplorerChange,
+		type ExplorerInput,
+		type ExplorerRepresentation
 	} from '$lib/explorer/explorer.svelte';
 	import { motionDuration } from '$lib/motion';
 	import { untrack } from 'svelte';
@@ -24,14 +27,41 @@
 	const summary = $derived(data.projection.summaryByYear[String(year)]);
 	const source = $derived(`WITS · ${year}`);
 
-	function navigateExplorer(state: Readonly<ExplorerState>) {
+	function navigateExplorer({ state }: ExplorerChange) {
 		const params = new URLSearchParams();
 		params.set('country', state.reporter);
 		if (state.representation !== 'chord') params.set('view', state.representation);
 		if (state.representation === 'products') params.set('flow', state.flow);
 		if (state.partner) params.set('partner', state.partner);
 		if (state.product) params.set('product', state.product);
-		goto(`?${params}`, { keepFocus: true, noScroll: true });
+		pushState(`?${params}`, {});
+	}
+
+	function explorerInputFromUrl(url: URL): ExplorerInput {
+		const partnerCodes = new Set(
+			(data.projection.partnersByYear[String(year)] ?? []).map((row) => row.partner)
+		);
+		const productCodes = new Set(
+			(data.projection.productsByYear[String(year)] ?? []).map((row) =>
+				row.product.replace(/^\d+-\d+_/, '')
+			)
+		);
+		const partnerParam = url.searchParams.get('partner');
+		const productParam = url.searchParams.get('product');
+		const partner = partnerParam && partnerCodes.has(partnerParam) ? partnerParam : null;
+		const product = productParam && productCodes.has(productParam) ? productParam : null;
+		const flowParam = url.searchParams.get('flow');
+		const flow = flowParam === 'export' || flowParam === 'import' ? flowParam : 'both';
+		const view = url.searchParams.get('view');
+		const representation: ExplorerRepresentation =
+			view === 'rank'
+				? 'rank'
+				: view === 'products' && partner && flow !== 'both'
+					? 'products'
+					: view === 'relationship' && partner
+						? 'relationship'
+						: 'chord';
+		return { reporter: data.country, year, flow, partner, product, representation };
 	}
 
 	const explorer = provideExplorer(
@@ -50,16 +80,11 @@
 		)
 	);
 
-	// Apply URL/back-forward navigation to the single scene state.
+	// Analytical actions use shallow URL state. Back/forward reparses that URL
+	// into the same reducer without re-running the country data loader.
 	$effect(() => {
-		explorer.sync({
-			reporter: data.country,
-			year,
-			flow: data.explorer.flow,
-			partner: data.explorer.partner,
-			product: data.explorer.product,
-			representation: data.explorer.representation
-		});
+		const next = explorerInputFromUrl(page.url);
+		untrack(() => explorer.sync(next));
 	});
 
 	const partnersTitle = $derived(
