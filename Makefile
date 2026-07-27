@@ -1,5 +1,5 @@
 .PHONY: dev check build web-install pipeline-install pipeline-test \
-        data-collect data-validate data-release test
+        data-collect data-validate data-release data-verify test
 
 # ---- Web (Node only) ----
 web-install:
@@ -37,6 +37,11 @@ data-validate:
 # e.g. make data-release STAGING=data/staging/<run> VERSION=2026-01
 data-release:
 	$(TRADECHORD) release --input $(STAGING) --version $(VERSION) --releases-root data/releases
+
+# e.g. make data-verify VERSION=2026-07.1
+data-verify:
+	PYTHONPATH=pipeline/src python -m tradechord_pipeline.cli verify \
+		--release data/releases/$(VERSION) --repo-root .
 
 # ---- Aggregate ----
 # NOTE: `build` intentionally does NOT depend on data-collect; it uses the committed release.

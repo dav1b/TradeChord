@@ -20,7 +20,9 @@
 					partner: p.partner,
 					exportsUsd: 0,
 					importsUsd: 0,
-					balanceUsd: 0,
+					balanceUsd: null,
+					exportAvailable: false,
+					importAvailable: false,
 					exportShare: 0
 				};
 				return {

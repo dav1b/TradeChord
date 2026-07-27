@@ -6,14 +6,15 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async ({ fetch, url }) => {
 	const current = await loadCurrent(fetch);
 	const overview = await loadOverview(current.datasetVersion, fetch);
-	const countries = overview.reporters.map((r) => r.code);
+	const countries = overview.reporters.map((r) => ({ code: r.code, name: r.name }));
+	const countryCodes = countries.map((country) => country.code);
 
 	const requested = url.searchParams.get('country') ?? '';
-	const country = countries.includes(requested)
+	const country = countryCodes.includes(requested)
 		? requested
-		: countries.includes('USA')
+		: countryCodes.includes('USA')
 			? 'USA'
-			: countries[0];
+			: countryCodes[0];
 
 	const projection = await loadCountry(current.datasetVersion, country, fetch);
 

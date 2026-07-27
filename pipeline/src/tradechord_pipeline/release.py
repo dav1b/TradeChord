@@ -16,6 +16,7 @@ import io
 import json
 import os
 import shutil
+import statistics
 import tempfile
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -26,7 +27,7 @@ from .models import INDICATOR_BY_FLOW, Flow, Observation
 from .normalize import CANONICAL_FIELDS, CanonicalRecord, normalize
 from .validation import completeness, reconciliation
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 DEFAULT_TOLERANCE = 0.02
 
 _VALUATION = {
@@ -101,6 +102,7 @@ class ValidationReport:
     recon_failures: list = field(default_factory=list)
     invalid: list = field(default_factory=list)
     missing_flows: set = field(default_factory=set)
+    shape_issues: list[str] = field(default_factory=list)
 
     @property
     def ok(self) -> bool:
@@ -110,6 +112,7 @@ class ValidationReport:
             or self.recon_failures
             or self.invalid
             or self.missing_flows
+            or self.shape_issues
         )
 
     def summary(self) -> str:
@@ -119,6 +122,7 @@ class ValidationReport:
             f"reconciliation_failures={len(self.recon_failures)} "
             f"invalid_values={len(self.invalid)} "
             f"missing_flows={sorted(self.missing_flows)}"
+            f" shape_issues={len(self.shape_issues)}"
         )
 
 
@@ -137,7 +141,11 @@ def validate(
         recon_failures=recon_failures,
         invalid=completeness.invalid_values(records),
         missing_flows=completeness.missing_flows(
-            staging.per_file_manifests, expected_flows or set()
+            staging.per_file_manifests,
+            expected_flows or set(staging.run_manifest.get("flows") or []),
+        ),
+        shape_issues=completeness.staging_shape_issues(
+            staging.per_file_manifests, staging.run_manifest
         ),
     )
 
@@ -150,6 +158,7 @@ def _coverage_summary(staging: Staging, flows: list[str]) -> dict:
     summary: dict[str, dict] = {}
     for flow in flows:
         achieved: list[float] = []
+        worst: list[dict] = []
         method = "unknown"
         for m in staging.per_file_manifests.values():
             if m.get("flow") != flow:
@@ -157,10 +166,43 @@ def _coverage_summary(staging: Staging, flows: list[str]) -> dict:
             cov = m.get("coverage")
             if cov:
                 method = "top_k"
-                achieved.extend(c["min_achieved"] for c in cov.values())
+                for product, item in cov.items():
+                    value = item["min_achieved"]
+                    achieved.append(value)
+                    worst.append({
+                        "reporter": m.get("reporter"),
+                        "product": product,
+                        "minAchieved": value,
+                        "year": item.get("min_year"),
+                    })
+        achieved.sort()
+        worst.sort(key=lambda item: item["minAchieved"])
+
+        def percentile(fraction: float, values: list[float] = achieved) -> float | None:
+            if not values:
+                return None
+            index = round((len(values) - 1) * fraction)
+            return values[index]
+
         summary[flow] = {
             "method": method,
             "min_achieved": min(achieved) if achieved else None,
+            "p10_achieved": percentile(0.10),
+            "median_achieved": statistics.median(achieved) if achieved else None,
+            "mean_achieved": statistics.fmean(achieved) if achieved else None,
+            "share_at_least_50pct": (
+                sum(value >= 0.50 for value in achieved) / len(achieved)
+                if achieved else None
+            ),
+            "share_at_least_75pct": (
+                sum(value >= 0.75 for value in achieved) / len(achieved)
+                if achieved else None
+            ),
+            "share_at_least_90pct": (
+                sum(value >= 0.90 for value in achieved) / len(achieved)
+                if achieved else None
+            ),
+            "worst_observations": worst[:10],
             "reconciled": True,
         }
     return summary
@@ -200,6 +242,7 @@ def build_manifest(version: str, staging: Staging, records: list[CanonicalRecord
         },
         "artifacts": {
             "matrix": {"path": "trade_matrix.csv.gz", "sha256": None, "records": len(records)},
+            "web": {"root": f"web/static/data/{version}", "files": []},
         },
     }
 
@@ -215,6 +258,24 @@ def _write_matrix_gz(records: list[CanonicalRecord], path: str) -> str:
         gz.write(data)
     with open(path, "rb") as f:
         return hashlib.sha256(f.read()).hexdigest()
+
+
+def load_canonical_matrix(path: str) -> list[CanonicalRecord]:
+    """Load a published canonical matrix for projection-only releases."""
+    records: list[CanonicalRecord] = []
+    with gzip.open(path, mode="rt", newline="", encoding="utf-8") as source:
+        for row in csv.DictReader(source):
+            records.append(
+                CanonicalRecord(
+                    year=int(row["year"]),
+                    reporter=row["reporter"],
+                    partner=row["partner"],
+                    product=row["product"],
+                    flow=Flow(row["flow"]),
+                    value_usd=int(row["value_usd"]),
+                )
+            )
+    return records
 
 
 def write_release(
@@ -253,19 +314,44 @@ def write_release(
     return out_dir, manifest_sha
 
 
-def write_web_projections(
-    records: list[CanonicalRecord], version: str, web_root: str, manifest_sha: str, force: bool = False
+def prepare_web_projections(
+    records: list[CanonicalRecord], version: str, web_root: str
+) -> tuple[str, list[dict[str, str]]]:
+    """Build web projections in a temporary directory and return their hashes."""
+    os.makedirs(web_root, exist_ok=True)
+    tmp = tempfile.mkdtemp(prefix=".tmp-web-release-", dir=web_root)
+    content = os.path.join(tmp, version)
+    projections.write_projections(records, version, content)
+    files: list[dict[str, str]] = []
+    for root, _, names in os.walk(content):
+        for name in sorted(names):
+            path = os.path.join(root, name)
+            relative = os.path.relpath(path, content).replace(os.sep, "/")
+            with open(path, "rb") as f:
+                digest = hashlib.sha256(f.read()).hexdigest()
+            files.append({"path": relative, "sha256": digest})
+    files.sort(key=lambda item: item["path"])
+    return content, files
+
+
+def promote_web_projections(
+    prepared_dir: str,
+    version: str,
+    web_root: str,
+    manifest_sha: str,
+    force: bool = False,
 ) -> str:
-    """Write committed browser projections under web_root/<version>/ + current.json."""
+    """Promote prepared projections and atomically update ``current.json`` last."""
     version_dir = os.path.join(web_root, version)
     if os.path.exists(version_dir):
         if not force:
             raise FileExistsError(f"web projections already exist: {version_dir} (use --force)")
         shutil.rmtree(version_dir)
     os.makedirs(web_root, exist_ok=True)
-    projections.write_projections(records, version, version_dir)
+    os.rename(prepared_dir, version_dir)
 
-    with open(os.path.join(web_root, "current.json"), "w", encoding="utf-8") as f:
+    fd, pointer_tmp = tempfile.mkstemp(prefix=".tmp-current-", dir=web_root, text=True)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
         json.dump(
             {"schemaVersion": SCHEMA_VERSION, "datasetVersion": version, "manifestSha256": manifest_sha},
             f,
@@ -273,6 +359,7 @@ def write_web_projections(
             sort_keys=True,
         )
         f.write("\n")
+    os.replace(pointer_tmp, os.path.join(web_root, "current.json"))
     return version_dir
 
 
@@ -292,17 +379,68 @@ def run_release(
     releases_root: str,
     web_root: str,
     tolerance: float = DEFAULT_TOLERANCE,
-    strict: bool = True,
     force: bool = False,
 ) -> tuple[str | None, ValidationReport]:
     staging = load_staging(run_dir)
     records = normalize(staging.observations)
     report = validate(staging, records, tolerance=tolerance)
-    if strict and not report.ok:
+    if not report.ok:
         return None, report
 
     manifest = build_manifest(version, staging, records)
+    prepared_web, web_files = prepare_web_projections(records, version, web_root)
+    manifest["artifacts"]["web"]["files"] = web_files
     out_dir = os.path.join(releases_root, version)
-    path, manifest_sha = write_release(records, manifest, out_dir, force=force)
-    write_web_projections(records, version, web_root, manifest_sha, force=force)
+    try:
+        path, manifest_sha = write_release(records, manifest, out_dir, force=force)
+        promote_web_projections(
+            prepared_web, version, web_root, manifest_sha, force=force
+        )
+        # Remove the now-empty temporary parent created by mkdtemp.
+        shutil.rmtree(os.path.dirname(prepared_web), ignore_errors=True)
+    except BaseException:
+        shutil.rmtree(os.path.dirname(prepared_web), ignore_errors=True)
+        raise
     return path, report
+
+
+def run_reproject(
+    source_release: str,
+    version: str,
+    releases_root: str,
+    web_root: str,
+    force: bool = False,
+) -> str:
+    """Publish a new immutable release from an existing canonical matrix.
+
+    This is used when projection semantics change without recollecting WITS.
+    """
+    with open(os.path.join(source_release, "manifest.json"), encoding="utf-8") as source:
+        manifest = json.load(source)
+    manifest["schemaVersion"] = SCHEMA_VERSION
+    records = load_canonical_matrix(os.path.join(source_release, "trade_matrix.csv.gz"))
+    manifest["datasetVersion"] = version
+    manifest["generatedAt"] = datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    manifest["artifacts"]["matrix"] = {
+        "path": "trade_matrix.csv.gz",
+        "sha256": None,
+        "records": len(records),
+    }
+    manifest["artifacts"]["web"] = {
+        "root": f"web/static/data/{version}",
+        "files": [],
+    }
+
+    prepared_web, web_files = prepare_web_projections(records, version, web_root)
+    manifest["artifacts"]["web"]["files"] = web_files
+    out_dir = os.path.join(releases_root, version)
+    try:
+        path, manifest_sha = write_release(records, manifest, out_dir, force=force)
+        promote_web_projections(
+            prepared_web, version, web_root, manifest_sha, force=force
+        )
+        shutil.rmtree(os.path.dirname(prepared_web), ignore_errors=True)
+    except BaseException:
+        shutil.rmtree(os.path.dirname(prepared_web), ignore_errors=True)
+        raise
+    return path

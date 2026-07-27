@@ -71,8 +71,16 @@ sum(explicit import partners) + import ROW ≈ import WLD
 
 ## Coverage status
 
-The current committed CSV (`web/static/data/complete_export_matrix.csv`) is
-**legacy/incomplete**: export-only, single-flow, ~22 reporters, with imports that
-were previously mirror-derived downstream. It remains only until the first
-**dual-flow release** (M3), which will carry explicit `coverage` metadata in its
-manifest. Until then the dashboard must not claim complete imports or balances.
+Release `2026-07` is the first directly reported dual-flow release. National
+totals and product totals reconcile to WITS world totals through flow-specific
+ROW records.
+
+Its named export and import partners were selected independently. Compatibility
+release `2026-07.1` therefore marks a bilateral balance unavailable when one
+side was not explicitly collected instead of treating the missing side as zero.
+The next full collection uses the union of export and import rankings and
+requests both flows for every named partner.
+
+Named partners are a top-partner view, not exhaustive bilateral coverage.
+Trade outside the explicit set is included in synthetic ROW. Release manifests
+report coverage distributions and the worst reporter/product/year observations.

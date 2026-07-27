@@ -5,11 +5,15 @@ on:
     paths:
       - 'pipeline/**'
       - 'data/contracts/**'
+      - 'data/releases/**'
+      - 'web/static/data/**'
       - '.github/workflows/pipeline.yml'
   pull_request:
     paths:
       - 'pipeline/**'
       - 'data/contracts/**'
+      - 'data/releases/**'
+      - 'web/static/data/**'
   workflow_dispatch:
 
 jobs:
@@ -49,3 +53,10 @@ jobs:
             (cd "$d" && sha256sum -c checksums.txt) || fail=1
           done
           exit $fail
+
+      - name: Verify canonical ↔ web release integrity
+        run: |
+          for d in data/releases/*/; do
+            [ -f "${d}manifest.json" ] || continue
+            tradechord-data verify --release "$d" --repo-root .
+          done

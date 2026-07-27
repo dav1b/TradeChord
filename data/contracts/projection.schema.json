@@ -8,6 +8,7 @@
     "schemaVersion",
     "datasetVersion",
     "country",
+    "countryName",
     "years",
     "summaryByYear",
     "partnersByYear",
@@ -16,9 +17,10 @@
     "crossCells"
   ],
   "properties": {
-    "schemaVersion": { "type": "integer", "const": 1 },
+    "schemaVersion": { "type": "integer", "const": 2 },
     "datasetVersion": { "type": "string" },
     "country": { "type": "string" },
+    "countryName": { "type": "string" },
     "years": { "type": "array", "items": { "type": "integer" } },
     "summaryByYear": {
       "type": "object",
@@ -50,34 +52,40 @@
   "$defs": {
     "crossCell": {
       "type": "object",
-      "required": ["partner", "product", "exportsUsd", "importsUsd", "balanceUsd"],
+      "required": ["partner", "product", "exportsUsd", "importsUsd", "balanceUsd", "exportAvailable", "importAvailable"],
       "properties": {
         "partner": { "type": "string" },
         "product": { "type": "string" },
         "exportsUsd": { "type": "integer" },
         "importsUsd": { "type": "integer" },
-        "balanceUsd": { "type": "integer" }
+        "balanceUsd": { "type": ["integer", "null"] },
+        "exportAvailable": { "type": "boolean" },
+        "importAvailable": { "type": "boolean" }
       }
     },
     "partnerRow": {
       "type": "object",
-      "required": ["partner", "exportsUsd", "importsUsd", "balanceUsd", "exportShare"],
+      "required": ["partner", "exportsUsd", "importsUsd", "balanceUsd", "exportShare", "exportAvailable", "importAvailable"],
       "properties": {
         "partner": { "type": "string" },
         "exportsUsd": { "type": "integer" },
         "importsUsd": { "type": "integer" },
-        "balanceUsd": { "type": "integer" },
+        "balanceUsd": { "type": ["integer", "null"] },
+        "exportAvailable": { "type": "boolean" },
+        "importAvailable": { "type": "boolean" },
         "exportShare": { "type": "number", "minimum": 0, "maximum": 1 }
       }
     },
     "productRow": {
       "type": "object",
-      "required": ["product", "exportsUsd", "importsUsd", "balanceUsd", "exportShare"],
+      "required": ["product", "exportsUsd", "importsUsd", "balanceUsd", "exportShare", "exportAvailable", "importAvailable"],
       "properties": {
         "product": { "type": "string" },
         "exportsUsd": { "type": "integer" },
         "importsUsd": { "type": "integer" },
-        "balanceUsd": { "type": "integer" },
+        "balanceUsd": { "type": ["integer", "null"] },
+        "exportAvailable": { "type": "boolean" },
+        "importAvailable": { "type": "boolean" },
         "exportShare": { "type": "number", "minimum": 0, "maximum": 1 }
       }
     }

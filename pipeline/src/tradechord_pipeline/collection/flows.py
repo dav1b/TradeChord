@@ -179,13 +179,18 @@ def collect_reporter_flow(
             by_partner[r.partner] += r.value_thousands
     ranked = [p for p, _ in sorted(by_partner.items(), key=lambda kv: kv[1], reverse=True)][:top_k]
     manifest["ranked_partners"] = len(ranked)
+    manifest["ranked_partner_codes"] = ranked
+    manifest["partner_strategy"] = "independent_top_k"
 
     # ---- Phase 2: WLD per product across the range ----
     wld: dict[str, dict[int, float]] = {}
 
     def wld_fetch(prod: str) -> tuple[str, dict[int, float]]:
         rows = _fetch(client, reporter, "WLD", prod, indicator, y0, y1, flow, statuses)
-        return prod, {r.year: r.value_thousands for r in rows if r.year in yset}
+        observed = {r.year: r.value_thousands for r in rows if r.year in yset}
+        # A successful range response may omit zero-value years. Preserve the
+        # requested year shape explicitly so completeness can be validated.
+        return prod, {year: observed.get(year, 0.0) for year in years}
 
     with ThreadPoolExecutor(max_workers=min(cc.concurrency, 6)) as ex:
         for fut in as_completed({ex.submit(wld_fetch, p): p for p in cc.sector_products}):
@@ -195,6 +200,8 @@ def collect_reporter_flow(
     valid_products = sorted(wld)
     valid_set = set(valid_products)
     manifest["valid_products"] = len(valid_products)
+    manifest["valid_product_codes"] = valid_products
+    manifest["requested_products"] = sorted(cc.sector_products)
 
     # ---- Phase 3: bilateral history for each top-K partner ----
     observations: list[Observation] = []
@@ -218,6 +225,19 @@ def collect_reporter_flow(
                 observations.extend(fut.result() or [])
 
     # ---- ROW remainder per (product, year) = WLD - explicit top-K ----
+    # Materialize authoritative zeroes for every explicitly requested
+    # partner/product/year. Their presence lets downstream projections
+    # distinguish a collected zero from a flow that was never requested.
+    existing = {(o.partner, o.product, o.year) for o in observations}
+    for partner in sorted(ranked):
+        for product in sorted(valid_products):
+            for year in years:
+                key = (partner, product, year)
+                if key not in existing:
+                    observations.append(
+                        Observation(year, reporter, partner, product, flow, 0.0)
+                    )
+
     sums: dict[tuple[str, int], float] = defaultdict(float)
     for o in observations:
         sums[(o.product, o.year)] += o.value_thousands
@@ -232,11 +252,15 @@ def collect_reporter_flow(
     coverage: dict[str, dict] = {}
     for prod, year_values in wld.items():
         fractions = [
-            min(1.0, sums.get((prod, year), 0.0) / total)
+            (year, min(1.0, sums.get((prod, year), 0.0) / total))
             for year, total in year_values.items()
             if total > 0
         ]
-        coverage[prod] = {"min_achieved": min(fractions) if fractions else 1.0}
+        minimum = min(fractions, key=lambda pair: pair[1]) if fractions else (None, 1.0)
+        coverage[prod] = {
+            "min_achieved": minimum[1],
+            "min_year": minimum[0],
+        }
 
     manifest["coverage"] = coverage
     manifest["wld_totals"] = {
@@ -245,3 +269,107 @@ def collect_reporter_flow(
     manifest["statuses"] = statuses.as_dict()
     manifest["observations"] = len(observations)
     return CollectionResult(reporter, sorted(yset), flow, observations, statuses, manifest)
+
+
+def complete_partner_union(
+    result: CollectionResult,
+    partner_union: list[str],
+    *,
+    cc: CollectionConfig,
+    client: WitsClient,
+) -> CollectionResult:
+    """Ensure ``result`` contains its flow for every partner in a shared union.
+
+    Export and import rankings are selected independently, but bilateral
+    balances are only meaningful when both flows were explicitly requested for
+    every displayed partner. This expands each provisional result to the union
+    of both rankings, then recomputes the flow-specific ROW remainder.
+    """
+    indicator = indicator_for(result.flow)
+    years = sorted(result.years)
+    yset = set(years)
+    y0, y1 = years[0], years[-1]
+    valid_products = set(result.manifest.get("wld_totals", {}))
+    product_all_ok = bool(result.manifest.get("probe", {}).get("product_all"))
+    already_requested = set(result.manifest.get("ranked_partner_codes", []))
+    missing = sorted(set(partner_union) - already_requested)
+
+    # ROW was computed against the provisional top-K set; discard it before
+    # adding the missing explicit partners and calculate it again below.
+    explicit = [o for o in result.observations if o.partner != "ROW"]
+
+    if product_all_ok:
+        def fetch_partner(partner: str) -> list[Observation]:
+            rows = _fetch(
+                client, result.reporter, partner, "ALL", indicator,
+                y0, y1, result.flow, result.statuses,
+            )
+            return [r for r in rows if r.product in valid_products and r.year in yset]
+
+        with ThreadPoolExecutor(max_workers=cc.concurrency) as ex:
+            for fut in as_completed({ex.submit(fetch_partner, p): p for p in missing}):
+                explicit.extend(fut.result() or [])
+    else:
+        def fetch_partner_product(partner: str, product: str) -> list[Observation]:
+            rows = _fetch(
+                client, result.reporter, partner, product, indicator,
+                y0, y1, result.flow, result.statuses,
+            )
+            return [r for r in rows if r.year in yset]
+
+        tasks = [(p, product) for p in missing for product in sorted(valid_products)]
+        with ThreadPoolExecutor(max_workers=cc.concurrency) as ex:
+            futures = {
+                ex.submit(fetch_partner_product, partner, product): (partner, product)
+                for partner, product in tasks
+            }
+            for fut in as_completed(futures):
+                explicit.extend(fut.result() or [])
+
+    existing = {(o.partner, o.product, o.year) for o in explicit}
+    for partner in sorted(partner_union):
+        for product in sorted(valid_products):
+            for year in years:
+                key = (partner, product, year)
+                if key not in existing:
+                    explicit.append(
+                        Observation(
+                            year, result.reporter, partner, product, result.flow, 0.0
+                        )
+                    )
+
+    sums: dict[tuple[str, int], float] = defaultdict(float)
+    for observation in explicit:
+        sums[(observation.product, observation.year)] += observation.value_thousands
+
+    observations = list(explicit)
+    coverage: dict[str, dict] = {}
+    for product, year_map in result.manifest.get("wld_totals", {}).items():
+        fractions: list[tuple[int, float]] = []
+        for year_str, total_value in year_map.items():
+            year = int(year_str)
+            total = float(total_value)
+            accumulated = sums.get((product, year), 0.0)
+            if total > 0:
+                fractions.append((year, min(1.0, accumulated / total)))
+            remainder = total - accumulated
+            if cc.include_row_remainder and remainder > 0:
+                observations.append(
+                    Observation(
+                        year, result.reporter, "ROW", product, result.flow, remainder
+                    )
+                )
+        minimum = min(fractions, key=lambda pair: pair[1]) if fractions else (None, 1.0)
+        coverage[product] = {
+            "min_achieved": minimum[1],
+            "min_year": minimum[0],
+        }
+
+    result.observations = observations
+    result.manifest["ranked_partner_codes"] = sorted(partner_union)
+    result.manifest["ranked_partners"] = len(partner_union)
+    result.manifest["partner_strategy"] = "union_of_export_import_top_k"
+    result.manifest["coverage"] = coverage
+    result.manifest["statuses"] = result.statuses.as_dict()
+    result.manifest["observations"] = len(observations)
+    return result

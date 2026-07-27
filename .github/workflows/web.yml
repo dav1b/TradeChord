@@ -34,6 +34,14 @@ jobs:
         working-directory: web
         run: npm run build
 
+      - name: Install browser
+        working-directory: web
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser smoke test
+        working-directory: web
+        run: npm run test:e2e
+
       - name: Large-file guard
         run: |
           big=$(find . -type f -size +20M -not -path './.git/*' -not -path '*/node_modules/*' -not -path './data/releases/*')

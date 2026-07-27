@@ -41,6 +41,7 @@ def test_partners_ranked_with_real_imports_and_share():
     assert [p["partner"] for p in partners] == ["CAN", "CHN", "ROW"]
     can = partners[0]
     assert can["importsUsd"] == 40_000 and can["balanceUsd"] == 60_000
+    assert can["exportAvailable"] and can["importAvailable"]
     assert abs(can["exportShare"] - 0.625) < 1e-9  # 100 / 160
 
 
@@ -61,6 +62,20 @@ def test_cross_cells_are_partner_product_dual_flow():
         40_000,
         60_000,
     )
+    assert can["exportAvailable"] and can["importAvailable"]
+
+
+def test_uncollected_bilateral_flow_is_not_reported_as_zero_balance():
+    records = normalize(
+        [Observation(2022, "USA", "NLD", "84-85_MachElec", Flow.EXPORT, 10.0)]
+    )
+    projection = build_country_projection("USA", records, "v1")
+    partner = projection["partnersByYear"]["2022"][0]
+    assert partner["exportsUsd"] == 10_000
+    assert partner["importsUsd"] == 0
+    assert partner["exportAvailable"] is True
+    assert partner["importAvailable"] is False
+    assert partner["balanceUsd"] is None
 
 
 def test_generated_projection_matches_schema():

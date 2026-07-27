@@ -44,7 +44,7 @@
 	<header class="head">
 		<div>
 			<p class="eyebrow">Global trade · {year}</p>
-			<h1>{data.country}</h1>
+			<h1>{data.projection.countryName} <span>{data.country}</span></h1>
 		</div>
 		<CountrySelect value={data.country} options={data.countries} onchange={selectCountry} />
 	</header>
@@ -76,6 +76,15 @@
 		<span>Source: World Bank WITS · dual-flow release {data.version}</span>
 		<span>DataJockey</span>
 	</footer>
+	<details class="method">
+		<summary>How to read the data</summary>
+		<p>
+			National exports and imports are directly reported WITS flows. Named bilateral partners
+			represent explicitly collected top-partner flows; remaining trade is reconciled to the
+			reporter’s world total under synthetic ROW. A bilateral balance is shown only when both
+			flows were explicitly collected.
+		</p>
+	</details>
 </div>
 
 <style>
@@ -126,6 +135,27 @@
 		font-weight: 500;
 		color: var(--text-1);
 		letter-spacing: -0.01em;
+	}
+	h1 span {
+		font-family: var(--font-mono);
+		font-size: 0.42em;
+		color: var(--text-3);
+		vertical-align: middle;
+	}
+	.method {
+		font-size: 12px;
+		color: var(--text-3);
+		max-width: 72ch;
+	}
+	.method summary {
+		cursor: pointer;
+		font-family: var(--font-mono);
+		font-size: 10px;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+	.method p {
+		margin-top: var(--space-2);
 	}
 	.grid {
 		display: grid;

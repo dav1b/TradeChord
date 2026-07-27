@@ -42,3 +42,35 @@ def test_invalid_values_flagged():
 def test_missing_flows():
     manifests = {"a.json": {"flow": "export"}}
     assert completeness.missing_flows(manifests, {"export", "import"}) == {"import"}
+
+
+def test_staging_shape_requires_every_reporter_flow_and_year():
+    run = {
+        "reporters": ["USA", "DEU"],
+        "flows": ["export", "import"],
+        "years": [2020, 2021],
+    }
+    manifests = {
+        "USA_export.manifest.json": {
+            "reporter": "USA",
+            "flow": "export",
+            "years": [2020, 2021],
+            "partner_strategy": "union_of_export_import_top_k",
+            "ranked_partner_codes": ["CAN", "MEX"],
+            "wld_totals": {"Total": {"2020": 1, "2021": 2}},
+        },
+        "USA_import.manifest.json": {
+            "reporter": "USA",
+            "flow": "import",
+            "years": [2020],
+            "partner_strategy": "union_of_export_import_top_k",
+            "ranked_partner_codes": ["CAN"],
+            "wld_totals": {"Total": {"2020": 1}},
+        },
+    }
+    issues = completeness.staging_shape_issues(manifests, run)
+    assert any("year mismatch for USA_import" in issue for issue in issues)
+    assert any("WLD year mismatch" in issue for issue in issues)
+    assert "export/import partner union mismatch: USA" in issues
+    assert "missing reporter-flow manifest: DEU export" in issues
+    assert "missing reporter-flow manifest: DEU import" in issues

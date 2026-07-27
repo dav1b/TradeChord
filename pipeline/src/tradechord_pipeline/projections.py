@@ -17,10 +17,11 @@ import json
 import os
 from collections import defaultdict
 
+from .countries import country_name
 from .models import Flow
 from .normalize import CanonicalRecord
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def _bucket_by_reporter(records: list[CanonicalRecord]) -> dict[str, list[CanonicalRecord]]:
@@ -51,24 +52,32 @@ def _breakdown(recs: list[CanonicalRecord], year: int, name: str) -> list[dict]:
     attr = "partner" if name == "partner" else "product"
     exp: dict[str, int] = defaultdict(int)
     imp: dict[str, int] = defaultdict(int)
+    exp_present: set[str] = set()
+    imp_present: set[str] = set()
     for r in recs:
         if r.year != year:
             continue
         key = getattr(r, attr)
         if r.flow is Flow.EXPORT:
             exp[key] += r.value_usd
+            exp_present.add(key)
         else:
             imp[key] += r.value_usd
+            imp_present.add(key)
     total_exp = sum(exp.values())
     rows = []
     for key in set(exp) | set(imp):
         e, i = exp.get(key, 0), imp.get(key, 0)
+        export_available = key in exp_present
+        import_available = key in imp_present
         rows.append({
             name: key,
             "exportsUsd": e,
             "importsUsd": i,
-            "balanceUsd": e - i,
+            "balanceUsd": (e - i) if export_available and import_available else None,
             "exportShare": (e / total_exp) if total_exp else 0.0,
+            "exportAvailable": export_available,
+            "importAvailable": import_available,
         })
     rows.sort(key=lambda d: (-d["exportsUsd"], d[name]))
     return rows
@@ -82,23 +91,31 @@ def _cross_cells(recs: list[CanonicalRecord], year: int) -> list[dict]:
     """
     exp: dict[tuple[str, str], int] = defaultdict(int)
     imp: dict[tuple[str, str], int] = defaultdict(int)
+    exp_present: set[tuple[str, str]] = set()
+    imp_present: set[tuple[str, str]] = set()
     for r in recs:
         if r.year != year:
             continue
         key = (r.partner, r.product)
         if r.flow is Flow.EXPORT:
             exp[key] += r.value_usd
+            exp_present.add(key)
         else:
             imp[key] += r.value_usd
+            imp_present.add(key)
     cells = []
     for partner, product in sorted(set(exp) | set(imp)):
         e, i = exp.get((partner, product), 0), imp.get((partner, product), 0)
+        export_available = (partner, product) in exp_present
+        import_available = (partner, product) in imp_present
         cells.append({
             "partner": partner,
             "product": product,
             "exportsUsd": e,
             "importsUsd": i,
-            "balanceUsd": e - i,
+            "balanceUsd": (e - i) if export_available and import_available else None,
+            "exportAvailable": export_available,
+            "importAvailable": import_available,
         })
     return cells
 
@@ -111,6 +128,7 @@ def build_country_projection(country: str, recs: list[CanonicalRecord], dataset_
         "schemaVersion": SCHEMA_VERSION,
         "datasetVersion": dataset_version,
         "country": country,
+        "countryName": country_name(country),
         "years": years,
         "summaryByYear": {str(y): totals[y] for y in years},
         "partnersByYear": {str(y): _breakdown(recs, y, "partner") for y in years},
@@ -128,6 +146,7 @@ def build_overview(records: list[CanonicalRecord], dataset_version: str) -> dict
         totals = _totals_by_year(buckets[code])
         reporters.append({
             "code": code,
+            "name": country_name(code),
             "totalsByYear": [{"year": y, **totals[y]} for y in sorted(totals)],
         })
     return {

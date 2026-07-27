@@ -13,6 +13,7 @@
 				const latest = r.totalsByYear[r.totalsByYear.length - 1];
 				return {
 					code: r.code,
+					name: r.name,
 					latest,
 					series: r.totalsByYear.map((t) => ({ year: t.year, value: t.balanceUsd }))
 				};
@@ -37,6 +38,7 @@
 			<a class="cell" href="/?country={r.code}">
 				<div class="top">
 					<span class="code">{r.code}</span>
+					<span class="name">{r.name}</span>
 					<span class="bal" style:color={deltaColor(r.latest.balanceUsd)}>
 						{usdSigned(r.latest.balanceUsd)}
 					</span>
@@ -118,6 +120,12 @@
 		font-size: 1.1rem;
 		font-weight: 600;
 		color: var(--text-1);
+	}
+	.name {
+		font-size: 0.8rem;
+		color: var(--text-3);
+		margin-right: auto;
+		margin-left: var(--space-2);
 	}
 	.bal {
 		font-size: 0.9rem;

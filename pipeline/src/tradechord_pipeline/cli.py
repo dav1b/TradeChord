@@ -19,9 +19,15 @@ import time
 from datetime import UTC, datetime
 
 from . import config as _config
-from .collection.flows import CollectionConfig, build_client, collect_reporter_flow
+from .collection.flows import (
+    CollectionConfig,
+    build_client,
+    collect_reporter_flow,
+    complete_partner_union,
+)
 from .models import Flow
-from .release import DEFAULT_TOLERANCE, run_release, run_validate
+from .release import DEFAULT_TOLERANCE, run_release, run_reproject, run_validate
+from .verification import verify_release
 
 _STAGING_FIELDS = ["year", "reporter", "partner", "product", "flow", "value_thousands"]
 
@@ -100,16 +106,34 @@ def _cmd_collect(args: argparse.Namespace) -> int:
     total_obs = 0
     unresolved = 0
     for reporter in reporters:
-        for flow in flows:
-            result = collect_reporter_flow(
+        provisional = [
+            collect_reporter_flow(
                 reporter, years, flow, cc=cc, client=client, top_k=args.top_k
             )
+            for flow in flows
+        ]
+        if set(flows) == {Flow.EXPORT, Flow.IMPORT}:
+            partner_union = sorted(
+                {
+                    partner
+                    for result in provisional
+                    for partner in result.manifest.get("ranked_partner_codes", [])
+                }
+            )
+            results = [
+                complete_partner_union(result, partner_union, cc=cc, client=client)
+                for result in provisional
+            ]
+        else:
+            results = provisional
+
+        for result in results:
             _write_staging(run_dir, result)
             total_obs += len(result.observations)
             if result.statuses.had_unresolved_failures:
                 unresolved += 1
             print(
-                f"  {reporter} {flow.value}: {len(result.observations)} obs  "
+                f"  {reporter} {result.flow.value}: {len(result.observations)} obs  "
                 f"statuses={result.statuses.as_dict()}",
                 file=sys.stderr,
             )
@@ -163,14 +187,35 @@ def _cmd_release(args: argparse.Namespace) -> int:
         args.releases_root,
         args.web_root,
         tolerance=args.tolerance,
-        strict=args.strict,
         force=args.force,
     )
     _print_report(report)
     if path is None:
-        print("[release] REJECTED: validation failed (use --no-strict to override)", file=sys.stderr)
+        print("[release] REJECTED: validation failed", file=sys.stderr)
         return 1
     print(f"[release] wrote {path}", file=sys.stderr)
+    return 0
+
+
+def _cmd_verify(args: argparse.Namespace) -> int:
+    errors = verify_release(args.release, args.repo_root)
+    for error in errors:
+        print(f"[verify] {error}", file=sys.stderr)
+    if errors:
+        return 1
+    print(f"[verify] OK: {args.release}", file=sys.stderr)
+    return 0
+
+
+def _cmd_reproject(args: argparse.Namespace) -> int:
+    path = run_reproject(
+        args.source,
+        args.version,
+        args.releases_root,
+        args.web_root,
+        force=args.force,
+    )
+    print(f"[reproject] wrote {path}", file=sys.stderr)
     return 0
 
 
@@ -206,10 +251,23 @@ def _build_parser() -> argparse.ArgumentParser:
     r.add_argument("--web-root", dest="web_root", default="web/static/data",
                    help="Root directory for committed browser projections")
     r.add_argument("--tolerance", type=float, default=DEFAULT_TOLERANCE)
-    r.add_argument("--no-strict", dest="strict", action="store_false",
-                   help="Write the release even if validation fails (records issues)")
     r.add_argument("--force", action="store_true", help="Overwrite an existing release version")
-    r.set_defaults(func=_cmd_release, strict=True)
+    r.set_defaults(func=_cmd_release)
+
+    verify = sub.add_parser("verify", help="Verify committed canonical and web artifacts")
+    verify.add_argument("--release", required=True, help="Path to data/releases/<version>")
+    verify.add_argument("--repo-root", default=".", help="Repository root")
+    verify.set_defaults(func=_cmd_verify)
+
+    reproject = sub.add_parser(
+        "reproject", help="Publish a new version from an existing canonical matrix"
+    )
+    reproject.add_argument("--source", required=True, help="Existing release directory")
+    reproject.add_argument("--version", required=True)
+    reproject.add_argument("--releases-root", default="data/releases")
+    reproject.add_argument("--web-root", default="web/static/data")
+    reproject.add_argument("--force", action="store_true")
+    reproject.set_defaults(func=_cmd_reproject)
 
     return parser
 

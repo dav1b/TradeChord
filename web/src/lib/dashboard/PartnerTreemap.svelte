@@ -27,6 +27,8 @@
 							exportsUsd: c.exportsUsd,
 							importsUsd: c.importsUsd,
 							balanceUsd: c.balanceUsd,
+							exportAvailable: c.exportAvailable,
+							importAvailable: c.importAvailable,
 							exportShare: c.exportsUsd / total
 						},
 						selection.product ?? undefined

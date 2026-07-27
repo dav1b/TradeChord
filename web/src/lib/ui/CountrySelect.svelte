@@ -1,21 +1,31 @@
 <script lang="ts">
 	// Country picker. Brand input: solid 1px rule, 2px navy border on focus.
+	import { onMount } from 'svelte';
+
+	let ready = $state(false);
+	onMount(() => {
+		ready = true;
+	});
 	let {
 		value,
 		options,
 		onchange
 	}: {
 		value: string;
-		options: string[];
+		options: Array<{ code: string; name: string }>;
 		onchange: (code: string) => void;
 	} = $props();
 </script>
 
 <label class="wrap">
 	<span class="eyebrow">Reporter</span>
-	<select {value} onchange={(e) => onchange((e.currentTarget as HTMLSelectElement).value)}>
-		{#each options as code (code)}
-			<option value={code}>{code}</option>
+	<select
+		{value}
+		data-ready={ready}
+		onchange={(e) => onchange((e.currentTarget as HTMLSelectElement).value)}
+	>
+		{#each options as option (option.code)}
+			<option value={option.code}>{option.name} · {option.code}</option>
 		{/each}
 	</select>
 </label>

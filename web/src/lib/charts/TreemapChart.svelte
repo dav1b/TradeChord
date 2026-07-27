@@ -61,7 +61,8 @@
 			{#each nodes as n, i (n.data.label)}
 				{@const w = n.x1 - n.x0}
 				{@const h = n.y1 - n.y0}
-				{@const pos = n.data.point.balanceUsd >= 0}
+				{@const available = n.data.point.balanceUsd != null}
+				{@const pos = available && n.data.point.balanceUsd! >= 0}
 				{@const isSel = selectedLabel === n.data.label}
 				{@const recessed = selectedLabel != null && !isSel}
 				<g
@@ -81,11 +82,11 @@
 					<rect
 						width={w}
 						height={h}
-						fill={pos ? 'var(--pos-dim)' : 'var(--neg-dim)'}
+						fill={available ? (pos ? 'var(--pos-dim)' : 'var(--neg-dim)') : 'var(--surface-2)'}
 						stroke={isSel ? 'var(--active)' : 'var(--border)'}
 						stroke-width={isSel ? 2 : 1}
 					/>
-					<rect width="3" height={h} fill={pos ? 'var(--delta-pos)' : 'var(--delta-neg)'} />
+					<rect width="3" height={h} fill={available ? (pos ? 'var(--delta-pos)' : 'var(--delta-neg)') : 'var(--text-4)'} />
 					{#if w > 56 && h > 30}
 						<text x="8" y="17" class="name">{n.data.label}</text>
 						<text
@@ -93,9 +94,9 @@
 							y="16"
 							class="delta-mark"
 							text-anchor="end"
-							fill={pos ? 'var(--delta-pos-mark)' : 'var(--delta-neg-mark)'}
+							fill={available ? (pos ? 'var(--delta-pos-mark)' : 'var(--delta-neg-mark)') : 'var(--text-4)'}
 							aria-hidden="true"
-						>{pos ? '▲' : '▼'}</text>
+						>{available ? (pos ? '▲' : '▼') : '•'}</text>
 						<text x="8" y="31" class="val">{usd(n.data.value, 1)}</text>
 						{#if h > 46}
 							<text x="8" y="45" class="sub">{pct(n.data.point.share ?? 0)} · exports</text>

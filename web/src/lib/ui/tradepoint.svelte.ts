@@ -13,9 +13,9 @@ export interface TradePoint {
 	product?: string;
 	year: number;
 	focus: 'country' | 'partner' | 'product';
-	exportsUsd: number;
-	importsUsd: number;
-	balanceUsd: number;
+	exportsUsd: number | null;
+	importsUsd: number | null;
+	balanceUsd: number | null;
 	share?: number;
 	shareOf?: 'exports' | 'imports';
 }
@@ -70,8 +70,8 @@ export function partnerPoint(
 		product,
 		year,
 		focus: 'partner',
-		exportsUsd: r.exportsUsd,
-		importsUsd: r.importsUsd,
+		exportsUsd: r.exportAvailable ? r.exportsUsd : null,
+		importsUsd: r.importAvailable ? r.importsUsd : null,
 		balanceUsd: r.balanceUsd,
 		share: r.exportShare,
 		shareOf: 'exports'
@@ -91,8 +91,8 @@ export function productPoint(
 		partner,
 		year,
 		focus: 'product',
-		exportsUsd: r.exportsUsd,
-		importsUsd: r.importsUsd,
+		exportsUsd: r.exportAvailable ? r.exportsUsd : null,
+		importsUsd: r.importAvailable ? r.importsUsd : null,
 		balanceUsd: r.balanceUsd,
 		share: r.exportShare,
 		shareOf: 'exports'

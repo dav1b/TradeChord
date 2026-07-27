@@ -13,11 +13,13 @@
 	<div class="title">{tipTitle(point)}</div>
 	<dl class="eq">
 		<dt>Exports</dt>
-		<dd>{usd(point.exportsUsd)}</dd>
+		<dd>{point.exportsUsd == null ? 'Not explicit' : usd(point.exportsUsd)}</dd>
 		<dt>Imports</dt>
-		<dd>{usd(point.importsUsd)}</dd>
+		<dd>{point.importsUsd == null ? 'Not explicit' : usd(point.importsUsd)}</dd>
 		<dt class="bal">Balance</dt>
-		<dd class="bal" style:color={deltaColor(point.balanceUsd)}>{usdSigned(point.balanceUsd)}</dd>
+		<dd class="bal" style:color={point.balanceUsd == null ? undefined : deltaColor(point.balanceUsd)}>
+			{point.balanceUsd == null ? 'Unavailable' : usdSigned(point.balanceUsd)}
+		</dd>
 	</dl>
 	{#if point.share != null}
 		<div class="share">{pct(point.share)} of {point.shareOf ?? 'exports'}</div>

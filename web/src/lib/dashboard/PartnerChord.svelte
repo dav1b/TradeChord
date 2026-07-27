@@ -12,7 +12,7 @@
 	const rows = $derived.by(() => {
 		const all = projection.partnersByYear[String(year)] ?? [];
 		const named = all
-			.filter((p) => p.partner !== 'ROW')
+			.filter((p) => p.partner !== 'ROW' && p.exportAvailable && p.importAvailable)
 			.slice()
 			.sort((a, b) => b.exportsUsd + b.importsUsd - (a.exportsUsd + a.importsUsd))
 			.slice(0, topN);

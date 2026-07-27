@@ -8,8 +8,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		// Deploy target: Vercel. The AI commentary server route (F6) needs SSR, so
-		// this is not a pure-static build.
+		// Deploy target: Vercel.
 		adapter: adapter()
 	}
 };

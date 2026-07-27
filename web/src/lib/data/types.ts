@@ -1,7 +1,7 @@
 // Types for the committed data release consumed by the dashboard.
 // Mirrors data/contracts/*.schema.json. All monetary values are integer current USD.
 
-export const SUPPORTED_SCHEMA_VERSION = 1;
+export const SUPPORTED_SCHEMA_VERSION = 2;
 
 /** Total exports/imports/balance for one year. */
 export interface FlowSummary {
@@ -15,7 +15,9 @@ export interface PartnerRow {
 	partner: string;
 	exportsUsd: number;
 	importsUsd: number;
-	balanceUsd: number;
+	balanceUsd: number | null;
+	exportAvailable: boolean;
+	importAvailable: boolean;
 	exportShare: number; // 0..1, share of the reporter's exports that year
 }
 
@@ -24,7 +26,9 @@ export interface ProductRow {
 	product: string;
 	exportsUsd: number;
 	importsUsd: number;
-	balanceUsd: number;
+	balanceUsd: number | null;
+	exportAvailable: boolean;
+	importAvailable: boolean;
 	exportShare: number;
 }
 
@@ -34,7 +38,9 @@ export interface CrossCell {
 	product: string;
 	exportsUsd: number;
 	importsUsd: number;
-	balanceUsd: number;
+	balanceUsd: number | null;
+	exportAvailable: boolean;
+	importAvailable: boolean;
 }
 
 /** Per-country projection: web/static/data/<version>/countries/<CODE>.json */
@@ -42,6 +48,7 @@ export interface CountryProjection {
 	schemaVersion: number;
 	datasetVersion: string;
 	country: string;
+	countryName: string;
 	years: number[];
 	summaryByYear: Record<string, FlowSummary>;
 	partnersByYear: Record<string, PartnerRow[]>;
@@ -56,6 +63,7 @@ export interface ReporterYearTotals extends FlowSummary {
 
 export interface OverviewReporter {
 	code: string;
+	name: string;
 	totalsByYear: ReporterYearTotals[];
 }
 

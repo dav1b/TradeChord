@@ -1,6 +1,32 @@
 # TradeChord Monorepo & Data-Product Plan
 
-Status: agreed plan of record. Supersedes ad-hoc scripts and the manual CSV hand-off.
+Status: architecture implemented. This remains the decision record; active
+follow-up work is tracked in Git history and the “Implementation status” below.
+
+## Implementation status (2026-07-27)
+
+Completed:
+
+- Monorepo layout and independent Node/Python toolchains.
+- Directly reported export and import flows.
+- Versioned canonical releases and committed browser projections.
+- Deterministic gzip, schemas, checksums, and offline pipeline tests.
+- Per-country projections for `/` and `overview.json` for `/all`.
+- Removal of the legacy 14 MB browser CSV and browser-side aggregation.
+- Explicit request statuses, strict validation, and Vercel deployment adapter.
+- Compatibility release semantics for unavailable bilateral flows.
+- Coordinated export/import partner unions, validated against a live USA/DEU
+  pilot with no unresolved, duplicate, reconciliation, value, flow, or shape
+  failures.
+- Atomic browser projection promotion, per-file hashes, release verification,
+  coverage summaries, country names, browser loading/error states, and
+  Playwright route/interaction coverage.
+
+Operational follow-up:
+
+- Run and review the full 30-reporter recollection before publishing the next
+  historical-data release. The active `2026-07.1` release is intentionally a
+  schema-v2 compatibility projection of the existing canonical matrix.
 
 This document merges the pipeline repo (`TradeChord_datapipeline`) and the dashboard repo
 (`TradeChord`) into one repository with a clean data contract, and sets the path to a more
@@ -205,7 +231,7 @@ No symlink, no runtime copy, no `prepare:data`, no Python in normal web work. Th
 `current.json` is minimal:
 
 ```json
-{ "schemaVersion": 1, "datasetVersion": "2026-01", "manifestSha256": "..." }
+{ "schemaVersion": 2, "datasetVersion": "2026-01", "manifestSha256": "..." }
 ```
 
 The web app must **reject unsupported `schemaVersion`** values.

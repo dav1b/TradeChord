@@ -58,6 +58,7 @@
 		if (i === 0) return 'var(--dj-navy)';
 		const r = rows[i - 1];
 		if (r.partner === 'ROW') return 'var(--dj-alabaster)';
+		if (r.balanceUsd == null) return 'var(--dj-alabaster)';
 		return r.balanceUsd >= 0 ? 'var(--delta-pos)' : 'var(--delta-neg)';
 	}
 	function label(i: number): string {
