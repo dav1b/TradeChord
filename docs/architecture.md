@@ -113,6 +113,31 @@ the shared reduced-motion policy applies. Once one response model is selected
 through visual and touch review, it can be folded into the production chord
 without coupling the future drill-down architecture to a disposable demo.
 
+The next laboratory increment separates three responsibilities that must not
+collapse into one chart component:
+
+```text
+ChordLayer
+  → HighlightStrategy (fixed geometry; presentation only)
+  → RelationshipBridge (foreground extraction and reversal)
+  → BilateralComposition (export/import representations)
+```
+
+Selection and navigation are different events. Selecting a ribbon moves the
+scene from `network` to `focused`; opening it advances through `extracting` to
+`relationship`. The bridge temporarily owns the selected partner entity while
+the national chord recedes. It resolves into stable export and import flow
+entities that a later increment can render as two product treemaps. Highlight
+strategies may alter opacity, saturation, stroke, shadow, or a transient sheen,
+but never the value-derived ribbon path or thickness.
+
+Bridge geometry and choreography are representation contracts rather than
+data contracts. They consume the same stable partner and flow keys and can be
+replaced without changing projections or analytical state. The first bridge
+increment deliberately stops at a central bilateral band so its continuity,
+interruption, reversal, responsiveness, and reduced-motion behavior can be
+judged before product geometry is introduced.
+
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns
 state, geometry, visual continuity, URL navigation, motion, and accessible

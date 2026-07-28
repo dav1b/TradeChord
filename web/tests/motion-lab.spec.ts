@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-test('motion laboratory focuses, retargets, extracts, and resets one chord', async ({ page }) => {
+test('motion laboratory focuses, bridges, reverses, retargets, and resets one chord', async ({
+	page
+}) => {
 	await page.goto('/motion-lab');
 
 	await expect(page.getByRole('heading', { level: 1 })).toContainText('Germany');
@@ -34,15 +36,23 @@ test('motion laboratory focuses, retargets, extracts, and resets one chord', asy
 		)
 		.toEqual(reporterType);
 
-	const focusedTransform = await first.getAttribute('transform');
-	await page.getByRole('button', { name: 'Ribbon extraction' }).click();
-	await expect(page.getByRole('button', { name: 'Ribbon extraction' })).toHaveAttribute(
+	const openRelationship = page.getByRole('button', { name: 'Open relationship' });
+	await expect(openRelationship).toBeEnabled();
+	await openRelationship.click();
+	await expect(page.getByRole('button', { name: 'Return ribbon' })).toHaveAttribute(
 		'aria-pressed',
 		'true'
 	);
-	await expect
-		.poll(() => first.getAttribute('transform'))
-		.not.toBe(focusedTransform);
+	await expect(page.locator('#instruction')).toContainText('the bridge now owns');
+	await expect.poll(() => first.getAttribute('d')).toBe(restingPath);
+
+	const bridge = page.locator('.bridge');
+	await expect(bridge).toHaveAttribute('aria-hidden', 'false');
+	await expect(bridge.locator('[data-entity-id$="export"]')).toBeVisible();
+	await expect(bridge.locator('[data-entity-id$="import"]')).toBeVisible();
+	await bridge.getByRole('button', { name: /Return .* to the trade network/ }).click();
+	await expect(page.getByRole('button', { name: 'Open relationship' })).toBeVisible();
+	await expect(bridge).toHaveAttribute('aria-hidden', 'true');
 
 	await second.dispatchEvent('click');
 	await expect(second).toHaveAttribute('aria-pressed', 'true');

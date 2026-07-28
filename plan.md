@@ -597,8 +597,11 @@ container and transition/tween utilities. Build **one reference chart** (slope) 
 pattern before scaling out. **Implemented extension:** `/motion-lab` isolates one full-viewport chord and
 compares two interruptible Svelte-motion responses—fixed-geometry visual focus and spatial extraction—using
 production projections, stable partner keys, keyboard selection, responsive sizing, and reduced motion.
-The next decision is experiential: review both on desktop and touch hardware, choose the production
-ribbon grammar, then connect the selected ribbon to the existing bilateral scene.
+The next implementation is modular: `HighlightStrategy` preserves analytical geometry,
+`RelationshipBridge` carries the selected keyed entity into a reversible central bilateral band, and a
+later `BilateralComposition` resolves it into separately keyed export/import treemaps. Equal-size
+treemaps compare within-flow composition; proportional containers are required for honest absolute
+magnitude comparison. The bridge is implemented and judged before either treemap encoding is selected.
 
 **F3 — Rebuild the charts** (on F2, fed by projection props):
 - **Chord** — animated ribbons, responsive radius, hover to isolate a partner's flows.

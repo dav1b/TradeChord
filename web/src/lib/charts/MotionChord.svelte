@@ -2,25 +2,34 @@
 	import { arc as d3arc, chord as d3chord, ribbon as d3ribbon } from 'd3';
 	import { cubicOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
+	import RelationshipBridge from '$lib/charts/motion/RelationshipBridge.svelte';
+	import {
+		ribbonHighlight,
+		type HighlightStyle
+	} from '$lib/charts/motion/highlight';
 	import { motionDuration } from '$lib/motion';
 	import { partnerKey } from '$lib/explorer/entity';
 	import { usd } from '$lib/format';
 	import type { FlowSummary, PartnerRow } from '$lib/data/types';
 
-	export type MotionMode = 'breathe' | 'extract';
+	export type MotionPhase = 'network' | 'focused' | 'relationship';
 
 	let {
 		reporter,
 		rows,
 		summary,
-		mode,
-		onselect
+		phase,
+		highlightStyle,
+		onselect,
+		onclose
 	}: {
 		reporter: string;
 		rows: PartnerRow[];
 		summary: FlowSummary;
-		mode: MotionMode;
+		phase: MotionPhase;
+		highlightStyle: HighlightStyle;
 		onselect?: (partner: string | null) => void;
+		onclose?: () => void;
 	} = $props();
 
 	let width = $state(0);
@@ -32,8 +41,8 @@
 		interpolate: (from, to) => (progress) =>
 			from.map((value, index) => value + ((to[index] ?? 0) - value) * progress)
 	});
-	const extraction = tweened(0, {
-		duration: motionDuration(420),
+	const bridgeProgress = tweened(0, {
+		duration: motionDuration(620),
 		easing: cubicOut
 	});
 
@@ -42,13 +51,16 @@
 	});
 
 	$effect(() => {
-		void extraction.set(mode === 'extract' ? 1 : 0, { duration: motionDuration(420) });
+		void bridgeProgress.set(phase === 'relationship' ? 1 : 0, {
+			duration: motionDuration(phase === 'relationship' ? 620 : 480)
+		});
 	});
 
 	const size = $derived(Math.max(260, Math.min(width, height)));
 	const outerRadius = $derived(Math.max(100, size / 2 - (size < 500 ? 34 : 28)));
 	const band = $derived(size < 500 ? 9 : 13);
 	const focusAmount = $derived(Math.max(0, ...$emphasis));
+	const selectedRow = $derived(rows.find((row) => row.partner === selected) ?? null);
 
 	const matrix = $derived.by(() => {
 		const count = rows.length + 1;
@@ -89,18 +101,12 @@
 		return row.balanceUsd >= 0 ? 'var(--delta-pos)' : 'var(--delta-neg)';
 	}
 
-	function offset(index: number, angle: number) {
-		const energy = $emphasis[index] ?? 0;
-		const distance = 32 * $extraction * energy;
-		return {
-			x: Math.sin(angle) * distance,
-			y: -Math.cos(angle) * distance
-		};
-	}
-
 	function ribbonOpacity(index: number) {
 		const energy = $emphasis[index] ?? 0;
-		return 0.3 * (1 - focusAmount * 0.76) + energy * 0.72;
+		const presentation = ribbonHighlight(highlightStyle, energy, focusAmount);
+		const bridgeRecession =
+			selected === rows[index].partner ? 1 - $bridgeProgress * 0.82 : 1 - $bridgeProgress * 0.68;
+		return presentation.opacity * bridgeRecession;
 	}
 
 	function activate(index: number) {
@@ -148,14 +154,19 @@
 					{@const index = partnerIndex(chord)}
 					{@const partnerGroup = layout.groups[index + 1]}
 					{@const mid = (partnerGroup.startAngle + partnerGroup.endAngle) / 2}
-					{@const movement = offset(index, mid)}
+					{@const presentation = ribbonHighlight(
+						highlightStyle,
+						$emphasis[index] ?? 0,
+						focusAmount
+					)}
 					<path
 						class="ribbon"
 						class:selected={selected === rows[index].partner}
 						d={ribbon(chord) as unknown as string}
 						fill={color(index)}
 						opacity={ribbonOpacity(index)}
-						transform="translate({movement.x},{movement.y})"
+						style:filter="saturate({presentation.saturation})"
+						stroke="color-mix(in srgb, var(--dj-carbon) {presentation.strokeOpacity * 100}%, transparent)"
 						role="button"
 						tabindex={rows[index].partner === 'ROW' ? -1 : 0}
 						aria-pressed={selected === rows[index].partner}
@@ -175,7 +186,6 @@
 				{#each layout.groups as group (group.index)}
 					{@const index = group.index - 1}
 					{@const mid = (group.startAngle + group.endAngle) / 2}
-					{@const movement = group.index === 0 ? { x: 0, y: 0 } : offset(index, mid)}
 					<path
 						class="arc"
 						class:reporter={group.index === 0}
@@ -185,15 +195,15 @@
 						opacity={
 							group.index === 0
 								? 1
-								: 1 - focusAmount * 0.62 + ($emphasis[index] ?? 0) * 0.62
+								: (1 - focusAmount * 0.62 + ($emphasis[index] ?? 0) * 0.62) *
+									(1 - $bridgeProgress * 0.72)
 						}
-						transform="translate({movement.x},{movement.y})"
 					/>
 					{#if group.index > 0}
 						{@const labelRadius = outerRadius + (size < 500 ? 12 : 18)}
 						<text
-							x={Math.sin(mid) * labelRadius + movement.x}
-							y={-Math.cos(mid) * labelRadius + movement.y}
+							x={Math.sin(mid) * labelRadius}
+							y={-Math.cos(mid) * labelRadius}
 							class:selected={selected === rows[index].partner}
 							class="partner-label"
 							text-anchor={Math.sin(mid) >= 0 ? 'start' : 'end'}
@@ -221,6 +231,16 @@
 				</text>
 			</g>
 		</svg>
+	{/if}
+	{#if selectedRow}
+		<RelationshipBridge
+			{reporter}
+			row={selectedRow}
+			{width}
+			{height}
+			progress={$bridgeProgress}
+			onclose={() => onclose?.()}
+		/>
 	{/if}
 </div>
 

@@ -983,6 +983,19 @@ before the production dashboard is reorganized.
 
 Current increment:
 
+- The next architecture is now explicitly staged as fixed-geometry highlight
+  → foreground relationship bridge → bilateral composition. Highlight,
+  extraction, and treemap rendering are separate modules joined by stable
+  partner and flow identities.
+- Scene phases distinguish `network`, `focused`, `extracting`, `relationship`,
+  and `composition`. Selection does not automatically claim that the user has
+  navigated into a relationship; extraction is a deliberate scene action.
+- The first shippable bridge ends at a reversible central bilateral band.
+  Export/import treemaps follow only after that bridge is visually and
+  accessibly accepted.
+- Highlight treatments are presentation strategies. They may change opacity,
+  saturation, edge, shadow, or transient light, but cannot alter the chord
+  path or value-derived thickness.
 - A dedicated `/motion-lab` route now isolates one production-data chord in a
   full-viewport scene. It deliberately removes dashboard cards and analytical
   drill-downs so ribbon response can be judged on its own.
@@ -998,8 +1011,10 @@ Current increment:
   calculation, Svelte-owned SVG, Svelte motion stores, keyboard activation,
   ARIA selection state, responsive geometry, and the shared reduced-motion
   duration policy.
-- Browser coverage verifies geometry change, retargeting, mode change, reset,
-  keyboard operation, reduced motion, and a narrow viewport. A manual visual,
+- Browser coverage verifies geometry preservation, retargeting, reset,
+  keyboard operation, reduced motion, and a narrow viewport. The bridge
+  increment additionally verifies fixed ribbon paths, stable export/import
+  identities, deliberate opening, and reversible return. A manual visual,
   physical-touch, and assistive-technology review remains required.
 - Network ↔ ranked partners is implemented against production projection data.
 - Partner ribbons and ranked bars share semantic partner keys.
@@ -1032,6 +1047,12 @@ Current increment:
 
 Still required before Phase A is complete:
 
+- validate the reversible central relationship bridge, then split it into
+  stable export/import flow regions;
+- build two product treemaps from the existing partner×product `crossCells`
+  only after choosing explicit comparison semantics:
+  - equal containers compare within-flow composition and must headline totals;
+  - proportional containers compare absolute magnitude on one common scale;
 - compare the two `/motion-lab` studies on real desktop and touch hardware and
   choose the motion grammar that should become the production ribbon response;
 - decide whether a selected relationship should remain within the chord

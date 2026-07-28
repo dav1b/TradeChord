@@ -1,11 +1,23 @@
 <script lang="ts">
-	import MotionChord, { type MotionMode } from '$lib/charts/MotionChord.svelte';
+	import MotionChord, { type MotionPhase } from '$lib/charts/MotionChord.svelte';
+	import type { HighlightStyle } from '$lib/charts/motion/highlight';
 	import Wordmark from '$lib/ui/Wordmark.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-	let mode = $state<MotionMode>('breathe');
+	let phase = $state<MotionPhase>('network');
+	let highlightStyle = $state<HighlightStyle>('illuminate');
 	let selected = $state<string | null>(null);
+
+	function selectPartner(partner: string | null) {
+		selected = partner;
+		phase = partner ? 'focused' : 'network';
+	}
+
+	function toggleRelationship() {
+		if (!selected) return;
+		phase = phase === 'relationship' ? 'focused' : 'relationship';
+	}
 </script>
 
 <svelte:head>
@@ -23,24 +35,29 @@
 			<p>Motion laboratory · {data.year}</p>
 			<h1>{data.reporterName} <span>{data.reporter}</span></h1>
 		</div>
-		<div class="mode" role="group" aria-label="Ribbon motion study">
+		<div class="mode" role="group" aria-label="Relationship motion study">
 			<button
-				class:active={mode === 'breathe'}
-				aria-pressed={mode === 'breathe'}
-				onclick={() => (mode = 'breathe')}>Focus & breathe</button
+				class:active={highlightStyle === 'illuminate'}
+				aria-pressed={highlightStyle === 'illuminate'}
+				onclick={() => (highlightStyle = 'illuminate')}>Illuminate</button
 			>
 			<button
-				class:active={mode === 'extract'}
-				aria-pressed={mode === 'extract'}
-				onclick={() => (mode = 'extract')}>Ribbon extraction</button
+				class:active={phase === 'relationship'}
+				aria-pressed={phase === 'relationship'}
+				disabled={!selected}
+				onclick={toggleRelationship}
 			>
+				{phase === 'relationship' ? 'Return ribbon' : 'Open relationship'}
+			</button>
 		</div>
 	</header>
 
 	<section class="canvas" aria-labelledby="instruction">
 		<p id="instruction">
 			{selected
-				? `${selected} selected · click another ribbon to retarget · Escape to reset`
+				? phase === 'relationship'
+					? `${selected} relationship · the bridge now owns the selected entity`
+					: `${selected} selected · open the relationship or choose another ribbon`
 				: 'Select a ribbon · reported geometry stays fixed while the relationship comes forward'}
 		</p>
 		<div class="diagram">
@@ -48,15 +65,17 @@
 				reporter={data.reporter}
 				rows={data.rows}
 				summary={data.summary}
-				{mode}
-				onselect={(partner) => (selected = partner)}
+				{phase}
+				{highlightStyle}
+				onselect={selectPartner}
+				onclose={() => (phase = 'focused')}
 			/>
 		</div>
 	</section>
 
 	<footer>
 		<span>WITS · release {data.version}</span>
-		<span>{mode === 'breathe' ? 'Geometry emphasis' : 'Spatial extraction'}</span>
+		<span>{phase === 'relationship' ? 'Relationship bridge' : 'Fixed-geometry illumination'}</span>
 	</footer>
 </main>
 
@@ -122,6 +141,10 @@
 	.mode button.active {
 		color: var(--text-1);
 		font-weight: 700;
+	}
+	.mode button:disabled {
+		cursor: default;
+		opacity: 0.36;
 	}
 	.mode button:focus-visible {
 		outline: 2px solid var(--active);
