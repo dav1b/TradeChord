@@ -138,6 +138,32 @@ increment deliberately stops at a central bilateral band so its continuity,
 interruption, reversal, responsiveness, and reduced-motion behavior can be
 judged before product geometry is introduced.
 
+Ribbon activation now represents one semantic intent:
+
+```text
+OPEN_RELATIONSHIP(partner)
+  → illuminating
+  → extracting
+  → opening
+  → relationship
+```
+
+The click handler does not independently select, move, and open components.
+An interruptible choreography controller advances the scene phases and ignores
+stale completion work when the user retargets, closes, or presses Escape.
+The bridge and relationship panel consume one responsive
+`RelationshipAnchor`; on wide screens it occupies the upper-left analytical
+region, while compact screens use a nearly full-width destination below the
+scene instruction. “Upper-left” is therefore a layout role rather than fixed
+pixel coordinates.
+
+The panel begins resolving while extraction completes. This is a wayfinding
+transition, not a modal popup: the selected partner arrives first, flow
+regions follow, and labels settle last. Reduced motion traverses the same
+semantic phases without spatial delay. Returning to the network invalidates
+the active choreography and reverses the bridge while retaining the partner
+selection.
+
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns
 state, geometry, visual continuity, URL navigation, motion, and accessible

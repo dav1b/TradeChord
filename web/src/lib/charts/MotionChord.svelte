@@ -7,12 +7,11 @@
 		ribbonHighlight,
 		type HighlightStyle
 	} from '$lib/charts/motion/highlight';
+	import type { RelationshipPhase } from '$lib/charts/motion/relationship-choreography';
 	import { motionDuration } from '$lib/motion';
 	import { partnerKey } from '$lib/explorer/entity';
 	import { usd } from '$lib/format';
 	import type { FlowSummary, PartnerRow } from '$lib/data/types';
-
-	export type MotionPhase = 'network' | 'focused' | 'relationship';
 
 	let {
 		reporter,
@@ -26,7 +25,7 @@
 		reporter: string;
 		rows: PartnerRow[];
 		summary: FlowSummary;
-		phase: MotionPhase;
+		phase: RelationshipPhase;
 		highlightStyle: HighlightStyle;
 		onselect?: (partner: string | null) => void;
 		onclose?: () => void;
@@ -51,8 +50,10 @@
 	});
 
 	$effect(() => {
-		void bridgeProgress.set(phase === 'relationship' ? 1 : 0, {
-			duration: motionDuration(phase === 'relationship' ? 620 : 480)
+		const bridgeVisible =
+			phase === 'extracting' || phase === 'opening' || phase === 'relationship';
+		void bridgeProgress.set(bridgeVisible ? 1 : 0, {
+			duration: motionDuration(bridgeVisible ? 620 : 480)
 		});
 	});
 
@@ -112,6 +113,9 @@
 	function activate(index: number) {
 		const partner = rows[index].partner;
 		if (partner === 'ROW') return;
+		if (selected !== partner && $bridgeProgress > 0) {
+			void bridgeProgress.set(0, { duration: 0 });
+		}
 		selected = selected === partner ? null : partner;
 		void emphasis.set(
 			rows.map((row) => (row.partner === selected ? 1 : 0)),

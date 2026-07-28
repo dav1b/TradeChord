@@ -18,7 +18,7 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 
 	await first.dispatchEvent('click');
 	await expect(first).toHaveAttribute('aria-pressed', 'true');
-	await expect(page.locator('#instruction')).toContainText('selected');
+	await expect(page.locator('#instruction')).toContainText('illuminating');
 	await expect.poll(() => first.getAttribute('d')).toBe(restingPath);
 	const selectedLabel = chord.locator('text.partner-label.selected');
 	const reporterLabel = chord.locator('text.reporter-code');
@@ -36,13 +36,6 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 		)
 		.toEqual(reporterType);
 
-	const openRelationship = page.getByRole('button', { name: 'Open relationship' });
-	await expect(openRelationship).toBeEnabled();
-	await openRelationship.click();
-	await expect(page.getByRole('button', { name: 'Return ribbon' })).toHaveAttribute(
-		'aria-pressed',
-		'true'
-	);
 	await expect(page.locator('#instruction')).toContainText('the bridge now owns');
 	await expect.poll(() => first.getAttribute('d')).toBe(restingPath);
 
@@ -51,7 +44,7 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 	await expect(bridge.locator('[data-entity-id$="export"]')).toBeVisible();
 	await expect(bridge.locator('[data-entity-id$="import"]')).toBeVisible();
 	await bridge.getByRole('button', { name: /Return .* to the trade network/ }).click();
-	await expect(page.getByRole('button', { name: 'Open relationship' })).toBeVisible();
+	await expect(page.locator('#instruction')).toContainText('focused');
 	await expect(bridge).toHaveAttribute('aria-hidden', 'true');
 
 	await second.dispatchEvent('click');

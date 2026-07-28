@@ -19,25 +19,41 @@
 		onclose: () => void;
 	} = $props();
 
-	const bandWidth = $derived(Math.min(width * 0.72, 760));
+	const compact = $derived(width < 640);
+	const bandWidth = $derived(compact ? Math.min(width * 0.92, 520) : Math.min(width * 0.44, 620));
 	const bandHeight = $derived(width < 560 ? 96 : 116);
-	const x = $derived((width - bandWidth) / 2);
-	const y = $derived((height - bandHeight) / 2);
+	const startX = $derived((width - bandWidth) / 2);
+	const startY = $derived((height - bandHeight) / 2);
+	const targetX = $derived(compact ? (width - bandWidth) / 2 : width * 0.055);
+	const targetY = $derived(compact ? 18 : Math.max(28, height * 0.08));
+	const x = $derived(startX + (targetX - startX) * progress);
+	const y = $derived(startY + (targetY - startY) * progress);
+	const contentProgress = $derived(Math.max(0, Math.min(1, (progress - 0.42) / 0.58)));
 	const total = $derived(row.exportsUsd + row.importsUsd);
 	const exportShare = $derived(total ? row.exportsUsd / total : 0.5);
+	const ribbonColor = $derived(
+		row.partner === 'ROW' || row.balanceUsd == null
+			? 'var(--dj-alabaster)'
+			: row.balanceUsd >= 0
+				? 'var(--delta-pos)'
+				: 'var(--delta-neg)'
+	);
 </script>
 
 <div
 	class="bridge"
 	class:visible={progress > 0.02}
 	style:--bridge-progress={progress}
+	style:--content-progress={contentProgress}
 	style:--bridge-x="{x}px"
 	style:--bridge-y="{y}px"
 	style:--bridge-width="{bandWidth}px"
 	style:--bridge-height="{bandHeight}px"
+	style:--ribbon-color={ribbonColor}
 	data-entity-id={partnerKey(reporter, row.partner)}
 	aria-hidden={progress < 0.98}
 >
+	<div class="ribbon-surrogate" aria-hidden="true"></div>
 	<button class="back" onclick={onclose} aria-label="Return {row.partner} to the trade network">
 		← Network
 	</button>
@@ -83,9 +99,23 @@
 		border: 1px solid color-mix(in srgb, var(--dj-carbon) 22%, transparent);
 		opacity: var(--bridge-progress);
 		transform: translateY(calc((1 - var(--bridge-progress)) * 36px))
-			scaleX(calc(0.72 + var(--bridge-progress) * 0.28));
+			scaleX(calc(0.72 + var(--bridge-progress) * 0.28))
+			scaleY(calc(0.16 + var(--content-progress) * 0.84));
 		transform-origin: center;
 		pointer-events: none;
+	}
+	.ribbon-surrogate {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background: var(--ribbon-color);
+		opacity: calc(1 - var(--content-progress));
+	}
+	.back,
+	.identity,
+	.flows {
+		position: relative;
+		z-index: 1;
 	}
 	.bridge.visible {
 		pointer-events: auto;
@@ -110,6 +140,8 @@
 		align-items: baseline;
 		justify-content: flex-end;
 		gap: 9px;
+		opacity: var(--content-progress);
+		transform: translateY(calc((1 - var(--content-progress)) * 8px));
 	}
 	.identity span,
 	.identity em,
@@ -130,6 +162,9 @@
 		display: flex;
 		min-width: 0;
 		height: 42px;
+		opacity: var(--content-progress);
+		transform: scaleX(calc(0.82 + var(--content-progress) * 0.18));
+		transform-origin: left;
 	}
 	.flow {
 		display: flex;

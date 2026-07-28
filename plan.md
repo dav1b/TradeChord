@@ -601,7 +601,10 @@ The next implementation is modular: `HighlightStrategy` preserves analytical geo
 `RelationshipBridge` carries the selected keyed entity into a reversible central bilateral band, and a
 later `BilateralComposition` resolves it into separately keyed export/import treemaps. Equal-size
 treemaps compare within-flow composition; proportional containers are required for honest absolute
-magnitude comparison. The bridge is implemented and judged before either treemap encoding is selected.
+magnitude comparison. Ribbon activation is one `OPEN_RELATIONSHIP(partner)` intent orchestrated through
+interruptible `illuminating → extracting → opening → relationship` phases. A responsive relationship
+anchor is upper-left on larger screens and nearly full-width below the instruction on phones. The bridge
+is implemented and judged before either treemap encoding is selected.
 
 **F3 — Rebuild the charts** (on F2, fed by projection props):
 - **Chord** — animated ribbons, responsive radius, hover to isolate a partner's flows.

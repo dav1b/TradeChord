@@ -1,22 +1,35 @@
 <script lang="ts">
-	import MotionChord, { type MotionPhase } from '$lib/charts/MotionChord.svelte';
+	import MotionChord from '$lib/charts/MotionChord.svelte';
 	import type { HighlightStyle } from '$lib/charts/motion/highlight';
+	import {
+		openRelationshipSequence,
+		type RelationshipPhase
+	} from '$lib/charts/motion/relationship-choreography';
 	import Wordmark from '$lib/ui/Wordmark.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-	let phase = $state<MotionPhase>('network');
+	let phase = $state<RelationshipPhase>('network');
 	let highlightStyle = $state<HighlightStyle>('illuminate');
 	let selected = $state<string | null>(null);
+	let choreographyRevision = 0;
 
 	function selectPartner(partner: string | null) {
+		const revision = ++choreographyRevision;
 		selected = partner;
-		phase = partner ? 'focused' : 'network';
+		if (!partner) {
+			phase = 'network';
+			return;
+		}
+		void openRelationshipSequence(
+			() => revision === choreographyRevision,
+			(nextPhase) => (phase = nextPhase)
+		);
 	}
 
-	function toggleRelationship() {
-		if (!selected) return;
-		phase = phase === 'relationship' ? 'focused' : 'relationship';
+	function closeRelationship() {
+		choreographyRevision += 1;
+		phase = 'focused';
 	}
 </script>
 
@@ -41,14 +54,7 @@
 				aria-pressed={highlightStyle === 'illuminate'}
 				onclick={() => (highlightStyle = 'illuminate')}>Illuminate</button
 			>
-			<button
-				class:active={phase === 'relationship'}
-				aria-pressed={phase === 'relationship'}
-				disabled={!selected}
-				onclick={toggleRelationship}
-			>
-				{phase === 'relationship' ? 'Return ribbon' : 'Open relationship'}
-			</button>
+			<span>{phase}</span>
 		</div>
 	</header>
 
@@ -57,7 +63,7 @@
 			{selected
 				? phase === 'relationship'
 					? `${selected} relationship · the bridge now owns the selected entity`
-					: `${selected} selected · open the relationship or choose another ribbon`
+					: `${selected} · ${phase} · choose another ribbon to retarget`
 				: 'Select a ribbon · reported geometry stays fixed while the relationship comes forward'}
 		</p>
 		<div class="diagram">
@@ -68,7 +74,7 @@
 				{phase}
 				{highlightStyle}
 				onselect={selectPartner}
-				onclose={() => (phase = 'focused')}
+				onclose={closeRelationship}
 			/>
 		</div>
 	</section>
@@ -142,9 +148,13 @@
 		color: var(--text-1);
 		font-weight: 700;
 	}
-	.mode button:disabled {
-		cursor: default;
-		opacity: 0.36;
+	.mode span {
+		align-self: center;
+		padding: 0 9px;
+		font-family: var(--font-mono);
+		font-size: 9px;
+		text-transform: uppercase;
+		color: var(--text-4);
 	}
 	.mode button:focus-visible {
 		outline: 2px solid var(--active);

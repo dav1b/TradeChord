@@ -983,6 +983,16 @@ before the production dashboard is reorganized.
 
 Current increment:
 
+- One ribbon click is defined as `OPEN_RELATIONSHIP(partner)`, a single user
+  intent fulfilled by the interruptible sequence `illuminating → extracting
+  → opening → relationship`.
+- The bridge and its emerging relationship panel share one responsive anchor:
+  upper-left on standard/wide layouts and nearly full-width below the
+  instruction on compact layouts. The destination is not hardcoded desktop
+  coordinates.
+- Retargeting or closing increments a choreography revision so stale delayed
+  phases cannot reopen the previous partner. Reduced motion preserves the
+  state sequence without spatial delay.
 - The next architecture is now explicitly staged as fixed-geometry highlight
   → foreground relationship bridge → bilateral composition. Highlight,
   extraction, and treemap rendering are separate modules joined by stable
@@ -1047,7 +1057,11 @@ Current increment:
 
 Still required before Phase A is complete:
 
-- validate the reversible central relationship bridge, then split it into
+- assess whether automatic opening feels intentional or whether production
+  should retain a short focused pause or explicit second action;
+- replace the initial transform-and-resolve bridge with true path
+  interpolation only if the simpler wayfinding motion proves insufficient;
+- validate the reversible anchored relationship bridge, then split it into
   stable export/import flow regions;
 - build two product treemaps from the existing partner×product `crossCells`
   only after choosing explicit comparison semantics:
