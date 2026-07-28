@@ -166,6 +166,7 @@
 						onclick={(event) => {
 							event.stopPropagation();
 							activate(index);
+							event.currentTarget.blur();
 						}}
 						onkeydown={(event) => keyActivate(event, index)}
 					/>
@@ -248,10 +249,12 @@
 		transform-origin: center;
 	}
 	.ribbon:hover,
+	.ribbon:focus,
 	.ribbon:focus-visible {
 		filter: saturate(1.3) brightness(0.95);
 		stroke: var(--dj-carbon);
-		outline: none;
+		outline: none !important;
+		box-shadow: none;
 	}
 	.ribbon.selected {
 		filter: saturate(1.25);

@@ -68,6 +68,7 @@ test('motion laboratory remains operable with keyboard and reduced motion', asyn
 
 	const ribbon = page.getByRole('img', { name: /DEU trade chord/ }).locator('path.ribbon').first();
 	await ribbon.focus();
+	expect(await ribbon.evaluate((element) => getComputedStyle(element).outlineStyle)).toBe('none');
 	await ribbon.press('Enter');
 	await expect(ribbon).toHaveAttribute('aria-pressed', 'true');
 	await ribbon.press('Enter');
