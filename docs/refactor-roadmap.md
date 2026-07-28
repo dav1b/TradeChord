@@ -1,6 +1,6 @@
 # Refactor implementation record and roadmap
 
-Last updated: 2026-07-27
+Last updated: 2026-07-28
 
 This is the living record of the TradeChord refactor. It separates completed
 implementation from operational work and optional future improvements. New
@@ -983,6 +983,23 @@ before the production dashboard is reorganized.
 
 Current increment:
 
+- A dedicated `/motion-lab` route now isolates one production-data chord in a
+  full-viewport scene. It deliberately removes dashboard cards and analytical
+  drill-downs so ribbon response can be judged on its own.
+- The laboratory exposes two interruptible motion studies: **Focus & breathe**
+  continuously recalculates chord geometry so the selected relationship
+  gains visual weight while its peers contract; **Ribbon extraction** carries
+  that same keyed relationship outward without replacing the SVG scene.
+- Selecting a new ribbon retargets from the current interpolated state,
+  selecting it again or pressing Escape resets the chord, and changing motion
+  mode while selected interpolates rather than snapping.
+- The study uses production projection data, stable partner keys, D3 layout
+  calculation, Svelte-owned SVG, Svelte motion stores, keyboard activation,
+  ARIA selection state, responsive geometry, and the shared reduced-motion
+  duration policy.
+- Browser coverage verifies geometry change, retargeting, mode change, reset,
+  keyboard operation, reduced motion, and a narrow viewport. A manual visual,
+  physical-touch, and assistive-technology review remains required.
 - Network ↔ ranked partners is implemented against production projection data.
 - Partner ribbons and ranked bars share semantic partner keys.
 - Ranked selection pins the chosen partner and re-ranks the remainder with
@@ -1014,6 +1031,10 @@ Current increment:
 
 Still required before Phase A is complete:
 
+- compare the two `/motion-lab` studies on real desktop and touch hardware and
+  choose the motion grammar that should become the production ribbon response;
+- decide whether a selected relationship should remain within the chord
+  envelope or begin the future ribbon-to-bilateral transformation;
 - manual VoiceOver/NVDA reading-order and announcement review;
 - physical touch-device review;
 - richer ribbon-to-band and band-to-tile geometry interpolation after the

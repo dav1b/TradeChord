@@ -103,6 +103,16 @@ leaving the history representation still creates reversible history entries.
 Product context remains explicitly labeled with `crossYear` when it cannot
 follow the selected historical year.
 
+`/motion-lab` is an intentionally isolated interaction laboratory alongside
+the production explorer. It renders one full-viewport chord from the active
+country projection and exercises interruptible Svelte-driven geometry
+emphasis and spatial extraction. It has no independent analytical state or
+data contract: partner identity uses the same semantic keys, D3 calculates
+each intermediate chord layout, Svelte owns the SVG and motion lifecycle, and
+the shared reduced-motion policy applies. Once one response model is selected
+through visual and touch review, it can be folded into the production chord
+without coupling the future drill-down architecture to a disposable demo.
+
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns
 state, geometry, visual continuity, URL navigation, motion, and accessible
