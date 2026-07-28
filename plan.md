@@ -607,6 +607,13 @@ interruptible `illuminating → extracting → opening → relationship` phases.
 anchor is upper-left on larger screens and above the panel on phones. The extraction and panel are
 implemented and judged before either treemap encoding is selected.
 
+**Relationship analytics increment.** The first panel implementation uses the existing projection
+honestly: an exports − imports = balance equation; equal-sized export/import product treemaps whose tile
+areas encode within-flow composition; linked product hover/selection; and a dual-line bilateral history
+whose line gap represents balance. Timeline interaction is preview-only, while treemaps remain labeled
+with `crossYear` because historical bilateral product detail is not currently published. A combined
+import/export mosaic is a documented comparison candidate after this baseline ships.
+
 **F3 — Rebuild the charts** (on F2, fed by projection props):
 - **Chord** — animated ribbons, responsive radius, hover to isolate a partner's flows.
 - **Treemap** (partners + products) — tween on year/country change; dual-flow tiles (exports / imports /

@@ -16,13 +16,42 @@ export const load: PageLoad = async ({ fetch }) => {
 		.sort((a, b) => b.exportsUsd + b.importsUsd - (a.exportsUsd + a.importsUsd))
 		.slice(0, 10);
 	const rest = all.find((row) => row.partner === 'ROW');
+	const rows = rest ? [...named, rest] : named;
+	const namedPartners = new Set(named.map((row) => row.partner));
+	const historyByPartner = Object.fromEntries(
+		named.map((row) => [
+			row.partner,
+			projection.years.map((candidateYear) => {
+				const candidate = (projection.partnersByYear[String(candidateYear)] ?? []).find(
+					(entry) => entry.partner === row.partner
+				);
+				return {
+					year: candidateYear,
+					exportsUsd: candidate?.exportsUsd ?? 0,
+					importsUsd: candidate?.importsUsd ?? 0,
+					balanceUsd: candidate?.balanceUsd ?? null,
+					exportAvailable: candidate?.exportAvailable ?? false,
+					importAvailable: candidate?.importAvailable ?? false
+				};
+			})
+		])
+	);
+	const productsByPartner = projection.crossCells
+		.filter((cell) => namedPartners.has(cell.partner))
+		.reduce<Record<string, typeof projection.crossCells>>((grouped, cell) => {
+			(grouped[cell.partner] ??= []).push(cell);
+			return grouped;
+		}, {});
 
 	return {
 		reporter,
 		reporterName: projection.countryName,
 		year,
-		rows: rest ? [...named, rest] : named,
+		rows,
 		summary: projection.summaryByYear[String(year)],
+		crossYear: projection.crossYear,
+		historyByPartner,
+		productsByPartner,
 		version: current.datasetVersion
 	};
 };

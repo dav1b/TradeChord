@@ -983,6 +983,19 @@ before the production dashboard is reorganized.
 
 Current increment:
 
+- The centered relationship panel’s first analytical composition is specified:
+  exports − imports = balance, equal-sized export/import product treemaps, and
+  a bilateral export/import history with the signed balance shown as the gap.
+- Equal treemap containers compare within-flow product shares. They do not
+  claim that equal canvas area means equal total value; prominent flow totals
+  carry that comparison.
+- Product hover and selection are linked across both treemaps through stable
+  flow-specific product keys and a shared product color domain.
+- History interaction is initially a temporary year preview. Product treemaps
+  remain explicitly fixed to projection `crossYear`, because the current
+  release does not publish partner×product detail for every year.
+- A combined import/export mosaic is recorded as a future alternative once the
+  baseline interaction and encoding contracts can be compared against it.
 - One ribbon click is defined as `OPEN_RELATIONSHIP(partner)`, a single user
   intent fulfilled by the interruptible sequence `illuminating → extracting
   → opening → relationship`.
@@ -1061,6 +1074,10 @@ Current increment:
 
 Still required before Phase A is complete:
 
+- compare the dual-treemap baseline with an aligned import/export mosaic,
+  including absolute-magnitude readability and mobile behavior;
+- decide whether historical partner×product detail earns its payload cost
+  before enabling timeline-driven product reconstruction;
 - assess whether automatic opening feels intentional or whether production
   should retain a short focused pause or explicit second action;
 - add true path interpolation only if translation plus uniform scaling proves

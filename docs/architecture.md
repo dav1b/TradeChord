@@ -167,6 +167,46 @@ semantic phases without spatial delay. Returning to the network invalidates
 the active choreography, closes the centered panel, and returns the exact
 ribbon path while retaining the partner selection.
 
+### Relationship analytics scene
+
+The centered relationship panel is the next analytical level, not a collection
+of unrelated dashboard cards:
+
+```text
+RelationshipPanel
+  ├── bilateral equation: exports − imports = balance
+  ├── DualProductTreemap
+  │   ├── export composition
+  │   └── import composition
+  └── BilateralHistory
+      ├── reported export line
+      ├── reported import line
+      └── signed balance gap
+```
+
+The first treemap contract uses equal-sized containers. Tile area therefore
+encodes share within each flow, not absolute comparison between the two flow
+totals. Monetary totals must remain prominent. Products use a shared color
+domain and stable flow-specific keys; hovering or selecting a product in
+either treemap emphasizes the corresponding product in both.
+
+The history view uses one shared monetary scale for reported exports and
+reported imports. Their vertical gap is the bilateral balance; it is not
+invented as an independent third measure. Pointer or keyboard year preview
+updates a temporary readout without changing durable scene year.
+
+The existing browser projection supports bilateral history by year but
+partner×product detail only for `crossYear`. Consequently, the treemaps remain
+explicitly labeled with `crossYear` while the history preview moves. The UI
+must not imply that product composition changed with a previewed historical
+year. Fully synchronized scrubbing requires a future immutable
+partner×product×year detail projection.
+
+An import/export mosaic is a recorded alternative representation. It may
+encode absolute flow magnitude and product composition in one aligned surface,
+but it should be evaluated after the equal-treemap baseline establishes
+selection, color, identity, accessibility, and payload contracts.
+
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns
 state, geometry, visual continuity, URL navigation, motion, and accessible

@@ -14,12 +14,16 @@
 	import { motionDuration } from '$lib/motion';
 	import { partnerKey } from '$lib/explorer/entity';
 	import { usd } from '$lib/format';
-	import type { FlowSummary, PartnerRow } from '$lib/data/types';
+	import type { CrossCell, FlowSummary, PartnerRow } from '$lib/data/types';
+	import type { RelationshipHistoryPoint } from '$lib/charts/motion/relationship-types';
 
 	let {
 		reporter,
 		rows,
 		summary,
+		crossYear,
+		historyByPartner,
+		productsByPartner,
 		phase,
 		highlightStyle,
 		onselect,
@@ -28,6 +32,9 @@
 		reporter: string;
 		rows: PartnerRow[];
 		summary: FlowSummary;
+		crossYear: number | null;
+		historyByPartner: Record<string, RelationshipHistoryPoint[]>;
+		productsByPartner: Record<string, CrossCell[]>;
 		phase: RelationshipPhase;
 		highlightStyle: HighlightStyle;
 		onselect?: (partner: string | null) => void;
@@ -279,6 +286,9 @@
 		<RelationshipPanel
 			{reporter}
 			row={selectedRow}
+			history={historyByPartner[selectedRow.partner] ?? []}
+			products={productsByPartner[selectedRow.partner] ?? []}
+			{crossYear}
 			progress={$panelProgress}
 			onclose={() => onclose?.()}
 		/>

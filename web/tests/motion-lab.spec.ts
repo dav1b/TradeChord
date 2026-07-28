@@ -48,6 +48,31 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 	await expect(panel).toHaveAttribute('aria-hidden', 'false');
 	await expect(panel.locator('[data-entity-id$="export"]')).toBeVisible();
 	await expect(panel.locator('[data-entity-id$="import"]')).toBeVisible();
+	await expect(panel.getByRole('heading', { name: 'What does this relationship trade?' })).toBeVisible();
+	await expect(panel.getByRole('img', { name: 'Export products' })).toBeVisible();
+	await expect(panel.getByRole('img', { name: 'Import products' })).toBeVisible();
+	await expect(
+		panel.getByRole('heading', { name: 'How have exports and imports changed?' })
+	).toBeVisible();
+	await expect(
+		panel.getByRole('img', { name: /reported exports and imports by year/ })
+	).toBeVisible();
+
+	const exportProduct = panel.locator('[data-entity-id*=":export:"]').first();
+	const exportEntity = await exportProduct.getAttribute('data-entity-id');
+	const product = exportEntity?.split(':').at(-1);
+	await exportProduct.click();
+	await expect(exportProduct).toHaveAttribute('aria-pressed', 'true');
+	if (product) {
+		await expect(panel.locator(`[data-entity-id$=":import:${product}"]`)).toHaveAttribute(
+			'aria-pressed',
+			'true'
+		);
+	}
+
+	const yearPoint = panel.locator('circle.year-hit').first();
+	await yearPoint.focus();
+	await expect(panel.locator('.readout')).toBeVisible();
 	await panel.getByRole('button', { name: /Return .* to the trade network/ }).click();
 	await expect(page.locator('#instruction')).toContainText('closing');
 	await expect(page.locator('#instruction')).toContainText('focused');

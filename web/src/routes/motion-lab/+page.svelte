@@ -75,6 +75,9 @@
 				reporter={data.reporter}
 				rows={data.rows}
 				summary={data.summary}
+				crossYear={data.crossYear}
+				historyByPartner={data.historyByPartner}
+				productsByPartner={data.productsByPartner}
 				{phase}
 				{highlightStyle}
 				onselect={selectPartner}

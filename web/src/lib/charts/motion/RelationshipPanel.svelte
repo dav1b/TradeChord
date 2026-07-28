@@ -1,22 +1,35 @@
 <script lang="ts">
-	import { usd } from '$lib/format';
+	import BilateralHistory from '$lib/charts/motion/BilateralHistory.svelte';
+	import DualProductTreemap from '$lib/charts/motion/DualProductTreemap.svelte';
+	import type { RelationshipHistoryPoint } from '$lib/charts/motion/relationship-types';
+	import { usd, usdSigned } from '$lib/format';
 	import { flowKey, partnerKey } from '$lib/explorer/entity';
-	import type { PartnerRow } from '$lib/data/types';
+	import type { CrossCell, PartnerRow } from '$lib/data/types';
 
 	let {
 		reporter,
 		row,
+		history,
+		products,
+		crossYear,
 		progress,
 		onclose
 	}: {
 		reporter: string;
 		row: PartnerRow;
+		history: RelationshipHistoryPoint[];
+		products: CrossCell[];
+		crossYear: number | null;
 		progress: number;
 		onclose: () => void;
 	} = $props();
 
+	let preview = $state<RelationshipHistoryPoint | null>(null);
 	const total = $derived(row.exportsUsd + row.importsUsd);
-	const exportShare = $derived(total ? row.exportsUsd / total : 0.5);
+	const exportsUsd = $derived(preview?.exportsUsd ?? row.exportsUsd);
+	const importsUsd = $derived(preview?.importsUsd ?? row.importsUsd);
+	const balanceUsd = $derived(preview?.balanceUsd ?? row.balanceUsd);
+	const displayYear = $derived(preview?.year ?? crossYear);
 </script>
 
 <section
@@ -35,35 +48,58 @@
 			<span>Bilateral relationship</span>
 			<h2>{reporter} ↔ {row.partner}</h2>
 		</div>
-		<strong>{usd(total)}</strong>
+		<div class="headline">
+			<strong>{usd(total)}</strong>
+			<span>{displayYear ?? 'Latest available year'}</span>
+		</div>
 	</header>
-	<div class="flows" aria-label="{reporter} bilateral trade with {row.partner}">
+	<div class="equation" aria-label="{reporter} bilateral trade balance with {row.partner}">
 		<div
-			class="flow export"
-			style:flex={Math.max(exportShare, 0.08)}
+			class="measure export"
 			data-entity-id={flowKey(reporter, row.partner, 'export')}
 		>
-			<span>Exports</span>
-			<strong>{usd(row.exportsUsd)}</strong>
+			<span>Reported exports</span>
+			<strong>{usd(exportsUsd)}</strong>
 		</div>
+		<span class="operator" aria-hidden="true">−</span>
 		<div
-			class="flow import"
-			style:flex={Math.max(1 - exportShare, 0.08)}
+			class="measure import"
 			data-entity-id={flowKey(reporter, row.partner, 'import')}
 		>
-			<span>Imports</span>
-			<strong>{usd(row.importsUsd)}</strong>
+			<span>Reported imports</span>
+			<strong>{usd(importsUsd)}</strong>
+		</div>
+		<span class="operator" aria-hidden="true">=</span>
+		<div class="measure balance">
+			<span>Reported balance</span>
+			<strong class:negative={(balanceUsd ?? 0) < 0}>
+				{balanceUsd == null ? 'Unavailable' : usdSigned(balanceUsd)}
+			</strong>
 		</div>
 	</div>
+	<DualProductTreemap
+		{reporter}
+		partner={row.partner}
+		year={crossYear}
+		cells={products}
+	/>
+	<BilateralHistory
+		{reporter}
+		partner={row.partner}
+		points={history}
+		onpreview={(point) => (preview = point)}
+	/>
 </section>
 
 <style>
 	.panel {
 		position: absolute;
 		z-index: 5;
-		top: 50%;
+		top: 54%;
 		left: 50%;
-		width: min(72%, 720px);
+		width: min(82%, 1080px);
+		max-height: min(78%, 760px);
+		overflow: auto;
 		padding: clamp(16px, 2.4vw, 28px);
 		border: 1px solid color-mix(in srgb, var(--dj-carbon) 24%, transparent);
 		background: color-mix(in srgb, var(--surface) 97%, transparent);
@@ -97,8 +133,7 @@
 		gap: 16px;
 		margin: 18px 0 22px;
 	}
-	header span,
-	.flow span {
+	header span {
 		font-family: var(--font-mono);
 		font-size: 9px;
 		text-transform: uppercase;
@@ -111,26 +146,54 @@
 		font-weight: 500;
 		color: var(--text-1);
 	}
-	header > strong {
+	.headline {
+		display: grid;
+		justify-items: end;
+		gap: 3px;
+	}
+	.headline strong {
 		font-family: var(--font-mono);
 		font-size: clamp(0.9rem, 1.6vw, 1.2rem);
 	}
-	.flows {
-		display: flex;
-		height: clamp(58px, 8vw, 82px);
+	.headline span {
+		font-family: var(--font-mono);
+		font-size: 9px;
+		text-transform: uppercase;
+		color: var(--text-3);
 	}
-	.flow {
+	.equation {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr auto 1fr;
+		align-items: stretch;
+		margin-bottom: 18px;
+	}
+	.measure {
 		display: flex;
-		align-items: center;
+		flex-direction: column;
 		justify-content: space-between;
 		gap: 8px;
 		min-width: 0;
 		padding: 12px;
 		color: var(--dj-carbon);
 	}
-	.flow strong {
+	.measure span {
+		font-family: var(--font-mono);
+		font-size: 9px;
+		text-transform: uppercase;
+	}
+	.measure strong {
 		font-family: var(--font-mono);
 		font-size: clamp(10px, 1.3vw, 14px);
+	}
+	.measure strong.negative {
+		color: var(--delta-neg);
+	}
+	.operator {
+		align-self: center;
+		padding: 0 9px;
+		font-family: var(--font-head);
+		font-size: 1.35rem;
+		color: var(--text-3);
 	}
 	.export {
 		background: color-mix(in srgb, var(--delta-pos) 78%, var(--surface));
@@ -138,19 +201,29 @@
 	.import {
 		background: color-mix(in srgb, var(--delta-neg) 72%, var(--surface));
 	}
+	.balance {
+		border: 1px solid var(--border);
+		background: var(--surface);
+	}
 	@media (max-width: 640px) {
 		.panel {
-			top: 58%;
+			top: 62%;
 			width: calc(100% - 28px);
+			max-height: 72%;
 		}
 		header {
 			align-items: start;
 			flex-direction: column;
 			gap: 8px;
 		}
-		.flows {
-			flex-direction: column;
-			height: auto;
+		.headline {
+			justify-items: start;
+		}
+		.equation {
+			grid-template-columns: 1fr;
+		}
+		.operator {
+			display: none;
 		}
 	}
 </style>
