@@ -186,16 +186,20 @@ RelationshipPanel
       └── other-partner benchmark for the selected product
 ```
 
-The exact extracted ribbon moves to the upper-right of the panel on both
-desktop and mobile. Closing is one complete `CLOSE_RELATIONSHIP` transition:
+The exact extracted ribbon moves to the upper-right of a sticky panel header
+on both desktop and mobile. The header, ribbon, return control, and relationship
+identity remain visible while the analytical body scrolls. Panel width is
+bounded by the viewport, including safe compact-screen gutters, rather than by
+the underlying chord container. Closing is one complete
+`CLOSE_RELATIONSHIP` transition:
 panel closes, ribbon returns, emphasis clears, durable partner selection
 becomes null, and the scene returns to `network`.
 
 Product rows use one monetary scale across all visible rows. Exports diverge
 left from zero and imports diverge right. A separate signed balance marker uses
 teal for surplus and copper for deficit. Teal and copper are reserved for
-calculated direction; export and import series use directly labelled neutral
-navy and fern encodings. Color is never the only identifier.
+calculated direction; export and import series use directly labelled carbon
+and dark-grey encodings. Color is never the only identifier.
 
 The history view uses one shared monetary scale for reported exports and
 reported imports. Their vertical gap is the bilateral balance; it is not

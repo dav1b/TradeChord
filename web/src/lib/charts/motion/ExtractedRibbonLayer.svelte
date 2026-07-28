@@ -36,7 +36,7 @@
 	const anchorX = $derived(
 		compact ? width - targetWidth - 22 : width * 0.91 - targetWidth - 20
 	);
-	const anchorY = $derived(compact ? Math.max(22, height * 0.13) : Math.max(26, height * 0.08));
+	const anchorY = $derived(compact ? Math.max(26, height * 0.16) : Math.max(26, height * 0.08));
 	const targetX = $derived(anchorX - geometry.bounds.x * targetScale);
 	const targetY = $derived(anchorY - geometry.bounds.y * targetScale);
 	const translateX = $derived(width / 2 + (targetX - width / 2) * progress);

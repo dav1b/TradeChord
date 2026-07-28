@@ -52,6 +52,20 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 	await expect(
 		panel.getByRole('img', { name: /reported exports and imports by year/ })
 	).toBeVisible();
+	const stickyTop = await panel.locator('.sticky-header').evaluate((element) =>
+		element.getBoundingClientRect().top
+	);
+	const ribbonTop = await extracted.evaluate((element) => element.getBoundingClientRect().top);
+	await panel.evaluate((element) => (element.scrollTop = 420));
+	await expect
+		.poll(() =>
+			panel.locator('.sticky-header').evaluate((element) => element.getBoundingClientRect().top)
+		)
+		.toBeCloseTo(stickyTop, 0);
+	await expect
+		.poll(() => extracted.evaluate((element) => element.getBoundingClientRect().top))
+		.toBeCloseTo(ribbonTop, 0);
+	await panel.evaluate((element) => (element.scrollTop = 0));
 
 	const productRow = panel.locator('.product-row').first();
 	await productRow.getByRole('button').click();
@@ -74,19 +88,19 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 	await expect(second).toHaveAttribute('aria-pressed', 'false');
 	await expect(page.locator('#instruction')).toContainText('Select a ribbon');
 
-	await page.setViewportSize({ width: 390, height: 844 });
+	await page.setViewportSize({ width: 320, height: 700 });
 	await page.reload();
 	await expect
 		.poll(async () => (await chord.boundingBox())?.width)
-		.toBeLessThanOrEqual(390);
+		.toBeLessThanOrEqual(320);
 	await expect
 		.poll(async () => (await chord.boundingBox())?.height)
-		.toBeLessThanOrEqual(844);
+		.toBeLessThanOrEqual(700);
 	await ribbons.first().dispatchEvent('click');
 	await expect(page.locator('.panel')).toBeVisible();
 	await expect
 		.poll(async () => (await page.locator('.panel').boundingBox())?.width)
-		.toBeLessThanOrEqual(390);
+		.toBeLessThanOrEqual(320);
 });
 
 test('motion laboratory remains operable with keyboard and reduced motion', async ({ page }) => {

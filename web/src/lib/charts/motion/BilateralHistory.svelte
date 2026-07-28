@@ -247,10 +247,10 @@
 		background: var(--text-4);
 	}
 	.legend .export::before {
-		background: var(--dj-navy);
+		background: var(--dj-carbon);
 	}
 	.legend .import::before {
-		background: var(--dj-fern-green);
+		background: color-mix(in srgb, var(--dj-carbon) 58%, var(--surface));
 	}
 	.chart,
 	svg {
@@ -270,10 +270,10 @@
 		stroke-width: 2.5;
 	}
 	.export-line {
-		stroke: var(--dj-navy);
+		stroke: var(--dj-carbon);
 	}
 	.import-line {
-		stroke: var(--dj-fern-green);
+		stroke: color-mix(in srgb, var(--dj-carbon) 58%, var(--surface));
 	}
 	.year-hit {
 		fill: transparent;

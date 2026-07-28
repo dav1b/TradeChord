@@ -606,7 +606,8 @@ interruptible `illuminating → extracting → opening → relationship` phases.
 anchor remains upper-right on larger screens and phones.
 
 **Relationship analytics increment.** The responsive panel anchors the exact
-extracted ribbon upper-right, presents directly labelled neutral export/import
+extracted ribbon in a persistent upper-right header, constrains width to the
+viewport rather than the chord container, presents directly labelled carbon/dark-grey export/import
 history and balance-only teal/copper direction, and replaces treemaps with a
 shared-scale product diverging table. Selecting a keyed product row uses FLIP
 to promote it and reveals the reporter’s other partners for that product.

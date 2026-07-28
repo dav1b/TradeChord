@@ -983,12 +983,14 @@ before the production dashboard is reorganized.
 
 Current increment:
 
-- The relationship panel is a responsive workspace: extracted ribbon
-  upper-right, headline flow/balance measures, compact bilateral history, and
-  a product table that reflows rather than scales down on mobile.
+- The relationship panel is a viewport-bound responsive workspace: a sticky
+  header keeps the upper-right extracted ribbon, return control, and identity
+  visible while headline measures, compact bilateral history, and the product
+  table scroll beneath it. Product columns reflow rather than retaining
+  desktop minimum widths on mobile.
 - Product rows use shared-scale diverging export/import bars and a separately
   coloured signed balance marker. Teal/copper are reserved for
-  surplus/deficit; exports/imports use directly labelled neutral series.
+  surplus/deficit; exports/imports use directly labelled carbon/dark-grey series.
 - Selecting a stable product key promotes the row using FLIP and reveals the
   reporter’s other partners for that product from the current-year
   `crossCells` projection.
