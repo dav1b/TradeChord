@@ -272,7 +272,7 @@
 	.partner-label.selected {
 		font-family: var(--font-head);
 		font-size: clamp(1.4rem, 3vw, 2.5rem);
-		font-weight: 600;
+		font-weight: 500;
 		fill: var(--text-1);
 	}
 	.reporter-code {

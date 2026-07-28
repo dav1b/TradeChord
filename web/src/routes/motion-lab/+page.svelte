@@ -62,15 +62,14 @@
 
 <style>
 	:global(body) {
-		overflow: hidden;
 		background: var(--bg);
 	}
 	.lab {
 		position: relative;
-		display: grid;
-		grid-template-rows: auto auto minmax(0, 1fr) auto;
+		display: flex;
+		flex-direction: column;
 		width: 100vw;
-		height: 100svh;
+		min-height: 100svh;
 		padding: var(--space-5);
 	}
 	header {
@@ -131,9 +130,8 @@
 	.canvas {
 		position: relative;
 		display: grid;
-		grid-template-rows: auto minmax(0, 1fr);
+		grid-template-rows: auto auto;
 		gap: var(--space-3);
-		min-height: 0;
 		padding-top: var(--space-6);
 	}
 	.canvas > p {
@@ -144,7 +142,9 @@
 	}
 	.diagram {
 		position: relative;
-		min-height: 0;
+		width: 100%;
+		height: min(90vw, 90svh, 960px);
+		min-height: min(90vw, 420px);
 	}
 	footer {
 		display: flex;
@@ -170,6 +170,10 @@
 		}
 		.canvas > p {
 			width: 100%;
+		}
+		.diagram {
+			height: min(92vw, 560px);
+			min-height: 320px;
 		}
 	}
 </style>

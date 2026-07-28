@@ -18,6 +18,21 @@ test('motion laboratory focuses, retargets, extracts, and resets one chord', asy
 	await expect(first).toHaveAttribute('aria-pressed', 'true');
 	await expect(page.locator('#instruction')).toContainText('selected');
 	await expect.poll(() => first.getAttribute('d')).toBe(restingPath);
+	const selectedLabel = chord.locator('text.partner-label.selected');
+	const reporterLabel = chord.locator('text.reporter-code');
+	await expect(selectedLabel).toBeVisible();
+	const reporterType = await reporterLabel.evaluate((element) => {
+		const style = getComputedStyle(element);
+		return [style.fontFamily, style.fontSize, style.fontWeight];
+	});
+	await expect
+		.poll(() =>
+			selectedLabel.evaluate((element) => {
+				const style = getComputedStyle(element);
+				return [style.fontFamily, style.fontSize, style.fontWeight];
+			})
+		)
+		.toEqual(reporterType);
 
 	const focusedTransform = await first.getAttribute('transform');
 	await page.getByRole('button', { name: 'Ribbon extraction' }).click();
