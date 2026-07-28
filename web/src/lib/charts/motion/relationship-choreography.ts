@@ -36,3 +36,13 @@ export async function openRelationshipSequence(
 	}
 	if (isCurrent()) setPhase('relationship');
 }
+
+export async function closeRelationshipSequence(
+	isCurrent: () => boolean,
+	setPhase: PhaseSetter
+) {
+	if (!isCurrent()) return;
+	setPhase('closing');
+	await wait(190);
+	if (isCurrent()) setPhase('focused');
+}

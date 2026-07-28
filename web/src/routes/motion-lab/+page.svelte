@@ -2,6 +2,7 @@
 	import MotionChord from '$lib/charts/MotionChord.svelte';
 	import type { HighlightStyle } from '$lib/charts/motion/highlight';
 	import {
+		closeRelationshipSequence,
 		openRelationshipSequence,
 		type RelationshipPhase
 	} from '$lib/charts/motion/relationship-choreography';
@@ -28,8 +29,11 @@
 	}
 
 	function closeRelationship() {
-		choreographyRevision += 1;
-		phase = 'focused';
+		const revision = ++choreographyRevision;
+		void closeRelationshipSequence(
+			() => revision === choreographyRevision,
+			(nextPhase) => (phase = nextPhase)
+		);
 	}
 </script>
 
@@ -62,7 +66,7 @@
 		<p id="instruction">
 			{selected
 				? phase === 'relationship'
-					? `${selected} relationship · the bridge now owns the selected entity`
+					? `${selected} relationship · the extracted ribbon is anchored upper-left`
 					: `${selected} · ${phase} · choose another ribbon to retarget`
 				: 'Select a ribbon · reported geometry stays fixed while the relationship comes forward'}
 		</p>

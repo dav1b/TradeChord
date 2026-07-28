@@ -598,13 +598,14 @@ pattern before scaling out. **Implemented extension:** `/motion-lab` isolates on
 compares two interruptible Svelte-motion responses—fixed-geometry visual focus and spatial extraction—using
 production projections, stable partner keys, keyboard selection, responsive sizing, and reduced motion.
 The next implementation is modular: `HighlightStrategy` preserves analytical geometry,
-`RelationshipBridge` carries the selected keyed entity into a reversible central bilateral band, and a
-later `BilateralComposition` resolves it into separately keyed export/import treemaps. Equal-size
+`ExtractedRibbonLayer` moves the identical selected SVG path to an upper-left anchor using translation
+and uniform scale, `RelationshipPanel` opens separately in the center, and a later
+`BilateralComposition` resolves it into separately keyed export/import treemaps. Equal-size
 treemaps compare within-flow composition; proportional containers are required for honest absolute
 magnitude comparison. Ribbon activation is one `OPEN_RELATIONSHIP(partner)` intent orchestrated through
 interruptible `illuminating → extracting → opening → relationship` phases. A responsive relationship
-anchor is upper-left on larger screens and nearly full-width below the instruction on phones. The bridge
-is implemented and judged before either treemap encoding is selected.
+anchor is upper-left on larger screens and above the panel on phones. The extraction and panel are
+implemented and judged before either treemap encoding is selected.
 
 **F3 — Rebuild the charts** (on F2, fed by projection props):
 - **Chord** — animated ribbons, responsive radius, hover to isolate a partner's flows.

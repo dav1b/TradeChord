@@ -986,22 +986,26 @@ Current increment:
 - One ribbon click is defined as `OPEN_RELATIONSHIP(partner)`, a single user
   intent fulfilled by the interruptible sequence `illuminating → extracting
   → opening → relationship`.
-- The bridge and its emerging relationship panel share one responsive anchor:
-  upper-left on standard/wide layouts and nearly full-width below the
-  instruction on compact layouts. The destination is not hardcoded desktop
-  coordinates.
+- The exact selected SVG path is rendered in a foreground
+  `ExtractedRibbonLayer`, translated and uniformly scaled to an upper-left
+  anchor. The original chord copy fades fully out; its `d` path is not
+  regenerated or reshaped.
+- The relationship content is a separate centered `RelationshipPanel`.
+  Extracted ribbon and panel deliberately have different responsive layout
+  contracts.
 - Retargeting or closing increments a choreography revision so stale delayed
   phases cannot reopen the previous partner. Reduced motion preserves the
   state sequence without spatial delay.
 - The next architecture is now explicitly staged as fixed-geometry highlight
-  → foreground relationship bridge → bilateral composition. Highlight,
+  → extracted SVG ribbon → centered relationship panel → bilateral
+  composition. Highlight,
   extraction, and treemap rendering are separate modules joined by stable
   partner and flow identities.
 - Scene phases distinguish `network`, `focused`, `extracting`, `relationship`,
   and `composition`. Selection does not automatically claim that the user has
   navigated into a relationship; extraction is a deliberate scene action.
-- The first shippable bridge ends at a reversible central bilateral band.
-  Export/import treemaps follow only after that bridge is visually and
+- The first shippable extraction ends with the ribbon parked upper-left and a
+  reversible centered panel. Export/import treemaps follow only after this is visually and
   accessibly accepted.
 - Highlight treatments are presentation strategies. They may change opacity,
   saturation, edge, shadow, or transient light, but cannot alter the chord
@@ -1059,10 +1063,10 @@ Still required before Phase A is complete:
 
 - assess whether automatic opening feels intentional or whether production
   should retain a short focused pause or explicit second action;
-- replace the initial transform-and-resolve bridge with true path
-  interpolation only if the simpler wayfinding motion proves insufficient;
-- validate the reversible anchored relationship bridge, then split it into
-  stable export/import flow regions;
+- add true path interpolation only if translation plus uniform scaling proves
+  insufficient; the current extraction deliberately preserves the exact path;
+- validate the parked ribbon and centered relationship panel, then replace its
+  stable export/import flow regions with product compositions;
 - build two product treemaps from the existing partner×product `crossCells`
   only after choosing explicit comparison semantics:
   - equal containers compare within-flow composition and must headline totals;

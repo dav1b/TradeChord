@@ -2,7 +2,10 @@
 	import { arc as d3arc, chord as d3chord, ribbon as d3ribbon } from 'd3';
 	import { cubicOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
-	import RelationshipBridge from '$lib/charts/motion/RelationshipBridge.svelte';
+	import ExtractedRibbonLayer, {
+		type ExtractedRibbonGeometry
+	} from '$lib/charts/motion/ExtractedRibbonLayer.svelte';
+	import RelationshipPanel from '$lib/charts/motion/RelationshipPanel.svelte';
 	import {
 		ribbonHighlight,
 		type HighlightStyle
@@ -34,14 +37,19 @@
 	let width = $state(0);
 	let height = $state(0);
 	let selected = $state<string | null>(null);
+	let extractedGeometry = $state<ExtractedRibbonGeometry | null>(null);
 	const emphasis = tweened<number[]>([], {
 		duration: motionDuration(560),
 		easing: cubicOut,
 		interpolate: (from, to) => (progress) =>
 			from.map((value, index) => value + ((to[index] ?? 0) - value) * progress)
 	});
-	const bridgeProgress = tweened(0, {
+	const extractionProgress = tweened(0, {
 		duration: motionDuration(620),
+		easing: cubicOut
+	});
+	const panelProgress = tweened(0, {
+		duration: motionDuration(280),
 		easing: cubicOut
 	});
 
@@ -50,10 +58,17 @@
 	});
 
 	$effect(() => {
-		const bridgeVisible =
-			phase === 'extracting' || phase === 'opening' || phase === 'relationship';
-		void bridgeProgress.set(bridgeVisible ? 1 : 0, {
-			duration: motionDuration(bridgeVisible ? 620 : 480)
+		const ribbonExtracted =
+			phase === 'extracting' ||
+			phase === 'opening' ||
+			phase === 'relationship' ||
+			phase === 'closing';
+		void extractionProgress.set(ribbonExtracted ? 1 : 0, {
+			duration: motionDuration(ribbonExtracted ? 620 : 480)
+		});
+		const panelVisible = phase === 'opening' || phase === 'relationship';
+		void panelProgress.set(panelVisible ? 1 : 0, {
+			duration: motionDuration(panelVisible ? 280 : 180)
 		});
 	});
 
@@ -106,17 +121,35 @@
 		const energy = $emphasis[index] ?? 0;
 		const presentation = ribbonHighlight(highlightStyle, energy, focusAmount);
 		const bridgeRecession =
-			selected === rows[index].partner ? 1 - $bridgeProgress * 0.82 : 1 - $bridgeProgress * 0.68;
+			selected === rows[index].partner
+				? 1 - $extractionProgress
+				: 1 - $extractionProgress * 0.68;
 		return presentation.opacity * bridgeRecession;
 	}
 
-	function activate(index: number) {
+	function activate(index: number, element: SVGPathElement) {
 		const partner = rows[index].partner;
 		if (partner === 'ROW') return;
-		if (selected !== partner && $bridgeProgress > 0) {
-			void bridgeProgress.set(0, { duration: 0 });
+		if (selected !== partner && $extractionProgress > 0) {
+			void extractionProgress.set(0, { duration: 0 });
+			void panelProgress.set(0, { duration: 0 });
+		}
+		if (selected !== partner) {
+			const bounds = element.getBBox();
+			extractedGeometry = {
+				partner,
+				path: element.getAttribute('d') ?? '',
+				fill: color(index),
+				bounds: {
+					x: bounds.x,
+					y: bounds.y,
+					width: bounds.width,
+					height: bounds.height
+				}
+			};
 		}
 		selected = selected === partner ? null : partner;
+		if (!selected) extractedGeometry = null;
 		void emphasis.set(
 			rows.map((row) => (row.partner === selected ? 1 : 0)),
 			{ duration: motionDuration(selected ? 560 : 420) }
@@ -127,6 +160,7 @@
 	function reset() {
 		if (!selected && focusAmount === 0) return;
 		selected = null;
+		extractedGeometry = null;
 		void emphasis.set(rows.map(() => 0), { duration: motionDuration(420) });
 		onselect?.(null);
 	}
@@ -134,7 +168,7 @@
 	function keyActivate(event: KeyboardEvent, index: number) {
 		if (event.key === 'Enter' || event.key === ' ') {
 			event.preventDefault();
-			activate(index);
+			activate(index, event.currentTarget as SVGPathElement);
 		}
 	}
 
@@ -156,8 +190,6 @@
 			<g transform="translate({width / 2},{height / 2})">
 				{#each layout as chord (partnerKey(reporter, rows[partnerIndex(chord)].partner))}
 					{@const index = partnerIndex(chord)}
-					{@const partnerGroup = layout.groups[index + 1]}
-					{@const mid = (partnerGroup.startAngle + partnerGroup.endAngle) / 2}
 					{@const presentation = ribbonHighlight(
 						highlightStyle,
 						$emphasis[index] ?? 0,
@@ -180,7 +212,7 @@
 						data-partner={rows[index].partner}
 						onclick={(event) => {
 							event.stopPropagation();
-							activate(index);
+							activate(index, event.currentTarget);
 							event.currentTarget.blur();
 						}}
 						onkeydown={(event) => keyActivate(event, index)}
@@ -200,7 +232,7 @@
 							group.index === 0
 								? 1
 								: (1 - focusAmount * 0.62 + ($emphasis[index] ?? 0) * 0.62) *
-									(1 - $bridgeProgress * 0.72)
+									(1 - $extractionProgress * 0.72)
 						}
 					/>
 					{#if group.index > 0}
@@ -236,13 +268,18 @@
 			</g>
 		</svg>
 	{/if}
-	{#if selectedRow}
-		<RelationshipBridge
+	{#if selectedRow && extractedGeometry}
+		<ExtractedRibbonLayer
 			{reporter}
-			row={selectedRow}
+			geometry={extractedGeometry}
 			{width}
 			{height}
-			progress={$bridgeProgress}
+			progress={$extractionProgress}
+		/>
+		<RelationshipPanel
+			{reporter}
+			row={selectedRow}
+			progress={$panelProgress}
 			onclose={() => onclose?.()}
 		/>
 	{/if}

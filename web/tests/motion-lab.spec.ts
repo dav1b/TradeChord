@@ -36,16 +36,23 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 		)
 		.toEqual(reporterType);
 
-	await expect(page.locator('#instruction')).toContainText('the bridge now owns');
+	await expect(page.locator('#instruction')).toContainText('anchored upper-left');
 	await expect.poll(() => first.getAttribute('d')).toBe(restingPath);
 
-	const bridge = page.locator('.bridge');
-	await expect(bridge).toHaveAttribute('aria-hidden', 'false');
-	await expect(bridge.locator('[data-entity-id$="export"]')).toBeVisible();
-	await expect(bridge.locator('[data-entity-id$="import"]')).toBeVisible();
-	await bridge.getByRole('button', { name: /Return .* to the trade network/ }).click();
+	const extracted = page.locator('.extracted-layer');
+	await expect(extracted).toHaveAttribute('data-progress', '1');
+	await expect(extracted.locator('path.extracted-ribbon')).toHaveAttribute('d', restingPath ?? '');
+	await expect(first).toHaveAttribute('opacity', '0');
+
+	const panel = page.locator('.panel');
+	await expect(panel).toHaveAttribute('aria-hidden', 'false');
+	await expect(panel.locator('[data-entity-id$="export"]')).toBeVisible();
+	await expect(panel.locator('[data-entity-id$="import"]')).toBeVisible();
+	await panel.getByRole('button', { name: /Return .* to the trade network/ }).click();
+	await expect(page.locator('#instruction')).toContainText('closing');
 	await expect(page.locator('#instruction')).toContainText('focused');
-	await expect(bridge).toHaveAttribute('aria-hidden', 'true');
+	await expect(panel).toHaveAttribute('aria-hidden', 'true');
+	await expect(extracted).toHaveAttribute('data-progress', '0');
 
 	await second.dispatchEvent('click');
 	await expect(second).toHaveAttribute('aria-pressed', 'true');

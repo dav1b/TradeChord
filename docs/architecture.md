@@ -119,22 +119,25 @@ collapse into one chart component:
 ```text
 ChordLayer
   → HighlightStrategy (fixed geometry; presentation only)
-  → RelationshipBridge (foreground extraction and reversal)
-  → BilateralComposition (export/import representations)
+  → ExtractedRibbonLayer (same SVG path; foreground movement and reversal)
+  → RelationshipPanel (centered bilateral content)
+  → BilateralComposition (future export/import representations)
 ```
 
 Selection and navigation are different events. Selecting a ribbon moves the
 scene from `network` to `focused`; opening it advances through `extracting` to
-`relationship`. The bridge temporarily owns the selected partner entity while
-the national chord recedes. It resolves into stable export and import flow
-entities that a later increment can render as two product treemaps. Highlight
-strategies may alter opacity, saturation, stroke, shadow, or a transient sheen,
-but never the value-derived ribbon path or thickness.
+`relationship`. The selected path is omitted visually from the base chord and
+rendered once in a foreground SVG layer with the identical `d` attribute.
+Only translation and uniform scaling move it to the upper-left anchor. A
+separate centered relationship panel resolves into stable export and import
+flow entities that a later increment can render as two product treemaps.
+Highlight strategies may alter opacity, saturation, stroke, shadow, or a
+transient sheen, but never the value-derived ribbon path or thickness.
 
-Bridge geometry and choreography are representation contracts rather than
+Extracted-ribbon geometry and choreography are representation contracts rather than
 data contracts. They consume the same stable partner and flow keys and can be
-replaced without changing projections or analytical state. The first bridge
-increment deliberately stops at a central bilateral band so its continuity,
+replaced without changing projections or analytical state. The ribbon path
+and centered panel are deliberately separate so their continuity,
 interruption, reversal, responsiveness, and reduced-motion behavior can be
 judged before product geometry is introduced.
 
@@ -151,18 +154,18 @@ OPEN_RELATIONSHIP(partner)
 The click handler does not independently select, move, and open components.
 An interruptible choreography controller advances the scene phases and ignores
 stale completion work when the user retargets, closes, or presses Escape.
-The bridge and relationship panel consume one responsive
-`RelationshipAnchor`; on wide screens it occupies the upper-left analytical
-region, while compact screens use a nearly full-width destination below the
-scene instruction. “Upper-left” is therefore a layout role rather than fixed
-pixel coordinates.
+The extracted path consumes a responsive `RibbonAnchor`; on wide screens it
+occupies the upper-left analytical region, while compact screens use the area
+above the panel. The relationship panel has an independent centered layout
+contract. “Upper-left” and “centered” are therefore layout roles rather than
+fixed pixel coordinates.
 
 The panel begins resolving while extraction completes. This is a wayfinding
 transition, not a modal popup: the selected partner arrives first, flow
 regions follow, and labels settle last. Reduced motion traverses the same
 semantic phases without spatial delay. Returning to the network invalidates
-the active choreography and reverses the bridge while retaining the partner
-selection.
+the active choreography, closes the centered panel, and returns the exact
+ribbon path while retaining the partner selection.
 
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns
