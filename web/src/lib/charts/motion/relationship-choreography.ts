@@ -43,6 +43,6 @@ export async function closeRelationshipSequence(
 ) {
 	if (!isCurrent()) return;
 	setPhase('closing');
-	await wait(190);
-	if (isCurrent()) setPhase('focused');
+	await wait(480);
+	if (isCurrent()) setPhase('network');
 }

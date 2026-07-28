@@ -36,7 +36,7 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 		)
 		.toEqual(reporterType);
 
-	await expect(page.locator('#instruction')).toContainText('anchored upper-left');
+	await expect(page.locator('#instruction')).toContainText('anchored upper-right');
 	await expect.poll(() => first.getAttribute('d')).toBe(restingPath);
 
 	const extracted = page.locator('.extracted-layer');
@@ -48,36 +48,23 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 	await expect(panel).toHaveAttribute('aria-hidden', 'false');
 	await expect(panel.locator('[data-entity-id$="export"]')).toBeVisible();
 	await expect(panel.locator('[data-entity-id$="import"]')).toBeVisible();
-	await expect(panel.getByRole('heading', { name: 'What does this relationship trade?' })).toBeVisible();
-	await expect(panel.getByRole('img', { name: 'Export products' })).toBeVisible();
-	await expect(panel.getByRole('img', { name: 'Import products' })).toBeVisible();
-	await expect(
-		panel.getByRole('heading', { name: 'How have exports and imports changed?' })
-	).toBeVisible();
+	await expect(panel.getByRole('heading', { name: 'What drives this relationship?' })).toBeVisible();
 	await expect(
 		panel.getByRole('img', { name: /reported exports and imports by year/ })
 	).toBeVisible();
 
-	const exportProduct = panel.locator('[data-entity-id*=":export:"]').first();
-	const exportEntity = await exportProduct.getAttribute('data-entity-id');
-	const product = exportEntity?.split(':').at(-1);
-	await exportProduct.click();
-	await expect(exportProduct).toHaveAttribute('aria-pressed', 'true');
-	if (product) {
-		await expect(panel.locator(`[data-entity-id$=":import:${product}"]`)).toHaveAttribute(
-			'aria-pressed',
-			'true'
-		);
-	}
-
+	const productRow = panel.locator('.product-row').first();
+	await productRow.getByRole('button').click();
+	await expect(productRow.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+	await expect(productRow.getByText(/Where else does DEU trade this product/)).toBeVisible();
 	const yearPoint = panel.locator('circle.year-hit').first();
 	await yearPoint.focus();
-	await expect(panel.locator('.readout')).toBeVisible();
 	await panel.getByRole('button', { name: /Return .* to the trade network/ }).click();
 	await expect(page.locator('#instruction')).toContainText('closing');
-	await expect(page.locator('#instruction')).toContainText('focused');
-	await expect(panel).toHaveAttribute('aria-hidden', 'true');
-	await expect(extracted).toHaveAttribute('data-progress', '0');
+	await expect(page.locator('#instruction')).toContainText('Select a ribbon');
+	await expect(panel).toHaveCount(0);
+	await expect(extracted).toHaveCount(0);
+	await expect(first).toHaveAttribute('aria-pressed', 'false');
 
 	await second.dispatchEvent('click');
 	await expect(second).toHaveAttribute('aria-pressed', 'true');
@@ -95,6 +82,11 @@ test('motion laboratory focuses, bridges, reverses, retargets, and resets one ch
 	await expect
 		.poll(async () => (await chord.boundingBox())?.height)
 		.toBeLessThanOrEqual(844);
+	await ribbons.first().dispatchEvent('click');
+	await expect(page.locator('.panel')).toBeVisible();
+	await expect
+		.poll(async () => (await page.locator('.panel').boundingBox())?.width)
+		.toBeLessThanOrEqual(390);
 });
 
 test('motion laboratory remains operable with keyboard and reduced motion', async ({ page }) => {

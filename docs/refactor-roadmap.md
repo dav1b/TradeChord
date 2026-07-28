@@ -983,24 +983,26 @@ before the production dashboard is reorganized.
 
 Current increment:
 
-- The centered relationship panel’s first analytical composition is specified:
-  exports − imports = balance, equal-sized export/import product treemaps, and
-  a bilateral export/import history with the signed balance shown as the gap.
-- Equal treemap containers compare within-flow product shares. They do not
-  claim that equal canvas area means equal total value; prominent flow totals
-  carry that comparison.
-- Product hover and selection are linked across both treemaps through stable
-  flow-specific product keys and a shared product color domain.
-- History interaction is initially a temporary year preview. Product treemaps
-  remain explicitly fixed to projection `crossYear`, because the current
-  release does not publish partner×product detail for every year.
-- A combined import/export mosaic is recorded as a future alternative once the
-  baseline interaction and encoding contracts can be compared against it.
+- The relationship panel is a responsive workspace: extracted ribbon
+  upper-right, headline flow/balance measures, compact bilateral history, and
+  a product table that reflows rather than scales down on mobile.
+- Product rows use shared-scale diverging export/import bars and a separately
+  coloured signed balance marker. Teal/copper are reserved for
+  surplus/deficit; exports/imports use directly labelled neutral series.
+- Selecting a stable product key promotes the row using FLIP and reveals the
+  reporter’s other partners for that product from the current-year
+  `crossCells` projection.
+- Closing is a complete state transition back to `network`; it clears durable
+  partner selection and visual emphasis after returning the exact ribbon.
+- Product-level sparklines require a compact partner×product×year static
+  projection and are not inferred from bilateral totals. A later
+  cross-reporter benchmark projection can compare the same product/partner
+  relationship across reporters without loading many country projections.
 - One ribbon click is defined as `OPEN_RELATIONSHIP(partner)`, a single user
   intent fulfilled by the interruptible sequence `illuminating → extracting
   → opening → relationship`.
 - The exact selected SVG path is rendered in a foreground
-  `ExtractedRibbonLayer`, translated and uniformly scaled to an upper-left
+  `ExtractedRibbonLayer`, translated and uniformly scaled to an upper-right
   anchor. The original chord copy fades fully out; its `d` path is not
   regenerated or reshaped.
 - The relationship content is a separate centered `RelationshipPanel`.
@@ -1009,17 +1011,15 @@ Current increment:
 - Retargeting or closing increments a choreography revision so stale delayed
   phases cannot reopen the previous partner. Reduced motion preserves the
   state sequence without spatial delay.
-- The next architecture is now explicitly staged as fixed-geometry highlight
-  → extracted SVG ribbon → centered relationship panel → bilateral
-  composition. Highlight,
-  extraction, and treemap rendering are separate modules joined by stable
-  partner and flow identities.
+- The architecture is staged as fixed-geometry highlight → extracted SVG
+  ribbon → responsive relationship panel → keyed product analysis. Highlight,
+  extraction, and product rendering are separate modules joined by stable
+  partner, product, and flow identities.
 - Scene phases distinguish `network`, `focused`, `extracting`, `relationship`,
   and `composition`. Selection does not automatically claim that the user has
   navigated into a relationship; extraction is a deliberate scene action.
-- The first shippable extraction ends with the ribbon parked upper-left and a
-  reversible centered panel. Export/import treemaps follow only after this is visually and
-  accessibly accepted.
+- The extracted ribbon parks upper-right and the responsive panel reverses
+  completely to an unselected network state.
 - Highlight treatments are presentation strategies. They may change opacity,
   saturation, edge, shadow, or transient light, but cannot alter the chord
   path or value-derived thickness.

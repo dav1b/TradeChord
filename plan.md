@@ -598,21 +598,22 @@ pattern before scaling out. **Implemented extension:** `/motion-lab` isolates on
 compares two interruptible Svelte-motion responses—fixed-geometry visual focus and spatial extraction—using
 production projections, stable partner keys, keyboard selection, responsive sizing, and reduced motion.
 The next implementation is modular: `HighlightStrategy` preserves analytical geometry,
-`ExtractedRibbonLayer` moves the identical selected SVG path to an upper-left anchor using translation
-and uniform scale, `RelationshipPanel` opens separately in the center, and a later
-`BilateralComposition` resolves it into separately keyed export/import treemaps. Equal-size
-treemaps compare within-flow composition; proportional containers are required for honest absolute
-magnitude comparison. Ribbon activation is one `OPEN_RELATIONSHIP(partner)` intent orchestrated through
+`ExtractedRibbonLayer` moves the identical selected SVG path to an upper-right anchor using translation
+and uniform scale, while `RelationshipPanel` reflows independently across desktop and mobile.
+`ProductRelationshipTable` uses shared-scale diverging flow bars, a signed balance marker, and keyed
+product expansion. Ribbon activation is one `OPEN_RELATIONSHIP(partner)` intent orchestrated through
 interruptible `illuminating → extracting → opening → relationship` phases. A responsive relationship
-anchor is upper-left on larger screens and above the panel on phones. The extraction and panel are
-implemented and judged before either treemap encoding is selected.
+anchor remains upper-right on larger screens and phones.
 
-**Relationship analytics increment.** The first panel implementation uses the existing projection
-honestly: an exports − imports = balance equation; equal-sized export/import product treemaps whose tile
-areas encode within-flow composition; linked product hover/selection; and a dual-line bilateral history
-whose line gap represents balance. Timeline interaction is preview-only, while treemaps remain labeled
-with `crossYear` because historical bilateral product detail is not currently published. A combined
-import/export mosaic is a documented comparison candidate after this baseline ships.
+**Relationship analytics increment.** The responsive panel anchors the exact
+extracted ribbon upper-right, presents directly labelled neutral export/import
+history and balance-only teal/copper direction, and replaces treemaps with a
+shared-scale product diverging table. Selecting a keyed product row uses FLIP
+to promote it and reveals the reporter’s other partners for that product.
+Closing clears panel, extraction, emphasis, and partner state together.
+Product sparklines remain deliberately unavailable until a static
+partner×product×year relationship projection exists; cross-reporter partner
+benchmarks remain a later compact release artifact.
 
 **F3 — Rebuild the charts** (on F2, fed by projection props):
 - **Chord** — animated ribbons, responsive radius, hover to isolate a partner's flows.

@@ -24,6 +24,8 @@
 		crossYear,
 		historyByPartner,
 		productsByPartner,
+		peersByProduct,
+		selectedPartner,
 		phase,
 		highlightStyle,
 		onselect,
@@ -35,6 +37,8 @@
 		crossYear: number | null;
 		historyByPartner: Record<string, RelationshipHistoryPoint[]>;
 		productsByPartner: Record<string, CrossCell[]>;
+		peersByProduct: Record<string, CrossCell[]>;
+		selectedPartner: string | null;
 		phase: RelationshipPhase;
 		highlightStyle: HighlightStyle;
 		onselect?: (partner: string | null) => void;
@@ -62,6 +66,10 @@
 
 	$effect(() => {
 		if ($emphasis.length !== rows.length) void emphasis.set(rows.map(() => 0), { duration: 0 });
+	});
+
+	$effect(() => {
+		if (selectedPartner === null && selected !== null) reset();
 	});
 
 	$effect(() => {
@@ -288,6 +296,7 @@
 			row={selectedRow}
 			history={historyByPartner[selectedRow.partner] ?? []}
 			products={productsByPartner[selectedRow.partner] ?? []}
+			{peersByProduct}
 			{crossYear}
 			progress={$panelProgress}
 			onclose={() => onclose?.()}

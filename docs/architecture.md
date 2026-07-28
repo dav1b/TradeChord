@@ -128,9 +128,9 @@ Selection and navigation are different events. Selecting a ribbon moves the
 scene from `network` to `focused`; opening it advances through `extracting` to
 `relationship`. The selected path is omitted visually from the base chord and
 rendered once in a foreground SVG layer with the identical `d` attribute.
-Only translation and uniform scaling move it to the upper-left anchor. A
-separate centered relationship panel resolves into stable export and import
-flow entities that a later increment can render as two product treemaps.
+Only translation and uniform scaling move it to the upper-right relationship
+anchor. A separate responsive relationship panel resolves into stable export,
+import, balance, and product entities.
 Highlight strategies may alter opacity, saturation, stroke, shadow, or a
 transient sheen, but never the value-derived ribbon path or thickness.
 
@@ -154,58 +154,66 @@ OPEN_RELATIONSHIP(partner)
 The click handler does not independently select, move, and open components.
 An interruptible choreography controller advances the scene phases and ignores
 stale completion work when the user retargets, closes, or presses Escape.
-The extracted path consumes a responsive `RibbonAnchor`; on wide screens it
-occupies the upper-left analytical region, while compact screens use the area
-above the panel. The relationship panel has an independent centered layout
-contract. “Upper-left” and “centered” are therefore layout roles rather than
-fixed pixel coordinates.
+The extracted path consumes a responsive `RibbonAnchor`; on wide and compact
+screens it occupies the panel's upper-right region. The relationship panel has
+an independent reflowing layout contract, so the anchor is a layout role
+rather than a fixed pixel coordinate.
 
 The panel begins resolving while extraction completes. This is a wayfinding
 transition, not a modal popup: the selected partner arrives first, flow
 regions follow, and labels settle last. Reduced motion traverses the same
 semantic phases without spatial delay. Returning to the network invalidates
 the active choreography, closes the centered panel, and returns the exact
-ribbon path while retaining the partner selection.
+ribbon path, clears the partner selection, and restores the untouched network.
 
 ### Relationship analytics scene
 
-The centered relationship panel is the next analytical level, not a collection
-of unrelated dashboard cards:
+The relationship panel is a responsive analytical workspace, not a scaled
+desktop modal or a collection of unrelated dashboard cards:
 
 ```text
 RelationshipPanel
-  ├── bilateral equation: exports − imports = balance
-  ├── DualProductTreemap
-  │   ├── export composition
-  │   └── import composition
-  └── BilateralHistory
+  ├── extracted ribbon: upper-right relationship anchor
+  ├── headline: exports, imports, reported balance
+  ├── BilateralHistory
       ├── reported export line
       ├── reported import line
       └── signed balance gap
+  └── ProductRelationshipTable
+      ├── shared-scale export/import diverging bars
+      ├── signed balance marker
+      ├── product selection and FLIP reordering
+      └── other-partner benchmark for the selected product
 ```
 
-The first treemap contract uses equal-sized containers. Tile area therefore
-encodes share within each flow, not absolute comparison between the two flow
-totals. Monetary totals must remain prominent. Products use a shared color
-domain and stable flow-specific keys; hovering or selecting a product in
-either treemap emphasizes the corresponding product in both.
+The exact extracted ribbon moves to the upper-right of the panel on both
+desktop and mobile. Closing is one complete `CLOSE_RELATIONSHIP` transition:
+panel closes, ribbon returns, emphasis clears, durable partner selection
+becomes null, and the scene returns to `network`.
+
+Product rows use one monetary scale across all visible rows. Exports diverge
+left from zero and imports diverge right. A separate signed balance marker uses
+teal for surplus and copper for deficit. Teal and copper are reserved for
+calculated direction; export and import series use directly labelled neutral
+navy and fern encodings. Color is never the only identifier.
 
 The history view uses one shared monetary scale for reported exports and
 reported imports. Their vertical gap is the bilateral balance; it is not
 invented as an independent third measure. Pointer or keyboard year preview
 updates a temporary readout without changing durable scene year.
 
-The existing browser projection supports bilateral history by year but
-partner×product detail only for `crossYear`. Consequently, the treemaps remain
-explicitly labeled with `crossYear` while the history preview moves. The UI
-must not imply that product composition changed with a previewed historical
-year. Fully synchronized scrubbing requires a future immutable
-partner×product×year detail projection.
+Selecting a product reorders it to the analytical focus using keyed FLIP and
+reveals where else the reporter trades that product. This current-year
+benchmark is derived from the already committed `crossCells`; it does not
+fetch other country files.
 
-An import/export mosaic is a recorded alternative representation. It may
-encode absolute flow magnitude and product composition in one aligned surface,
-but it should be evaluated after the equal-treemap baseline establishes
-selection, color, identity, accessibility, and payload contracts.
+The browser projection supports bilateral relationship history, but
+partner×product detail only for `crossYear`. Product sparklines must not be
+fabricated from relationship totals. A later static relationship projection
+will publish partner×product×year detail, enabling each row’s sparkline to
+stretch into the main history chart. A later cross-reporter benchmark artifact
+can answer how other reporters trade the same product with the selected
+partner without browser fan-out.
 
 This direction does not change the ownership boundary above. The pipeline
 continues to produce validated analytical projections; the scene layer owns

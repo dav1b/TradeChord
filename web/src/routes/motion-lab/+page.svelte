@@ -32,7 +32,10 @@
 		const revision = ++choreographyRevision;
 		void closeRelationshipSequence(
 			() => revision === choreographyRevision,
-			(nextPhase) => (phase = nextPhase)
+			(nextPhase) => {
+				phase = nextPhase;
+				if (nextPhase === 'network') selected = null;
+			}
 		);
 	}
 </script>
@@ -66,7 +69,7 @@
 		<p id="instruction">
 			{selected
 				? phase === 'relationship'
-					? `${selected} relationship · the extracted ribbon is anchored upper-left`
+					? `${selected} relationship · the extracted ribbon is anchored upper-right`
 					: `${selected} · ${phase} · choose another ribbon to retarget`
 				: 'Select a ribbon · reported geometry stays fixed while the relationship comes forward'}
 		</p>
@@ -78,6 +81,8 @@
 				crossYear={data.crossYear}
 				historyByPartner={data.historyByPartner}
 				productsByPartner={data.productsByPartner}
+				peersByProduct={data.peersByProduct}
+				selectedPartner={selected}
 				{phase}
 				{highlightStyle}
 				onselect={selectPartner}

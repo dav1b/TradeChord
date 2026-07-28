@@ -42,6 +42,13 @@ export const load: PageLoad = async ({ fetch }) => {
 			(grouped[cell.partner] ??= []).push(cell);
 			return grouped;
 		}, {});
+	const peersByProduct = projection.crossCells.reduce<Record<string, typeof projection.crossCells>>(
+		(grouped, cell) => {
+			(grouped[cell.product] ??= []).push(cell);
+			return grouped;
+		},
+		{}
+	);
 
 	return {
 		reporter,
@@ -52,6 +59,7 @@ export const load: PageLoad = async ({ fetch }) => {
 		crossYear: projection.crossYear,
 		historyByPartner,
 		productsByPartner,
+		peersByProduct,
 		version: current.datasetVersion
 	};
 };

@@ -7,17 +7,19 @@
 		reporter,
 		partner,
 		points,
+		compact = false,
 		onpreview
 	}: {
 		reporter: string;
 		partner: string;
 		points: RelationshipHistoryPoint[];
+		compact?: boolean;
 		onpreview?: (point: RelationshipHistoryPoint | null) => void;
 	} = $props();
 
 	let width = $state(0);
 	let preview = $state<RelationshipHistoryPoint | null>(null);
-	const height = 235;
+	const height = $derived(compact ? 170 : 235);
 	const margin = { top: 20, right: 18, bottom: 30, left: 54 };
 	const available = $derived(
 		points.filter((point) => point.exportAvailable || point.importAvailable)
@@ -102,8 +104,8 @@
 	}
 </script>
 
-<section class="history" aria-label="{reporter} and {partner} trade through time">
-	<header>
+<section class="history" class:compact aria-label="{reporter} and {partner} trade through time">
+	{#if !compact}<header>
 		<div>
 			<span>Historical relationship</span>
 			<h3>How have exports and imports changed?</h3>
@@ -116,9 +118,9 @@
 				<span>Balance {preview.balanceUsd == null ? 'Unavailable' : usdSigned(preview.balanceUsd)}</span>
 			</div>
 		{/if}
-	</header>
+	</header>{/if}
 
-	<div class="legend">
+	<div class="legend" class:compact>
 		<span class="export">Exports</span>
 		<span class="import">Imports</span>
 		<span>Shaded gap = reported balance</span>
@@ -193,6 +195,11 @@
 		border-top: 1px solid var(--border-faint);
 		padding-top: 16px;
 	}
+	.history.compact {
+		margin-top: 0;
+		border-top: 0;
+		padding-top: 0;
+	}
 	header {
 		display: flex;
 		align-items: start;
@@ -240,10 +247,10 @@
 		background: var(--text-4);
 	}
 	.legend .export::before {
-		background: var(--delta-pos);
+		background: var(--dj-navy);
 	}
 	.legend .import::before {
-		background: var(--delta-neg);
+		background: var(--dj-fern-green);
 	}
 	.chart,
 	svg {
@@ -263,10 +270,10 @@
 		stroke-width: 2.5;
 	}
 	.export-line {
-		stroke: var(--delta-pos);
+		stroke: var(--dj-navy);
 	}
 	.import-line {
-		stroke: var(--delta-neg);
+		stroke: var(--dj-fern-green);
 	}
 	.year-hit {
 		fill: transparent;
