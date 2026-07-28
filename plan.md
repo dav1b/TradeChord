@@ -595,7 +595,7 @@ Brand kit → `theme/` tokens. Adopt Svelte 5 runes; set the explicit deploy ada
 **F2 — Reactive chart architecture.** Establish the "D3 math + Svelte DOM" pattern with a size-aware
 container and transition/tween utilities. Build **one reference chart** (slope) end-to-end to lock the
 pattern before scaling out. **Implemented extension:** `/motion-lab` isolates one full-viewport chord and
-compares two interruptible Svelte-motion responses—geometry emphasis and spatial extraction—using
+compares two interruptible Svelte-motion responses—fixed-geometry visual focus and spatial extraction—using
 production projections, stable partner keys, keyboard selection, responsive sizing, and reduced motion.
 The next decision is experiential: review both on desktop and touch hardware, choose the production
 ribbon grammar, then connect the selected ribbon to the existing bilateral scene.

@@ -17,9 +17,7 @@ test('motion laboratory focuses, retargets, extracts, and resets one chord', asy
 	await first.dispatchEvent('click');
 	await expect(first).toHaveAttribute('aria-pressed', 'true');
 	await expect(page.locator('#instruction')).toContainText('selected');
-	await expect
-		.poll(() => first.getAttribute('d'))
-		.not.toBe(restingPath);
+	await expect.poll(() => first.getAttribute('d')).toBe(restingPath);
 
 	const focusedTransform = await first.getAttribute('transform');
 	await page.getByRole('button', { name: 'Ribbon extraction' }).click();
@@ -40,6 +38,7 @@ test('motion laboratory focuses, retargets, extracts, and resets one chord', asy
 	await expect(page.locator('#instruction')).toContainText('Select a ribbon');
 
 	await page.setViewportSize({ width: 390, height: 844 });
+	await page.reload();
 	await expect
 		.poll(async () => (await chord.boundingBox())?.width)
 		.toBeLessThanOrEqual(390);

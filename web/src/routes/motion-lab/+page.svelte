@@ -41,7 +41,7 @@
 		<p id="instruction">
 			{selected
 				? `${selected} selected · click another ribbon to retarget · Escape to reset`
-				: 'Select a ribbon · the relationship stays in place while its geometry responds'}
+				: 'Select a ribbon · reported geometry stays fixed while the relationship comes forward'}
 		</p>
 		<div class="diagram">
 			<MotionChord
@@ -121,8 +121,8 @@
 		cursor: pointer;
 	}
 	.mode button.active {
-		background: var(--active);
-		color: var(--active-ink);
+		color: var(--text-1);
+		font-weight: 700;
 	}
 	.mode button:focus-visible {
 		outline: 2px solid var(--active);
@@ -130,20 +130,21 @@
 	}
 	.canvas {
 		position: relative;
+		display: grid;
+		grid-template-rows: auto minmax(0, 1fr);
+		gap: var(--space-3);
 		min-height: 0;
+		padding-top: var(--space-6);
 	}
 	.canvas > p {
-		position: absolute;
-		top: var(--space-4);
-		left: 50%;
 		z-index: 1;
 		width: min(90vw, 70ch);
-		transform: translateX(-50%);
+		margin-inline: auto;
 		text-align: center;
 	}
 	.diagram {
-		position: absolute;
-		inset: 0;
+		position: relative;
+		min-height: 0;
 	}
 	footer {
 		display: flex;
@@ -168,7 +169,7 @@
 			flex: 1;
 		}
 		.canvas > p {
-			top: var(--space-3);
+			width: 100%;
 		}
 	}
 </style>

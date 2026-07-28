@@ -46,7 +46,7 @@
 	});
 
 	const size = $derived(Math.max(260, Math.min(width, height)));
-	const outerRadius = $derived(Math.max(90, size / 2 - (size < 500 ? 42 : 64)));
+	const outerRadius = $derived(Math.max(100, size / 2 - (size < 500 ? 34 : 28)));
 	const band = $derived(size < 500 ? 9 : 13);
 	const focusAmount = $derived(Math.max(0, ...$emphasis));
 
@@ -54,15 +54,14 @@
 		const count = rows.length + 1;
 		const result = Array.from({ length: count }, () => new Array(count).fill(0));
 		rows.forEach((row, index) => {
-			const energy = $emphasis[index] ?? 0;
-			const multiplier = 1 - focusAmount * 0.14 + energy * 0.42;
-			result[0][index + 1] = row.exportsUsd * multiplier;
-			result[index + 1][0] = row.importsUsd * multiplier;
+			result[0][index + 1] = row.exportsUsd;
+			result[index + 1][0] = row.importsUsd;
 		});
 		return result;
 	});
 
-	// D3 calculates geometry; Svelte's tween store drives every intermediate matrix.
+	// D3 geometry always reflects the reported values. Selection may change visual
+	// emphasis or position, but must never reweight the analytical layout.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const layout = $derived.by((): any =>
 		width && height
@@ -73,6 +72,12 @@
 	);
 	const arc = $derived(d3arc().innerRadius(outerRadius - band).outerRadius(outerRadius));
 	const ribbon = $derived(d3ribbon().radius(outerRadius - band));
+	const reporterMid = $derived(
+		layout ? (layout.groups[0].startAngle + layout.groups[0].endAngle) / 2 : 0
+	);
+	const reporterLabelRadius = $derived(outerRadius + (size < 500 ? 18 : 28));
+	const reporterLabelX = $derived(Math.sin(reporterMid) * reporterLabelRadius + 8);
+	const reporterLabelY = $derived(-Math.cos(reporterMid) * reporterLabelRadius);
 
 	function partnerIndex(chord: { source: { index: number }; target: { index: number } }) {
 		return (chord.source.index === 0 ? chord.target.index : chord.source.index) - 1;
@@ -86,7 +91,7 @@
 
 	function offset(index: number, angle: number) {
 		const energy = $emphasis[index] ?? 0;
-		const distance = (7 + 25 * $extraction) * energy;
+		const distance = 32 * $extraction * energy;
 		return {
 			x: Math.sin(angle) * distance,
 			y: -Math.cos(angle) * distance
@@ -199,8 +204,18 @@
 					{/if}
 				{/each}
 
-				<text class="reporter-code" text-anchor="middle" y="-8">{reporter}</text>
-				<text class="reporter-total" text-anchor="middle" y="17">
+				<text
+					class="reporter-code"
+					x={reporterLabelX}
+					y={reporterLabelY - 8}
+					text-anchor="start">{reporter}</text
+				>
+				<text
+					class="reporter-total"
+					x={reporterLabelX}
+					y={reporterLabelY + 14}
+					text-anchor="start"
+				>
 					{usd(summary.exportsUsd + summary.importsUsd)}
 				</text>
 			</g>
@@ -250,8 +265,13 @@
 		font-size: clamp(9px, 1vw, 12px);
 		fill: var(--text-2);
 		pointer-events: none;
+		transition:
+			font-size var(--motion-slow) var(--ease),
+			opacity var(--motion-base) var(--ease);
 	}
 	.partner-label.selected {
+		font-family: var(--font-head);
+		font-size: clamp(1.4rem, 3vw, 2.5rem);
 		font-weight: 600;
 		fill: var(--text-1);
 	}

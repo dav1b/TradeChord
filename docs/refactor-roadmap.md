@@ -987,9 +987,10 @@ Current increment:
   full-viewport scene. It deliberately removes dashboard cards and analytical
   drill-downs so ribbon response can be judged on its own.
 - The laboratory exposes two interruptible motion studies: **Focus & breathe**
-  continuously recalculates chord geometry so the selected relationship
-  gains visual weight while its peers contract; **Ribbon extraction** carries
-  that same keyed relationship outward without replacing the SVG scene.
+  preserves the value-derived chord geometry while the selected relationship
+  gains color and label emphasis and its peers recede; **Ribbon extraction**
+  carries that same unchanged, keyed relationship outward without replacing
+  the SVG scene.
 - Selecting a new ribbon retargets from the current interpolated state,
   selecting it again or pressing Escape resets the chord, and changing motion
   mode while selected interpolates rather than snapping.
