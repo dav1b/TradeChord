@@ -1,0 +1,354 @@
+{
+  "artifactUnit": "current_usd",
+  "artifacts": {
+    "matrix": {
+      "path": "trade_matrix.csv.gz",
+      "records": 321175,
+      "sha256": "96e769fea45a2264fc3d1299908b85996879af177795ad4100e2b4aeb3c48ebc"
+    },
+    "web": {
+      "files": [
+        {
+          "path": "countries.json",
+          "sha256": "a002b422a512d798772801b8795bba45a71032bda024ab4411256bdcdaef01f2"
+        },
+        {
+          "path": "countries/ARE.json",
+          "sha256": "5d9562b48515008d525efc579e24574bdf2ead22ab697bffa0412ea7351c0676"
+        },
+        {
+          "path": "countries/AUS.json",
+          "sha256": "c6fa3a51ebd00987b16673805267167e91b4538d52e37599b8d9d78c24d10be0"
+        },
+        {
+          "path": "countries/AUT.json",
+          "sha256": "840b19179c2cd65dcb1a42de815015de21cb480706278c97f7eed188721f93a0"
+        },
+        {
+          "path": "countries/BEL.json",
+          "sha256": "b3bff4e4323e7a1ca7013aaaee43dc7b967c603cebfb104215de824131c729ec"
+        },
+        {
+          "path": "countries/BRA.json",
+          "sha256": "f2c54582fe15cdd29ff866bb3d52c3cef7b4c6996ba9755e7aa67f583b328a08"
+        },
+        {
+          "path": "countries/CAN.json",
+          "sha256": "fccac163942f4ec0aef9d50085f3683d9ba8152e255d4e349d61ed08cc2c7b47"
+        },
+        {
+          "path": "countries/CHE.json",
+          "sha256": "4b9712aeae1ef65becfec14c4df0338dd57d2ec7ac0a4780bba97c93a8f08e5b"
+        },
+        {
+          "path": "countries/CHN.json",
+          "sha256": "1b1cc2a0b97a879cf0bb8b3f8b96f0d7048e391d5802f85dade75be5f2e675aa"
+        },
+        {
+          "path": "countries/CZE.json",
+          "sha256": "dfb0d77cc69cb5b71d1b118e9f1a683fc61a0f2bfbd0eb6bc9ac43df255d4b83"
+        },
+        {
+          "path": "countries/DEU.json",
+          "sha256": "af8845bfe0b371dfdf7646e30be81da9743fee36452ed302e12d17f3f3015491"
+        },
+        {
+          "path": "countries/ESP.json",
+          "sha256": "37d2e6f5ab564f630b8f28b0a450af7bf25e7f25f9441470a882894c12164b66"
+        },
+        {
+          "path": "countries/FRA.json",
+          "sha256": "19b6a309bbeabebe449f52e8ccf9d2f08229fb866420803cf43976eb311df84e"
+        },
+        {
+          "path": "countries/GBR.json",
+          "sha256": "7e309cf123e6e1a45edb2976c776ba4e0567abcac8005ad17cc617f345cd8faf"
+        },
+        {
+          "path": "countries/HKG.json",
+          "sha256": "c42d289e12cee96d8e740a18e47af309a49d124c32a64b3077da17410f650979"
+        },
+        {
+          "path": "countries/IDN.json",
+          "sha256": "66ce0e28f46a5ad599c797fee3765f2140231d81ba9f8fc4ca3dbcddc96f2985"
+        },
+        {
+          "path": "countries/IND.json",
+          "sha256": "22265d0f63164af3ba6896593adbe995049e675657b41f6f1bb6837b0696ede8"
+        },
+        {
+          "path": "countries/IRL.json",
+          "sha256": "4aa1d7301b4e103a7b5b0b7ae52bf753f17ef5fd2f3a841b56946f0caf3141a7"
+        },
+        {
+          "path": "countries/ITA.json",
+          "sha256": "0ed242889f7bc1f038336432ac350a7836512dbeedcbf1dcd60d9b0f9aca94a5"
+        },
+        {
+          "path": "countries/JPN.json",
+          "sha256": "1a66868268d7f955bfa4107d92270f407bb292e6b729b57cd106f526bd5b6da4"
+        },
+        {
+          "path": "countries/KOR.json",
+          "sha256": "987a95a3ffc5996205827777ff27b391f91ce23e1080b7da0daee19d6675b43a"
+        },
+        {
+          "path": "countries/MEX.json",
+          "sha256": "1059d274f38a8c98714998eb4cc1af707c65aef4e37f30c9fde0f1ea5f54866d"
+        },
+        {
+          "path": "countries/MYS.json",
+          "sha256": "3a35c1b3aea049da7f4cf43bc822656cf8ec2372c3707ef0191815b53ba387ba"
+        },
+        {
+          "path": "countries/NLD.json",
+          "sha256": "c1ccc74ff21ba2412dfc4d6fee744ea9880060b268848d3dcf72f89a40a6f8aa"
+        },
+        {
+          "path": "countries/NOR.json",
+          "sha256": "5bae44161f6c73a5b5ca379b4771909ad32074c8c58770dc18d558333b8ce302"
+        },
+        {
+          "path": "countries/POL.json",
+          "sha256": "e42cc369b4e7ff00964c94c0eaa908e6ffbe6e9d855952697325715efb3ab49e"
+        },
+        {
+          "path": "countries/SAU.json",
+          "sha256": "ad71702d7bd7705a99d256ac94cf60deaf53b63074dba155db74e1afe6c6bd01"
+        },
+        {
+          "path": "countries/SGP.json",
+          "sha256": "1ec5069bce95ba2552dc66521eda90302af12b41d240c764930a08397d5b310a"
+        },
+        {
+          "path": "countries/THA.json",
+          "sha256": "65738d3471105d3d82baaaa81b6f1f9ccd2ebdd4b91f0d9b26c178f7bc6f6dcf"
+        },
+        {
+          "path": "countries/TUR.json",
+          "sha256": "1ee10cc6bd541a4efb5fc0ecf911a64a5b3806afdd0b3eee85f0c52814e91103"
+        },
+        {
+          "path": "countries/USA.json",
+          "sha256": "c3a9fd256b609d0019c5d3f155e69448c88415ed5d44278bdae2f5eccc4165aa"
+        },
+        {
+          "path": "detail/ARE.json",
+          "sha256": "d7f5a66c37c099d7c0c944849060a1d12b1da30d54a0d6477d02503742a184c4"
+        },
+        {
+          "path": "detail/AUS.json",
+          "sha256": "3445620f779d210034feb980074a28532460c080242338cf64197a74cf157cbe"
+        },
+        {
+          "path": "detail/AUT.json",
+          "sha256": "5816adfa6ec8d862532713bb7bef34f3788df0dc54f9fdf7c93370a7ba5cae2f"
+        },
+        {
+          "path": "detail/BEL.json",
+          "sha256": "790788051abc6fc4cc08e915e6208e0ed408bf6c4a47f4444ab2b952de9ff1b9"
+        },
+        {
+          "path": "detail/BRA.json",
+          "sha256": "c8fb13ca1825cd264cd3dac1afc4cb8e69df44431b5af0ddbb43238a811a8201"
+        },
+        {
+          "path": "detail/CAN.json",
+          "sha256": "95d6c9f0fbf84d20580c483311534c4c1d777f88fa8cc3995dbc2123aa6930b4"
+        },
+        {
+          "path": "detail/CHE.json",
+          "sha256": "20b42558c9b61f486f49d9445d34a59c4c658acec31b32a7f292a78b3fc914ec"
+        },
+        {
+          "path": "detail/CHN.json",
+          "sha256": "873e7d480c966def43a1a4dad35d54a4186c2b4e73fdf647594f14f1c663a274"
+        },
+        {
+          "path": "detail/CZE.json",
+          "sha256": "2b381f10235994a14e8c71e27eb7410565ab57b9b81735b8ef2c0d38c01d238a"
+        },
+        {
+          "path": "detail/DEU.json",
+          "sha256": "eeff0957a13d8b658a2f8e82615d512b36598dea77cc12195dde235cc05e48be"
+        },
+        {
+          "path": "detail/ESP.json",
+          "sha256": "a487a0e5e8db1f0f9d624a9d604adc279e10dc942a31fdd01bab7cac97559da2"
+        },
+        {
+          "path": "detail/FRA.json",
+          "sha256": "f8443287151e85285e5a75e4e43c3cfd8e37c7962fd4188661df80c965d2cb1b"
+        },
+        {
+          "path": "detail/GBR.json",
+          "sha256": "27d3fa352d1c64db9f9d6a72e6848bdb3c4c0fbca4539625158c9f4cffaa693f"
+        },
+        {
+          "path": "detail/HKG.json",
+          "sha256": "f9099bf2bb8471fad0058fc7bf7d80f1c75d851c82d6edb0236115da9c60c0c1"
+        },
+        {
+          "path": "detail/IDN.json",
+          "sha256": "c1a48c0e544decd2948fb586093ff9fb16f322c29b95615139f3945907eb204f"
+        },
+        {
+          "path": "detail/IND.json",
+          "sha256": "9bc64d3465deeb3932c313efc4b70625c365800d4b8ccf4fc9f401f633da97da"
+        },
+        {
+          "path": "detail/IRL.json",
+          "sha256": "4b919feab5395a42569a54badd92ec5a8bc5588ff50d4d7da2091b3562ff1dbb"
+        },
+        {
+          "path": "detail/ITA.json",
+          "sha256": "838ee2ee6128ac4ae3f7e60be96d10a6151affd7b0a58a60f7c3470ce200e280"
+        },
+        {
+          "path": "detail/JPN.json",
+          "sha256": "bc57b9b3cd0b8a7ac7bd21ded15c29e3d2c27cb0b7a7f7c87d796def29a1bd30"
+        },
+        {
+          "path": "detail/KOR.json",
+          "sha256": "68c2b44fad3681f8ccc68047a4dc2b9850f2002a45af79d80bbbddebe45e8ce1"
+        },
+        {
+          "path": "detail/MEX.json",
+          "sha256": "45ef1412e1eeffe4e3b9f340e3b1751c1a251e38e3b3f6981aa76662321474e9"
+        },
+        {
+          "path": "detail/MYS.json",
+          "sha256": "6bcfca81b5dc323285dc25bd5c918e9dd003db6223d8c426052f082944420a0e"
+        },
+        {
+          "path": "detail/NLD.json",
+          "sha256": "63c7c0c10a1b879eda3cf49ee36aebc0c76c6c21d35f97a1561e05f8931dcdea"
+        },
+        {
+          "path": "detail/NOR.json",
+          "sha256": "a876c5ca7354861e7d530abc58f124bad7a5c894c0a644365d52f92c517ee71e"
+        },
+        {
+          "path": "detail/POL.json",
+          "sha256": "754997bdf8ecf2a3545350b09605233e2360a073d91819e9e8dcb345820c22f7"
+        },
+        {
+          "path": "detail/SAU.json",
+          "sha256": "c3a0db8706fcdf2992c806ea4648114b0b789fe6cb6e9a13fe1f7eaa639140d5"
+        },
+        {
+          "path": "detail/SGP.json",
+          "sha256": "5240a007972d80f2a45f9f7d9b73c48fbc196e954a1e89a9e592ed7444b78ea8"
+        },
+        {
+          "path": "detail/THA.json",
+          "sha256": "f5152e0fec818bce61bfd29bc07d2e3d1885d407db3ec92aa0ebb2ed6f9bf9f9"
+        },
+        {
+          "path": "detail/TUR.json",
+          "sha256": "75831ccc96671858308ee0d4b484994352bcdd0e66802f2f8691c0fb7f4e58a9"
+        },
+        {
+          "path": "detail/USA.json",
+          "sha256": "a2341e38a7755922400fda5077ed86e857d114b4c32c929cdafd593bd842dd6d"
+        },
+        {
+          "path": "overview.json",
+          "sha256": "c075200c588e6a510bba880a921f03116c19cdf3129b837c6aee37b3081aae2c"
+        }
+      ],
+      "root": "web/static/data/2026-07.2"
+    }
+  },
+  "coverage": {
+    "export": {
+      "method": "top_k",
+      "min_achieved": 3.689680392457166e-06,
+      "reconciled": true
+    },
+    "import": {
+      "method": "top_k",
+      "min_achieved": 0.04531730230746701,
+      "reconciled": true
+    }
+  },
+  "datasetVersion": "2026-07.2",
+  "flows": [
+    "export",
+    "import"
+  ],
+  "generatedAt": "2026-07-29T19:37:46.928238Z",
+  "products": [
+    "01-05_Animal",
+    "06-15_Vegetable",
+    "16-24_FoodProd",
+    "25-26_Minerals",
+    "27-27_Fuels",
+    "28-38_Chemicals",
+    "39-40_PlastiRub",
+    "41-43_HidesSkin",
+    "44-49_Wood",
+    "50-63_TextCloth",
+    "64-67_Footwear",
+    "68-71_StoneGlas",
+    "72-83_Metals",
+    "84-85_MachElec",
+    "86-89_Transport",
+    "90-99_Miscellan"
+  ],
+  "reporters": [
+    "ARE",
+    "AUS",
+    "AUT",
+    "BEL",
+    "BRA",
+    "CAN",
+    "CHE",
+    "CHN",
+    "CZE",
+    "DEU",
+    "ESP",
+    "FRA",
+    "GBR",
+    "HKG",
+    "IDN",
+    "IND",
+    "IRL",
+    "ITA",
+    "JPN",
+    "KOR",
+    "MEX",
+    "MYS",
+    "NLD",
+    "NOR",
+    "POL",
+    "SAU",
+    "SGP",
+    "THA",
+    "TUR",
+    "USA"
+  ],
+  "row": {
+    "definition": "Reporter WLD total minus explicitly collected partners, per flow.",
+    "synthetic": true
+  },
+  "schemaVersion": 2,
+  "source": {
+    "flows": {
+      "export": {
+        "sourceIndicator": "XPRT-TRD-VL",
+        "valuation": "reported export value"
+      },
+      "import": {
+        "sourceIndicator": "MPRT-TRD-VL",
+        "valuation": "reported import value"
+      }
+    },
+    "provider": "World Bank WITS",
+    "sourceUnit": "thousands_current_usd"
+  },
+  "years": {
+    "end": 2022,
+    "start": 2002
+  }
+}

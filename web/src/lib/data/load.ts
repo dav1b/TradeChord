@@ -7,6 +7,7 @@
 import {
 	SUPPORTED_SCHEMA_VERSION,
 	type CountriesIndex,
+	type CountryDetail,
 	type CountryProjection,
 	type CurrentPointer,
 	type Overview
@@ -56,4 +57,17 @@ export async function loadCountry(
 	fetchFn: Fetch = fetch
 ): Promise<CountryProjection> {
 	return fetchJson<CountryProjection>(`${BASE}/${version}/countries/${code}.json`, fetchFn);
+}
+
+/**
+ * Lazily load the per-country detail sidecar (year-by-year partner×product cells).
+ * Call only when a scene drills into history or product composition — it is
+ * larger than the primary projection and not needed for the initial view.
+ */
+export async function loadCountryDetail(
+	version: string,
+	code: string,
+	fetchFn: Fetch = fetch
+): Promise<CountryDetail> {
+	return fetchJson<CountryDetail>(`${BASE}/${version}/detail/${code}.json`, fetchFn);
 }

@@ -86,8 +86,9 @@ def _breakdown(recs: list[CanonicalRecord], year: int, name: str) -> list[dict]:
 def _cross_cells(recs: list[CanonicalRecord], year: int) -> list[dict]:
     """Partner × product cells for one year (both flows) — powers cross-filtering.
 
-    Only the headline year is emitted (the year scrubber is deferred); when it
-    lands this becomes keyed by year.
+    The primary country projection emits only the headline year here; the detail
+    sidecar (:func:`build_country_detail`) calls this per year to surface the
+    full year-by-year cells that already exist in the canonical matrix.
     """
     exp: dict[tuple[str, str], int] = defaultdict(int)
     imp: dict[tuple[str, str], int] = defaultdict(int)
@@ -138,6 +139,25 @@ def build_country_projection(country: str, recs: list[CanonicalRecord], dataset_
     }
 
 
+def build_country_detail(country: str, recs: list[CanonicalRecord], dataset_version: str) -> dict:
+    """Year-by-year partner × product cells — the lazily-loaded detail sidecar.
+
+    The primary country projection carries only the headline ``crossYear``. This
+    additive sidecar surfaces the full partner×product history already present in
+    the canonical matrix so history, product-composition, and sparkline scenes
+    render without inferring values from national totals. Older clients that do
+    not fetch it are unaffected; it shares schema version 2.
+    """
+    years = sorted({r.year for r in recs})
+    return {
+        "schemaVersion": SCHEMA_VERSION,
+        "datasetVersion": dataset_version,
+        "country": country,
+        "years": years,
+        "crossCellsByYear": {str(y): _cross_cells(recs, y) for y in years},
+    }
+
+
 def build_overview(records: list[CanonicalRecord], dataset_version: str) -> dict:
     buckets = _bucket_by_reporter(records)
     years_all = sorted({r.year for r in records})
@@ -163,9 +183,17 @@ def _dump(path: str, data: dict) -> None:
         f.write("\n")
 
 
+def _dump_compact(path: str, data: dict) -> None:
+    """Deterministic minified dump for the large, lazily-fetched detail files."""
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, separators=(",", ":"), sort_keys=True)
+        f.write("\n")
+
+
 def write_projections(records: list[CanonicalRecord], dataset_version: str, version_dir: str) -> int:
     """Write overview + per-country projections into ``version_dir``. Returns count."""
     os.makedirs(os.path.join(version_dir, "countries"), exist_ok=True)
+    os.makedirs(os.path.join(version_dir, "detail"), exist_ok=True)
     buckets = _bucket_by_reporter(records)
 
     _dump(os.path.join(version_dir, "overview.json"), build_overview(records, dataset_version))
@@ -178,5 +206,9 @@ def write_projections(records: list[CanonicalRecord], dataset_version: str, vers
         _dump(
             os.path.join(version_dir, "countries", f"{code}.json"),
             build_country_projection(code, buckets[code], dataset_version),
+        )
+        _dump_compact(
+            os.path.join(version_dir, "detail", f"{code}.json"),
+            build_country_detail(code, buckets[code], dataset_version),
         )
     return len(buckets)

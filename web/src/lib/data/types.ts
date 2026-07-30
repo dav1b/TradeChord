@@ -57,6 +57,22 @@ export interface CountryProjection {
 	crossCells: CrossCell[];
 }
 
+/**
+ * Per-country detail sidecar: web/static/data/<version>/detail/<CODE>.json
+ *
+ * Additive to CountryProjection and fetched lazily only when a scene drills into
+ * history or product composition. Surfaces the full year-by-year partner×product
+ * cells that already exist in the canonical matrix; the primary projection ships
+ * only the headline crossYear to keep the initial scene light.
+ */
+export interface CountryDetail {
+	schemaVersion: number;
+	datasetVersion: string;
+	country: string;
+	years: number[];
+	crossCellsByYear: Record<string, CrossCell[]>;
+}
+
 export interface ReporterYearTotals extends FlowSummary {
 	year: number;
 }

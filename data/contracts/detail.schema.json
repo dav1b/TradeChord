@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tradechord/contracts/detail.schema.json",
+  "title": "TradeChord per-country detail sidecar",
+  "description": "Shape of web/static/data/<version>/detail/<CODE>.json — year-by-year partner×product cells, loaded lazily by history and composition scenes. Additive to the per-country projection; shares schema version 2.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "datasetVersion",
+    "country",
+    "years",
+    "crossCellsByYear"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 2 },
+    "datasetVersion": { "type": "string" },
+    "country": { "type": "string" },
+    "years": { "type": "array", "items": { "type": "integer" } },
+    "crossCellsByYear": {
+      "type": "object",
+      "description": "year -> partner × product cells (both flows) for that year",
+      "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/crossCell" } }
+    }
+  },
+  "$defs": {
+    "crossCell": {
+      "type": "object",
+      "required": ["partner", "product", "exportsUsd", "importsUsd", "balanceUsd", "exportAvailable", "importAvailable"],
+      "properties": {
+        "partner": { "type": "string" },
+        "product": { "type": "string" },
+        "exportsUsd": { "type": "integer" },
+        "importsUsd": { "type": "integer" },
+        "balanceUsd": { "type": ["integer", "null"] },
+        "exportAvailable": { "type": "boolean" },
+        "importAvailable": { "type": "boolean" }
+      }
+    }
+  }
+}

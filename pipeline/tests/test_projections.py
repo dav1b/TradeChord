@@ -8,6 +8,7 @@ import jsonschema
 from tradechord_pipeline.models import Flow, Observation
 from tradechord_pipeline.normalize import normalize
 from tradechord_pipeline.projections import (
+    build_country_detail,
     build_country_projection,
     build_overview,
     write_projections,
@@ -65,6 +66,34 @@ def test_cross_cells_are_partner_product_dual_flow():
     assert can["exportAvailable"] and can["importAvailable"]
 
 
+def test_country_detail_keys_cells_by_year():
+    records = normalize(
+        [
+            Observation(2021, "USA", "CHN", "84-85_MachElec", Flow.EXPORT, 30.0),
+            Observation(2021, "USA", "CHN", "84-85_MachElec", Flow.IMPORT, 90.0),
+            Observation(2022, "USA", "CHN", "84-85_MachElec", Flow.EXPORT, 50.0),
+            Observation(2022, "USA", "CHN", "84-85_MachElec", Flow.IMPORT, 200.0),
+        ]
+    )
+    detail = build_country_detail("USA", records, "v1")
+    assert detail["years"] == [2021, 2022]
+    assert set(detail["crossCellsByYear"]) == {"2021", "2022"}
+    cell_2021 = detail["crossCellsByYear"]["2021"][0]
+    assert (cell_2021["partner"], cell_2021["exportsUsd"], cell_2021["importsUsd"]) == (
+        "CHN",
+        30_000,
+        90_000,
+    )
+    # Same partner/product cell reappears each year: identity is year-independent.
+    cell_2022 = detail["crossCellsByYear"]["2022"][0]
+    assert cell_2022["balanceUsd"] == -150_000
+
+
+def test_generated_detail_matches_schema():
+    schema = json.loads((CONTRACTS / "detail.schema.json").read_text())
+    jsonschema.validate(build_country_detail("USA", _records(), "v1"), schema)
+
+
 def test_uncollected_bilateral_flow_is_not_reported_as_zero_balance():
     records = normalize(
         [Observation(2022, "USA", "NLD", "84-85_MachElec", Flow.EXPORT, 10.0)]
@@ -89,3 +118,4 @@ def test_write_projections_emits_expected_files(tmp_path):
     assert (tmp_path / "overview.json").exists()
     assert (tmp_path / "countries.json").exists()
     assert (tmp_path / "countries" / "USA.json").exists()
+    assert (tmp_path / "detail" / "USA.json").exists()
