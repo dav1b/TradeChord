@@ -1,6 +1,6 @@
 # Refactor implementation record and roadmap
 
-Last updated: 2026-07-28
+Last updated: 2026-09-12
 
 This is the living record of the TradeChord refactor. It separates completed
 implementation from operational work and optional future improvements. New
@@ -316,7 +316,7 @@ After activation:
 6. Record the release date, source range, validation result, and any accepted
    caveats in the methodology documentation.
 
-### 6.6 Establish the first Vercel baseline — Implemented; field metrics pending
+### 6.6 Establish the first Vercel baseline — Implemented; prerendering and field metrics pending
 
 Treat deployment as the next validation environment, not as the last step
 after the revised frontend is complete:
@@ -359,6 +359,34 @@ Baseline progress:
 - The bilateral relationship journey passes against production in Chromium.
 - Field Core Web Vitals still require Speed Insights traffic and are not yet
   complete.
+- The intended static-first rendering is **not yet implemented**. No route
+  declares `prerender`, so production currently serves `/`, `/all`, and
+  `/motion-lab` as Vercel serverless (SSR) functions rather than prerendered
+  static assets. This is a discrepancy between the documented target
+  architecture and the live deployment; see 6.7.
+
+### 6.7 Implement static-first prerendering — Next
+
+The deployment is live but does not yet match the static-first architecture
+described above and in [deployment-performance.md](./deployment-performance.md).
+The public experience is identical for every visitor and reads only immutable
+committed projections, so it should be prerendered rather than server-rendered
+per request.
+
+1. Add `export const prerender = true` to the finite public routes (`/` and
+   `/all`).
+2. Enumerate the reporter route set from the committed country index at build
+   time; decide whether the reporter becomes a path segment (for example
+   `/country/DEU`) as recommended in 7.16, keeping year, flow, partner,
+   product, and representation in query parameters.
+3. Verify direct URL entry, refresh, client-side scene navigation, and error
+   handling still pass after the rendering-mode change.
+4. Re-confirm the build output emits prerendered pages (not serverless
+   functions) for the public route set, and re-record transfer-size and Core
+   Web Vitals baselines.
+
+Isolate any route that genuinely needs request-time behaviour instead of
+reverting the whole application to SSR.
 
 ## 7. Revised frontend direction: one continuous visual scene
 
@@ -1399,6 +1427,16 @@ Use a few stable representative states rather than snapshotting every chart:
 
 The test should tolerate insignificant D3 antialiasing differences.
 
+### 8.8 Consolidate duplicate Vercel link directories — Later
+
+Two `.vercel` link directories currently exist and point at the same project:
+one at the repository root and one under `web/`. Because the Vercel project's
+Root Directory is `web`, only the linking that matches that setting is
+authoritative, and the root-level `.vercel` is redundant and confusing. Remove
+the stray link directory (both are gitignored) so a single, unambiguous link
+remains. This does not affect the Git integration, which is the actual deploy
+path.
+
 ## 9. Longer-term possibilities
 
 These ideas should be evaluated against actual use before implementation.
@@ -1448,7 +1486,28 @@ If the project gains meaningful traffic, monitor missing projection requests,
 client-side schema rejection, and route-load failures without collecting
 sensitive user data.
 
-## 10. Deliberate non-goals
+### 9.8 VisQuill GDK visualization spike — Idea
+
+Evaluate [`@visquill/visquill-gdk`](https://visquill.com/developers) as a way
+to build a richer interactive, animated trade visualization. VisQuill is a
+reactive SVG graphics kit (handles, attach-bindings, eased animation) whose
+domain overlaps with the existing bespoke scene-graph engine in
+`web/src/lib/explorer/`.
+
+Scope and constraints for the spike:
+
+- Prototype in the existing `/motion-lab` route, not a separate repository.
+- Integrate it as an imperative island: mount into a container in an effect,
+  feed it the committed `web/static/data/<version>/` projections, and call
+  `rvg.dispose()` on unmount. Do not let VisQuill and Svelte manage the same
+  DOM, to avoid running two reactive systems against one tree.
+- License: VisQuill is **non-commercial**. This is acceptable because
+  TradeChord has no commercial intent; unlicensed use adds a "Made with
+  VisQuill" attribution label. Revisit if the project ever gains a commercial
+  angle.
+- Maturity risk: the package is new (1.x, single maintainer). Treat this as a
+  throwaway spike first; promote only if it clearly beats the current D3 +
+  runes approach for the target interaction.
 
 - Do not make Python a dependency of `npm install`, `npm run dev`, or the web
   production build.
